@@ -604,5 +604,34 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 })();
 </script>
 
+<script>
+(function(){
+  // Powiadomienia o otwarciu oferty (ntfy.sh -> aplikacja ntfy w telefonie)
+  var TOPIC='https://ntfy.sh/pmb-oferty-0d10ca967d', OFERTA='Expo Real – LDS (Krystian)';
+  var owner=false;
+  try{ if(/[?&]ja(=|&|$)/.test(location.search)) localStorage.setItem('pmb_owner','1'); owner=localStorage.getItem('pmb_owner')==='1'; }catch(e){}
+  function ping(msg,tags,prio){
+    if(owner) return;
+    try{
+      var u=TOPIC+'?title='+encodeURIComponent(OFERTA)+'&tags='+encodeURIComponent(tags||'eyes')+(prio?'&priority='+prio:'');
+      fetch(u,{method:'POST',body:msg,keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
+  var dev=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'telefon':'komputer';
+  var first=true; try{ first=!sessionStorage.getItem('pmb_seen'); sessionStorage.setItem('pmb_seen','1'); }catch(e){}
+  if(first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
+  var sent={};
+  function once(key,msg,tags,prio){ if(sent[key]) return; sent[key]=1; ping(msg,tags,prio); }
+  var wyc=document.getElementById('wycena');
+  if(wyc && 'IntersectionObserver' in window){ new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ once('wyc','Ogląda wycenę','moneybag'); o.disconnect(); } },{threshold:.3}).observe(wyc); }
+  var kit=document.getElementById('opt-kit'); if(kit) kit.addEventListener('click',function(){ once('kit','Przełączył na wariant ze sprzętem','gear'); });
+  document.querySelectorAll('input[name=crew]').forEach(function(r){ r.addEventListener('change',function(){ if(r.value!=='0') once('crew'+r.value,'Sprawdza opcję SCA: '+(r.value==='1'?'1 barista SCA':'Kuba i Dominika'),'coffee'); }); });
+  var cf=document.getElementById('coffee'); if(cf) cf.addEventListener('change',function(){ if(cf.checked) once('coffee','Zaznaczył kawę od nas','coffee'); });
+  document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Akceptuję” → '+(t?t.textContent:''),'white_check_mark',5); }); });
+  document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')','telephone_receiver',5); }); });
+  document.querySelectorAll('a[href*="instagram.com"]').forEach(function(a){ a.addEventListener('click',function(){ once('ig'+a.href,'Otworzył film z realizacji','movie_camera'); }); });
+})();
+</script>
+
 </body>
 </html>
