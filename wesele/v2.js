@@ -10,6 +10,7 @@
     flair: 2200, branding: 200, tower: 500
   };
   var MENU_MIN = 6, MENU_MAX = 8;
+  var FRONT_FILM = '';  // film: ten sam bar ze zmieniającym się frontem (wizualizacja)
   // Media strony. Tymczasowe ujęcia wygenerowane (Higgsfield); podmienić na własne pliki w wesele/assets/.
   var G = 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/';
   var MEDIA = {
@@ -20,7 +21,7 @@
   };
   // Fronty baru: img = zdjęcie kliszy, css = klasa kafelka, k = klucz nazwy w tekstach
   var FRONTS = [
-    {id:'silver', css:'f-silver', k:'fSilver'}, {id:'k2', img:'front-2.jpg'}, {id:'k3', img:'front-3.jpg'}, {id:'k4', img:'front-4.jpg'}, {id:'gold', css:'f-gold', k:'fGold'},
+    {id:'silver', img:'front-lustro.jpg', k:'fSilver'}, {id:'k2', img:'front-2.jpg'}, {id:'k3', img:'front-3.jpg'}, {id:'k4', img:'front-4.jpg'}, {id:'gold', css:'f-gold', k:'fGold'},
     {id:'color', css:'f-color', k:'fColor'}, {id:'k7', img:'front-7.jpg'}, {id:'k8', img:'front-8.jpg'}, {id:'k9', img:'front-9.jpg'}, {id:'k10', img:'front-10.jpg'}
   ];
 
@@ -71,7 +72,7 @@
     s3:'Krok 3', s3h:'Wybierzcie menu', s3p:'Od {min} do {max} koktajli. Zaznaczyliśmy zestaw, który najczęściej wybierają pary. Menu nie zmienia ceny.',
     zero:'też 0%', picked:'Wybrane: {n} z {max}', pickMore:'Wybrane: {n}. Dobierzcie jeszcze {k}, żeby było minimum {min}.',
     s4:'Krok 4', s4h:'Front baru i dodatki', s4p:'Front wybieracie w cenie: lustro srebrne lub złote, panel pomalowany na Wasz kolor albo podświetlana klisza. Dodatki są opcjonalne.',
-    own:'Własna grafika', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', fColor:'Panel w Waszym kolorze',
+    frontFilm:'Ten sam bar, różne fronty. Wizualizacja.', own:'Własna grafika', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', fColor:'Panel w Waszym kolorze',
     aFlair:'Pokaz barmański flair', aFlairS:'Żonglerka butelkami i shakerami na parkiecie, z udziałem gości.',
     aBrand:'Bar z Waszą grafiką', aBrandS:'Inicjały, data albo motyw z zaproszeń na podświetlanym froncie.',
     aTower:'Champagne tower', aTowerS:'Piramida kieliszków zalewana winem musującym. Cena zależy od liczby kieliszków.',
@@ -127,7 +128,7 @@
     s3:'Step 3', s3h:'Choose your menu', s3p:'Between {min} and {max} cocktails. We have ticked the set couples choose most often. The menu does not change the price.',
     zero:'also 0%', picked:'Selected: {n} of {max}', pickMore:'Selected: {n}. Add {k} more to reach the minimum of {min}.',
     s4:'Step 4', s4h:'Bar front and extras', s4p:'The bar front is included: silver or gold mirror, a panel painted in your colour, or a backlit print. Extras are optional.',
-    own:'Own artwork', frontN:'Print {n}', fSilver:'Silver mirror', fGold:'Gold mirror', fColor:'Panel in your colour',
+    frontFilm:'The same bar with different fronts. Visualisation.', own:'Own artwork', frontN:'Print {n}', fSilver:'Silver mirror', fGold:'Gold mirror', fColor:'Panel in your colour',
     aFlair:'Flair bartending show', aFlairS:'Bottle and shaker juggling on the dance floor, with guests joining in.',
     aBrand:'Bar with your artwork', aBrandS:'Your initials, date or invitation motif on the backlit bar front.',
     aTower:'Champagne tower', aTowerS:'A pyramid of glasses filled with sparkling wine. Price depends on the number of glasses.',
@@ -183,7 +184,7 @@
     s3:'Schritt 3', s3h:'Wählt eure Karte', s3p:'Zwischen {min} und {max} Cocktails. Vorausgewählt ist die Auswahl, die Paare am häufigsten nehmen. Die Karte ändert den Preis nicht.',
     zero:'auch 0%', picked:'Ausgewählt: {n} von {max}', pickMore:'Ausgewählt: {n}. Wählt noch {k} dazu, das Minimum sind {min}.',
     s4:'Schritt 4', s4h:'Barfront und Extras', s4p:'Die Barfront ist im Preis enthalten: Silber- oder Goldspiegel, ein Paneel in eurer Farbe oder ein beleuchtetes Motiv. Extras sind optional.',
-    own:'Eigene Grafik', frontN:'Motiv {n}', fSilver:'Silberspiegel', fGold:'Goldspiegel', fColor:'Paneel in eurer Farbe',
+    frontFilm:'Dieselbe Bar mit verschiedenen Fronten. Visualisierung.', own:'Eigene Grafik', frontN:'Motiv {n}', fSilver:'Silberspiegel', fGold:'Goldspiegel', fColor:'Paneel in eurer Farbe',
     aFlair:'Flair-Bartending-Show', aFlairS:'Jonglage mit Flaschen und Shakern auf der Tanzfläche, die Gäste machen mit.',
     aBrand:'Bar mit eurer Grafik', aBrandS:'Initialen, Datum oder das Motiv der Einladungen auf der beleuchteten Barfront.',
     aTower:'Champagnerpyramide', aTowerS:'Eine Pyramide aus Gläsern, gefüllt mit Schaumwein. Der Preis hängt von der Zahl der Gläser ab.',
@@ -255,7 +256,7 @@
     if (state.add.coffee) lines.push([t('aCoffee'), null]);
     return {lines:lines, total:total, from: state.add.tower};
   }
-  function frontName(id){ var n = 0, r = ''; FRONTS.forEach(function(f){ if (f.img) n++; if (f.id===id) r = f.k ? t(f.k) : t('frontN',{n:n}); }); return r; }
+  function frontName(id){ var n = 0, r = ''; FRONTS.forEach(function(f){ if (f.img && !f.k) n++; if (f.id===id) r = f.k ? t(f.k) : t('frontN',{n:n}); }); return r; }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   function summary(){
     var c = calc(), parts = [t('sumGuests',{g:state.guests}), state.vodka?t('sumVodkaY'):t('sumVodkaN'), t('sumPer',{n:perGuest()}),
@@ -289,9 +290,10 @@
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+(d.z?'<span class="zero">'+L.zero+'</span>':'')+'</strong><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
     h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><div class="fronts" role="group">';
-    FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '<span>'+esc(frontName(f.id))+'</span>')+'</button>'; });
+    FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name">';
     h += '</p>';
+    if (FRONT_FILM) h += '<figure class="frontfilm"><video src="'+FRONT_FILM+'" poster="'+A+'bar-ref.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>'+L.frontFilm+'</figcaption></figure>';
     h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding));
     h += addon('flair', L.aFlair, L.aFlairS, '+ '+money(PRICE.flair));
     h += addon('tower', L.aTower, L.aTowerS, L.from+money(PRICE.tower));
