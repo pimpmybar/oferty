@@ -14,7 +14,7 @@
   var BV = { base: 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_120125_442f7e44-83e8-40ab-9ea9-6ce94befcf8b.png', 'bar-green': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_125340_a086eced-042e-4f69-8177-964b4b406239.png', 'bar-olive': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_121858_4b905690-f3c4-4c1b-b9d6-a5cb45ef529c.png' };
   var SEQ = ['silver','gold','black','sage','navy','blush','k2','k3','k4','k7','k8','k9','k10','bar-green','bar-olive'];
   var SOLID = {black:'#161616', sage:'#8a9a82', navy:'#1f2a44', blush:'#e2bfbf'};
-  var bvTimer = null, bvStep = 0;
+  var bvTimer = null, bvStep = 0, bvTouched = false;
   var FRONT_FILM = '';  // film: ten sam bar ze zmieniającym się frontem (wizualizacja)
   // Media strony. Tymczasowe ujęcia wygenerowane (Higgsfield); podmienić na własne pliki w wesele/assets/.
   var G = 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/';
@@ -379,7 +379,7 @@
   function bind(){
     $('bv-play').addEventListener('click', function(){ if (bvTimer){ bvStop(); bvPaint(bvCurrent()); } else { bvStart(); once('bvplay','Ogląda pokaz frontów baru','art'); } });
     SEQ.forEach(function(k){ var i = new Image(); i.src = BV[k] || (/^k\d+$/.test(k) ? A+'front-'+k.slice(1)+'.jpg' : BV.base); });
-    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ lang = b.dataset.lang; try{localStorage.setItem('pmb_lang_'+O.id, lang)}catch(e){} once('lang'+lang,'Zmienił język na '+lang.toUpperCase(),'globe_with_meridians'); build(); }); });
     var gt; $('g').addEventListener('input', function(e){ state.guests = +e.target.value; render(); clearTimeout(gt); gt = setTimeout(function(){ ping('Ustawił liczbę gości: '+state.guests+' → '+summary().total,'busts_in_silhouette'); }, 2500); });
     $('v-yes').addEventListener('click', function(){ state.vodka = true; render(); });
@@ -389,7 +389,7 @@
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
       render(); clearTimeout(mt); mt = setTimeout(function(){ ping('Zmienił menu: '+menuNames().join(', '),'cocktail'); }, 6000);
     }); });
-    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ bvStop(); state.front = b.dataset.front; state.own = false; render(); ping('Front baru: '+T.pl[(FRONTS.filter(function(f){return f.id===state.front})[0]||{}).k||'frontN'].replace('{n}',''),'art'); }); });
+    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ bvTouched = true; bvStop(); state.front = b.dataset.front; state.own = false; render(); ping('Front baru: '+T.pl[(FRONTS.filter(function(f){return f.id===state.front})[0]||{}).k||'frontN'].replace('{n}',''),'art'); }); });
     document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){
       var id = i.dataset.add; if (id==='own') state.own = i.checked; else state.add[id] = i.checked; render();
       if (i.checked) once('add'+id,'Dodał: '+T.pl[{own:'aBrand',flair:'aFlair',tower:'aTower',welcome:'aWelcome',coffee:'aCoffee'}[id]]+' → '+summary().total,'heavy_plus_sign');
