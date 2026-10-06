@@ -81,6 +81,7 @@
     yourPrice:'Wasza cena', perPerson:'ok. {n} za osobę', lBar:'Bar koktajlowy, {g} gości', lFourth:'4 koktajle na osobę', lAsk:'do wyceny',
     inclH:'W cenie', incl:['{crew} przez 8 godzin','alkohole do koktajli, soki, puree, owoce i lód','mobilny bar z wybranym frontem','szkło w 5 rodzajach i cały sprzęt','wydrukowane menu i koktajl autorski','dojazd, montaż i demontaż'],
     valid:'Cena ważna do {d}', book:'Rezerwuję termin',
+    crewH:'Barmani, z którymi pracujemy i pracowaliśmy', crewP:'Przez nasz bar przeszło wielu barmanów. Część z nich do dziś dołącza do nas przy większych weselach.',
     teamH:'Kto przyjedzie', teamP:'Na weselach pracujemy w stałym składzie. Przy większej liczbie gości dołącza barman, z którym pracujemy na co dzień.',
     tomekL:'Właściciel · barman od 2013', tomekP:'Założył Pimp My Bar w 2013 roku. Przez pięć lat występował z pokazami flair, czyli żonglerką barmańską. Osobiście układa menu z każdą parą.',
     tomekC:['flair','PL · EN · DE'],
@@ -136,6 +137,7 @@
     yourPrice:'Your price', perPerson:'approx. {n} per guest', lBar:'Cocktail bar, {g} guests', lFourth:'4 cocktails per guest', lAsk:'on request',
     inclH:'Included', incl:['{crew} for 8 hours','spirits for the cocktails, juices, purées, fruit and ice','mobile bar with the front you choose','five types of glassware and all equipment','printed menu and your signature cocktail','travel, set-up and take-down'],
     valid:'Price valid until {d}', book:'Reserve our date',
+    crewH:'Bartenders we work and have worked with', crewP:'Many bartenders have worked behind our bar over the years. Some still join us for larger weddings.',
     teamH:'Who is coming', teamP:'We work weddings with a fixed crew. For larger guest lists, a bartender we work with regularly joins us.',
     tomekL:'Owner · bartender since 2013', tomekP:'Founded Pimp My Bar in 2013. Performed flair bartending shows for five years. Plans the menu with every couple personally.',
     tomekC:['flair','PL · EN · DE'],
@@ -191,6 +193,7 @@
     yourPrice:'Euer Preis', perPerson:'ca. {n} pro Gast', lBar:'Cocktailbar, {g} Gäste', lFourth:'4 Cocktails pro Gast', lAsk:'auf Anfrage',
     inclH:'Im Preis enthalten', incl:['{crew} für 8 Stunden','Spirituosen für die Cocktails, Säfte, Pürees, Früchte und Eis','mobile Bar mit der gewählten Front','fünf Glastypen und die gesamte Ausstattung','gedruckte Karte und euer Signature-Cocktail','Anfahrt, Auf- und Abbau'],
     valid:'Preis gültig bis {d}', book:'Termin reservieren',
+    crewH:'Barkeeper, mit denen wir arbeiten und gearbeitet haben', crewP:'Über die Jahre standen viele Barkeeper hinter unserer Bar. Einige kommen bei größeren Hochzeiten bis heute dazu.',
     teamH:'Wer kommt', teamP:'Auf Hochzeiten arbeiten wir im festen Team. Bei mehr Gästen kommt ein Barkeeper dazu, mit dem wir regelmäßig arbeiten.',
     tomekL:'Inhaber · Barkeeper seit 2013', tomekP:'Hat Pimp My Bar 2013 gegründet und fünf Jahre lang Flair-Shows gezeigt. Von 2016 bis 2024 lebte er in Jena. Die Karte plant er mit jedem Paar persönlich.',
     tomekC:['Flair','PL · EN · DE'],
@@ -298,10 +301,10 @@
     h += '<aside class="total" aria-live="polite"><span class="label">'+L.yourPrice+'</span><div class="sum" id="sum"></div><span class="sub" id="pp"></span><hr><ul class="lines" id="lines"></ul><hr><span class="label">'+L.inclH+'</span><ul class="incl" id="incl"></ul><hr><span class="sub">'+t('valid',{d:O.validUntil})+'</span><a class="btn" href="#rezerwacja" data-book>'+L.book+'</a></aside>';
     h += '</div></div></section>';
 
-    h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.teamH+'</h2><p>'+L.teamP+'</p></div><div class="team">';
-    h += '<div class="person"><img class="avatar" src="'+A+'tomek.jpg" alt="Tomasz Malinowski" loading="lazy"><div class="who"><span class="label">'+L.tomekL+'</span><h3>Tomasz Malinowski</h3><div class="chips"><span class="chip k">'+L.tomekC[0]+'</span><span class="chip">'+L.tomekC[1]+'</span></div><p>'+L.tomekP+'</p></div></div>';
+    h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.teamH+'</h2><p>'+L.teamP+'</p></div>';
+    h += '<div class="lead"><img src="'+A+'tomek.jpg" alt="Tomasz Malinowski" loading="lazy"><div class="who"><span class="label">'+L.tomekL+'</span><h3>Tomasz Malinowski</h3><div class="chips"><span class="chip k">'+L.tomekC[0]+'</span><span class="chip">'+L.tomekC[1]+'</span></div><p>'+L.tomekP+'</p></div></div><div class="team">';
     h += '<div class="person"><img class="avatar" src="'+A+'patryk.jpg" alt="Patryk Mroczkowski" loading="lazy"><div class="who"><span class="label">'+L.patrykL+'</span><h3>Patryk Mroczkowski</h3><div class="chips"><span class="chip k">'+L.patrykC[0]+'</span><span class="chip">'+L.patrykC[1]+'</span></div><p>'+L.patrykP+'</p></div></div>';
-    h += '</div></div></section>';
+    h += '</div><div class="crew-head"><h3>'+L.crewH+'</h3><p>'+L.crewP+'</p></div><div class="crewgrid">'+[1,2,3,4].map(function(n){ return '<img src="'+A+'crew-'+n+'.jpg" alt="" loading="lazy">'; }).join('')+'</div></div></section>';
 
     h += '<section class="filmsec"><div class="wrap"><button type="button" class="bigfilm" id="film"><img src="'+M.filmPoster+'" alt="" loading="lazy"><span class="bigplay"><span class="tri" aria-hidden="true"></span></span><span class="bigcap"><strong>'+L.filmH+'</strong><span>'+L.filmP+'</span></span></button>';
 

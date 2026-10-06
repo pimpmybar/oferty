@@ -177,3 +177,13 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .ftext{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .ftext h3{font-size:30px}
 .ftext .more{margin-top:4px}
+.lead{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:center;margin-bottom:18px}
+.lead img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:16px;display:block;background:var(--sunk)}
+.lead .who{display:flex;flex-direction:column;gap:12px}
+.lead h3{font-size:34px}
+@media (max-width:760px){.lead{grid-template-columns:1fr;gap:16px}}
+.team:has(.person:only-child){grid-template-columns:1fr}
+.crew-head{margin:40px 0 16px;padding-top:26px;border-top:1px dashed var(--line-2);display:flex;flex-direction:column;gap:6px}
+.crewgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.crewgrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;display:block;background:var(--sunk)}
+@media (max-width:640px){.crewgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}

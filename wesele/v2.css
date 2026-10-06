@@ -100,3 +100,4 @@ h3{font-size:24px;font-weight:600;line-height:1.1}
 .total{box-shadow:0 24px 60px -40px rgba(18,55,44,.55)}
 .f-color{background:conic-gradient(from 210deg,#7d8b6a,#ecdcb6,#d4202f,#12372c,#7d8b6a)}
 .at-hero .bar{transform:translateY(110%)}.bar{transition:transform .3s}
+.lead img,.crewgrid img{border-radius:4px}
