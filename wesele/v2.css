@@ -1,0 +1,102 @@
+/* Wesela v2: nakładka na offer.css. Paleta: butelkowa zieleń, biel, czerwień z logo PMB, szampan. */
+:root{
+  --ground:#ffffff; --panel:#ffffff; --sunk:#f0f4f1;
+  --ink:#12372c; --ink-2:#44605a; --ink-3:#768a84;
+  --line:#dde6e1; --line-2:#c3d1ca;
+  --crema:#d4202f; --crema-soft:#fdeeee; --on-crema:#ffffff;
+  --ok:#1f6b4a; --ok-soft:#e3f1ea;
+  --champ:#ecdcb6;
+  --display:"Bodoni Moda","Didot","Bodoni MT",Georgia,serif;
+  --body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:var(--body);
+}
+h1,h2,h3{text-transform:none;font-weight:600;letter-spacing:-.01em;line-height:1.02}
+h2{font-size:clamp(36px,5.4vw,60px)}
+h3{font-size:24px;font-weight:600;line-height:1.1}
+.label,.step{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:14px;font-weight:600;color:var(--ink-3)}
+.step{color:var(--crema)}
+.brand{font-family:var(--body);font-weight:700;text-transform:none;letter-spacing:0;font-size:18px}
+.btn{font-weight:700}
+.chip{font-family:var(--body);font-size:13px}
+.zero{font-family:var(--body);font-size:11.5px;font-weight:600}
+.addon b,.count{font-family:var(--body);font-weight:600}
+.block{border-top:1px solid var(--line-2)}
+.total .sum,.bar .s,.guests output{font-family:var(--display);font-weight:600}
+.faq{border-top:1px solid var(--line-2)}
+.faq summary::after{font-family:var(--body);font-weight:300}
+.ftext h3{font-size:32px}
+
+/* ── hero: film w tle + napisy ── */
+.hero2{position:relative;min-height:100svh;display:flex;flex-direction:column;color:#fff;overflow:hidden;background:#12372c}
+.hero2-media{position:absolute;inset:0}
+.hero2-media video,.hero2-media img{width:100%;height:100%;object-fit:cover;display:block}
+.hero2-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,24,.55) 0%,rgba(10,30,24,.15) 32%,rgba(10,30,24,.35) 58%,rgba(10,30,24,.86) 100%)}
+.kb{animation:kb 22s ease-in-out infinite alternate;transform-origin:60% 55%}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.16) translate(-1.5%,-1%)}}
+.hero2-top{position:relative;display:flex;justify-content:space-between;align-items:center;padding-block:20px;width:100%}
+.hero2 .brand{color:#fff}
+.hero2 .langs{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);backdrop-filter:blur(8px)}
+.hero2 .langs button{color:rgba(255,255,255,.82);font-family:var(--body)}
+.hero2 .langs button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:none}
+.hero2-body{position:relative;margin-top:auto;padding-bottom:clamp(24px,5vh,56px);width:100%}
+.hero2-for{color:var(--champ);font-weight:600;font-size:16px;margin-bottom:14px;max-width:none}
+.hook{font-family:var(--display);font-weight:600;font-size:clamp(46px,9.4vw,132px);line-height:.94;letter-spacing:-.02em;color:#fff;text-wrap:balance}
+.hook .hl{display:block}
+.hook .hl:last-child{font-style:italic;color:var(--champ)}
+.hook .w{display:inline-block;opacity:0;transform:translateY(.5em);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--d) * 110ms + 250ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+.hero2-rot{color:#fff;font-size:clamp(17px,2.2vw,22px);margin-top:20px;min-height:2.8em;max-width:34ch;transition:opacity .4s,transform .4s;opacity:0;animation:rise .9s 1.5s forwards}
+.hero2-rot.out{opacity:0!important;transform:translateY(6px)}
+.hero2-foot{position:relative;border-top:1px solid rgba(255,255,255,.28);background:rgba(10,30,24,.35);backdrop-filter:blur(10px)}
+.hero2-strip{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:18px;flex-wrap:wrap}
+.facts2{display:flex;gap:clamp(18px,4vw,52px);margin:0;flex-wrap:wrap}
+.facts2 dt{font-size:13px;color:rgba(255,255,255,.72)}
+.facts2 dd{margin:0;font-weight:600;font-size:18px}
+.facts2 dd#peek{font-family:var(--display);font-size:26px;line-height:1}
+@media (max-width:640px){
+  .hero2-strip{flex-direction:column;align-items:stretch}
+  .facts2{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
+  .hero2-strip .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.kb{animation:none}.hook .w,.hero2-rot{animation:none;opacity:1;transform:none}}
+
+/* ── wieczór przy barze: przesuwany pas ── */
+.eve{border-top:0;padding-bottom:clamp(36px,6vw,64px)}
+.rail{list-style:none;margin:0;padding:4px clamp(16px,4vw,40px) 18px;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;scroll-padding-inline:clamp(16px,4vw,40px)}
+@media (min-width:1160px){.rail{padding-inline:calc((100vw - 1000px)/2);scroll-padding-inline:calc((100vw - 1000px)/2)}}
+.rail li{flex:0 0 min(78vw,330px);scroll-snap-align:start}
+.rail figure{margin:0;display:flex;flex-direction:column;gap:14px}
+.rail img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;display:block;background:var(--sunk)}
+.rail figcaption{display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:2px;align-items:baseline}
+.rail .n{grid-row:1/span 2;font-family:var(--display);font-style:italic;font-size:40px;line-height:.9;color:var(--crema)}
+.rail strong{font-family:var(--display);font-size:24px;font-weight:600;line-height:1.1}
+.rail figcaption span:last-child{color:var(--ink-2);font-size:15px}
+.illus{font-size:13px;color:var(--ink-3);margin-top:6px}
+
+/* ── film ── */
+.bigfilm{position:relative;display:block;width:100%;aspect-ratio:21/9;border:0;padding:0;border-radius:6px;overflow:hidden;cursor:pointer;background:var(--ink);color:#fff;text-align:left}
+@media (max-width:700px){.bigfilm{aspect-ratio:4/5}}
+.bigfilm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.bigfilm:hover img{transform:scale(1.03)}
+.bigfilm::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,24,.05) 30%,rgba(10,30,24,.8) 100%)}
+.bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:92px;height:92px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.bigplay .tri{width:auto;height:auto;background:none;border:14px solid transparent;border-left:22px solid var(--crema);border-right:0;margin-left:8px;border-radius:0}
+.bigplay .tri::after{display:none}
+.bigcap{position:absolute;left:clamp(18px,3vw,36px);bottom:clamp(18px,3vw,32px);z-index:2;display:flex;flex-direction:column;gap:2px}
+.bigcap strong{font-family:var(--display);font-size:clamp(26px,3.6vw,44px);font-weight:600;color:#fff;line-height:1.05}
+.bigcap span{color:rgba(255,255,255,.82);font-size:15px}
+.modal{border:0;padding:0;background:transparent;width:min(1100px,94vw);max-width:none;overflow:visible}
+.modal::backdrop{background:rgba(10,30,24,.82)}
+.modal-in{aspect-ratio:16/9;background:#000;border-radius:6px;overflow:hidden}
+.modal-in iframe{width:100%;height:100%;border:0;display:block}
+.modal-x{position:absolute;right:0;top:-46px;width:38px;height:38px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
+
+/* ── drobne korekty reszty ── */
+.person,.total,.drink,.addon,.crow,.choice{border-radius:6px}
+.front,.avatar,.fmedia{border-radius:4px}
+.accept{background:var(--ink);border-radius:8px}
+.accept h2,.accept .col>p{color:#fff}
+.accept .col>p{color:rgba(255,255,255,.8)}
+.total{box-shadow:0 24px 60px -40px rgba(18,55,44,.55)}
+.f-color{background:conic-gradient(from 210deg,#7d8b6a,#ecdcb6,#d4202f,#12372c,#7d8b6a)}
+.at-hero .bar{transform:translateY(110%)}.bar{transition:transform .3s}
