@@ -10,6 +10,11 @@
     flair: 2200, branding: 200, tower: 500
   };
   var MENU_MIN = 6, MENU_MAX = 8;
+  // Fronty baru: img = zdjęcie kliszy, css = klasa kafelka, k = klucz nazwy w tekstach
+  var FRONTS = [
+    {id:'silver', css:'f-silver', k:'fSilver'}, {id:'k2', img:'front-2.jpg'}, {id:'k3', img:'front-3.jpg'}, {id:'k4', img:'front-4.jpg'}, {id:'gold', css:'f-gold', k:'fGold'},
+    {id:'color', css:'f-color', k:'fColor'}, {id:'k7', img:'front-7.jpg'}, {id:'k8', img:'front-8.jpg'}, {id:'k9', img:'front-9.jpg'}, {id:'k10', img:'front-10.jpg'}
+  ];
 
   // ── Karta koktajli (z „Mix some drinks”) ──
   var DRINKS = [
@@ -39,7 +44,7 @@
     tag:'/ Wesela', offerFor:'Oferta weselna', h1:'Bar koktajlowy na <em>Wasze wesele</em>',
     lead:'Każdy koktajl robimy na żywo przy barze, ze świeżych owoców. Poniżej ułożycie własne menu i od razu zobaczycie cenę.',
     fDate:'Termin', fPlace:'Miejsce', fGuests:'Goście', fTime:'Czas pracy baru', hours:'8 godzin', guestsN:'{n} osób',
-    cta:'Ułóż swój bar ↓', play:'Zobacz film z wesela',
+    cta:'Ułóż swój bar ↓', play:'Zobacz nasz showreel',
     howH:'Jak to wygląda', howP:'Bar stoi na sali przez całe wesele. Goście podchodzą, rozmawiają z barmanem i dostają koktajl zrobiony dla nich.',
     c1h:'Koktajl dobrany w rozmowie', c1p:'Menu stoi obok, ale barman i tak zapyta o ulubiony owoc, smak i alkohol. Dzięki temu po koktajl przychodzą też goście, którzy zwykle ich nie piją.',
     c2h:'Bar pasujący do sali', c2p:'Front baru jest podświetlany i wymienny. Wybieracie jeden z gotowych wzorów albo dajecie własną grafikę, np. z zaproszeń.',
@@ -54,8 +59,8 @@
     forced:'Bez wódki na stołach liczymy 4 koktajle na osobę.',
     s3:'Krok 3', s3h:'Wybierzcie menu', s3p:'Od {min} do {max} koktajli. Zaznaczyliśmy zestaw, który najczęściej wybierają pary. Menu nie zmienia ceny.',
     zero:'też 0%', picked:'Wybrane: {n} z {max}', pickMore:'Wybrane: {n}. Dobierzcie jeszcze {k}, żeby było minimum {min}.',
-    s4:'Krok 4', s4h:'Front baru i dodatki', s4p:'Front wybieracie w cenie. Dodatki są opcjonalne.',
-    own:'Własna grafika', frontN:'Wzór {n}',
+    s4:'Krok 4', s4h:'Front baru i dodatki', s4p:'Front wybieracie w cenie: lustro srebrne lub złote, panel pomalowany na Wasz kolor albo podświetlana klisza. Dodatki są opcjonalne.',
+    own:'Własna grafika', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', fColor:'Panel w Waszym kolorze',
     aFlair:'Pokaz barmański flair', aFlairS:'Żonglerka butelkami i shakerami na parkiecie, z udziałem gości.',
     aBrand:'Bar z Waszą grafiką', aBrandS:'Inicjały, data albo motyw z zaproszeń na podświetlanym froncie.',
     aTower:'Champagne tower', aTowerS:'Piramida kieliszków zalewana winem musującym. Cena zależy od liczby kieliszków.',
@@ -71,15 +76,15 @@
     patrykL:'Szef baru · w Pimp My Bar od 2020', patrykP:'Prowadzi bar na weselach i eventach firmowych. Obsługuje gości po polsku i po angielsku.',
     patrykC:['koktajle na żywo','PL · EN'],
     workH:'Z naszych wesel', workP:'Wszystkie zdjęcia pochodzą z naszych realizacji. Działamy od 2013 roku i mamy za sobą ponad 2 000 eventów.',
-    moreFilm:'▶ Drugi film: showreel Pimp My Bar',
+    cofL:'Dodatek', cofH:'Bar kawowy z baristą', cofP:'Ten sam zespół prowadzi bary kawowe na targach w Polsce i za granicą. Na weselu barista podaje espresso, cappuccino i latte przez cały wieczór. Bar kawowy można zaznaczyć w dodatkach.', cofA:'Film z targów na Instagramie →',
     faqH:'Pytania, które zwykle padają', faqP:'Jeśli czegoś tu brakuje, napiszcie albo zadzwońcie.',
     faq:[
       ['Czy alkohol jest w cenie?','Tak. W cenie są alkohole do koktajli (gin, rum, whisky, tequila, likiery, wino musujące), soki, puree, owoce i lód. Wódkę do koktajli na wódce bierzemy z Waszej wódki weselnej. Ile butelek, podamy po wyborze menu.'],
       ['Płacimy za koktajl czy za godzinę?','Ani tak, ani tak. Jest jedna cena za całe wesele, liczona od liczby gości. Obejmuje 8 godzin pracy baru i pulę koktajli na wszystkich.'],
       ['Co znaczy „3 koktajle na osobę”?','To pula na całe wesele, a nie limit dla gościa. Przy {g} gościach przygotowujemy ok. {n} koktajli. Jedni wypiją pięć, inni żadnego.'],
       ['Czy możemy zmienić menu później?','Tak. Menu zamykamy z Wami przed weselem. To, co wybierzecie teraz, jest punktem wyjścia do rozmowy.'],
-      ['Co musi zapewnić sala?','Miejsce ok. 3 × 3 m, gniazdko prądu w pobliżu i mycie szkła w zmywalni sali. Resztę przywozimy sami.'],
-      ['Jak rezerwujemy termin?','Klikacie „Rezerwuję termin” albo piszecie do nas. Wysyłamy umowę, a termin jest Wasz po jej podpisaniu i wpłacie zadatku.']
+      ['Co musi zapewnić sala?','Miejsce na bar: ok. 2 × 2 m przy jednym barmanie i ok. 3 × 3 m przy dwóch. Do tego gniazdko prądu w pobliżu i mycie szkła w zmywalni sali. Resztę przywozimy sami.'],
+      ['Jak rezerwujemy termin?','Klikacie „Rezerwuję termin” albo piszecie do nas. Wysyłamy umowę, a termin jest Wasz po jej podpisaniu. Nie pobieramy zadatku.']
     ],
     accH:'Rezerwujemy termin', accP:'Kliknijcie przycisk, a otworzy się gotowy mail z Waszym wyborem. Można też po prostu zadzwonić.',
     yourChoice:'Wasz wybór', send:'Wyślij wybór mailem', copy:'Kopiuj', copied:'Skopiowano',
@@ -91,7 +96,7 @@
     tag:'/ Weddings', offerFor:'Wedding offer', h1:'A cocktail bar for <em>your wedding</em>',
     lead:'Every cocktail is made live at the bar, with fresh fruit. Build your own menu below and see the price straight away.',
     fDate:'Date', fPlace:'Venue', fGuests:'Guests', fTime:'Bar service', hours:'8 hours', guestsN:'{n} guests',
-    cta:'Build your bar ↓', play:'Watch a wedding film',
+    cta:'Build your bar ↓', play:'Watch our showreel',
     howH:'What it looks like', howP:'The bar stays in the room for the whole wedding. Guests walk up, chat with the bartender and get a cocktail made for them.',
     c1h:'A cocktail chosen in conversation', c1p:'The menu is on display, but the bartender still asks about your favourite fruit, flavour and spirit. That brings over guests who rarely order cocktails.',
     c2h:'A bar that suits the room', c2p:'The front of the bar is backlit and interchangeable. Pick one of our designs or send your own artwork, for example from your invitations.',
@@ -106,8 +111,8 @@
     forced:'Without vodka on the tables we plan 4 cocktails per guest.',
     s3:'Step 3', s3h:'Choose your menu', s3p:'Between {min} and {max} cocktails. We have ticked the set couples choose most often. The menu does not change the price.',
     zero:'also 0%', picked:'Selected: {n} of {max}', pickMore:'Selected: {n}. Add {k} more to reach the minimum of {min}.',
-    s4:'Step 4', s4h:'Bar front and extras', s4p:'The bar front is included. Extras are optional.',
-    own:'Own artwork', frontN:'Design {n}',
+    s4:'Step 4', s4h:'Bar front and extras', s4p:'The bar front is included: silver or gold mirror, a panel painted in your colour, or a backlit print. Extras are optional.',
+    own:'Own artwork', frontN:'Print {n}', fSilver:'Silver mirror', fGold:'Gold mirror', fColor:'Panel in your colour',
     aFlair:'Flair bartending show', aFlairS:'Bottle and shaker juggling on the dance floor, with guests joining in.',
     aBrand:'Bar with your artwork', aBrandS:'Your initials, date or invitation motif on the backlit bar front.',
     aTower:'Champagne tower', aTowerS:'A pyramid of glasses filled with sparkling wine. Price depends on the number of glasses.',
@@ -123,15 +128,15 @@
     patrykL:'Head bartender · with Pimp My Bar since 2020', patrykP:'Runs the bar at weddings and corporate events. Serves guests in Polish and English.',
     patrykC:['live cocktails','PL · EN'],
     workH:'From our weddings', workP:'All photos come from our own events. We have been running since 2013, with more than 2,000 events behind us.',
-    moreFilm:'▶ Second film: Pimp My Bar showreel',
+    cofL:'Extra', cofH:'Coffee bar with a barista', cofP:'The same team runs coffee bars at trade fairs in Poland and abroad. At a wedding, a barista serves espresso, cappuccino and latte all evening. You can tick the coffee bar in the extras.', cofA:'Trade-fair film on Instagram →',
     faqH:'Questions we usually get', faqP:'If something is missing here, write or call us.',
     faq:[
       ['Is the alcohol included?','Yes. The price includes the spirits for the cocktails (gin, rum, whisky, tequila, liqueurs, sparkling wine), juices, purées, fruit and ice. For vodka-based cocktails we use your wedding vodka. We will tell you how many bottles once the menu is set.'],
       ['Do you charge per drink or per hour?','Neither. There is one price for the whole wedding, based on the number of guests. It covers 8 hours of bar service and a pool of cocktails for everyone.'],
       ['What does "3 cocktails per guest" mean?','It is a pool for the whole wedding, not a limit per person. For {g} guests we prepare approx. {n} cocktails. Some guests have five, others none.'],
       ['Can we change the menu later?','Yes. We finalise the menu with you before the wedding. What you pick now is a starting point.'],
-      ['What does the venue need to provide?','A space of about 3 × 3 m, a power socket nearby and glass washing in the venue kitchen. We bring everything else.'],
-      ['How do we reserve the date?','Click "Reserve our date" or write to us. We send a contract, and the date is yours once it is signed and the deposit is paid.']
+      ['What does the venue need to provide?','Space for the bar: about 2 × 2 m with one bartender and about 3 × 3 m with two. Plus a power socket nearby and glass washing in the venue kitchen. We bring everything else.'],
+      ['How do we reserve the date?','Click "Reserve our date" or write to us. We send a contract, and the date is yours once it is signed. We do not take a deposit.']
     ],
     accH:'Let’s reserve your date', accP:'Click the button and an email with your selection opens, ready to send. Or simply call us.',
     yourChoice:'Your selection', send:'Send selection by email', copy:'Copy', copied:'Copied',
@@ -143,7 +148,7 @@
     tag:'/ Hochzeiten', offerFor:'Hochzeitsangebot', h1:'Eine Cocktailbar für <em>eure Hochzeit</em>',
     lead:'Jeder Cocktail entsteht live an der Bar, mit frischen Früchten. Stellt unten eure eigene Karte zusammen und seht sofort den Preis.',
     fDate:'Termin', fPlace:'Ort', fGuests:'Gäste', fTime:'Barservice', hours:'8 Stunden', guestsN:'{n} Gäste',
-    cta:'Bar zusammenstellen ↓', play:'Hochzeitsfilm ansehen',
+    cta:'Bar zusammenstellen ↓', play:'Showreel ansehen',
     howH:'So sieht es aus', howP:'Die Bar steht die ganze Feier über im Saal. Die Gäste kommen vorbei, sprechen mit dem Barkeeper und bekommen einen Cocktail, der für sie gemacht wird.',
     c1h:'Cocktail im Gespräch gewählt', c1p:'Die Karte steht bereit, trotzdem fragt der Barkeeper nach Lieblingsfrucht, Geschmack und Spirituose. So kommen auch Gäste, die sonst keine Cocktails trinken.',
     c2h:'Eine Bar, die zum Saal passt', c2p:'Die Front der Bar ist beleuchtet und austauschbar. Ihr wählt eines unserer Motive oder schickt eure eigene Grafik, zum Beispiel von den Einladungen.',
@@ -158,8 +163,8 @@
     forced:'Ohne Wodka auf den Tischen planen wir 4 Cocktails pro Gast.',
     s3:'Schritt 3', s3h:'Wählt eure Karte', s3p:'Zwischen {min} und {max} Cocktails. Vorausgewählt ist die Auswahl, die Paare am häufigsten nehmen. Die Karte ändert den Preis nicht.',
     zero:'auch 0%', picked:'Ausgewählt: {n} von {max}', pickMore:'Ausgewählt: {n}. Wählt noch {k} dazu, das Minimum sind {min}.',
-    s4:'Schritt 4', s4h:'Barfront und Extras', s4p:'Die Barfront ist im Preis enthalten. Extras sind optional.',
-    own:'Eigene Grafik', frontN:'Motiv {n}',
+    s4:'Schritt 4', s4h:'Barfront und Extras', s4p:'Die Barfront ist im Preis enthalten: Silber- oder Goldspiegel, ein Paneel in eurer Farbe oder ein beleuchtetes Motiv. Extras sind optional.',
+    own:'Eigene Grafik', frontN:'Motiv {n}', fSilver:'Silberspiegel', fGold:'Goldspiegel', fColor:'Paneel in eurer Farbe',
     aFlair:'Flair-Bartending-Show', aFlairS:'Jonglage mit Flaschen und Shakern auf der Tanzfläche, die Gäste machen mit.',
     aBrand:'Bar mit eurer Grafik', aBrandS:'Initialen, Datum oder das Motiv der Einladungen auf der beleuchteten Barfront.',
     aTower:'Champagnerpyramide', aTowerS:'Eine Pyramide aus Gläsern, gefüllt mit Schaumwein. Der Preis hängt von der Zahl der Gläser ab.',
@@ -175,15 +180,15 @@
     patrykL:'Barchef · seit 2020 bei Pimp My Bar', patrykP:'Leitet die Bar auf Hochzeiten und Firmenevents. Bedient die Gäste auf Polnisch und Englisch.',
     patrykC:['Cocktails live','PL · EN'],
     workH:'Von unseren Hochzeiten', workP:'Alle Fotos stammen von unseren eigenen Events. Wir sind seit 2013 dabei, mit über 2.000 Veranstaltungen.',
-    moreFilm:'▶ Zweiter Film: Pimp My Bar Showreel',
+    cofL:'Extra', cofH:'Kaffeebar mit Barista', cofP:'Dasselbe Team betreibt Kaffeebars auf Messen in Polen und im Ausland. Auf der Hochzeit serviert ein Barista den ganzen Abend Espresso, Cappuccino und Latte. Die Kaffeebar könnt ihr bei den Extras ankreuzen.', cofA:'Messefilm auf Instagram →',
     faqH:'Häufige Fragen', faqP:'Fehlt hier etwas, schreibt uns oder ruft an.',
     faq:[
       ['Ist der Alkohol im Preis enthalten?','Ja. Im Preis sind die Spirituosen für die Cocktails (Gin, Rum, Whisky, Tequila, Liköre, Schaumwein), Säfte, Pürees, Früchte und Eis. Für Cocktails auf Wodkabasis nehmen wir euren Hochzeitswodka. Wie viele Flaschen, sagen wir euch, sobald die Karte steht.'],
       ['Rechnet ihr pro Drink oder pro Stunde ab?','Weder noch. Es gibt einen Preis für die ganze Hochzeit, berechnet nach der Gästezahl. Er umfasst 8 Stunden Barservice und ein Cocktailkontingent für alle.'],
       ['Was bedeutet „3 Cocktails pro Gast“?','Das ist ein Kontingent für die ganze Feier, kein Limit pro Person. Für {g} Gäste bereiten wir ca. {n} Cocktails vor. Manche trinken fünf, andere keinen.'],
       ['Können wir die Karte später ändern?','Ja. Die Karte legen wir vor der Hochzeit gemeinsam fest. Eure Auswahl jetzt ist der Ausgangspunkt.'],
-      ['Was muss die Location stellen?','Eine Fläche von etwa 3 × 3 m, eine Steckdose in der Nähe und das Spülen der Gläser in der Küche der Location. Alles andere bringen wir mit.'],
-      ['Wie reservieren wir den Termin?','Klickt auf „Termin reservieren“ oder schreibt uns. Wir schicken den Vertrag, und der Termin gehört euch, sobald er unterschrieben und die Anzahlung bezahlt ist.']
+      ['Was muss die Location stellen?','Platz für die Bar: etwa 2 × 2 m bei einem Barkeeper und etwa 3 × 3 m bei zwei. Dazu eine Steckdose in der Nähe und das Spülen der Gläser in der Küche der Location. Alles andere bringen wir mit.'],
+      ['Wie reservieren wir den Termin?','Klickt auf „Termin reservieren“ oder schreibt uns. Wir schicken den Vertrag, und der Termin gehört euch, sobald er unterschrieben ist. Eine Anzahlung nehmen wir nicht.']
     ],
     accH:'Wir reservieren euren Termin', accP:'Klickt auf den Button und es öffnet sich eine fertige E-Mail mit eurer Auswahl. Oder ruft einfach an.',
     yourChoice:'Eure Auswahl', send:'Auswahl per E-Mail senden', copy:'Kopieren', copied:'Kopiert',
@@ -203,7 +208,7 @@
   var state = {
     guests: O.guests, vodka: true, more: false,
     menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}),
-    front: 2, own: false,
+    front: 'silver', own: false,
     add: {flair:false, tower:false, welcome:false, coffee:false}
   };
 
@@ -229,10 +234,11 @@
     if (state.add.coffee) lines.push([t('aCoffee'), null]);
     return {lines:lines, total:total, from: state.add.tower};
   }
+  function frontName(id){ var n = 0, r = ''; FRONTS.forEach(function(f){ if (f.img) n++; if (f.id===id) r = f.k ? t(f.k) : t('frontN',{n:n}); }); return r; }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   function summary(){
     var c = calc(), parts = [t('sumGuests',{g:state.guests}), state.vodka?t('sumVodkaY'):t('sumVodkaN'), t('sumPer',{n:perGuest()}),
-      t('sumFront',{f: state.own ? t('sumOwn') : t('frontN',{n:state.front})})];
+      t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
     var adds = c.lines.slice(1).filter(function(l){return l[0]!==t('lFourth')}).map(function(l){return l[0]});
     return {head: parts.join(' · '), menu: menuNames().join(', '), adds: adds.length ? adds.join(', ') : t('none'), total: (c.from?t('from'):'')+money(c.total)};
   }
@@ -261,8 +267,9 @@
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+(d.z?'<span class="zero">'+L.zero+'</span>':'')+'</strong><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
     h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><div class="fronts" role="group">';
-    for (var i=1;i<=10;i++) h += '<button type="button" class="front" data-front="'+i+'" aria-label="'+t('frontN',{n:i})+'"><img src="'+A+'front-'+i+'.jpg" alt="" loading="lazy"></button>';
-    h += '</div>';
+    FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '<span>'+esc(frontName(f.id))+'</span>')+'</button>'; });
+    h += '</div><p class="hint" id="f-name">';
+    h += '</p>';
     h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding));
     h += addon('flair', L.aFlair, L.aFlairS, '+ '+money(PRICE.flair));
     h += addon('tower', L.aTower, L.aTowerS, L.from+money(PRICE.tower));
@@ -279,7 +286,7 @@
 
     h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.workH+'</h2><p>'+L.workP+'</p></div><div class="gallery">';
     h += '<figure class="g1"><img src="'+A+'pour.jpg" alt="" loading="lazy"></figure><figure class="g2"><img src="'+A+'menu-board.jpg" alt="" loading="lazy"></figure><figure class="g3"><img src="'+A+'welcome.jpg" alt="" loading="lazy"></figure><figure class="g4"><img src="'+A+'lights.jpg" alt="" loading="lazy"></figure><figure class="g5"><img src="'+A+'bar-grafika.jpg" alt="" loading="lazy"></figure>';
-    h += '</div><a class="more" href="https://www.youtube.com/watch?v=Btc8eqYrPd8" target="_blank" rel="noopener" data-film2>'+L.moreFilm+'</a></div></section>';
+    h += '</div><div class="feature"><div class="fmedia"><video src="'+A+'coffee.mp4" poster="'+A+'coffee-poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div><div class="ftext"><span class="label">'+L.cofL+'</span><h3>'+L.cofH+'</h3><p>'+L.cofP+'</p><a class="more" href="https://www.instagram.com/p/C2c30XzIJnS/" target="_blank" rel="noopener" data-film2>'+L.cofA+'</a></div></div></div></section>';
 
     h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.faqH+'</h2><p>'+L.faqP+'</p></div><div class="faq" id="faq"></div></div></section>';
 
@@ -306,7 +313,8 @@
     document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=MENU_MAX; });
     var mc = $('m-count'); mc.className = 'count'+(cnt<MENU_MIN?' bad':'');
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
-    document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && +b.dataset.front===state.front)); });
+    document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
+    $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
     document.querySelectorAll('[data-add]').forEach(function(i){ i.checked = i.dataset.add==='own' ? state.own : state.add[i.dataset.add]; });
     var tot = (c.from?L.from:'')+money(c.total), pp = t('perPerson',{n:money(c.total/g)});
     $('sum').textContent = tot; $('pp').textContent = pp; $('bar-sum').textContent = tot; $('bar-pp').textContent = pp; $('peek').textContent = tot;
@@ -329,16 +337,16 @@
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
       render(); clearTimeout(mt); mt = setTimeout(function(){ ping('Zmienił menu: '+menuNames().join(', '),'cocktail'); }, 6000);
     }); });
-    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ state.front = +b.dataset.front; state.own = false; render(); once('front','Wybiera front baru (wzór '+state.front+')','art'); }); });
+    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ state.front = b.dataset.front; state.own = false; render(); ping('Front baru: '+T.pl[(FRONTS.filter(function(f){return f.id===state.front})[0]||{}).k||'frontN'].replace('{n}',''),'art'); }); });
     document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){
       var id = i.dataset.add; if (id==='own') state.own = i.checked; else state.add[id] = i.checked; render();
       if (i.checked) once('add'+id,'Dodał: '+T.pl[{own:'aBrand',flair:'aFlair',tower:'aTower',welcome:'aWelcome',coffee:'aCoffee'}[id]]+' → '+summary().total,'heavy_plus_sign');
     }); });
     $('film').addEventListener('click', function(){ var f = $('film'); if (f.classList.contains('playing')) return; f.classList.add('playing');
-      f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/qwjbtS3To6c?autoplay=1&rel=0" title="Wedding Bar – Pimp My Bar" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; once('film','Ogląda film WEDDING BAR','movie_camera'); });
+      f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/Btc8eqYrPd8?autoplay=1&rel=0" title="Showreel – Pimp My Bar" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; once('film','Ogląda showreel','movie_camera'); });
     document.querySelectorAll('[data-book]').forEach(function(a){ a.addEventListener('click', function(){ var s = summary(); once('book','Kliknął „Rezerwuję termin” → '+s.total+' · '+s.head,'white_check_mark',5); }); });
     $('send').addEventListener('click', function(){ var s = summary(); once('send','WYSYŁA WYBÓR MAILEM → '+s.total+' · '+s.head+' · '+s.menu,'tada',5); });
-    document.querySelector('[data-film2]').addEventListener('click', function(){ once('film2','Otworzył showreel','movie_camera'); });
+    document.querySelector('[data-film2]').addEventListener('click', function(){ once('film2','Otworzył film kawowy z targów','coffee'); });
     document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){
       var src = $(b.dataset.copy), txt = src.textContent, L = T[lang];
       var ok = function(){ b.textContent = L.copied; b.classList.add('done'); setTimeout(function(){ b.textContent = L.copy; b.classList.remove('done'); }, 1600); };

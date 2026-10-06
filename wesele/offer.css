@@ -166,3 +166,14 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
   .langs button{padding:6px 8px;font-size:12px}
 }
 @media (min-width:861px){.bar{display:none}body{padding-bottom:0}}
+.front span{position:absolute;left:0;right:0;bottom:0;padding:5px 4px;font:600 11px/1.2 var(--body);text-align:center;background:rgba(255,255,255,.82);color:#1c1714}
+.f-silver{background:linear-gradient(125deg,#f4f5f6 0%,#c9cdd2 22%,#fbfbfc 38%,#aeb3b9 55%,#eceef0 72%,#b9bec4 100%)}
+.f-gold{background:linear-gradient(125deg,#f7e6b0 0%,#c79a3c 22%,#fbefc6 38%,#b5842a 55%,#f1d98f 72%,#a8782a 100%)}
+.f-color{background:conic-gradient(from 210deg,#7d8b6a,#c9b8a3,#a3591b,#8a2f3c,#2f4858,#7d8b6a)}
+.feature{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:32px}
+@media (max-width:760px){.feature{grid-template-columns:1fr}}
+.fmedia{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/2;background:var(--sunk)}
+.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ftext{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.ftext h3{font-size:30px}
+.ftext .more{margin-top:4px}
