@@ -13,7 +13,7 @@
   // Media strony. Tymczasowe ujęcia wygenerowane (Higgsfield); podmienić na własne pliki w wesele/assets/.
   var G = 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/';
   var MEDIA = {
-    video: '',
+    video: G+'hf_20261006_101447_06a450e3-0594-4c4f-9a27-633e63df528e.mp4',
     poster: G+'hf_20261006_101047_849d94f3-3601-424d-bf6a-fe90625333a0.png',
     filmPoster: G+'hf_20261006_101046_f9852898-5f10-4014-a3f3-76f4f5dcd12f.png',
     strip: [G+'hf_20261006_101046_4b001c54-4aa3-4eab-98f3-bc1beb1c1117.png', G+'hf_20261006_101048_1b39c5a1-7072-4045-b3bb-e7ef49235a78.png', G+'hf_20261006_101046_f9852898-5f10-4014-a3f3-76f4f5dcd12f.png', G+'hf_20261006_101046_75b1e636-27bb-4fab-8c96-69cf7e756ca4.png', G+'hf_20261006_101046_827827c5-2e5e-4a68-9f79-e308b0d45f9d.png', G+'hf_20261006_101048_07889199-769a-4e4b-ad03-1d0e2e20d33f.png']
