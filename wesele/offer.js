@@ -10,6 +10,11 @@
     flair: 2200, branding: 200, tower: 500
   };
   var MENU_MIN = 6, MENU_MAX = 8;
+  // Podgląd baru: zdjęcie bazowe + klisze nakładane na dwa fronty (bez animacji, twarde cięcie)
+  var BV = { base: 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_120125_442f7e44-83e8-40ab-9ea9-6ce94befcf8b.png', 'bar-green': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_125340_a086eced-042e-4f69-8177-964b4b406239.png', 'bar-olive': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_121858_4b905690-f3c4-4c1b-b9d6-a5cb45ef529c.png' };
+  var SEQ = ['silver','gold','black','sage','navy','blush','k2','k3','k4','k7','k8','k9','k10','bar-green','bar-olive'];
+  var SOLID = {black:'#161616', sage:'#8a9a82', navy:'#1f2a44', blush:'#e2bfbf'};
+  var bvTimer = null, bvStep = 0;
   var FRONT_FILM = '';  // film: ten sam bar ze zmieniającym się frontem (wizualizacja)
   // Fronty baru: img = zdjęcie kliszy, css = klasa kafelka, k = klucz nazwy w tekstach
   var FRONTS = [
@@ -61,7 +66,7 @@
     s3:'Krok 3', s3h:'Wybierzcie menu', s3p:'Od {min} do {max} koktajli. Zaznaczyliśmy zestaw, który najczęściej wybierają pary. Menu nie zmienia ceny.',
     zero:'też 0%', picked:'Wybrane: {n} z {max}', pickMore:'Wybrane: {n}. Dobierzcie jeszcze {k}, żeby było minimum {min}.',
     s4:'Krok 4', s4h:'Front baru i dodatki', s4p:'Front wybieracie w cenie: lustro srebrne lub złote, panel pomalowany na Wasz kolor albo podświetlana klisza. Dodatki są opcjonalne.',
-    frontFilm:'Ten sam bar, różne fronty. Wizualizacja.', own:'Własna grafika', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', fColor:'Panel w Waszym kolorze',
+    frontFilm:'Ten sam bar, różne fronty. Wizualizacja.', bvPlay:'▶ Pokaż wszystkie fronty', bvStop:'■ Zatrzymaj', c_black:'Czarny mat', c_sage:'Zielony', c_navy:'Granat', c_blush:'Pudrowy róż', barGreen:'Bar zielony z kasetonami, 2 m', barOlive:'Bar oliwkowy, 3 m', own:'Własna grafika', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', fColor:'Panel w Waszym kolorze',
     aFlair:'Pokaz barmański flair', aFlairS:'Żonglerka butelkami i shakerami na parkiecie, z udziałem gości.',
     aBrand:'Bar z Waszą grafiką', aBrandS:'Inicjały, data albo motyw z zaproszeń na podświetlanym froncie.',
     aTower:'Champagne tower', aTowerS:'Piramida kieliszków zalewana winem musującym. Cena zależy od liczby kieliszków.',
@@ -114,7 +119,7 @@
     s3:'Step 3', s3h:'Choose your menu', s3p:'Between {min} and {max} cocktails. We have ticked the set couples choose most often. The menu does not change the price.',
     zero:'also 0%', picked:'Selected: {n} of {max}', pickMore:'Selected: {n}. Add {k} more to reach the minimum of {min}.',
     s4:'Step 4', s4h:'Bar front and extras', s4p:'The bar front is included: silver or gold mirror, a panel painted in your colour, or a backlit print. Extras are optional.',
-    frontFilm:'The same bar with different fronts. Visualisation.', own:'Own artwork', frontN:'Print {n}', fSilver:'Silver mirror', fGold:'Gold mirror', fColor:'Panel in your colour',
+    frontFilm:'The same bar with different fronts. Visualisation.', bvPlay:'▶ Show all fronts', bvStop:'■ Stop', c_black:'Matte black', c_sage:'Green', c_navy:'Navy', c_blush:'Blush pink', barGreen:'Green panelled bar, 2 m', barOlive:'Olive bar, 3 m', own:'Own artwork', frontN:'Print {n}', fSilver:'Silver mirror', fGold:'Gold mirror', fColor:'Panel in your colour',
     aFlair:'Flair bartending show', aFlairS:'Bottle and shaker juggling on the dance floor, with guests joining in.',
     aBrand:'Bar with your artwork', aBrandS:'Your initials, date or invitation motif on the backlit bar front.',
     aTower:'Champagne tower', aTowerS:'A pyramid of glasses filled with sparkling wine. Price depends on the number of glasses.',
@@ -167,7 +172,7 @@
     s3:'Schritt 3', s3h:'Wählt eure Karte', s3p:'Zwischen {min} und {max} Cocktails. Vorausgewählt ist die Auswahl, die Paare am häufigsten nehmen. Die Karte ändert den Preis nicht.',
     zero:'auch 0%', picked:'Ausgewählt: {n} von {max}', pickMore:'Ausgewählt: {n}. Wählt noch {k} dazu, das Minimum sind {min}.',
     s4:'Schritt 4', s4h:'Barfront und Extras', s4p:'Die Barfront ist im Preis enthalten: Silber- oder Goldspiegel, ein Paneel in eurer Farbe oder ein beleuchtetes Motiv. Extras sind optional.',
-    frontFilm:'Dieselbe Bar mit verschiedenen Fronten. Visualisierung.', own:'Eigene Grafik', frontN:'Motiv {n}', fSilver:'Silberspiegel', fGold:'Goldspiegel', fColor:'Paneel in eurer Farbe',
+    frontFilm:'Dieselbe Bar mit verschiedenen Fronten. Visualisierung.', bvPlay:'▶ Alle Fronten zeigen', bvStop:'■ Stopp', c_black:'Schwarz matt', c_sage:'Grün', c_navy:'Marineblau', c_blush:'Puderrosa', barGreen:'Grüne Kassettenbar, 2 m', barOlive:'Olivgrüne Bar, 3 m', own:'Eigene Grafik', frontN:'Motiv {n}', fSilver:'Silberspiegel', fGold:'Goldspiegel', fColor:'Paneel in eurer Farbe',
     aFlair:'Flair-Bartending-Show', aFlairS:'Jonglage mit Flaschen und Shakern auf der Tanzfläche, die Gäste machen mit.',
     aBrand:'Bar mit eurer Grafik', aBrandS:'Initialen, Datum oder das Motiv der Einladungen auf der beleuchteten Barfront.',
     aTower:'Champagnerpyramide', aTowerS:'Eine Pyramide aus Gläsern, gefüllt mit Schaumwein. Der Preis hängt von der Zahl der Gläser ab.',
@@ -239,6 +244,19 @@
     return {lines:lines, total:total, from: state.add.tower};
   }
   function frontName(id){ var n = 0, r = ''; FRONTS.forEach(function(f){ if (f.img && !f.k) n++; if (f.id===id) r = f.k ? t(f.k) : t('frontN',{n:n}); }); return r; }
+  function bvName(k){ var L = T[lang]; if (k==='silver') return L.fSilver; if (k==='gold') return L.fGold; if (SOLID[k]) return L['c_'+k]; if (k==='bar-green') return L.barGreen; if (k==='bar-olive') return L.barOlive; return frontName(k); }
+  function bvPaint(k){
+    var fig = $('barview'); if (!fig) return; var im = $('bv-img'), ov = fig.querySelectorAll('i');
+    var src = BV[k] || BV.base; if (im.getAttribute('src') !== src) im.src = src;
+    for (var i=0;i<ov.length;i++){ var s = ov[i].style; s.display = (BV[k] || k==='silver') ? 'none' : 'block'; s.backgroundImage = 'none'; s.backgroundColor = 'transparent'; s.mixBlendMode = 'normal';
+      if (k==='gold'){ s.backgroundColor = '#e0b25a'; s.mixBlendMode = 'multiply'; }
+      else if (SOLID[k]) s.backgroundColor = SOLID[k];
+      else if (/^k\d+$/.test(k)) s.backgroundImage = 'url('+A+'front-'+k.slice(1)+'.jpg)'; }
+    $('bv-cap').textContent = bvName(k);
+  }
+  function bvStop(){ if (bvTimer){ clearInterval(bvTimer); bvTimer = null; } var b = $('bv-play'); if (b) b.textContent = T[lang].bvPlay; }
+  function bvStart(){ bvStop(); bvStep = 0; bvPaint(SEQ[0]); $('bv-play').textContent = T[lang].bvStop; bvTimer = setInterval(function(){ bvStep = (bvStep+1) % SEQ.length; bvPaint(SEQ[bvStep]); }, 1000); }
+  function bvCurrent(){ return state.own ? 'sage' : (state.front==='color' ? 'sage' : state.front); }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   function summary(){
     var c = calc(), parts = [t('sumGuests',{g:state.guests}), state.vodka?t('sumVodkaY'):t('sumVodkaN'), t('sumPer',{n:perGuest()}),
@@ -249,6 +267,7 @@
 
   // ── Szkielet strony ──
   function build(){
+    if (bvTimer){ clearInterval(bvTimer); bvTimer = null; }
     document.documentElement.lang = lang;
     var L = T[lang], P = O.t && O.t[lang] || {};
     var h = '';
@@ -270,7 +289,7 @@
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+t('s3p',{min:MENU_MIN,max:MENU_MAX})+'</p><div class="menu">';
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+(d.z?'<span class="zero">'+L.zero+'</span>':'')+'</strong><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
-    h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><div class="fronts" role="group">';
+    h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name">';
     h += '</p>';
@@ -320,6 +339,7 @@
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
     document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
     $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
+    if (!bvTimer) bvPaint(bvCurrent());
     document.querySelectorAll('[data-add]').forEach(function(i){ i.checked = i.dataset.add==='own' ? state.own : state.add[i.dataset.add]; });
     var tot = (c.from?L.from:'')+money(c.total), pp = t('perPerson',{n:money(c.total/g)});
     $('sum').textContent = tot; $('pp').textContent = pp; $('bar-sum').textContent = tot; $('bar-pp').textContent = pp; $('peek').textContent = tot;
@@ -333,6 +353,9 @@
   }
 
   function bind(){
+    $('bv-play').addEventListener('click', function(){ if (bvTimer){ bvStop(); bvPaint(bvCurrent()); } else { bvStart(); once('bvplay','Ogląda pokaz frontów baru','art'); } });
+    SEQ.forEach(function(k){ var i = new Image(); i.src = BV[k] || (/^k\d+$/.test(k) ? A+'front-'+k.slice(1)+'.jpg' : BV.base); });
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ lang = b.dataset.lang; try{localStorage.setItem('pmb_lang_'+O.id, lang)}catch(e){} once('lang'+lang,'Zmienił język na '+lang.toUpperCase(),'globe_with_meridians'); build(); }); });
     var gt; $('g').addEventListener('input', function(e){ state.guests = +e.target.value; render(); clearTimeout(gt); gt = setTimeout(function(){ ping('Ustawił liczbę gości: '+state.guests+' → '+summary().total,'busts_in_silhouette'); }, 2500); });
     $('v-yes').addEventListener('click', function(){ state.vodka = true; render(); });
@@ -342,7 +365,7 @@
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
       render(); clearTimeout(mt); mt = setTimeout(function(){ ping('Zmienił menu: '+menuNames().join(', '),'cocktail'); }, 6000);
     }); });
-    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ state.front = b.dataset.front; state.own = false; render(); ping('Front baru: '+T.pl[(FRONTS.filter(function(f){return f.id===state.front})[0]||{}).k||'frontN'].replace('{n}',''),'art'); }); });
+    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ bvStop(); state.front = b.dataset.front; state.own = false; render(); ping('Front baru: '+T.pl[(FRONTS.filter(function(f){return f.id===state.front})[0]||{}).k||'frontN'].replace('{n}',''),'art'); }); });
     document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){
       var id = i.dataset.add; if (id==='own') state.own = i.checked; else state.add[id] = i.checked; render();
       if (i.checked) once('add'+id,'Dodał: '+T.pl[{own:'aBrand',flair:'aFlair',tower:'aTower',welcome:'aWelcome',coffee:'aCoffee'}[id]]+' → '+summary().total,'heavy_plus_sign');

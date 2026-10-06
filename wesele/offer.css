@@ -190,3 +190,10 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .frontfilm{margin:14px 0 6px}
 .frontfilm video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block;background:var(--sunk)}
 .frontfilm figcaption{font-size:13px;color:var(--ink-3);margin-top:6px}
+.barview{position:relative;margin:0 0 14px;border-radius:12px;overflow:hidden;background:var(--sunk)}
+.barview>img{display:block;width:100%;aspect-ratio:1344/752;object-fit:cover}
+.barview>i{position:absolute;top:51.46%;height:31.52%;width:25.3%;display:none;background-size:cover;background-position:center;box-shadow:inset 0 0 18px rgba(0,0,0,.18)}
+.barview>i.pl{left:24.11%}.barview>i.pr{left:50.6%}
+.barview figcaption{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.barview figcaption span{background:rgba(255,255,255,.9);color:#1c1714;font:600 13px var(--body);padding:6px 10px;border-radius:999px}
+.barview figcaption button{border:0;background:#1c1714;color:#fff;font:600 13px var(--body);padding:7px 12px;border-radius:999px;cursor:pointer}

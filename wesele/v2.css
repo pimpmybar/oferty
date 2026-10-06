@@ -101,3 +101,4 @@ h3{font-size:24px;font-weight:600;line-height:1.1}
 .f-color{background:conic-gradient(from 210deg,#7d8b6a,#ecdcb6,#d4202f,#12372c,#7d8b6a)}
 .at-hero .bar{transform:translateY(110%)}.bar{transition:transform .3s}
 .lead img,.crewgrid img{border-radius:4px}
+.barview{border-radius:4px}
