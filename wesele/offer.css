@@ -217,4 +217,4 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .book .btn:disabled{opacity:.5;cursor:default}
 .booknote{font-size:13.5px;color:var(--ink-3);margin:0}
 .booknote.ok{color:var(--ok);font-weight:600}.booknote.err{color:var(--crema);font-weight:600}
-@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{aspect-ratio:1/1;max-width:420px}}
+@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{aspect-ratio:4/5;max-width:380px}}
