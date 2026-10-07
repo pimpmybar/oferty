@@ -92,7 +92,7 @@
       ['Co musi zapewnić sala?','Miejsce na bar: ok. 2 × 2 m przy jednym barmanie i ok. 3 × 3 m przy dwóch. Do tego gniazdko prądu w pobliżu i mycie szkła w zmywalni sali. Resztę przywozimy sami.'],
       ['Jak rezerwujemy termin?','Klikacie „Rezerwuję termin” albo piszecie do nas. Wysyłamy umowę, a termin jest Wasz po jej podpisaniu. Nie pobieramy zadatku.']
     ],
-    accH:'Rezerwujemy termin', accP:'Kliknijcie przycisk, a otworzy się gotowy mail z Waszym wyborem. Można też po prostu zadzwonić.',
+    talkStep:'Porozmawiajmy', talkH:'Macie pytania? Zapytajcie mnie.', talkP:'Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Zadzwońcie, napiszcie albo umówmy 15 minut rozmowy wideo: odpowiem na wszystko i doradzę menu pod Wasze wesele.', talkCall:'Zadzwoń', talkMail:'Napisz maila', talkBook:'15 minut rozmowy wideo', talkDay:'Dzień', talkTime:'Godzina', talkContact:'Wasz telefon lub e-mail', talkSend:'Poproszę o ten termin', talkOk:'Dziękuję! Potwierdzę termin SMS-em lub mailem i wyślę link do rozmowy.', talkErr:'Wpiszcie telefon lub e-mail, żebym mógł potwierdzić termin.', talkNote:'To prośba o termin. Potwierdzam każdą osobiście.', accH:'Rezerwujemy termin', accP:'Kliknijcie przycisk, a otworzy się gotowy mail z Waszym wyborem. Można też po prostu zadzwonić.',
     yourChoice:'Wasz wybór', send:'Wyślij wybór mailem', copy:'Kopiuj', copied:'Skopiowano',
     sumGuests:'{g} gości', sumVodkaY:'wódka na stołach', sumVodkaN:'bez wódki na stołach', sumPer:'{n} koktajle na osobę', sumFront:'front: {f}', sumOwn:'własna grafika',
     mailSubj:'Rezerwacja baru na wesele {d} – {v}', mailHi:'Dzień dobry,\n\nchcemy zarezerwować bar na nasze wesele.\n', mailBye:'\nPozdrawiamy',
@@ -145,7 +145,7 @@
       ['What does the venue need to provide?','Space for the bar: about 2 × 2 m with one bartender and about 3 × 3 m with two. Plus a power socket nearby and glass washing in the venue kitchen. We bring everything else.'],
       ['How do we reserve the date?','Click "Reserve our date" or write to us. We send a contract, and the date is yours once it is signed. We do not take a deposit.']
     ],
-    accH:'Let’s reserve your date', accP:'Click the button and an email with your selection opens, ready to send. Or simply call us.',
+    talkStep:'Let’s talk', talkH:'Questions? Ask me.', talkP:'I’m Tomek, I’ve been running Pimp My Bar since 2013. Call, write, or book a 15-minute video call: I’ll answer everything and suggest a menu for your wedding.', talkCall:'Call', talkMail:'Send an email', talkBook:'15-minute video call', talkDay:'Day', talkTime:'Time', talkContact:'Your phone or email', talkSend:'Request this slot', talkOk:'Thank you! I’ll confirm the time by text or email and send a call link.', talkErr:'Please add a phone number or email so I can confirm.', talkNote:'This is a request. I confirm each one personally.', accH:'Let’s reserve your date', accP:'Click the button and an email with your selection opens, ready to send. Or simply call us.',
     yourChoice:'Your selection', send:'Send selection by email', copy:'Copy', copied:'Copied',
     sumGuests:'{g} guests', sumVodkaY:'vodka on tables', sumVodkaN:'no vodka on tables', sumPer:'{n} cocktails per guest', sumFront:'bar front: {f}', sumOwn:'own artwork',
     mailSubj:'Wedding bar reservation {d} – {v}', mailHi:'Hello,\n\nwe would like to reserve the bar for our wedding.\n', mailBye:'\nBest regards',
@@ -198,7 +198,7 @@
       ['Was muss die Location stellen?','Platz für die Bar: etwa 2 × 2 m bei einem Barkeeper und etwa 3 × 3 m bei zwei. Dazu eine Steckdose in der Nähe und das Spülen der Gläser in der Küche der Location. Alles andere bringen wir mit.'],
       ['Wie reservieren wir den Termin?','Klickt auf „Termin reservieren“ oder schreibt uns. Wir schicken den Vertrag, und der Termin gehört euch, sobald er unterschrieben ist. Eine Anzahlung nehmen wir nicht.']
     ],
-    accH:'Wir reservieren euren Termin', accP:'Klickt auf den Button und es öffnet sich eine fertige E-Mail mit eurer Auswahl. Oder ruft einfach an.',
+    talkStep:'Sprechen wir', talkH:'Fragen? Fragt mich.', talkP:'Ich bin Tomek und leite Pimp My Bar seit 2013. Ruft an, schreibt oder bucht 15 Minuten Videocall: Ich beantworte alles und berate euch beim Menü für eure Hochzeit.', talkCall:'Anrufen', talkMail:'E-Mail schreiben', talkBook:'15 Minuten Videocall', talkDay:'Tag', talkTime:'Uhrzeit', talkContact:'Eure Telefonnummer oder E-Mail', talkSend:'Diesen Termin anfragen', talkOk:'Danke! Ich bestätige den Termin per SMS oder E-Mail und schicke den Link.', talkErr:'Bitte Telefonnummer oder E-Mail angeben, damit ich bestätigen kann.', talkNote:'Das ist eine Anfrage. Ich bestätige jede persönlich.', accH:'Wir reservieren euren Termin', accP:'Klickt auf den Button und es öffnet sich eine fertige E-Mail mit eurer Auswahl. Oder ruft einfach an.',
     yourChoice:'Eure Auswahl', send:'Auswahl per E-Mail senden', copy:'Kopieren', copied:'Kopiert',
     sumGuests:'{g} Gäste', sumVodkaY:'Wodka auf den Tischen', sumVodkaN:'kein Wodka auf den Tischen', sumPer:'{n} Cocktails pro Gast', sumFront:'Barfront: {f}', sumOwn:'eigene Grafik',
     mailSubj:'Reservierung Hochzeitsbar {d} – {v}', mailHi:'Hallo,\n\nwir möchten die Bar für unsere Hochzeit reservieren.\n', mailBye:'\nViele Grüße',
@@ -315,6 +315,8 @@
 
     h += '<section id="rezerwacja"><div class="wrap"><div class="accept"><div class="col"><h2>'+L.accH+'</h2><p>'+L.accP+'</p><div class="choice"><span class="label">'+L.yourChoice+'</span><div id="choice"></div></div><a class="btn" id="send" href="#">'+L.send+'</a></div>';
     h += '<div class="contact"><div class="crow"><span>Tomasz Malinowski</span></div><div class="crow"><span id="c-mail">biuro@pimpmybar.pl</span><button class="copy" type="button" data-copy="c-mail">'+L.copy+'</button></div><div class="crow"><a href="tel:+48513916977" id="c-tel">+48 513 916 977</a><button class="copy" type="button" data-copy="c-tel">'+L.copy+'</button></div></div></div></div></section>';
+    h += '<section id="rozmowa"><div class="wrap"><div class="talk"><div class="talkpics" id="talkpics" role="img" aria-label="Tomasz Malinowski">'+[1,2,3,4].map(function(n){ return '<img src="'+A+'tomek-k'+n+'.jpg" alt="" loading="lazy"'+(n===4?' class="on"':'')+'>'; }).join('')+'</div><div class="col"><span class="step">'+L.talkStep+'</span><h2>'+L.talkH+'</h2><p>'+L.talkP+'</p><div class="talkbtns"><a class="btn" href="tel:+48513916977" id="t-call">'+L.talkCall+' · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl" id="t-mail">'+L.talkMail+'</a></div>';
+    h += '<form class="book" id="book" novalidate><strong>'+L.talkBook+'</strong><span class="label">'+L.talkDay+'</span><div class="slots" id="b-days"></div><span class="label">'+L.talkTime+'</span><div class="slots" id="b-times"></div><input type="text" id="b-contact" autocomplete="tel" placeholder="'+esc(L.talkContact)+'" aria-label="'+esc(L.talkContact)+'"><button class="btn" type="submit">'+L.talkSend+'</button><p class="booknote" id="b-note">'+L.talkNote+'</p></form></div></div></div></section>';
     h += '<footer class="wrap"><span>'+L.foot+'</span><span>'+t('footR',{d:O.prepared})+'</span></footer>';
     h += '<div class="bar"><div><div class="s num" id="bar-sum"></div><small id="bar-pp"></small></div><a class="btn" href="#rezerwacja" data-book>'+L.book+'</a></div>';
     $('app').innerHTML = h;
@@ -353,6 +355,24 @@
 
   function bind(){
     $('bv-play').addEventListener('click', function(){ if (bvTimer){ bvStop(); bvPaint(bvCurrent()); } else { bvStart(); once('bvplay','Ogląda pokaz frontów baru','art'); } });
+    (function(){
+      var days = $('b-days'), times = $('b-times'), bd = null, bt = null, loc = {pl:'pl-PL',en:'en-GB',de:'de-DE'}[lang] || 'pl-PL', n = 0, d = new Date();
+      while (n < 7){ d.setDate(d.getDate()+1); if (d.getDay()===0) continue; var lab = d.toLocaleDateString(loc,{weekday:'short',day:'numeric',month:'numeric'}); days.insertAdjacentHTML('beforeend','<button type="button" data-v="'+esc(lab)+'">'+esc(lab)+'</button>'); n++; }
+      ['10:00','12:00','14:00','16:00','18:00','20:00'].forEach(function(x){ times.insertAdjacentHTML('beforeend','<button type="button" data-v="'+x+'">'+x+'</button>'); });
+      function pick(box, set){ box.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; [].forEach.call(box.children, function(c){ c.setAttribute('aria-pressed', c===b ? 'true' : 'false'); }); set(b.dataset.v); }); box.children[0].click(); }
+      pick(days, function(v){ bd = v; }); pick(times, function(v){ bt = v; }); times.children[4].click();
+      $('book').addEventListener('submit', function(e){ e.preventDefault(); var c = $('b-contact').value.trim(), note = $('b-note'), L = T[lang];
+        if (c.length < 5){ note.textContent = L.talkErr; note.className = 'booknote err'; $('b-contact').focus(); return; }
+        var msg = 'PROŚBA O ROZMOWĘ 15 min: '+bd+', godz. '+bt+'. Kontakt: '+c;
+        function done(){ note.textContent = L.talkOk; note.className = 'booknote ok'; $('book').querySelector('button[type=submit]').disabled = true; }
+        function mail(){ location.href = 'mailto:biuro@pimpmybar.pl?subject='+encodeURIComponent('Rozmowa 15 min: '+bd+' '+bt)+'&body='+encodeURIComponent(msg+'\n'+O.title); done(); }
+        if (owner || O.noPing){ done(); return; }
+        try{ fetch(TOPIC+'?title='+encodeURIComponent(O.title)+'&tags=calendar&priority=5', {method:'POST', body:msg}).then(function(r){ r.ok ? done() : mail(); }).catch(mail); }catch(x){ mail(); }
+      });
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches){ var tp = $('talkpics').children, ti = 3; setInterval(function(){ tp[ti].className = ''; ti = (ti+1) % tp.length; tp[ti].className = 'on'; }, 850); }
+      $('t-call').addEventListener('click', function(){ once('tcall','Kliknął „Zadzwoń” w sekcji kontaktu','telephone_receiver',5); });
+      $('t-mail').addEventListener('click', function(){ once('tmail','Kliknął „Napisz maila” w sekcji kontaktu','email',4); });
+    })();
     SEQ.forEach(function(k){ var i = new Image(); if (/^k\d+$/.test(k)){ i.src = klUrl(k,'l'); new Image().src = klUrl(k,'r'); } else i.src = BV[k] || BV.base; });
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ lang = b.dataset.lang; try{localStorage.setItem('pmb_lang_'+O.id, lang)}catch(e){} once('lang'+lang,'Zmienił język na '+lang.toUpperCase(),'globe_with_meridians'); build(); }); });

@@ -200,3 +200,21 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 
 .barview>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .barview>video[hidden]{display:none}
+
+.talk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+.talkpics{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:var(--sunk)}
+.talkpics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.talkpics img.on{opacity:1}
+.talk .col{display:flex;flex-direction:column;gap:14px}
+.talk h2{font-size:clamp(34px,5vw,54px)}
+.talkbtns{display:flex;flex-wrap:wrap;gap:10px}
+.book{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:6px}
+.book strong{font-size:18px}
+.slots{display:flex;flex-wrap:wrap;gap:6px}
+.slots button{font:600 14px var(--body);padding:9px 12px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--ink);cursor:pointer}
+.slots button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground,#fff)}
+.book input{font:500 16px var(--body);padding:13px 14px;border-radius:12px;border:1px solid var(--line-2);background:var(--ground,#fff);color:var(--ink);width:100%}
+.book .btn:disabled{opacity:.5;cursor:default}
+.booknote{font-size:13.5px;color:var(--ink-3);margin:0}
+.booknote.ok{color:var(--ok);font-weight:600}.booknote.err{color:var(--crema);font-weight:600}
+@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{aspect-ratio:1/1;max-width:420px}}
