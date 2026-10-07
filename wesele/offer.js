@@ -12,15 +12,14 @@
   var MENU_MIN = 6, MENU_MAX = 8;
   // Podgląd baru: zdjęcie bazowe + klisze nakładane na dwa fronty (bez animacji, twarde cięcie)
   var BV = { base: 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_120125_442f7e44-83e8-40ab-9ea9-6ce94befcf8b.png', 'bar-green': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_125340_a086eced-042e-4f69-8177-964b4b406239.png', 'bar-olive': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_121858_4b905690-f3c4-4c1b-b9d6-a5cb45ef529c.png' };
-  var SEQ = ['silver','gold','black','sage','navy','blush','k2','k3','k4','k7','k8','k9','k10','bar-green','bar-olive'];
+  var KL = ['deski-kolor','deski-jasne','deski-biale','deski-bielone','deski-czarne','paski','kamien','cegla-czarna','drewno','cegla-biala'];
+  function klUrl(k, side){ return A+'klisze/'+KL[+k.slice(1)-1]+'-'+side+'.jpg'; }
+  var SEQ = ['silver','k1','gold','k2','k3','black','k4','k5','sage','k6','k7','navy','k8','k9','blush','k10','bar-green','bar-olive'];
   var SOLID = {black:'#161616', sage:'#8a9a82', navy:'#1f2a44', blush:'#e2bfbf'};
   var bvTimer = null, bvStep = 0, bvTouched = false;
   var FRONT_FILM = '';  // film: ten sam bar ze zmieniającym się frontem (wizualizacja)
   // Fronty baru: img = zdjęcie kliszy, css = klasa kafelka, k = klucz nazwy w tekstach
-  var FRONTS = [
-    {id:'silver', img:'front-lustro.jpg', k:'fSilver'}, {id:'k2', img:'front-2.jpg'}, {id:'k3', img:'front-3.jpg'}, {id:'k4', img:'front-4.jpg'}, {id:'gold', css:'f-gold', k:'fGold'},
-    {id:'color', css:'f-color', k:'fColor'}, {id:'k7', img:'front-7.jpg'}, {id:'k8', img:'front-8.jpg'}, {id:'k9', img:'front-9.jpg'}, {id:'k10', img:'front-10.jpg'}
-  ];
+  var FRONTS = [ {id:'silver', img:'front-lustro.jpg', k:'fSilver'}, {id:'gold', css:'f-gold', k:'fGold'}, {id:'color', css:'f-color', k:'fColor'} ].concat(KL.map(function(n,i){ return {id:'k'+(i+1), img:'klisze/'+n+'-l.jpg'}; }));
 
   // ── Karta koktajli (z „Mix some drinks”) ──
   var DRINKS = [
@@ -251,7 +250,7 @@
     for (var i=0;i<ov.length;i++){ var s = ov[i].style; s.display = (BV[k] || k==='silver') ? 'none' : 'block'; s.backgroundImage = 'none'; s.backgroundColor = 'transparent'; s.mixBlendMode = 'normal';
       if (k==='gold'){ s.backgroundColor = '#e0b25a'; s.mixBlendMode = 'multiply'; }
       else if (SOLID[k]) s.backgroundColor = SOLID[k];
-      else if (/^k\d+$/.test(k)) s.backgroundImage = 'url('+A+'front-'+k.slice(1)+'.jpg)'; }
+      else if (/^k\d+$/.test(k)) s.backgroundImage = 'url('+klUrl(k, i ? 'r' : 'l')+')'; }
     $('bv-cap').textContent = bvName(k);
   }
   function bvStop(){ if (bvTimer){ clearInterval(bvTimer); bvTimer = null; } var b = $('bv-play'); if (b) b.textContent = T[lang].bvPlay; }
@@ -354,7 +353,7 @@
 
   function bind(){
     $('bv-play').addEventListener('click', function(){ if (bvTimer){ bvStop(); bvPaint(bvCurrent()); } else { bvStart(); once('bvplay','Ogląda pokaz frontów baru','art'); } });
-    SEQ.forEach(function(k){ var i = new Image(); i.src = BV[k] || (/^k\d+$/.test(k) ? A+'front-'+k.slice(1)+'.jpg' : BV.base); });
+    SEQ.forEach(function(k){ var i = new Image(); if (/^k\d+$/.test(k)){ i.src = klUrl(k,'l'); new Image().src = klUrl(k,'r'); } else i.src = BV[k] || BV.base; });
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ lang = b.dataset.lang; try{localStorage.setItem('pmb_lang_'+O.id, lang)}catch(e){} once('lang'+lang,'Zmienił język na '+lang.toUpperCase(),'globe_with_meridians'); build(); }); });
     var gt; $('g').addEventListener('input', function(e){ state.guests = +e.target.value; render(); clearTimeout(gt); gt = setTimeout(function(){ ping('Ustawił liczbę gości: '+state.guests+' → '+summary().total,'busts_in_silhouette'); }, 2500); });
