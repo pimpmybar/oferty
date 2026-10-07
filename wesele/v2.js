@@ -336,7 +336,7 @@
 
     h += '<section id="rezerwacja"><div class="wrap"><div class="accept"><div class="col"><h2>'+L.accH+'</h2><p>'+L.accP+'</p><div class="choice"><span class="label">'+L.yourChoice+'</span><div id="choice"></div></div><a class="btn" id="send" href="#">'+L.send+'</a></div>';
     h += '<div class="contact"><div class="crow"><span>Tomasz Malinowski</span></div><div class="crow"><span id="c-mail">biuro@pimpmybar.pl</span><button class="copy" type="button" data-copy="c-mail">'+L.copy+'</button></div><div class="crow"><a href="tel:+48513916977" id="c-tel">+48 513 916 977</a><button class="copy" type="button" data-copy="c-tel">'+L.copy+'</button></div></div></div></div></section>';
-    h += '<section id="rozmowa"><div class="wrap"><div class="talk"><div class="talkpics" id="talkpics" role="img" aria-label="Tomasz Malinowski">'+[1,2,3,4].map(function(n){ return '<img src="'+A+'tomek-k'+n+'.jpg" alt="" loading="lazy"'+(n===4?' class="on"':'')+'>'; }).join('')+'</div><div class="col"><span class="step">'+L.talkStep+'</span><h2>'+L.talkH+'</h2><p>'+L.talkP+'</p><div class="talkbtns"><a class="btn" href="tel:+48513916977" id="t-call">'+L.talkCall+' · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl" id="t-mail">'+L.talkMail+'</a></div>';
+    h += '<section id="rozmowa"><div class="wrap"><div class="talk"><div class="col"><span class="step">'+L.talkStep+'</span><h2>'+L.talkH+'</h2><p>'+L.talkP+'</p><div class="talkbtns"><a class="btn" href="tel:+48513916977" id="t-call">'+L.talkCall+' · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl" id="t-mail">'+L.talkMail+'</a></div>';
     h += '<form class="book" id="book" novalidate><strong>'+L.talkBook+'</strong><span class="label">'+L.talkDay+'</span><div class="slots" id="b-days"></div><span class="label">'+L.talkTime+'</span><div class="slots" id="b-times"></div><input type="text" id="b-contact" autocomplete="tel" placeholder="'+esc(L.talkContact)+'" aria-label="'+esc(L.talkContact)+'"><button class="btn" type="submit">'+L.talkSend+'</button><p class="booknote" id="b-note">'+L.talkNote+'</p></form></div></div></div></section>';
     h += '<footer class="wrap"><span>'+L.foot+'</span><span>'+t('footR',{d:O.prepared})+'</span></footer>';
     h += '<div class="bar"><div><div class="s num" id="bar-sum"></div><small id="bar-pp"></small></div><a class="btn" href="#rezerwacja" data-book>'+L.book+'</a></div>';
@@ -395,7 +395,6 @@
         if (owner || O.noPing){ done(); return; }
         try{ fetch(TOPIC+'?title='+encodeURIComponent(O.title)+'&tags=calendar&priority=5', {method:'POST', body:msg}).then(function(r){ r.ok ? done() : mail(); }).catch(mail); }catch(x){ mail(); }
       });
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches){ var tp = $('talkpics').children, ti = 3; setInterval(function(){ tp[ti].className = ''; ti = (ti+1) % tp.length; tp[ti].className = 'on'; }, 850); }
       $('t-call').addEventListener('click', function(){ once('tcall','Kliknął „Zadzwoń” w sekcji kontaktu','telephone_receiver',5); });
       $('t-mail').addEventListener('click', function(){ once('tmail','Kliknął „Napisz maila” w sekcji kontaktu','email',4); });
     })();

@@ -201,7 +201,7 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .barview>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .barview>video[hidden]{display:none}
 
-.talk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+.talk{max-width:680px}
 .talkpics{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:var(--sunk)}
 .talkpics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
 .talkpics img.on{opacity:1}
@@ -217,7 +217,7 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .book .btn:disabled{opacity:.5;cursor:default}
 .booknote{font-size:13.5px;color:var(--ink-3);margin:0}
 .booknote.ok{color:var(--ok);font-weight:600}.booknote.err{color:var(--crema);font-weight:600}
-@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{aspect-ratio:4/5;max-width:380px}}
+
 
 .front span b{display:block;color:#a3591b;font-weight:700}
 .hint.designed{font-weight:600;color:var(--ink-2)}
