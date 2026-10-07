@@ -47,7 +47,7 @@
   var T = {
   pl:{
     tag:'/ Wesela', offerFor:'Oferta weselna', h1:'Bar koktajlowy na <em>Wasze wesele</em>',
-    lead:'Każdy koktajl robimy na żywo przy barze, ze świeżych owoców. Poniżej ułożycie własne menu i od razu zobaczycie cenę.',
+    lead:'Dzień dobry! Dziękujemy, że bierzecie nas pod uwagę przy swoim weselu. Od 2013 roku stawiamy bar koktajlowy na weselach, a każdy koktajl barman przygotowuje na oczach gości, pod ich smak. Poniżej ułożycie własne menu, wybierzecie wygląd baru i od razu zobaczycie cenę.',
     fDate:'Termin', fPlace:'Miejsce', fGuests:'Goście', fTime:'Czas pracy baru', hours:'8 godzin', guestsN:'{n} osób',
     cta:'Ułóż swój bar ↓', play:'Zobacz nasz showreel',
     howH:'Jak to wygląda', howP:'Bar stoi na sali przez całe wesele. Goście podchodzą, rozmawiają z barmanem i dostają koktajl zrobiony dla nich.',
@@ -100,7 +100,7 @@
   },
   en:{
     tag:'/ Weddings', offerFor:'Wedding offer', h1:'A cocktail bar for <em>your wedding</em>',
-    lead:'Every cocktail is made live at the bar, with fresh fruit. Build your own menu below and see the price straight away.',
+    lead:'Hello, and thank you for considering us for your wedding. We have been setting up cocktail bars at weddings since 2013, and every drink is made in front of your guests, to their taste. Below you can build your own menu, choose the look of the bar and see the price straight away.',
     fDate:'Date', fPlace:'Venue', fGuests:'Guests', fTime:'Bar service', hours:'8 hours', guestsN:'{n} guests',
     cta:'Build your bar ↓', play:'Watch our showreel',
     howH:'What it looks like', howP:'The bar stays in the room for the whole wedding. Guests walk up, chat with the bartender and get a cocktail made for them.',
@@ -153,7 +153,7 @@
   },
   de:{
     tag:'/ Hochzeiten', offerFor:'Hochzeitsangebot', h1:'Eine Cocktailbar für <em>eure Hochzeit</em>',
-    lead:'Jeder Cocktail entsteht live an der Bar, mit frischen Früchten. Stellt unten eure eigene Karte zusammen und seht sofort den Preis.',
+    lead:'Hallo, und danke, dass ihr bei eurer Hochzeit an uns denkt. Seit 2013 bauen wir Cocktailbars auf Hochzeiten auf, und jeden Drink mixt der Barkeeper vor den Augen eurer Gäste, ganz nach ihrem Geschmack. Unten stellt ihr eure eigene Karte zusammen, wählt das Aussehen der Bar und seht sofort den Preis.',
     fDate:'Termin', fPlace:'Ort', fGuests:'Gäste', fTime:'Barservice', hours:'8 Stunden', guestsN:'{n} Gäste',
     cta:'Bar zusammenstellen ↓', play:'Showreel ansehen',
     howH:'So sieht es aus', howP:'Die Bar steht die ganze Feier über im Saal. Die Gäste kommen vorbei, sprechen mit dem Barkeeper und bekommen einen Cocktail, der für sie gemacht wird.',

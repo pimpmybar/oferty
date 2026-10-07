@@ -54,11 +54,11 @@
   // ── Teksty ──
   var T = {
   pl:{
-    hook:['Koktajl robiony na żywo.','Dla każdego gościa.'], rot:['Ze świeżych owoców, przy Waszych gościach','Barman pyta o smak, zamiast podawać z karty','Jedna cena za cały wieczór, z dojazdem'],
+    hook:['Koktajl robiony na żywo.','Dla każdego gościa.'], rot:['Mieszany ręcznie, przy Waszych gościach','Barman pyta o smak, zamiast podawać z karty','Jedna cena za cały wieczór, z dojazdem'],
     eveH:'Wieczór przy barze', illus:'Zdjęcia poglądowe.', filmH:'Zobacz, jak pracujemy', filmP:'Showreel Pimp My Bar, 1 min 22 s',
     eve:[['Powitanie','Welcome drink czeka na gości, zanim wejdą na salę.'],['Rozmowa przy barze','Barman pyta o ulubiony owoc, smak i alkohol. Dopiero potem robi koktajl.'],['Wasze menu','Od 6 do 8 koktajli, które wybieracie sami. Kilka także w wersji 0%.'],['Wasz koktajl','Autorski koktajl z Waszą nazwą, ustalony przed weselem.'],['Pokaz flair','Żonglerka butelkami na parkiecie, z udziałem gości. Dodatek.'],['Champagne tower','Piramida kieliszków na toast albo przed tortem. Dodatek.']],
     tag:'/ Wesela', offerFor:'Oferta weselna', h1:'Bar koktajlowy na <em>Wasze wesele</em>',
-    lead:'Każdy koktajl robimy na żywo przy barze, ze świeżych owoców. Poniżej ułożycie własne menu i od razu zobaczycie cenę.',
+    lead:'Dzień dobry! Dziękujemy, że bierzecie nas pod uwagę przy swoim weselu. Od 2013 roku stawiamy bar koktajlowy na weselach, a każdy koktajl barman przygotowuje na oczach gości, pod ich smak. Poniżej ułożycie własne menu, wybierzecie wygląd baru i od razu zobaczycie cenę.',
     fDate:'Termin', fPlace:'Miejsce', fGuests:'Goście', fTime:'Czas pracy baru', hours:'8 godzin', guestsN:'{n} osób',
     cta:'Ułóż swój bar ↓', play:'Zobacz nasz showreel',
     howH:'Jak to wygląda', howP:'Bar stoi na sali przez całe wesele. Goście podchodzą, rozmawiają z barmanem i dostają koktajl zrobiony dla nich.',
@@ -114,7 +114,7 @@
     eveH:'An evening at the bar', illus:'Illustrative photos.', filmH:'See how we work', filmP:'Pimp My Bar showreel, 1 min 22 s',
     eve:[['Welcome','A welcome drink is waiting before guests enter the room.'],['A chat at the bar','The bartender asks about your favourite fruit, flavour and spirit, then makes the cocktail.'],['Your menu','Six to eight cocktails you choose yourselves. Several also alcohol-free.'],['Your cocktail','A signature cocktail with your own name, agreed before the wedding.'],['Flair show','Bottle juggling on the dance floor, with guests joining in. Optional extra.'],['Champagne tower','A pyramid of glasses for the toast or before the cake. Optional extra.']],
     tag:'/ Weddings', offerFor:'Wedding offer', h1:'A cocktail bar for <em>your wedding</em>',
-    lead:'Every cocktail is made live at the bar, with fresh fruit. Build your own menu below and see the price straight away.',
+    lead:'Hello, and thank you for considering us for your wedding. We have been setting up cocktail bars at weddings since 2013, and every drink is made in front of your guests, to their taste. Below you can build your own menu, choose the look of the bar and see the price straight away.',
     fDate:'Date', fPlace:'Venue', fGuests:'Guests', fTime:'Bar service', hours:'8 hours', guestsN:'{n} guests',
     cta:'Build your bar ↓', play:'Watch our showreel',
     howH:'What it looks like', howP:'The bar stays in the room for the whole wedding. Guests walk up, chat with the bartender and get a cocktail made for them.',
@@ -166,11 +166,11 @@
     foot:'Pimp My Bar · Poznań, Poland · pimpmybar.pl', footR:'Prices in PLN. Offer prepared {d}.', menuL:'Menu', addL:'Extras', none:'none'
   },
   de:{
-    hook:['Cocktails, live gemixt.','Für jeden Gast.'], rot:['Mit frischen Früchten, vor euren Gästen','Der Barkeeper fragt nach eurem Geschmack, statt auf die Karte zu zeigen','Ein Preis für den ganzen Abend, Anfahrt inklusive'],
+    hook:['Cocktails, live gemixt.','Für jeden Gast.'], rot:['Von Hand gemixt, vor euren Gästen','Der Barkeeper fragt nach eurem Geschmack, statt auf die Karte zu zeigen','Ein Preis für den ganzen Abend, Anfahrt inklusive'],
     eveH:'Ein Abend an der Bar', illus:'Beispielfotos.', filmH:'So arbeiten wir', filmP:'Pimp My Bar Showreel, 1 Min. 22 Sek.',
     eve:[['Empfang','Ein Welcome Drink wartet, bevor die Gäste den Saal betreten.'],['Gespräch an der Bar','Der Barkeeper fragt nach Lieblingsfrucht, Geschmack und Spirituose. Erst dann mixt er.'],['Eure Karte','Sechs bis acht Cocktails, die ihr selbst auswählt. Einige auch alkoholfrei.'],['Euer Cocktail','Ein Signature-Cocktail mit eurem Namen, vor der Hochzeit abgestimmt.'],['Flair-Show','Flaschenjonglage auf der Tanzfläche, die Gäste machen mit. Extra.'],['Champagnerpyramide','Eine Gläserpyramide zum Anstoßen oder vor der Torte. Extra.']],
     tag:'/ Hochzeiten', offerFor:'Hochzeitsangebot', h1:'Eine Cocktailbar für <em>eure Hochzeit</em>',
-    lead:'Jeder Cocktail entsteht live an der Bar, mit frischen Früchten. Stellt unten eure eigene Karte zusammen und seht sofort den Preis.',
+    lead:'Hallo, und danke, dass ihr bei eurer Hochzeit an uns denkt. Seit 2013 bauen wir Cocktailbars auf Hochzeiten auf, und jeden Drink mixt der Barkeeper vor den Augen eurer Gäste, ganz nach ihrem Geschmack. Unten stellt ihr eure eigene Karte zusammen, wählt das Aussehen der Bar und seht sofort den Preis.',
     fDate:'Termin', fPlace:'Ort', fGuests:'Gäste', fTime:'Barservice', hours:'8 Stunden', guestsN:'{n} Gäste',
     cta:'Bar zusammenstellen ↓', play:'Showreel ansehen',
     howH:'So sieht es aus', howP:'Die Bar steht die ganze Feier über im Saal. Die Gäste kommen vorbei, sprechen mit dem Barkeeper und bekommen einen Cocktail, der für sie gemacht wird.',
