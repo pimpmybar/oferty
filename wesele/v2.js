@@ -110,7 +110,7 @@
     foot:'Pimp My Bar · Poznań · pimpmybar.pl', footR:'Ceny w PLN. Oferta przygotowana {d}.', menuL:'Menu', addL:'Dodatki', none:'brak'
   },
   en:{
-    hook:['Cocktails made live.','For every guest.'], rot:['Fresh fruit, made in front of your guests','The bartender asks what you like instead of pointing at a menu','One price for the whole evening, travel included'],
+    hook:['Cocktails made live.','For every guest.'], rot:['Mixed by hand, in front of your guests','The bartender asks what you like instead of pointing at a menu','One price for the whole evening, travel included'],
     eveH:'An evening at the bar', illus:'Illustrative photos.', filmH:'See how we work', filmP:'Pimp My Bar showreel, 1 min 22 s',
     eve:[['Welcome','A welcome drink is waiting before guests enter the room.'],['A chat at the bar','The bartender asks about your favourite fruit, flavour and spirit, then makes the cocktail.'],['Your menu','Six to eight cocktails you choose yourselves. Several also alcohol-free.'],['Your cocktail','A signature cocktail with your own name, agreed before the wedding.'],['Flair show','Bottle juggling on the dance floor, with guests joining in. Optional extra.'],['Champagne tower','A pyramid of glasses for the toast or before the cake. Optional extra.']],
     tag:'/ Weddings', offerFor:'Wedding offer', h1:'A cocktail bar for <em>your wedding</em>',
