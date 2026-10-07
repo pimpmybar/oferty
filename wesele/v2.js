@@ -392,7 +392,6 @@
         var msg = 'PROŚBA O ROZMOWĘ 15 min: '+bd+', godz. '+bt+'. Kontakt: '+c;
         function done(){ note.textContent = L.talkOk; note.className = 'booknote ok'; $('book').querySelector('button[type=submit]').disabled = true; }
         function mail(){ location.href = 'mailto:biuro@pimpmybar.pl?subject='+encodeURIComponent('Rozmowa 15 min: '+bd+' '+bt)+'&body='+encodeURIComponent(msg+'\n'+O.title); done(); }
-        if (owner || O.noPing){ done(); return; }
         try{ fetch(TOPIC+'?title='+encodeURIComponent(O.title)+'&tags=calendar&priority=5', {method:'POST', body:msg}).then(function(r){ r.ok ? done() : mail(); }).catch(mail); }catch(x){ mail(); }
       });
       $('t-call').addEventListener('click', function(){ once('tcall','Kliknął „Zadzwoń” w sekcji kontaktu','telephone_receiver',5); });
