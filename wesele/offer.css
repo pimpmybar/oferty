@@ -218,3 +218,6 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .booknote{font-size:13.5px;color:var(--ink-3);margin:0}
 .booknote.ok{color:var(--ok);font-weight:600}.booknote.err{color:var(--crema);font-weight:600}
 @media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{aspect-ratio:4/5;max-width:380px}}
+
+.front span b{display:block;color:#a3591b;font-weight:700}
+.hint.designed{font-weight:600;color:var(--ink-2)}
