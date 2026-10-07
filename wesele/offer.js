@@ -436,5 +436,6 @@
   build();
   var dev = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'telefon' : 'komputer', first = true;
   try{ first = !sessionStorage.getItem('pmb_seen_'+O.id); sessionStorage.setItem('pmb_seen_'+O.id,'1'); }catch(e){}
+  track('wejscie', first ? 'pierwsze w tej karcie' : 'odświeżenie');
   if (first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
 })();
