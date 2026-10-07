@@ -271,8 +271,8 @@
       else if (/^k\d+$/.test(k)) s.backgroundImage = 'url('+klUrl(k, i ? 'r' : 'l')+')'; }
     $('bv-cap').textContent = bvName(k);
   }
-  function bvStop(){ if (bvTimer){ clearInterval(bvTimer); bvTimer = null; } var b = $('bv-play'); if (b) b.textContent = T[lang].bvPlay; }
-  function bvStart(){ bvStop(); bvStep = 0; bvPaint(SEQ[0]); $('bv-play').textContent = T[lang].bvStop; bvTimer = setInterval(function(){ bvStep = (bvStep+1) % SEQ.length; bvPaint(SEQ[bvStep]); }, 1000); }
+  function bvStop(){ bvTimer = null; var v = $('bv-film'); if (v){ v.pause(); v.hidden = true; } var b = $('bv-play'); if (b) b.textContent = T[lang].bvPlay; }
+  function bvStart(){ var v = $('bv-film'); if (!v) return; bvPaint('silver'); bvTimer = 1; v.hidden = false; try { v.currentTime = 0; } catch(e){} var p = v.play(); if (p && p.catch) p.catch(function(){}); $('bv-cap').textContent = T[lang].frontFilm; $('bv-play').textContent = T[lang].bvStop; }
   function bvCurrent(){ return state.own ? 'sage' : (state.front==='color' ? 'sage' : state.front); }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   function summary(){
@@ -307,7 +307,7 @@
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+t('s3p',{min:MENU_MIN,max:MENU_MAX})+'</p><div class="menu">';
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+(d.z?'<span class="zero">'+L.zero+'</span>':'')+'</strong><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
-    h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
+    h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name">';
     h += '</p>';
