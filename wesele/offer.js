@@ -366,6 +366,7 @@
       $('book').addEventListener('submit', function(e){ e.preventDefault(); var c = $('b-contact').value.trim(), note = $('b-note'), L = T[lang];
         if (c.length < 5){ note.textContent = L.talkErr; note.className = 'booknote err'; $('b-contact').focus(); return; }
         var msg = 'PROŚBA O ROZMOWĘ 15 min: '+bd+', godz. '+bt+'. Kontakt: '+c;
+        track('rozmowa', bd+', godz. '+bt);
         function done(){ note.textContent = L.talkOk; note.className = 'booknote ok'; $('book').querySelector('button[type=submit]').disabled = true; }
         function mail(){ location.href = 'mailto:biuro@pimpmybar.pl?subject='+encodeURIComponent('Rozmowa 15 min: '+bd+' '+bt)+'&body='+encodeURIComponent(msg+'\n'+O.title); done(); }
         try{ fetch(TOPIC+'?title='+encodeURIComponent(O.title)+'&tags=calendar&priority=5', {method:'POST', body:msg}).then(function(r){ r.ok ? done() : mail(); }).catch(mail); }catch(x){ mail(); }
@@ -410,9 +411,27 @@
   try{ if (/[?&]ja(=|&|$)/.test(location.search)) localStorage.setItem('pmb_owner','1'); owner = localStorage.getItem('pmb_owner')==='1'; }catch(e){}
   function ping(msg, tags, prio){
     if (owner || O.noPing) return;
+    track(tags||'eyes', msg);
     try{ fetch(TOPIC+'?title='+encodeURIComponent(O.title)+'&tags='+encodeURIComponent(tags||'eyes')+(prio?'&priority='+prio:''), {method:'POST', body:msg, keepalive:true}).catch(function(){}); }catch(e){}
   }
   function once(k, msg, tags, prio){ if (sent[k]) return; sent[k] = 1; ping(msg, tags, prio); }
+
+  // ── Analityka (Supabase, tylko zapis) ──
+  var SB = 'https://zqpqjgxtefzojhjglppb.supabase.co/rest/v1/offer_events', SBK = 'sb_publishable__bPrQF9K35vs8RbLdWBRXQ_VBVj2esQ';
+  var SID = Math.random().toString(36).slice(2,10)+Date.now().toString(36), T0 = Date.now();
+  function track(ev, detail){
+    if (owner || O.noPing) return;
+    try{ fetch(SB, {method:'POST', keepalive:true, headers:{'apikey':SBK,'Authorization':'Bearer '+SBK,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body: JSON.stringify({offer:String(O.id||O.title||'').slice(0,80), session:SID, event:String(ev).slice(0,40), detail: detail==null ? null : String(detail).slice(0,300), device:DEV, lang:lang})}).catch(function(){}); }catch(e){}
+  }
+  var DEV = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'telefon' : 'komputer';
+  (function(){
+    var marks = [25,50,75,100], seen = {};
+    function onScroll(){ var d = document.documentElement, p = (window.scrollY + window.innerHeight) / Math.max(1, d.scrollHeight) * 100;
+      marks.forEach(function(m){ if (p >= m - 1 && !seen[m]){ seen[m] = 1; track('scroll', m+'%'); if (m===100) ping('Przewinął ofertę do samego dołu','checkered_flag',3); } }); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    var sentT = 0; document.addEventListener('visibilitychange', function(){ if (document.visibilityState==='hidden'){ var s = Math.round((Date.now()-T0)/1000); if (s - sentT >= 5){ sentT = s; track('time', s+' s'); } } });
+  })();
 
   build();
   var dev = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'telefon' : 'komputer', first = true;
