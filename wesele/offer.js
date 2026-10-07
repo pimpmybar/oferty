@@ -19,7 +19,7 @@
   var bvTimer = null, bvStep = 0, bvTouched = false;
   var FRONT_FILM = '';  // film: ten sam bar ze zmieniającym się frontem (wizualizacja)
   // Fronty baru: img = zdjęcie kliszy, css = klasa kafelka, k = klucz nazwy w tekstach
-  var FRONTS = [ {id:'silver', img:'front-lustro.jpg', k:'fSilver'}, {id:'gold', css:'f-gold', k:'fGold'}, {id:'color', css:'f-color', k:'fColor'} ].concat(KL.map(function(n,i){ return {id:'k'+(i+1), img:'klisze/'+n+'-l.jpg'}; }));
+  var FRONTS = [ {id:'silver', css:'f-silver', k:'fSilver'}, {id:'gold', css:'f-gold', k:'fGold'}, {id:'color', css:'f-color', k:'fColor'} ].concat(KL.map(function(n,i){ return {id:'k'+(i+1), img:'klisze/'+n+'-l.jpg'}; }));
 
   // ── Karta koktajli (z „Mix some drinks”) ──
   var DRINKS = [
