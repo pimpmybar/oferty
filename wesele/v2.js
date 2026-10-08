@@ -411,7 +411,7 @@
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
       render(); clearTimeout(mt); mt = setTimeout(function(){ ping('Zmienił menu: '+menuNames().join(', '),'cocktail'); }, 6000);
     }); });
-    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ bvTouched = true; bvStop(); state.front = b.dataset.front; state.own = false; render(); ping('Front baru: '+T.pl[(FRONTS.filter(function(f){return f.id===state.front})[0]||{}).k||'frontN'].replace('{n}',''),'art'); }); });
+    document.querySelectorAll('[data-front]').forEach(function(b){ b.addEventListener('click', function(){ bvTouched = true; bvStop(); state.front = b.dataset.front; state.own = false; render(); var _l = lang; lang = 'pl'; var _fn = frontName(state.front); lang = _l; ping('Front baru: '+_fn,'art'); }); });
     document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){
       var id = i.dataset.add; if (id==='own') state.own = i.checked; else state.add[id] = i.checked; render();
       if (i.checked) once('add'+id,'Dodał: '+T.pl[{own:'aBrand',flair:'aFlair',tower:'aTower',welcome:'aWelcome',coffee:'aCoffee'}[id]]+' → '+summary().total,'heavy_plus_sign');
