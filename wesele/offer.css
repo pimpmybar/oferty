@@ -223,3 +223,7 @@ footer{padding-block:32px 24px;font-size:13px;color:var(--ink-3);display:flex;ju
 .hint.designed{font-weight:600;color:var(--ink-2)}
 
 @media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{aspect-ratio:4/5;max-width:380px}}
+
+.menu .mcat{grid-column:1/-1;margin:14px 0 2px;font:700 13px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--crema)}
+.menu .mcat:first-child{margin-top:0}
+.drink .taste{font-style:normal;font-size:13px;color:var(--ink-2)}
