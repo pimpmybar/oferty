@@ -44,16 +44,16 @@
     cfgH:'Państwa strefa mocktaili', cfgP:'Trzy kroki. Wybierają Państwo menu, serwis i wygląd barów, a na końcu wysyłają nam gotowy wybór.',
     s1:'Krok 1', s1h:'Menu mocktaili', s1p:'Proponujemy cztery koktajle bezalkoholowe. Mogą Państwo zostawić wszystkie albo wybrać trzy. Menu nie zmienia ceny.',
     picked:'Wybrane: {n} z {max}', pickMore:'Wybrane: {n}. Prosimy dobrać jeszcze {k}, minimum to {min}.',
-    s2:'Krok 2', s2h:'Kubki czy szkło?', s2p:'W cenie są kubki jednorazowe. Opcjonalnie podajemy w szkle, z obsługą kelnerską, która zbiera szkło ze strefy i z sali.',
-    cup:'Kubki jednorazowe', glass:'Szkło + serwis kelnerski', glassHint:'Szkło z obsługą kelnerską wycenimy osobno i prześlemy kwotę mailem.', cupHint:'Kubki jednorazowe są w cenie.',
+    s2:'Krok 2', s2h:'Kubki czy szkło?', s2p:'W cenie są kubki jednorazowe. Opcjonalnie podajemy w szkle. Do szkła można dodać obsługę kelnerską, która zbiera je ze strefy i z sali.',
+    cup:'Kubki jednorazowe', glass:'Szkło', lGlass:'Wynajem szkła, {pool} szt.', waiter:'Obsługa kelnerska', waiterS:'Kelner zbiera szkło ze strefy i z sali przez cały event.', glassHint:'Wynajem szkła: {pool} szt. Obsługa kelnerska jest opcjonalna.', cupHint:'Kubki jednorazowe są w cenie.',
     s3:'Krok 3', s3h:'Wygląd barów i dodatki', s3p:'Front barów wybierają Państwo w cenie: lustro srebrne lub złote albo podświetlana klisza. Dodatki są opcjonalne.',
     frontFilm:'Ten sam bar, różne fronty. Wizualizacja.', bvPlay:'▶ Pokaż wszystkie fronty', bvStop:'■ Zatrzymaj', c_black:'Czarny mat', c_sage:'Zielony', c_navy:'Granat', c_blush:'Pudrowy róż', barGreen:'Bar zielony z kasetonami, 2 m', barOlive:'Bar oliwkowy, 3 m', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', designed:'Bary zaprojektowane przez Pimp My Bar.',
     aBrand:'Branding barów logo', aBrandS:'Państwa logo na podświetlanych frontach. Projekt graficzny po Państwa stronie, wizualizację przygotujemy po potwierdzeniu realizacji.',
     aFlair:'Pokaz barmański flair', aFlairS:'Żonglerka butelkami i shakerami, z udziałem uczestników.',
     aCoffee:'Bar kawowy z baristą', aCoffeeS:'Espresso, cappuccino i latte z ekspresu kolbowego przez cały event.',
     ask:'wycenimy', lAsk:'do wyceny',
-    yourPrice:'Cena', net:' netto', vat:'+ 23% VAT', perPerson:'{a}–{b} zł netto na osobę', lBar:'Strefa mocktaili: {b} bary, {b} barmanów',
-    inclH:'W cenie', incl:['{b} mobilne bary z wyposażeniem','{b} barmanów, {h}','{m} mocktaile w menu, średnio {p} na osobę','wszystkie składniki, lód i dodatki','{cups}','wydrukowane menu','transport, montaż i demontaż strefy'],
+    yourPrice:'Cena', net:' netto', vat:'+ 23% VAT', perPerson:'{a}–{b} zł netto na osobę', lBar:'Obsługa: {b} bary, {b} barmanów',
+    inclH:'W cenie', incl:['{b} mobilne bary z wyposażeniem','{b} barmanów, {h}','{pool} mocktaili, {m} pozycje w menu','wszystkie składniki, lód i dodatki','{cups}','wydrukowane menu','transport, montaż i demontaż strefy'],
     inclCup:'kubki jednorazowe',
     valid:'Oferta ważna do {d}', book:'Potwierdzam realizację',
     crewH:'Barmani, z którymi pracujemy i pracowaliśmy', crewP:'Przez nasz bar przeszło wielu barmanów. Część z nich do dziś dołącza do nas przy większych realizacjach.',
@@ -66,9 +66,9 @@
     cofL:'Dodatek', cofH:'Bar kawowy z baristą', cofP:'Ten sam zespół prowadzi bary kawowe na targach w Polsce i za granicą. Na evencie barista podaje espresso, cappuccino i latte. Bar kawowy można zaznaczyć w dodatkach.', cofA:'Film z targów na Instagramie →',
     faqH:'Pytania, które zwykle padają', faqP:'Jeśli czegoś tu brakuje, prosimy o telefon albo maila.',
     faq:[
-      ['Co obejmuje cena?','{b} mobilne bary z wyposażeniem, {b} barmanów, menu mocktaili, wszystkie składniki, lód, dodatki, kubki jednorazowe oraz transport, montaż i demontaż strefy. Cena {price} netto, do której doliczamy 23% VAT.'],
-      ['Co znaczy „{p} mocktaile na osobę”?','To pula na cały event, a nie limit dla uczestnika. Przy {g} osobach przygotowujemy ok. {pool} mocktaili. Jedni wypiją cztery, inni jeden.'],
-      ['Czy mocktaile mogą być w szkle?','Tak. W cenie są kubki jednorazowe, a szkło z obsługą kelnerską, która zbiera je ze strefy i z sali, wyceniamy jako opcję. Wystarczy zaznaczyć ją w kroku 2.'],
+      ['Co obejmuje cena?','{b} mobilne bary z wyposażeniem, {b} barmanów, menu mocktaili, wszystkie składniki, lód, dodatki, kubki jednorazowe oraz transport, montaż i demontaż strefy. Razem {price} netto, do tego doliczamy 23% VAT. Szkło i obsługa kelnerska są opcjami.'],
+      ['Ile mocktaili jest w cenie?','{pool} mocktaili na cały event. To pula wspólna, a nie limit dla uczestnika: jedni wypiją cztery, inni jeden. Większą pulę wycenimy na życzenie.'],
+      ['Czy mocktaile mogą być w szkle?','Tak. W cenie są kubki jednorazowe, a szkło jest opcją: wynajem {pool} szt. to {glassP} netto. Obsługa kelnerska, która zbiera szkło ze strefy i z sali, to {waiterP} netto. Obie opcje zaznaczą Państwo w kroku 2.'],
       ['Czy bary mogą mieć nasze logo?','Tak. Fronty barów są wymienne i podświetlane. Projekt graficzny jest po Państwa stronie. Po potwierdzeniu realizacji prosimy o logo i zdjęcie miejsca, a my przygotujemy wizualizację modułów z Państwa grafiką.'],
       ['Co musi zapewnić biuro?','Miejsce na bary, ok. 2 × 2 m na każdy, oraz gniazdko prądu w pobliżu. Resztę przywozimy sami.'],
       ['Jak potwierdzamy realizację?','Klikają Państwo „Potwierdzam realizację” albo odpisują na naszego maila. Przesyłamy umowę, a termin jest zarezerwowany po jej podpisaniu.']
@@ -76,7 +76,7 @@
     talkStep:'Porozmawiajmy', talkH:'Mają Państwo pytania? Proszę pytać.', talkP:'Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Proszę zadzwonić albo napisać: odpowiem na wszystkie pytania i dopasuję strefę do Państwa eventu.', talkCall:'Zadzwoń', talkMail:'Napisz maila',
     accH:'Potwierdzamy realizację', accP:'Po kliknięciu otworzy się gotowy mail z Państwa wyborem. Można też po prostu zadzwonić.',
     yourChoice:'Państwa wybór', send:'Wyślij wybór mailem', copy:'Kopiuj', copied:'Skopiowano',
-    sumGuests:'{g} osób', sumPer:'{p} mocktaile na osobę', sumFront:'front: {f}', sumOwn:'branding logo',
+    sumGuests:'{g} osób', sumPer:'{pool} mocktaili', sumFront:'front: {f}', sumOwn:'branding logo',
     mailSubj:'Strefa mocktaili {d} – potwierdzenie', mailHi:'Dzień dobry,\n\npotwierdzamy zainteresowanie strefą mocktaili.\n', mailBye:'\nPozdrawiam',
     foot:'Pimp My Bar · Poznań · pimpmybar.pl', footR:'Ceny netto w PLN. Oferta przygotowana {d}.', menuL:'Menu', addL:'Opcje', none:'brak'
   }};
@@ -85,26 +85,29 @@
   var E = { bars: O.bars || 3, per: O.perGuest || 3, gMin: O.guestsMin || O.guests, gMax: O.guestsMax || O.guests };
   var state = {
     menu: DRINKS.map(function(d){return d.id}),
-    front: 'silver', own: false, glass: false,
+    front: 'silver', own: false, glass: false, waiter: false,
     add: {flair:false, coffee:false}
   };
 
   var $ = function(id){return document.getElementById(id)};
   function t(k, v){ var s = T[lang][k]; if (v) for (var p in v) s = s.split('{'+p+'}').join(v[p]); return s; }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]}); }
-  function money(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')+' zł'; }
+  function money(n){ var r = Math.round(n*100)/100, z = Math.floor(r), gr = Math.round((r-z)*100); return String(z).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')+(gr ? ','+(gr<10?'0':'')+gr : '')+' zł'; }
   function gLabel(){ var P = O.t && O.t[lang] || {}; return P.guestsLabel || t('guestsN',{n:O.guests}); }
   function gRange(){ return E.gMin===E.gMax ? String(E.gMin) : E.gMin+'–'+E.gMax; }
-  function pool(){ return E.gMin===E.gMax ? String(E.gMin*E.per) : (E.gMin*E.per)+'–'+(E.gMax*E.per); }
-  function fill(s){ return s.split('{b}').join(E.bars).split('{p}').join(E.per).split('{g}').join(gRange()).split('{pool}').join(pool()).split('{m}').join(state.menu.length).split('{h}').join(O.hours).split('{price}').join(money(O.price)).split('{cups}').join(state.glass ? T[lang].glass.toLowerCase()+' ('+T[lang].lAsk+')' : T[lang].inclCup); }
+  function pool(){ return String(O.pool || E.gMin*E.per); }
+  function fill(s){ return s.split('{b}').join(E.bars).split('{p}').join(E.per).split('{g}').join(gRange()).split('{pool}').join(pool()).split('{m}').join(state.menu.length).split('{h}').join(O.hours).split('{price}').join(money(baseTotal())).split('{glassP}').join(money(O.glass)).split('{waiterP}').join(money(O.waiter)).split('{cups}').join(T[lang].inclCup); }
+  function baseTotal(){ var x = O.price; (O.items||[]).forEach(function(it){ if (it[1] !== null) x += it[1]; }); return x; }
 
   function calc(){
-    var lines = [[fill(t('lBar')), O.price]];
-    if (state.glass) lines.push([t('glass'), null]);
+    var lines = [[fill(t('lBar')), O.price]], total = O.price;
+    (O.items || []).forEach(function(it){ lines.push([it[0], it[1]]); if (it[1] !== null) total += it[1]; });
+    if (state.glass){ lines.push([fill(t('lGlass')), O.glass]); total += O.glass; }
+    if (state.glass && state.waiter){ lines.push([t('waiter'), O.waiter]); total += O.waiter; }
     if (state.own) lines.push([t('aBrand'), null]);
     if (state.add.flair) lines.push([t('aFlair'), null]);
     if (state.add.coffee) lines.push([t('aCoffee'), null]);
-    return {lines:lines, total:O.price};
+    return {lines:lines, total:total};
   }
   function frontName(id){ var n = 0, r = ''; FRONTS_ALL.forEach(function(f){ if (f.img && !f.k) n++; if (f.id===id) r = f.k ? (T[lang][f.k]||'') : t('frontN',{n:n}); }); return r; }
   function bvName(k){ var L = T[lang]; if (k==='silver') return L.fSilver; if (k==='gold') return L.fGold; if (SOLID[k]) return L['c_'+k]; if (k==='bar-green') return L.barGreen; if (k==='bar-olive') return L.barOlive; return frontName(k); }
@@ -121,10 +124,10 @@
   function bvStart(){ var v = $('bv-film'); if (!v) return; bvPaint('silver'); bvTimer = 1; v.hidden = false; try { v.currentTime = 0; } catch(e){} var p = v.play(); if (p && p.catch) p.catch(function(){}); $('bv-cap').textContent = T[lang].frontFilm; $('bv-play').textContent = T[lang].bvStop; }
   function bvCurrent(){ return state.own ? 'sage' : state.front; }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
-  function priceTxt(){ return money(O.price)+T[lang].net; }
+  function priceTxt(){ return money(calc().total)+T[lang].net; }
   function summary(){
-    var c = calc(), parts = [gLabel(), t('sumPer',{p:E.per}), state.glass ? t('glass') : t('cup'), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
-    var adds = c.lines.slice(1).map(function(l){return l[0]+' ('+T[lang].lAsk+')'});
+    var c = calc(), parts = [gLabel(), fill(t('sumPer')), state.glass ? t('glass')+(state.waiter ? ' + '+t('waiter').toLowerCase() : '') : t('cup'), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
+    var adds = c.lines.slice(1+(O.items||[]).length).map(function(l){return l[0]+' ('+(l[1]===null ? T[lang].lAsk : money(l[1]))+')'});
     return {head: parts.join(' · '), menu: menuNames().join(', '), adds: adds.length ? adds.join(', ') : t('none'), total: priceTxt()};
   }
 
@@ -147,7 +150,7 @@
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="menu">';
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
-    h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+'</button></div><p class="hint" id="s-hint"></p></div>';
+    h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div><p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+L.s3p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name"></p><p class="hint designed">'+L.designed+'</p>';
@@ -188,13 +191,13 @@
     var mc = $('m-count'); mc.className = 'count'+(cnt<MENU_MIN?' bad':'');
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
     $('s-cup').setAttribute('aria-pressed', String(!state.glass)); $('s-glass').setAttribute('aria-pressed', String(state.glass));
-    $('s-hint').textContent = state.glass ? L.glassHint : L.cupHint;
+    $('s-hint').textContent = fill(state.glass ? L.glassHint : L.cupHint); var w = $('waiter'); w.disabled = !state.glass; w.checked = state.glass && state.waiter;
     document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
     $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
     if (!bvTimer) bvPaint(bvCurrent());
     document.querySelectorAll('[data-add]').forEach(function(i){ i.checked = i.dataset.add==='own' ? state.own : state.add[i.dataset.add]; });
-    var tot = priceTxt(), pp = t('perPerson',{a:Math.round(O.price/E.gMax), b:Math.round(O.price/E.gMin)})+' · '+L.vat;
-    $('sum').textContent = tot; $('pp').textContent = pp; $('bar-sum').textContent = money(O.price); $('bar-pp').textContent = 'netto '+L.vat; $('peek').textContent = tot;
+    var tot = priceTxt(), pp = t('perPerson',{a:Math.round(c.total/E.gMax), b:Math.round(c.total/E.gMin)})+' · '+L.vat;
+    $('sum').textContent = tot; $('pp').textContent = pp; $('bar-sum').textContent = money(c.total); $('bar-pp').textContent = 'netto '+L.vat; $('peek').textContent = tot;
     $('lines').innerHTML = c.lines.map(function(l){ return '<li>'+esc(l[0])+' <b>'+(l[1]===null ? L.lAsk : money(l[1]))+'</b></li>'; }).join('');
     $('incl').innerHTML = L.incl.map(function(s){ return '<li>'+esc(fill(s))+'</li>'; }).join('');
     $('faq').innerHTML = L.faq.map(function(f){ return '<details><summary>'+esc(fill(f[0]))+'</summary><p>'+esc(fill(f[1]))+'</p></details>'; }).join('');
@@ -228,7 +231,8 @@
     SEQ.forEach(function(k){ var i = new Image(); if (/^k\d+$/.test(k)){ i.src = klUrl(k,'l'); new Image().src = klUrl(k,'r'); } else i.src = BV[k] || BV.base; });
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
         $('s-cup').addEventListener('click', function(){ state.glass = false; render(); });
-    $('s-glass').addEventListener('click', function(){ state.glass = true; render(); once('glass','Wybrał szkło + serwis kelnerski (do wyceny)','wine_glass',4); });
+    $('s-glass').addEventListener('click', function(){ state.glass = true; render(); once('glass','Wybrał szkło → '+summary().total,'wine_glass',4); });
+    $('waiter').addEventListener('change', function(e){ state.waiter = e.target.checked; render(); if (state.waiter) once('waiter','Dodał obsługę kelnerską → '+summary().total,'heavy_plus_sign',4); });
     var mt; document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
       render(); clearTimeout(mt); mt = setTimeout(function(){ ping('Zmienił menu: '+menuNames().join(', '),'cocktail'); }, 6000);

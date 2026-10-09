@@ -27,7 +27,16 @@ window.OFFER = {
   "guests": 200, "guestsMin": 150, "guestsMax": 200,
   "bars": 3,
   "perGuest": 3,
+  "pool": 450,
   "price": 5400,
+  // pozycje doliczane do obsługi: [nazwa, kwota netto]; null = jeszcze bez ceny
+  "items": [
+    ["Lód, 80 kg", 280],
+    ["Składniki i dodatki do 450 mocktaili", 1125],
+    ["Rum 0% i prosecco 0%", null]
+  ],
+  "glass": 427.5,
+  "waiter": 650,
   "validUntil": "16.10.2026",
   "prepared": "9.10.2026",
   "t": {
@@ -41,6 +50,6 @@ window.OFFER = {
   }
 };
 </script>
-<script src="../event/event.js?v=1"></script>
+<script src="../event/event.js?v=2"></script>
 </body>
 </html>
