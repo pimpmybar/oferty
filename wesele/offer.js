@@ -248,7 +248,7 @@
     var s = String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang==='pl' ? ' ' : (lang==='de' ? '.' : ','));
     return lang==='pl' ? s+' zł' : s+' PLN';
   }
-  function crewN(g){ if (O.crew) return O.crew; return g<=90 ? 1 : (g<=180 ? 2 : 3); }
+  function crewN(g){ if (O.crew) return O.crew; return g<=80 ? 1 : (g<=180 ? 2 : 3); }
   function perGuest(){ if (O.perGuestFixed) return O.perGuestFixed; return (state.more || !state.vodka) ? 4 : 3; }
 
   function calc(){
