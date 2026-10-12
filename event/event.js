@@ -291,4 +291,7 @@
   try{ first = !sessionStorage.getItem('pmb_seen_'+O.id); sessionStorage.setItem('pmb_seen_'+O.id,'1'); }catch(e){}
   track('wejscie', first ? 'pierwsze w tej karcie' : 'odświeżenie');
   if (first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
+
+  // Wspólny moduł: alarm „gorący klient” + dymek kontaktowy
+  try{ var ks = document.createElement('script'); ks.src = '../wspolne/kontakt.js?v=1'; document.body.appendChild(ks); }catch(e){}
 })();
