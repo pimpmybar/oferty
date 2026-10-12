@@ -9,7 +9,9 @@
     fourth: 12,        // dopłata za osobę przy 4 koktajlach na osobę  (ROBOCZE – do potwierdzenia)
     flair: 2200, branding: 200, tower: 500
   };
-  var MENU_MIN = 6, MENU_MAX = 8;
+  // Nadpisania dla ofert innych niż wesele (przyjęcia, urodziny, jubileusze) – opcjonalne pola w window.OFFER
+  if (O.pricing) for (var pk in O.pricing) PRICE[pk] = O.pricing[pk];
+  var MENU_MIN = O.menuMin || 6, MENU_MAX = O.menuMax || 8, GR = O.guestsRange || [40,200,5];
   // Podgląd baru: zdjęcie bazowe + klisze nakładane na dwa fronty (bez animacji, twarde cięcie)
   var BV = { base: 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_120125_442f7e44-83e8-40ab-9ea9-6ce94befcf8b.png', 'bar-green': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_125340_a086eced-042e-4f69-8177-964b4b406239.png', 'bar-olive': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_121858_4b905690-f3c4-4c1b-b9d6-a5cb45ef529c.png' };
   var KL = ['deski-kolor','deski-jasne','deski-biale','deski-bielone','deski-czarne','paski','kamien','cegla-czarna','drewno','cegla-biala'];
@@ -221,6 +223,8 @@
     mailSubj:'Reservierung Hochzeitsbar {d} – {v}', mailHi:'Hallo,\n\nwir möchten die Bar für unsere Hochzeit reservieren.\n', mailBye:'\nViele Grüße',
     foot:'Pimp My Bar · Poznań, Polen · pimpmybar.pl', footR:'Preise in PLN. Angebot erstellt am {d}.', menuL:'Karte', addL:'Extras', none:'keine'
   }};
+  // Teksty z oferty (O.t[lang]) nadpisują dowolny klucz – tak robimy oferty na przyjęcia z tego samego silnika
+  if (O.t) for (var tl in O.t) if (T[tl]) for (var tk in O.t[tl]) T[tl][tk] = O.t[tl][tk];
 
   var LANGS = O.langs || ['pl','en','de'];
   var lang = O.lang || 'pl';
@@ -231,8 +235,8 @@
   }catch(e){}
 
   var state = {
-    guests: O.guests, vodka: true, more: false,
-    menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}),
+    guests: O.guests, vodka: O.vodka === false ? false : true, more: false,
+    menu: O.menuDefault ? O.menuDefault.slice() : DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}),
     front: 'silver', own: false,
     add: {flair:false, tower:false, welcome:false, coffee:false}
   };
@@ -244,15 +248,15 @@
     var s = String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang==='pl' ? ' ' : (lang==='de' ? '.' : ','));
     return lang==='pl' ? s+' zł' : s+' PLN';
   }
-  function crewN(g){ return g<=90 ? 1 : (g<=180 ? 2 : 3); }
-  function perGuest(){ return (state.more || !state.vodka) ? 4 : 3; }
+  function crewN(g){ if (O.crew) return O.crew; return g<=90 ? 1 : (g<=180 ? 2 : 3); }
+  function perGuest(){ if (O.perGuestFixed) return O.perGuestFixed; return (state.more || !state.vodka) ? 4 : 3; }
 
   function calc(){
     var g = state.guests, lines = [], total;
     var bar = (g === O.guests && O.price) ? O.price : PRICE.base + PRICE.perGuest*g;
     lines.push([t('lBar',{g:g}), bar]); total = bar;
     if (O.travel){ lines.push([t('lTravel',{km:O.travel.km}), O.travel.cost]); total += O.travel.cost; }
-    if (perGuest()===4){ var f = PRICE.fourth*g; lines.push([t('lFourth'), f]); total += f; }
+    if (perGuest()===4 && !O.perGuestFixed){ var f = PRICE.fourth*g; lines.push([t('lFourth'), f]); total += f; }
     if (state.add.flair){ lines.push([t('aFlair'), PRICE.flair]); total += PRICE.flair; }
     if (state.own){ lines.push([t('aBrand'), PRICE.branding]); total += PRICE.branding; }
     var fr = !state.own && FRONTS.filter(function(f){return f.id===state.front})[0]; if (fr && fr.extra){ lines.push([t(fr.line||'lWood'), fr.extra]); total += fr.extra; }
@@ -301,8 +305,8 @@
     h += '</div></div></section>';
 
     h += '<section id="bar"><div class="wrap"><div class="sec-head"><h2>'+L.cfgH+'</h2><p>'+L.cfgP+'</p></div><div class="cfg"><div>';
-    h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="guests"><output id="g-out" for="g"></output><input type="range" id="g" min="40" max="200" step="5" aria-label="'+esc(L.s1h)+'"></div><p class="hint" id="g-hint"></p></div>';
-    h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div class="seg" role="group"><button type="button" id="v-yes">'+L.yes+'</button><button type="button" id="v-no">'+L.no+'</button></div>';
+    h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="guests"><output id="g-out" for="g"></output><input type="range" id="g" min="'+GR[0]+'" max="'+GR[1]+'" step="'+GR[2]+'" aria-label="'+esc(L.s1h)+'"></div><p class="hint" id="g-hint"></p></div>';
+    h += '<div class="block"'+(O.noVodkaStep?' style="display:none"':'')+'><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div class="seg" role="group"><button type="button" id="v-yes">'+L.yes+'</button><button type="button" id="v-no">'+L.no+'</button></div>';
     h += '<label class="addon" for="more"><input type="checkbox" id="more"><span><strong>'+L.more+'</strong><small id="more-s"></small></span><b id="more-p"></b></label></div>';
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+t('s3p',{min:MENU_MIN,max:MENU_MAX})+'</p><div class="menu">';
     var lastC = '';
