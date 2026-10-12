@@ -266,7 +266,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <dl class="facts">
         <div><dt>Termin</dt><dd>15–16.12.2026</dd></div>
         <div><dt>Obsada</dt><dd>2 baristów</dd></div>
-        <div><dt>Napoje</dt><dd>ok. 500 kaw, 300 grzańców, 50 herbat</dd></div>
+        <div><dt>Napoje</dt><dd>ok. 500 kaw, do 300 grzańców, 50 herbat</dd></div>
         <div><dt>Miejsce</dt><dd>Colours Factory, Piła</dd></div>
       </dl>
       <div class="price-peek">
@@ -293,6 +293,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="pricing">
       <div>
         <ul class="lines" id="lines"></ul>
+        <div class="seg" role="group" aria-label="Liczba grzańców" style="margin-top:18px">
+          <button type="button" data-mull="100" aria-pressed="false">100 grzańców</button>
+          <button type="button" data-mull="200" aria-pressed="false">200 grzańców</button>
+          <button type="button" data-mull="300" aria-pressed="true">300 grzańców</button>
+        </div>
+        <p class="note" style="margin-top:8px">Grzańce liczymy po 800 zł netto za każde 100 porcji (200 ml), razem z kubkiem.</p>
         <label class="addon" for="cocktails">
           <input type="checkbox" id="cocktails">
           <span><strong>Wieczorem także koktajle?</strong><small>Ten sam bar po południu może podawać espresso martini i koktajle przygotowywane na żywo. Zaznaczenie nie zmienia ceny, a koktajle wycenimy osobno.</small></span>
@@ -322,10 +328,10 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     </div>
     <div class="req">
       <div><span class="ask">Termin 15–16.12, na miejscu w firmie</span><p>Dwa dni serwisu po 8 godzin. Dokładne godziny ustalimy w harmonogramie, tak jak w poprzednich latach.</p></div>
-      <div><span class="ask">Grzańce bezalkoholowe do wyboru</span><p>Tak. Proponujemy dwa smaki: porzeczkowy z goździkiem i cynamonem oraz jabłkowo-pomarańczowy z imbirem. Podajemy na gorąco, z plastrem pomarańczy. Można wybrać jeden smak albo oba.</p></div>
-      <div><span class="ask">Ok. 500 kaw, 300 grzańców i 50 herbat</span><p>Kawę, mleko (także roślinne), syropy, herbaty i składniki grzańców przywozimy sami. Wszystko jest wliczone w wycenę.</p></div>
+      <div><span class="ask">Grzańce bezalkoholowe do wyboru</span><p>Tak. Podajemy porcje po 200 ml, na gorąco, w kubkach dwuwarstwowych z pokrywką, które dowozimy sami. W wycenie można wybrać 100, 200 albo 300 porcji.</p></div>
+      <div><span class="ask">Ok. 500 kaw, 300 grzańców i 50 herbat</span><p>Kawę, mleko (także roślinne), syropy, herbaty i grzańce przywozimy sami. Wszystko jest wliczone w wycenę.</p></div>
       <div><span class="ask">Klisza na bar z Państwa projektu</span><p>Wydruk zlecamy po naszej stronie i doliczamy do faktury. Grafikę prosimy przygotować w wymiarze <b>1225 mm szerokości × 1095 mm wysokości</b>. Kliszę wymieniamy na miejscu.</p></div>
-      <div><span class="ask">Kubki po Państwa stronie</span><p>Kubki zapewniają Państwo. Wystarczy, że będą na miejscu przed otwarciem baru.</p></div>
+      <div><span class="ask">Kubki po Państwa stronie</span><p>Kubki do kawy i herbaty zapewniają Państwo. Do grzańców przywozimy własne kubki dwuwarstwowe, bo napój jest gorący.</p></div>
     </div>
   </div>
 </section>
@@ -343,7 +349,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
           <tr><th>Bar</th><td>1 moduł barowy, potrzebne ok. 1,5 × 1,5 m miejsca</td></tr>
           <tr><th>Prąd</th><td>Przyłącze siłowe mile widziane (400 V, 32 A, wtyczka 5-pinowa). Bez niego dajemy radę na gniazdkach 230 V z naszym mniejszym ekspresem.</td></tr>
           <tr><th>Grafika</th><td>klisza 1225 mm szer. × 1095 mm wys., z Państwa projektu</td></tr>
-          <tr><th>Kubki</th><td>po stronie Colours Factory</td></tr>
+          <tr><th>Kubki</th><td>do kawy i herbaty: po stronie Colours Factory; do grzańców: nasze, dwuwarstwowe z pokrywką</td></tr>
           <tr><th>Woda</th><td>przywozimy własną w kanistrach</td></tr>
         </table>
         <p class="note">Prosimy o informację mailem, jakie przyłącze będzie dostępne. Dopasujemy do niego ekspres.</p>
@@ -473,16 +479,19 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var BASE = [
     {id:'svc',  what:'Obsługa baristyczna, 2 dni', why:'2 baristów × 8 h dziennie, ekspres kolbowy, młynek i moduł barowy', amt:5145},
     {id:'cof',  what:'Kawa i herbata', why:'ok. 500 kaw i 50 herbat: ziarno, mleko krowie i roślinne, syropy, herbaty', amt:1030},
-    {id:'mull', what:'Grzańce bezalkoholowe', why:'ok. 300 porcji, do wyboru porzeczkowy i jabłkowo-pomarańczowy, podawane na gorąco', amt:1200},
+    {id:'mull', what:'Grzańce bezalkoholowe', why:'', amt:0},
     {id:'trip', what:'Dojazd i nocleg', why:'Poznań – Piła – Poznań, nocleg ekipy między dniami', amt:580},
     {id:'print',what:'Druk kliszy z Państwa projektu', why:'1225 × 1095 mm, doliczamy do faktury według kosztu druku', amt:null}
   ];
   var TICKS = ['Espresso, cappuccino, latte','Grzańce bez alkoholu','Dwa dni, ta sama jakość','Klisza z Państwa grafiką'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
-  var state = {cocktails:false};
+  var state = {cocktails:false, mull:300};
+  var MULL100 = 800;
 
   function render(){
+    var m = BASE.filter(function(i){return i.id==='mull'})[0]; m.amt = MULL100*state.mull/100; m.why = state.mull+' porcji po 200 ml, podawane na gorąco w kubkach dwuwarstwowych z pokrywką, żeby kubek nie parzył w dłonie';
+    document.querySelectorAll('[data-mull]').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.mull===state.mull)); });
     var total = BASE.reduce(function(s,i){return s+(i.amt||0)},0);
     var ul = $('lines'); ul.innerHTML='';
     BASE.forEach(function(i){
@@ -495,9 +504,10 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('sum').textContent = fmt(total);
     $('peek').innerHTML = fmt(total) + '<small>netto</small>';
     $('variant-name').textContent = 'Coffee bar · 2 dni' + (state.cocktails ? ' + pytanie o koktajle' : '');
-    $('choice-text').textContent = 'coffee bar 15–16.12, 2 baristów, ok. 500 kaw, 300 grzańców, 50 herbat, ' + fmt(total) + ' netto' + (state.cocktails ? ', prosimy też o wycenę koktajli' : '');
+    $('choice-text').textContent = 'coffee bar 15–16.12, 2 baristów, ok. 500 kaw, '+state.mull+' grzańców, 50 herbat, ' + fmt(total) + ' netto' + (state.cocktails ? ', prosimy też o wycenę koktajli' : '');
   }
   $('cocktails').addEventListener('change', function(e){state.cocktails=e.target.checked; render()});
+  document.querySelectorAll('[data-mull]').forEach(function(b){ b.addEventListener('click', function(){ state.mull=+b.dataset.mull; render(); }); });
   render();
 
   var t=0, el=$('tick'), reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
