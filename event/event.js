@@ -126,6 +126,21 @@
   function bvStart(){ var v = $('bv-film'); if (!v) return; bvPaint('silver'); bvTimer = 1; v.hidden = false; try { v.currentTime = 0; } catch(e){} var p = v.play(); if (p && p.catch) p.catch(function(){}); $('bv-cap').textContent = T[lang].frontFilm; $('bv-play').textContent = T[lang].bvStop; }
   function bvCurrent(){ return state.own ? 'sage' : state.front; }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
+  // Lista dla organizatora: alkohole (butelki) i szkło dla wybranego menu
+  function supply(){
+    var sel = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}), n = sel.length || 1, per = Math.ceil((O.poolN || +O.pool) / n), alc = {}, ord = [], gl = {}, gord = [];
+    sel.forEach(function(d){ (d.alc||[]).forEach(function(a){ if (!alc[a[0]]){ alc[a[0]] = {ml:0, b:a[2]}; ord.push(a[0]); } alc[a[0]].ml += a[1]*per; }); (d.gl||[]).forEach(function(g){ if (!gl[g]){ gl[g] = 1; gord.push(g); } }); });
+    return {per:per, sel:sel, alc:ord.map(function(k){ var x = alc[k]; return [k, Math.ceil(x.ml/1000/x.b - 1e-9), x.b]; }), gl:gord.map(function(g){ return [g, O.guests]; })};
+  }
+  function bLab(b){ return (String(b).replace('.',','))+' l'; }
+  function supplyHtml(){ var S = supply(), L = T[lang];
+    return '<span class="label">'+L.supCock+'</span><ul class="lines">'+S.sel.map(function(d){ return '<li>'+esc(d.n)+' <b>'+S.per+' szt.</b></li>'; }).join('')+'</ul><hr>'
+      +'<span class="label">'+L.supAlc+'</span><ul class="lines">'+S.alc.map(function(a){ return '<li>'+esc(a[0])+' <b>'+a[1]+' × '+bLab(a[2])+'</b></li>'; }).join('')+'</ul><hr>'
+      +'<span class="label">'+L.supGl+'</span><ul class="lines">'+S.gl.map(function(g){ return '<li>'+esc(g[0])+' <b>'+g[1]+' szt.</b></li>'; }).join('')+'</ul><p class="hint">'+L.supHint+'</p>';
+  }
+  function supplyTxt(){ var S = supply(), L = T[lang];
+    return '\n'+L.supAlc+':\n'+S.alc.map(function(a){ return '- '+a[0]+': '+a[1]+' × '+bLab(a[2]); }).join('\n')+'\n'+L.supGl+':\n'+S.gl.map(function(g){ return '- '+g[0]+': '+g[1]+' szt.'; }).join('\n')+'\n';
+  }
   function priceTxt(){ return money(calc().total)+T[lang].net; }
   function summary(){
     var c = calc(), parts = [gLabel(), fill(t('sumPer')), (state.glass ? t('glass') : t('cup'))+(state.waiter && (state.glass || O.waiterIndependent) ? ' + '+t('waiter').toLowerCase() : ''), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
@@ -152,7 +167,8 @@
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="menu">';
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
-    h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p>'+(O.glass==null ? '' : '<div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div>')+'<p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
+    if (O.supply) h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div id="supply"></div></div>';
+    else h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p>'+(O.glass==null ? '' : '<div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div>')+'<p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+L.s3p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name"></p><p class="hint designed">'+L.designed+'</p>';
@@ -193,7 +209,7 @@
     var mc = $('m-count'); mc.className = 'count'+(cnt<MENU_MIN?' bad':'');
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
     if ($('s-cup')){ $('s-cup').setAttribute('aria-pressed', String(!state.glass)); $('s-glass').setAttribute('aria-pressed', String(state.glass)); }
-    $('s-hint').textContent = fill(state.glass ? L.glassHint : L.cupHint); var w = $('waiter'); w.disabled = !state.glass && !O.waiterIndependent; w.checked = (state.glass || !!O.waiterIndependent) && state.waiter;
+    if ($('s-hint')) $('s-hint').textContent = fill(state.glass ? L.glassHint : L.cupHint); var w = $('waiter'); if (w){ w.disabled = !state.glass && !O.waiterIndependent; w.checked = (state.glass || !!O.waiterIndependent) && state.waiter; }
     document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
     $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
     if (!bvTimer) bvPaint(bvCurrent());
@@ -203,9 +219,10 @@
     $('lines').innerHTML = c.lines.map(function(l){ return '<li>'+esc(l[0])+' <b>'+(l[1]===null ? L.lAsk : money(l[1]))+'</b></li>'; }).join('');
     $('incl').innerHTML = L.incl.map(function(s){ return '<li>'+esc(fill(s))+'</li>'; }).join('');
     $('faq').innerHTML = L.faq.map(function(f){ return '<details><summary>'+esc(fill(f[0]))+'</summary><p>'+esc(fill(f[1]))+'</p></details>'; }).join('');
+    if (O.supply) $('supply').innerHTML = supplyHtml();
     var s = summary();
     $('choice').innerHTML = '<strong>'+esc(s.total)+'</strong> · '+esc(s.head)+'<br><span class="label">'+L.menuL+'</span> '+esc(s.menu)+'<br><span class="label">'+L.addL+'</span> '+esc(s.adds);
-    var body = L.mailHi+'\n'+O.date+', '+O.time+', '+O.venue+'\n'+s.head+'\n'+L.menuL+': '+s.menu+'\n'+L.addL+': '+s.adds+'\n'+L.yourPrice+': '+s.total+' '+L.vat+'\n'+L.mailBye;
+    var body = L.mailHi+'\n'+O.date+', '+O.time+', '+O.venue+'\n'+s.head+'\n'+L.menuL+': '+s.menu+'\n'+L.addL+': '+s.adds+'\n'+L.yourPrice+': '+s.total+' '+L.vat+'\n'+(O.supply ? supplyTxt() : '')+L.mailBye;
     $('send').href = 'mailto:biuro@pimpmybar.pl?subject='+encodeURIComponent(t('mailSubj',{d:O.date}))+'&body='+encodeURIComponent(body);
   }
 
@@ -234,7 +251,7 @@
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     if ($('s-cup')) $('s-cup').addEventListener('click', function(){ state.glass = false; render(); });
     if ($('s-glass')) $('s-glass').addEventListener('click', function(){ state.glass = true; render(); once('glass','Wybrał szkło → '+summary().total,'wine_glass',4); });
-    $('waiter').addEventListener('change', function(e){ state.waiter = e.target.checked; render(); if (state.waiter) once('waiter','Dodał obsługę kelnerską → '+summary().total,'heavy_plus_sign',4); });
+    if ($('waiter')) $('waiter').addEventListener('change', function(e){ state.waiter = e.target.checked; render(); if (state.waiter) once('waiter','Dodał obsługę kelnerską → '+summary().total,'heavy_plus_sign',4); });
     var mt; document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
       render(); clearTimeout(mt); mt = setTimeout(function(){ ping('Zmienił menu: '+menuNames().join(', '),'cocktail'); }, 6000);

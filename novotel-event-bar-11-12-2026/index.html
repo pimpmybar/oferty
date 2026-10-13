@@ -39,92 +39,1200 @@ window.OFFER = {
    490
   ]
  ],
- "glass": null,
- "waiter": 699,
- "waiterIndependent": true,
  "menuMin": 5,
  "menuMax": 5,
  "drinks": [
   {
-   "id": "wsr",
+   "id": "whiskysour",
    "n": "Whisky Sour",
    "d": 1,
-   "pl": "whisky, cytryna, syrop cukrowy, angostura",
+   "pl": "Whisky, cytryna, syrop cukrowy, Angostura Bitters",
    "t": {
-    "pl": "klasyczny, kwaśno-słodki"
-   }
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Whisky",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
   },
   {
-   "id": "psm",
-   "n": "Porn Star Martini",
+   "id": "pornstarma",
+   "n": "Pornstar Martini",
    "d": 1,
-   "pl": "wódka waniliowa, marakuja, cytryna, prosecco",
+   "pl": "Wódka, wanilia, marakuja, cytryna, Prosecco",
    "t": {
-    "pl": "owocowy, z bąbelkami"
-   }
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka waniliowa",
+     40.0,
+     0.7
+    ],
+    [
+     "Prosecco",
+     40.0,
+     0.75
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)",
+    "Shot (kieliszek do wódki)"
+   ]
   },
   {
-   "id": "ape",
+   "id": "aperolspri",
    "n": "Aperol Spritz",
    "d": 1,
-   "pl": "Aperol, prosecco, woda gazowana, pomarańcza",
+   "pl": "Aperol, Prosecco, woda gazowana, pomarańcza",
    "t": {
-    "pl": "gorzko-pomarańczowy, lekki"
-   }
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Aperol",
+     40.0,
+     0.7
+    ],
+    [
+     "Prosecco",
+     80.0,
+     0.75
+    ]
+   ],
+   "gl": [
+    "Kieliszek do wina"
+   ]
   },
   {
-   "id": "moj",
-   "n": "Mojito (także 0%)",
+   "id": "mojito",
+   "n": "Mojito",
    "d": 1,
-   "pl": "rum, mięta, limonka, cukier trzcinowy, woda gazowana",
+   "pl": "Rum, mięta, limonka, syrop cukrowy, woda gazowana",
    "t": {
-    "pl": "orzeźwiający, miętowy"
-   }
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum biały",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
   },
   {
-   "id": "man",
-   "n": "Mangolita (także 0%)",
+   "id": "mangolita",
+   "n": "Mangolita",
    "d": 1,
-   "pl": "wódka, puree z mango, marakuja, limonka",
+   "pl": "Wódka, puree z mango, marakuja, limonka",
    "t": {
-    "pl": "tropikalny, słodki"
-   }
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
   },
   {
-   "id": "red",
-   "n": "Red Lady (także 0%)",
+   "id": "negroni",
+   "n": "Negroni",
    "d": 0,
-   "pl": "wódka, puree truskawkowe, marakuja, limonka",
+   "pl": "Gin, Martini Rosso, Campari",
    "t": {
-    "pl": "owocowy, słodko-kwaśny"
-   }
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     30.0,
+     0.7
+    ],
+    [
+     "Campari",
+     30.0,
+     0.7
+    ],
+    [
+     "Martini Rosso",
+     30.0,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
   },
   {
-   "id": "hug",
+   "id": "gintonic",
+   "n": "Gin & Tonic",
+   "d": 0,
+   "pl": "Gin, tonik, limonka",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "bramble",
+   "n": "Bramble",
+   "d": 0,
+   "pl": "Gin, jeżyna, cytryna, syrop cukrowy",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ],
+    [
+     "Likier jeżynowy",
+     15.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "ginbasilsm",
+   "n": "Gin Basil Smash",
+   "d": 0,
+   "pl": "Gin, bazylia, cytryna, syrop cukrowy",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "gimlet",
+   "n": "Gimlet",
+   "d": 0,
+   "pl": "Gin, limonka, syrop cukrowy",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "whitelady",
+   "n": "White Lady",
+   "d": 0,
+   "pl": "Gin, Triple Sec, limonka, syrop cukrowy",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ],
+    [
+     "Triple Sec",
+     20.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "martinez",
+   "n": "Martinez",
+   "d": 0,
+   "pl": "Gin, Martini Rosso, Extra Dry, Maraschino, Angostura",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ],
+    [
+     "Martini Rosso",
+     10.0,
+     1.0
+    ],
+    [
+     "Martini Extra Dry",
+     10.0,
+     1.0
+    ],
+    [
+     "Luxardo Maraschino",
+     10.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "pinkginton",
+   "n": "Pink Gin Tonic",
+   "d": 0,
+   "pl": "Gin, grejpfrut, tonik, Angostura",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "cloverclub",
+   "n": "Clover Club",
+   "d": 0,
+   "pl": "Gin, malina, cytryna, Extra Dry",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ],
+    [
+     "Martini Extra Dry",
+     7.5,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "granddesig",
+   "n": "Grand Designs",
+   "d": 0,
+   "pl": "Gin, likier z kwiatu bzu, Extra Dry, ananas, rozmaryn",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ],
+    [
+     "Likier z kwiatu bzu",
+     20.0,
+     0.7
+    ],
+    [
+     "Martini Extra Dry",
+     7.5,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "parmanegro",
+   "n": "Parma Negroni",
+   "d": 0,
+   "pl": "Gin, Campari, grejpfrut, tonik, Angostura Bitters",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     30.0,
+     0.7
+    ],
+    [
+     "Campari",
+     30.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "junipereld",
+   "n": "Juniper & Elderflower Sour",
+   "d": 0,
+   "pl": "Gin, cytryna, syrop z kwiatu bzu",
+   "t": {
+    "pl": "gin"
+   },
+   "alc": [
+    [
+     "Gin",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "hugo",
    "n": "Hugo",
    "d": 0,
-   "pl": "prosecco, syrop z kwiatu bzu, mięta, limonka",
+   "pl": "Prosecco, limonka, syrop z kwiatu bzu, mięta, woda gazowana",
    "t": {
-    "pl": "lekki, kwiatowy"
-   }
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Prosecco",
+     80.0,
+     0.75
+    ]
+   ],
+   "gl": [
+    "Kieliszek do wina"
+   ]
   },
   {
-   "id": "cub",
-   "n": "Cuba Libre",
+   "id": "bellini",
+   "n": "Bellini",
    "d": 0,
-   "pl": "rum, cola, limonka",
+   "pl": "Prosecco, purée brzoskwiniowe",
    "t": {
-    "pl": "prosty, klasyczny"
-   }
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Prosecco",
+     100.0,
+     0.75
+    ]
+   ],
+   "gl": [
+    "Kieliszek do szampana"
+   ]
   },
   {
-   "id": "gt",
-   "n": "Gin Tonic",
+   "id": "paloma",
+   "n": "Paloma",
    "d": 0,
-   "pl": "gin, tonik, limonka",
+   "pl": "Tequila, różowy grejpfrut, limonka, syrop z agawy, woda gazowana",
    "t": {
-    "pl": "wytrawny, orzeźwiający"
-   }
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Tequila",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "margarita",
+   "n": "Margarita",
+   "d": 0,
+   "pl": "Tequila, Triple Sec, limonka, sól",
+   "t": {
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Tequila",
+     40.0,
+     0.7
+    ],
+    [
+     "Triple Sec",
+     20.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "piscosour",
+   "n": "Pisco Sour",
+   "d": 0,
+   "pl": "Pisco, limonka, syrop cukrowy, białko jajka, Bitters",
+   "t": {
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Pisco",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "longisland",
+   "n": "Long Island Ice Tea",
+   "d": 0,
+   "pl": "Wódka, rum, gin, tequila, Triple Sec, cola, cytryna",
+   "t": {
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     20.0,
+     0.7
+    ],
+    [
+     "Rum biały",
+     20.0,
+     0.7
+    ],
+    [
+     "Gin",
+     20.0,
+     0.7
+    ],
+    [
+     "Tequila",
+     20.0,
+     0.7
+    ],
+    [
+     "Triple Sec",
+     10.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "americanoc",
+   "n": "Americano (Campari)",
+   "d": 0,
+   "pl": "Campari, Martini Rosso, woda gazowana",
+   "t": {
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Campari",
+     30.0,
+     0.7
+    ],
+    [
+     "Martini Rosso",
+     30.0,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "pimmscup",
+   "n": "Pimm's Cup",
+   "d": 0,
+   "pl": "Pimm's, lemoniada, ogórek, truskawka, cytrusy",
+   "t": {
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Pimm's No.1",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "caipirinha",
+   "n": "Caipirinha",
+   "d": 0,
+   "pl": "Cachaça, limonka, cukier trzcinowy",
+   "t": {
+    "pl": "klasyka"
+   },
+   "alc": [
+    [
+     "Cachaça",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "daiquiri",
+   "n": "Daiquiri",
+   "d": 0,
+   "pl": "Rum, limonka, syrop cukrowy",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum biały",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "hemingwayd",
+   "n": "Hemingway Daiquiri",
+   "d": 0,
+   "pl": "Rum, likier maraschino, grejpfrut, limonka",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum biały",
+     40.0,
+     0.7
+    ],
+    [
+     "Luxardo Maraschino",
+     10.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "pinacolada",
+   "n": "Pina Colada",
+   "d": 0,
+   "pl": "Rum, mleczko kokosowe, sok ananasowy",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum biały",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Tulip (Pina Colada)"
+   ]
+  },
+  {
+   "id": "darkstormy",
+   "n": "Dark & Stormy",
+   "d": 0,
+   "pl": "Ciemny rum, limonka, syrop, piwo imbirowe, Angostura",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum ciemny",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "hurricane",
+   "n": "Hurricane",
+   "d": 0,
+   "pl": "Rum, ananas, pomarańcza, limonka, marakuja",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum biały",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "planterspu",
+   "n": "Planters Punch",
+   "d": 0,
+   "pl": "Ciemny rum, limonka, syrop, Angostura, woda gazowana",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum ciemny",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "maitai",
+   "n": "Mai Tai",
+   "d": 0,
+   "pl": "Rum jasny i ciemny, likier pomarańczowy, migdał, limonka",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum ciemny",
+     40.0,
+     0.7
+    ],
+    [
+     "Triple Sec",
+     20.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "anythingel",
+   "n": "Anything Else",
+   "d": 0,
+   "pl": "Rum, Campari, limonka, woda miodowa, IPA",
+   "t": {
+    "pl": "rum"
+   },
+   "alc": [
+    [
+     "Rum biały",
+     40.0,
+     0.7
+    ],
+    [
+     "Campari",
+     10.0,
+     0.7
+    ],
+    [
+     "Piwo IPA",
+     30.0,
+     0.5
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "oldfashion",
+   "n": "Old Fashioned",
+   "d": 0,
+   "pl": "Bourbon, cukier trzcinowy, Angostura Bitters, pomarańcza",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "newyorksou",
+   "n": "New York Sour",
+   "d": 0,
+   "pl": "Bourbon, cytryna, limonka, Angostura, czerwone wino",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     40.0,
+     0.7
+    ],
+    [
+     "Czerwone wino",
+     12.0,
+     0.75
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "mintjulep",
+   "n": "Mint Julep",
+   "d": 0,
+   "pl": "Bourbon, syrop cukrowy, mięta, Angostura Bitters",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "boulevardi",
+   "n": "Boulevardier",
+   "d": 0,
+   "pl": "Bourbon, Campari, Martini Rosso",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     40.0,
+     0.7
+    ],
+    [
+     "Campari",
+     30.0,
+     0.7
+    ],
+    [
+     "Martini Rosso",
+     30.0,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "perfectman",
+   "n": "Perfect Manhattan",
+   "d": 0,
+   "pl": "Bourbon, Martini Rosso, Extra Dry, Angostura",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     60.0,
+     0.7
+    ],
+    [
+     "Martini Extra Dry",
+     15.0,
+     1.0
+    ],
+    [
+     "Martini Rosso",
+     15.0,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "breakfasti",
+   "n": "Breakfast in Manhattan",
+   "d": 0,
+   "pl": "Bourbon, Martini Rosso, marmolada pomarańczowa, Angostura",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     40.0,
+     0.7
+    ],
+    [
+     "Martini Rosso",
+     15.0,
+     1.0
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "eclipse",
+   "n": "Eclipse",
+   "d": 0,
+   "pl": "Bourbon, maliny, likier malinowy, limonka, żurawina",
+   "t": {
+    "pl": "whisky / bourbon"
+   },
+   "alc": [
+    [
+     "Bourbon",
+     40.0,
+     0.7
+    ],
+    [
+     "Likier malinowy",
+     20.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "redlady",
+   "n": "Red Lady",
+   "d": 0,
+   "pl": "Wódka, puree truskawkowe, marakuja, limonka, woda gazowana",
+   "t": {
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "kiwideilla",
+   "n": "Kiwi de Illa",
+   "d": 0,
+   "pl": "Wódka, świeże kiwi, limonka",
+   "t": {
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "mangopassi",
+   "n": "Mango Passion",
+   "d": 0,
+   "pl": "Wódka, limonka, syrop cukrowy, purée z mango, woda gazowana",
+   "t": {
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "polishgard",
+   "n": "Polish Garden",
+   "d": 0,
+   "pl": "Wódka, bazylia, cytryna, syrop z bzu, woda gazowana",
+   "t": {
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "chillyspin",
+   "n": "Chilly Spiny",
+   "d": 0,
+   "pl": "Wódka, chilli, limonka, puree z mango",
+   "t": {
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "bloodyoran",
+   "n": "Bloody Orange Sour",
+   "d": 0,
+   "pl": "Wódka, limonka, grejpfrut, syrop krwista pomarańcza",
+   "t": {
+    "pl": "autorski Pimp My Bar"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "espressoma",
+   "n": "Espresso Martini",
+   "d": 0,
+   "pl": "Wódka, espresso, likier kawowy, syrop cukrowy",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ],
+    [
+     "Likier kawowy (Kahlua)",
+     20.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Coupette (kieliszek koktajlowy)"
+   ]
+  },
+  {
+   "id": "vodkasour",
+   "n": "Vodka Sour",
+   "d": 0,
+   "pl": "Wódka, sok z limonki, syrop cukrowy, Angostura Bitters",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "cosmopolit",
+   "n": "Cosmopolitan",
+   "d": 0,
+   "pl": "Wódka, Triple Sec, żurawina, limonka",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ],
+    [
+     "Triple Sec",
+     20.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "caipiroska",
+   "n": "Caipiroska",
+   "d": 0,
+   "pl": "Wódka, świeża limonka, cukier trzcinowy",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "bloodymary",
+   "n": "Bloody Mary",
+   "d": 0,
+   "pl": "Wódka, sok pomidorowy, tabasco, sos Worcestershire, cytryna",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Long (szklanka wysoka)"
+   ]
+  },
+  {
+   "id": "east8holdu",
+   "n": "East 8 Hold Up",
+   "d": 0,
+   "pl": "Wódka, Aperol, marakuja, cytryna, sok z ananasa",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ],
+    [
+     "Aperol",
+     15.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
+  },
+  {
+   "id": "grapefruit",
+   "n": "Grapefruit Julep",
+   "d": 0,
+   "pl": "Wódka, mięta, limonka, grejpfrut, grenadyna, miód",
+   "t": {
+    "pl": "wódka, klasyka"
+   },
+   "alc": [
+    [
+     "Wódka",
+     40.0,
+     0.7
+    ]
+   ],
+   "gl": [
+    "Short (szklanka niska)"
+   ]
   }
  ],
  "validUntil": "27.10.2026",
@@ -144,19 +1252,13 @@ window.OFFER = {
    "c3h": "5 barów, bez kolejek",
    "c3p": "Przy {g} osobach pracujemy na 5 barach z 5 barmanami, więc goście nie czekają na swoją kolej.",
    "s1h": "Menu koktajli",
-  "perPerson": "ok. {b} zł netto na osobę",
-  "cfgH": "Event bar dla Państwa klienta",
-   "cfgP": "Trzy kroki. Wybierają Państwo menu, dodatki i wygląd barów, a na końcu wysyłają nam gotowy wybór.",
-   "s1p": "Menu ma pięć pozycji. Zaznaczyliśmy koktajle, które najczęściej wybierali goście Novotelu. Można je podmienić na inne z listy. Menu nie zmienia ceny obsługi.",
-   "s2h": "Alkohole i dodatki",
-   "s2p": "Alkohole, szkło i obsługę kelnerską zapewnia Novotel, jak przy poprzednich realizacjach. Przed wydarzeniem prześlemy listę butelek do przygotowania dla wybranego menu.",
-   "cup": "alkohole Novotel",
-   "glass": "Alkohole zapewnia Pimp My Bar",
-   "lGlass": "Alkohole (whisky, rum, Aperol, prosecco)",
-   "cupHint": "",
-   "glassHint": "Cena alkoholi dla menu zaznaczonego domyślnie. Niewykorzystane pełne, zamknięte butelki odliczamy od faktury. Przy zmianie menu przeliczymy alkohole.",
-   "waiter": "Keg prosecco 20 l z nalewakiem",
-   "waiterS": "Ok. 166 porcji po 120 ml, z głowicą, CO2 i montażem. Na powitanie albo do toastu.",
+   "perPerson": "ok. {b} zł netto na osobę",
+   "cfgH": "Event bar dla Państwa klienta",
+   "cfgP": "Trzy kroki. Wybierają Państwo menu, sprawdzają listę alkoholi i szkła dla hotelu oraz wygląd barów, a na końcu wysyłają nam gotowy wybór.",
+   "s1p": "Do wyboru pięć koktajli z naszej pełnej karty. Zaznaczyliśmy te, które najczęściej wybierali goście Novotelu. Aby zmienić pozycję, najpierw odznacz jedną z wybranych. Menu nie zmienia ceny.",
+   "s2h": "Lista dla Novotelu: alkohole i szkło",
+  "cup": "alkohole i szkło: Novotel",
+   "s2p": "Alkohole i szkło zapewnia Novotel. Lista poniżej przelicza się na bieżąco po każdej zmianie menu, a po potwierdzeniu trafi też do maila z Państwa wyborem.",
    "s3p": "Front barów wybierają Państwo w cenie: lustro srebrne lub złote albo podświetlana klisza. Dodatki są opcjonalne.",
    "aBrandS": "Logo klienta na podświetlanych frontach. Projekt graficzny po stronie klienta, plik najpóźniej 5 dni roboczych przed realizacją.",
    "aFlairS": "Żonglerka butelkami i shakerami, z udziałem gości.",
@@ -182,7 +1284,7 @@ window.OFFER = {
     ],
     [
      "Co zapewnia hotel?",
-     "Alkohole według listy, którą prześlemy, szkło, obsługę kelnerską, która zbiera i myje szkło na bieżąco, oraz prąd przy barach."
+     "Alkohole i szkło według listy w kroku 2, która przelicza się po każdej zmianie menu, obsługę kelnerską, która zbiera i myje szkło na bieżąco, oraz prąd przy barach."
     ],
     [
      "Czy bary mogą mieć logo klienta?",
@@ -195,11 +1297,17 @@ window.OFFER = {
    ],
    "talkP": "Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Proszę zadzwonić albo napisać: dopasuję bar, menu i liczbę koktajli do wydarzenia Państwa klienta.",
    "mailSubj": "Event bar {d} – Novotel – potwierdzenie",
-   "mailHi": "Dzień dobry,\n\npotwierdzamy zainteresowanie event barem.\n"
+   "mailHi": "Dzień dobry,\n\npotwierdzamy zainteresowanie event barem.\n",
+   "supCock": "Koktajle (1 200 szt. łącznie)",
+   "supAlc": "Alkohole do zapewnienia",
+   "supGl": "Szkło do zapewnienia",
+   "supHint": "Liczba butelek zaokrąglona w górę. Szkła tyle, ile gości, bo obsługa hotelu myje je na bieżąco. Obsługę kelnerską i prąd przy barach zapewnia Novotel."
   }
- }
+ },
+ "supply": true,
+ "poolN": 1200
 };
 </script>
-<script src="../event/event.js?v=5"></script>
+<script src="../event/event.js?v=6"></script>
 </body>
 </html>
