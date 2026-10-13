@@ -9,7 +9,7 @@
     fourth: 12,        // dopłata za osobę przy 4 koktajlach na osobę  (ROBOCZE – do potwierdzenia)
     flair: 2200, branding: 200, tower: 500
   };
-  var MENU_MIN = 3, MENU_MAX = 4;
+  var MENU_MIN = O.menuMin || 3, MENU_MAX = O.menuMax || 4;
   // Podgląd baru: zdjęcie bazowe + klisze nakładane na dwa fronty (bez animacji, twarde cięcie)
   var BV = { base: 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_120125_442f7e44-83e8-40ab-9ea9-6ce94befcf8b.png', 'bar-green': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_125340_a086eced-042e-4f69-8177-964b4b406239.png', 'bar-olive': 'https://d8j0ntlcm91z4.cloudfront.net/user_3ErsnHFAg2T7i8FCPtDde7rCO2i/hf_20261006_121858_4b905690-f3c4-4c1b-b9d6-a5cb45ef529c.png' };
   var KL = ['deski-kolor','deski-jasne','deski-biale','deski-bielone','deski-czarne','paski','kamien','cegla-czarna','drewno','cegla-biala'];
@@ -24,7 +24,7 @@
   var FRONTS = FRONTS_ALL.filter(function(f){ return !f.extra; });
 
   // ── Menu mocktaili (0%) ──
-  var DRINKS = [
+  var DRINKS = O.drinks || [
     {id:"man", n:"Mangolita 0%", d:1, pl:"puree z mango, marakuja, limonka", t:{pl:"tropikalny, słodki"}},
     {id:"red", n:"Red Lady 0%", d:1, pl:"puree truskawkowe, marakuja, limonka", t:{pl:"owocowy, słodko-kwaśny"}},
     {id:"psm", n:"Porn Star Martini 0%", d:1, pl:"wanilia, marakuja, cytryna, prosecco 0%", t:{pl:"owocowy, waniliowy, z bąbelkami"}},
@@ -81,10 +81,12 @@
     foot:'Pimp My Bar · Poznań · pimpmybar.pl', footR:'Ceny netto w PLN. Oferta przygotowana {d}.', menuL:'Menu', addL:'Opcje', none:'brak'
   }};
 
+  // Nadpisania tekstów z danej oferty (O.t.pl) – dowolny klucz z T
+  if (O.t && O.t.pl) for (var tk in O.t.pl) T.pl[tk] = O.t.pl[tk];
   var LANGS = ['pl'], lang = 'pl';
   var E = { bars: O.bars || 3, per: O.perGuest || 3, gMin: O.guestsMin || O.guests, gMax: O.guestsMax || O.guests };
   var state = {
-    menu: DRINKS.map(function(d){return d.id}),
+    menu: (O.drinks ? DRINKS.filter(function(d){return d.d}) : DRINKS).map(function(d){return d.id}),
     front: 'silver', own: false, glass: false, waiter: false,
     add: {flair:false, coffee:false}
   };
@@ -103,7 +105,7 @@
     var lines = [[fill(t('lBar')), O.price]], total = O.price;
     (O.items || []).forEach(function(it){ lines.push([it[0], it[1]]); if (it[1] !== null) total += it[1]; });
     if (state.glass){ lines.push([fill(t('lGlass')), O.glass]); total += O.glass; }
-    if (state.glass && state.waiter){ lines.push([t('waiter'), O.waiter]); total += O.waiter; }
+    if ((state.glass || O.waiterIndependent) && state.waiter){ lines.push([t('waiter'), O.waiter]); total += O.waiter; }
     if (state.own) lines.push([t('aBrand'), null]);
     if (state.add.flair) lines.push([t('aFlair'), null]);
     if (state.add.coffee) lines.push([t('aCoffee'), null]);
@@ -126,7 +128,7 @@
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   function priceTxt(){ return money(calc().total)+T[lang].net; }
   function summary(){
-    var c = calc(), parts = [gLabel(), fill(t('sumPer')), state.glass ? t('glass')+(state.waiter ? ' + '+t('waiter').toLowerCase() : '') : t('cup'), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
+    var c = calc(), parts = [gLabel(), fill(t('sumPer')), (state.glass ? t('glass') : t('cup'))+(state.waiter && (state.glass || O.waiterIndependent) ? ' + '+t('waiter').toLowerCase() : ''), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
     var adds = c.lines.slice(1+(O.items||[]).length).map(function(l){return l[0]+' ('+(l[1]===null ? T[lang].lAsk : money(l[1]))+')'});
     return {head: parts.join(' · '), menu: menuNames().join(', '), adds: adds.length ? adds.join(', ') : t('none'), total: priceTxt()};
   }
@@ -191,7 +193,7 @@
     var mc = $('m-count'); mc.className = 'count'+(cnt<MENU_MIN?' bad':'');
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
     $('s-cup').setAttribute('aria-pressed', String(!state.glass)); $('s-glass').setAttribute('aria-pressed', String(state.glass));
-    $('s-hint').textContent = fill(state.glass ? L.glassHint : L.cupHint); var w = $('waiter'); w.disabled = !state.glass; w.checked = state.glass && state.waiter;
+    $('s-hint').textContent = fill(state.glass ? L.glassHint : L.cupHint); var w = $('waiter'); w.disabled = !state.glass && !O.waiterIndependent; w.checked = (state.glass || !!O.waiterIndependent) && state.waiter;
     document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
     $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
     if (!bvTimer) bvPaint(bvCurrent());
