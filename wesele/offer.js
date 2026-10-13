@@ -81,7 +81,7 @@
     yes:'Tak, będzie', no:'Nie, wszystko z baru',
     more:'Chcemy 4 koktajle na osobę', moreS:'Większa pula na całe wesele, bez obaw, że zabraknie przed północą.',
     forced:'Bez wódki na stołach liczymy 4 koktajle na osobę.',
-    s3:'Krok 3', s3h:'Wybierzcie menu', s3p:'Od {min} do {max} koktajli. Zaznaczyliśmy zestaw, który najczęściej wybierają pary. Menu nie zmienia ceny.',
+    s3:'Krok 3', s3h:'Wybierzcie menu', s3p:'Ułożyliśmy dla Was zestaw, który pary wybierają najczęściej. Możecie go dowolnie zmienić – od {min} do {max} koktajli z naszej karty. Menu nie zmienia ceny.', propH:'Nasza propozycja', propEdit:'Ułóżcie własne menu', propDone:'Gotowe, pokaż moje menu',
     zero:'też 0%', picked:'Wybrane: {n} z {max}', pickMore:'Wybrane: {n}. Dobierzcie jeszcze {k}, żeby było minimum {min}.',
     s4:'Krok 4', s4h:'Front baru i dodatki', s4p:'Front wybieracie w cenie: lustro srebrne lub złote, panel pomalowany na Wasz kolor albo podświetlana klisza. Dodatki są opcjonalne.',
     frontFilm:'Ten sam bar, różne fronty. Wizualizacja.', bvPlay:'▶ Pokaż wszystkie fronty', bvStop:'■ Zatrzymaj', c_black:'Czarny mat', c_sage:'Zielony', c_navy:'Granat', c_blush:'Pudrowy róż', barGreen:'Bar zielony z kasetonami, 2 m', barOlive:'Bar oliwkowy, 3 m', own:'Własna grafika', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', fColor:'Panel w Waszym kolorze',
@@ -134,7 +134,7 @@
     yes:'Yes', no:'No, bar only',
     more:'We want 4 cocktails per guest', moreS:'A bigger pool for the whole wedding, so the bar never runs short before midnight.',
     forced:'Without vodka on the tables we plan 4 cocktails per guest.',
-    s3:'Step 3', s3h:'Choose your menu', s3p:'Between {min} and {max} cocktails. We have ticked the set couples choose most often. The menu does not change the price.',
+    s3:'Step 3', s3h:'Choose your menu', s3p:'We have put together the set couples choose most often. Change it as you like – between {min} and {max} cocktails from our list. The menu does not change the price.', propH:'Our suggestion', propEdit:'Build your own menu', propDone:'Done, show my menu',
     zero:'also 0%', picked:'Selected: {n} of {max}', pickMore:'Selected: {n}. Add {k} more to reach the minimum of {min}.',
     s4:'Step 4', s4h:'Bar front and extras', s4p:'The bar front is included: silver or gold mirror, a panel painted in your colour, or a backlit print. Extras are optional.',
     frontFilm:'The same bar with different fronts. Visualisation.', bvPlay:'▶ Show all fronts', bvStop:'■ Stop', c_black:'Matte black', c_sage:'Green', c_navy:'Navy', c_blush:'Blush pink', barGreen:'Green panelled bar, 2 m', barOlive:'Olive bar, 3 m', own:'Own artwork', frontN:'Print {n}', fSilver:'Silver mirror', fGold:'Gold mirror', fColor:'Panel in your colour',
@@ -187,7 +187,7 @@
     yes:'Ja', no:'Nein, nur Bar',
     more:'Wir möchten 4 Cocktails pro Gast', moreS:'Ein größeres Kontingent für die ganze Feier, damit vor Mitternacht nichts ausgeht.',
     forced:'Ohne Wodka auf den Tischen planen wir 4 Cocktails pro Gast.',
-    s3:'Schritt 3', s3h:'Wählt eure Karte', s3p:'Zwischen {min} und {max} Cocktails. Vorausgewählt ist die Auswahl, die Paare am häufigsten nehmen. Die Karte ändert den Preis nicht.',
+    s3:'Schritt 3', s3h:'Wählt eure Karte', s3p:'Wir haben die Auswahl zusammengestellt, die Paare am häufigsten nehmen. Ändert sie nach Belieben – zwischen {min} und {max} Cocktails aus unserer Karte. Die Karte ändert den Preis nicht.', propH:'Unser Vorschlag', propEdit:'Stellt eure eigene Karte zusammen', propDone:'Fertig, meine Karte zeigen',
     zero:'auch 0%', picked:'Ausgewählt: {n} von {max}', pickMore:'Ausgewählt: {n}. Wählt noch {k} dazu, das Minimum sind {min}.',
     s4:'Schritt 4', s4h:'Barfront und Extras', s4p:'Die Barfront ist im Preis enthalten: Silber- oder Goldspiegel, ein Paneel in eurer Farbe oder ein beleuchtetes Motiv. Extras sind optional.',
     frontFilm:'Dieselbe Bar mit verschiedenen Fronten. Visualisierung.', bvPlay:'▶ Alle Fronten zeigen', bvStop:'■ Stopp', c_black:'Schwarz matt', c_sage:'Grün', c_navy:'Marineblau', c_blush:'Puderrosa', barGreen:'Grüne Kassettenbar, 2 m', barOlive:'Olivgrüne Bar, 3 m', own:'Eigene Grafik', frontN:'Motiv {n}', fSilver:'Silberspiegel', fGold:'Goldspiegel', fColor:'Paneel in eurer Farbe',
@@ -237,7 +237,7 @@
   var state = {
     guests: O.guests, vodka: O.vodka === false ? false : true, more: false,
     menu: O.menuDefault ? O.menuDefault.slice() : DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}),
-    front: 'silver', own: false,
+    front: 'silver', own: false, menuOpen: false,
     add: {flair:false, tower:false, welcome:false, coffee:false}
   };
 
@@ -308,10 +308,10 @@
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="guests"><output id="g-out" for="g"></output><input type="range" id="g" min="'+GR[0]+'" max="'+GR[1]+'" step="'+GR[2]+'" aria-label="'+esc(L.s1h)+'"></div><p class="hint" id="g-hint"></p></div>';
     h += '<div class="block"'+(O.noVodkaStep?' style="display:none"':'')+'><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div class="seg" role="group"><button type="button" id="v-yes">'+L.yes+'</button><button type="button" id="v-no">'+L.no+'</button></div>';
     h += '<label class="addon" for="more"><input type="checkbox" id="more"><span><strong>'+L.more+'</strong><small id="more-s"></small></span><b id="more-p"></b></label></div>';
-    h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+t('s3p',{min:MENU_MIN,max:MENU_MAX})+'</p><div class="menu">';
+    h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+t('s3p',{min:MENU_MIN,max:MENU_MAX})+'</p><div class="proposal" id="prop"><p class="mcat">'+L.propH+'</p><ol id="prop-list"></ol></div><div id="menu-wrap" hidden><div class="menu">';
     var lastC = '';
     DRINKS.forEach(function(d){ if (d.c !== lastC){ lastC = d.c; h += '<p class="mcat">'+esc(L.cats[d.c])+'</p>'; } h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+(d.z?'<span class="zero">'+L.zero+'</span>':'')+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; });
-    h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
+    h += '</div><p class="count" id="m-count" aria-live="polite"></p></div><button type="button" class="btn ghost" id="prop-edit"></button></div>';
     h += '<div class="block"><span class="step">'+L.s4+'</span><h3>'+L.s4h+'</h3><p>'+L.s4p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+(f.extra ? ' <b>+ '+money(f.extra)+'</b>' : '')+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name">';
@@ -361,6 +361,8 @@
     $('more-p').textContent = '+ '+money(PRICE.fourth*g);
     var cnt = state.menu.length;
     document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=MENU_MAX; });
+    $('menu-wrap').hidden = !state.menuOpen; $('prop').hidden = state.menuOpen; $('prop-edit').textContent = state.menuOpen ? L.propDone : L.propEdit;
+    $('prop-list').innerHTML = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){ return '<li><strong>'+esc(d.n)+(d.z?'<span class="zero">'+L.zero+'</span>':'')+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></li>'; }).join('');
     var mc = $('m-count'); mc.className = 'count'+(cnt<MENU_MIN?' bad':'');
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
     document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
@@ -403,6 +405,7 @@
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ lang = b.dataset.lang; try{localStorage.setItem('pmb_lang_'+O.id, lang)}catch(e){} once('lang'+lang,'Zmienił język na '+lang.toUpperCase(),'globe_with_meridians'); build(); }); });
     var gt; $('g').addEventListener('input', function(e){ state.guests = +e.target.value; render(); clearTimeout(gt); gt = setTimeout(function(){ ping('Ustawił liczbę gości: '+state.guests+' → '+summary().total,'busts_in_silhouette'); }, 2500); });
+    $('prop-edit').addEventListener('click', function(){ if (state.menuOpen && state.menu.length<MENU_MIN) { $('m-count').scrollIntoView({behavior:'smooth',block:'center'}); return; } state.menuOpen = !state.menuOpen; render(); if (state.menuOpen) once('menu','Rozwinął pełną kartę koktajli','cocktail'); else $('prop').scrollIntoView({behavior:'smooth',block:'center'}); });
     $('v-yes').addEventListener('click', function(){ state.vodka = true; render(); });
     $('v-no').addEventListener('click', function(){ state.vodka = false; render(); once('vodka','Bez wódki na stołach (4 koktajle/os.) → '+summary().total,'cocktail'); });
     $('more').addEventListener('change', function(e){ state.more = e.target.checked; render(); if (state.more) once('more','Zaznaczył 4 koktajle na osobę → '+summary().total,'cocktail'); });
