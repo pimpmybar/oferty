@@ -152,7 +152,7 @@
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="menu">';
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; });
     h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
-    h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div><p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
+    h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p>'+(O.glass==null ? '' : '<div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div>')+'<p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+L.s3p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name"></p><p class="hint designed">'+L.designed+'</p>';
@@ -192,7 +192,7 @@
     document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=MENU_MAX; });
     var mc = $('m-count'); mc.className = 'count'+(cnt<MENU_MIN?' bad':'');
     mc.textContent = cnt<MENU_MIN ? t('pickMore',{n:cnt,k:MENU_MIN-cnt,min:MENU_MIN}) : t('picked',{n:cnt,max:MENU_MAX});
-    $('s-cup').setAttribute('aria-pressed', String(!state.glass)); $('s-glass').setAttribute('aria-pressed', String(state.glass));
+    if ($('s-cup')){ $('s-cup').setAttribute('aria-pressed', String(!state.glass)); $('s-glass').setAttribute('aria-pressed', String(state.glass)); }
     $('s-hint').textContent = fill(state.glass ? L.glassHint : L.cupHint); var w = $('waiter'); w.disabled = !state.glass && !O.waiterIndependent; w.checked = (state.glass || !!O.waiterIndependent) && state.waiter;
     document.querySelectorAll('[data-front]').forEach(function(b){ b.setAttribute('aria-pressed', String(!state.own && b.dataset.front===state.front)); });
     $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
@@ -232,8 +232,8 @@
     })();
     SEQ.forEach(function(k){ var i = new Image(); if (/^k\d+$/.test(k)){ i.src = klUrl(k,'l'); new Image().src = klUrl(k,'r'); } else i.src = BV[k] || BV.base; });
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
-        $('s-cup').addEventListener('click', function(){ state.glass = false; render(); });
-    $('s-glass').addEventListener('click', function(){ state.glass = true; render(); once('glass','Wybrał szkło → '+summary().total,'wine_glass',4); });
+    if ($('s-cup')) $('s-cup').addEventListener('click', function(){ state.glass = false; render(); });
+    if ($('s-glass')) $('s-glass').addEventListener('click', function(){ state.glass = true; render(); once('glass','Wybrał szkło → '+summary().total,'wine_glass',4); });
     $('waiter').addEventListener('change', function(e){ state.waiter = e.target.checked; render(); if (state.waiter) once('waiter','Dodał obsługę kelnerską → '+summary().total,'heavy_plus_sign',4); });
     var mt; document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){
       var k = state.menu.indexOf(i.dataset.drink); if (i.checked && k<0) state.menu.push(i.dataset.drink); if (!i.checked && k>-1) state.menu.splice(k,1);
