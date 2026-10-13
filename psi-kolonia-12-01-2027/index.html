@@ -289,7 +289,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <div><dt>Na start</dt><dd>600 kaw + 300 Aperoli</dd></div>
       </dl>
       <div class="price-peek">
-        <div class="big num" id="peek">14 450 zł<small>netto</small></div>
+        <div class="big num" id="peek">14 870 zł<small>netto</small></div>
         <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
       </div>
     </div>
@@ -321,14 +321,14 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
           <div class="q">
             <div class="q-top"><label for="r-aperol">Aperol Spritz</label><output id="o-aperol" for="r-aperol">300 szt.</output></div>
             <div class="q-row"><button type="button" data-step="-1" data-for="r-aperol" aria-label="Mniej Aperoli">−</button><input type="range" id="r-aperol" min="0" max="600" step="100" value="300"><button type="button" data-step="1" data-for="r-aperol" aria-label="Więcej Aperoli">+</button></div>
-            <small id="h-aperol">100 dziennie · każde 100 szt. to 1 200 zł netto</small>
+            <small id="h-aperol">100 dziennie · każde 100 szt. to 1 250 zł netto</small>
           </div>
         </div>
         <p class="note">Jeśli Aperol ma być tylko 13 stycznia od 16:00, wystarczy zjechać suwakiem do 100 sztuk.</p>
       </div>
       <aside class="total" aria-live="polite">
         <span class="label" id="variant-name">600 kaw + 300 Aperoli</span>
-        <div class="sum" id="sum">14 450 zł</div>
+        <div class="sum" id="sum">14 870 zł</div>
         <span class="sub">netto, do ceny doliczamy VAT</span>
         <hr>
         <ul class="terms">
@@ -449,7 +449,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     </div>
     <div class="faq">
       <details><summary>Czy jedna osoba poradzi sobie z kawą i Aperolem?</summary><p>Tak, przy ok. 200 kawach i 100 Aperolach dziennie. Warunek jest jeden: kawa i bar stoją obok siebie, dlatego proponujemy połączyć stanowiska. Jeśli spodziewają się Państwo dużo większego ruchu, dopiszemy drugą osobę.</p></details>
-      <details><summary>Co, jeśli kawy albo Aperoli zabraknie?</summary><p>Zapas przywozimy z naddatkiem. Jeśli w trakcie targów wyjdzie więcej, niż Państwo zamówili, rozliczamy różnicę według tych samych stawek: 200 zł za każde 100 kaw i 1 200 zł za każde 100 Aperoli.</p></details>
+      <details><summary>Co, jeśli kawy albo Aperoli zabraknie?</summary><p>Zapas przywozimy z naddatkiem. Jeśli w trakcie targów wyjdzie więcej, niż Państwo zamówili, rozliczamy różnicę według tych samych stawek: 200 zł za każde 100 kaw i 1 250 zł za każde 100 Aperoli.</p></details>
       <details><summary>Czy możemy zmienić liczbę kaw po akceptacji?</summary><p>Tak, do tygodnia przed targami. Kubki z nadrukiem zamawiamy wcześniej, dlatego ich cena jest stała.</p></details>
       <details><summary>A jeśli ekspres zawiedzie?</summary><p>Mamy własny park maszyn. W samochodzie wieziemy zapasowy młynek i części, więc awaria nie zatrzyma serwisu.</p></details>
       <details><summary>Jak wygląda rozliczenie?</summary><p>Zaliczka przy potwierdzeniu, reszta przelewem po targach na podstawie faktury. Dojazd i nocleg są w cenie, bez rozliczania paragonów.</p></details>
@@ -463,7 +463,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div style="display:flex;flex-direction:column;gap:14px">
         <h2>Rezerwujemy termin</h2>
         <p>Proszę odpisać na maila z wybraną wersją albo zadzwonić. Wysyłamy wtedy umowę i fakturę zaliczkową, a po zaksięgowaniu termin jest Państwa.</p>
-        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">600 kaw + 300 Aperoli, 14 450 zł netto</span></p>
+        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">600 kaw + 300 Aperoli, 14 870 zł netto</span></p>
       </div>
       <div class="contact">
         <div class="crow"><span>Tomasz Malinowski</span></div>
@@ -485,12 +485,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var BASE = [
     {id:'svc',  what:'Obsługa: barista-barman', why:'1 osoba × 3 dni targowe 8:00–19:00, kawa i koktajle, z kalibracją i sprzątaniem stanowiska', amt:4800},
     {id:'kit',  what:'Stanowisko kawowe', why:'ekspres dwugrupowy, młynek, akcesoria i filtr wody; przywozimy naszym autem', amt:1200},
-    {id:'trip', what:'Dojazd Poznań – Kolonia – Poznań', why:'ok. 1 700 km: czas przejazdu, paliwo i opłaty drogowe', amt:1770},
+    {id:'trip', what:'Dojazd Poznań – Kolonia – Poznań', why:'ok. 1 700 km: czas przejazdu, paliwo i opłaty drogowe', amt:2040},
     {id:'hotel',what:'Nocleg 11–14.01', why:'3 noce', amt:1200},
     {id:'cups', what:'Kubki z nadrukiem', why:'do kawy i do drinków', amt:680}
   ];
   // ── Pozycje z suwaków: cena za każde 100 szt. ──
-  var COFFEE_100 = 200, APEROL_100 = 1200, DAYS = 3;
+  var COFFEE_100 = 200, APEROL_100 = 1250, DAYS = 3;
   var TICKS = ['Kalibracja przed otwarciem hali','Kawa od 8:00','Aperol Spritz od 16:00','Jedna osoba, dwa stanowiska','Kubki z nadrukiem'];
 
   var $ = function(id){return document.getElementById(id)};
