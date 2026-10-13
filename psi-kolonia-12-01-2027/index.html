@@ -307,7 +307,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Obsługa, sprzęt, dojazd, nocleg i kubki są stałe. Liczbę kaw i Aperoli ustawiają Państwo sami suwakami, a cena przelicza się od razu.</p>
+      <p>Obsługa, bar ze sprzętem, dojazd, nocleg i kubki są stałe. Liczbę kaw i Aperoli ustawiają Państwo sami suwakami, a cena przelicza się od razu.</p>
     </div>
     <div class="pricing">
       <div>
@@ -324,6 +324,10 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-aperol">100 dziennie · każde 100 szt. to 1 250 zł netto</small>
           </div>
         </div>
+        <label class="addon" for="brand">
+          <input type="checkbox" id="brand">
+          <span><strong>Branding modułu barowego, + 200 zł</strong><small>Front baru 125 cm z Państwa logo lub grafiką.</small></span>
+        </label>
         <p class="note">Jeśli Aperol ma być tylko 13 stycznia od 16:00, wystarczy zjechać suwakiem do 100 sztuk.</p>
       </div>
       <aside class="total" aria-live="polite">
@@ -353,6 +357,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <span class="label">Po naszej stronie</span>
         <ul>
           <li><span><b>Barista-barman</b> na trzy dni targowe, od rozstawienia do sprzątania stanowiska</span></li>
+          <li><span><b>Moduł barowy 125 cm</b> z możliwością brandingu frontu (+ 200 zł)</span></li>
           <li><span><b>Stanowisko kawowe:</b> ekspres dwugrupowy, młynek, dzbanki, wagi, filtr wody</span></li>
           <li><span><b>Kawa specialty, mleko</b> krowie i roślinne</span></li>
           <li><span><b>Kubki z nadrukiem</b> do kawy i do drinków</span></li>
@@ -365,12 +370,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <ul>
           <li><span><b>Prąd:</b> 2 gniazda 230 V na osobnych obwodach 16 A, jedno na ekspres i jedno na młynek</span></li>
           <li><span><b>Woda:</b> przyłącze 3/8" i odpływ przy ekspresie. Bez przyłącza pracujemy na kanistrach z pompą</span></li>
-          <li><span><b>Blat:</b> ok. 55 × 55 cm na ekspres, 25 × 40 cm na młynek i ok. 1 m na Aperol</span></li>
+          <li><span><b>Miejsce:</b> ok. 125 × 60 cm podłogi na nasz moduł barowy i przejście za nim dla barmana</span></li>
           <li><span><b>Identyfikator wystawcy</b> dla jednej osoby i wjazd na rozładunek 11 stycznia</span></li>
         </ul>
       </div>
     </div>
-    <p class="note" style="margin-top:18px"><strong>Sugestia do projektu stoiska:</strong> przy jednej osobie proponujemy połączyć oba stanowiska przy stole nr 12, frontem do gości. Kawa i Aperol są wtedy w jednym miejscu, a schowek zostaje zapleczem na zapas mleka, kubków i lodu.</p>
+    <p class="note" style="margin-top:18px"><strong>Sugestia do projektu stoiska:</strong> przy jednej osobie proponujemy postawić nasz moduł barowy 125 cm w miejscu stołu nr 12, frontem do gości. Kawa i Aperol są wtedy na jednym barze, a schowek zostaje zapleczem na zapas mleka, kubków i lodu.</p>
   </div>
 </section>
 
@@ -484,7 +489,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   // ── Pozycje stałe (PLN netto) ──
   var BASE = [
     {id:'svc',  what:'Obsługa: barista-barman', why:'1 osoba × 3 dni targowe 8:00–19:00, kawa i koktajle, z kalibracją i sprzątaniem stanowiska', amt:4800},
-    {id:'kit',  what:'Stanowisko kawowe', why:'ekspres dwugrupowy, młynek, akcesoria i filtr wody; przywozimy naszym autem', amt:1200},
+    {id:'kit',  what:'Moduł barowy 125 cm i stanowisko kawowe', why:'nasz bar o długości 125 cm, ekspres dwugrupowy, młynek, akcesoria i filtr wody; przywozimy naszym autem', amt:1200},
     {id:'trip', what:'Dojazd Poznań – Kolonia – Poznań', why:'ok. 1 700 km: czas przejazdu, paliwo i opłaty drogowe', amt:2040},
     {id:'hotel',what:'Nocleg 11–14.01', why:'3 noce', amt:1200},
     {id:'cups', what:'Kubki z nadrukiem', why:'do kawy i do drinków', amt:680}
@@ -502,6 +507,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var items = BASE.slice();
     items.push({id:'coffee', what:'Kawa specialty, ' + c + ' szt.', why:'ziarno z palarni specialty, mleko krowie i roślinne', amt:c/100*COFFEE_100});
     if (a > 0) items.push({id:'aperol', what:'Aperol Spritz, ' + a + ' szt.', why:'Aperol, prosecco, woda gazowana, pomarańcze i lód', amt:a/100*APEROL_100});
+    if ($('brand').checked) items.push({id:'brand', what:'Branding modułu barowego', why:'front baru 125 cm z Państwa logo lub grafiką', amt:200});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
     items.forEach(function(i){
@@ -510,7 +516,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why;
       ul.appendChild(li);
     });
-    var name = c + ' kaw' + (a > 0 ? ' + ' + a + ' Aperoli' : ', bez Aperola');
+    var name = c + ' kaw' + (a > 0 ? ' + ' + a + ' Aperoli' : ', bez Aperola') + ($('brand').checked ? ' + branding baru' : '');
     $('o-coffee').textContent = c + ' kaw';
     $('o-aperol').textContent = a > 0 ? a + ' szt.' : 'bez Aperola';
     $('h-coffee').textContent = 'ok. ' + Math.round(c/DAYS) + ' dziennie · każde 100 kaw to ' + fmt(COFFEE_100) + ' netto';
@@ -521,6 +527,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('choice-text').textContent = name + ', ' + fmt(total) + ' netto';
   }
   [rc, ra].forEach(function(r){ r.addEventListener('input', render); });
+  $('brand').addEventListener('change', render);
   document.querySelectorAll('.q-row button').forEach(function(b){
     b.addEventListener('click', function(){
       var r = $(b.dataset.for), v = +r.value + (+b.dataset.step) * (+r.step);
@@ -576,6 +583,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var r=document.getElementById(s[0]), tm;
     r.addEventListener('change',function(){ clearTimeout(tm); tm=setTimeout(function(){ var t=document.getElementById('sum'); ping(s[1]+r.value+s[2]+' (razem '+(t?t.textContent:'')+')',s[3]); },2500); });
   });
+  var br=document.getElementById('brand'); if(br) br.addEventListener('change',function(){ if(br.checked) once('brand','Zaznaczył branding baru (+200)','art'); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Akceptuję” → '+(t?t.textContent:''),'white_check_mark',5); }); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')','telephone_receiver',5); }); });
   document.querySelectorAll('a[href*="instagram.com"]').forEach(function(a){ a.addEventListener('click',function(){ once('ig'+a.href,'Otworzył film z realizacji','movie_camera'); }); });
