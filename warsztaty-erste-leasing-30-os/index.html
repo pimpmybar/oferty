@@ -432,9 +432,9 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div class="col you">
         <span class="label">Po Państwa stronie</span>
         <ul>
-          <li><span><b>Miejsce:</b> warsztaty prowadzimy u Państwa w biurze albo w sali lub restauracji, którą Państwo wybiorą. Chętnie podpowiemy sprawdzone miejsca w Poznaniu</span></li>
-          <li><span><b>Stoły:</b> 3 stoły ok. 160 × 80 cm na każde 15 osób. Nie potrzebujemy wody ani prądu</span></li>
-          <li><span><b>Jedzenie:</b> nie zapewniamy cateringu, ale warsztaty świetnie łączą się z kolacją lub finger food po stronie lokalu. Przy sali z kuchnią ustalimy to razem z obsługą</span></li>
+          <li><span><b>Miejsce:</b> warsztaty odbywają się w miejscu wyznaczonym przez Państwa, np. w biurze lub wynajętej sali. Przy 30 osobach potrzebujemy ok. 20 m²</span></li>
+          <li><span><b>Stoły:</b> jeden duży stół albo 3 stoły po 8 osób. Nie potrzebujemy wody ani prądu</span></li>
+          <li><span><b>Jedzenie:</b> nie zapewniamy; catering organizują Państwo we własnym zakresie</span></li>
           <li><span><b>Dostęp do sali</b> godzinę przed startem i 45 minut po</span></li>
         </ul>
       </div>
@@ -463,8 +463,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <p>Jeśli czegoś tu brakuje, wystarczy odpisać na maila.</p>
     </div>
     <div class="faq">
-      <details><summary>Czy warsztaty odbywają się u Państwa?</summary><p>Nie mamy własnej sali. Przyjeżdżamy do Państwa biura albo do miejsca, które Państwo wybiorą: restauracja, hotel, przestrzeń eventowa. Potrzebujemy tylko stołów, bez wody i prądu. Jeśli chcą Państwo połączyć warsztaty z kolacją, podpowiemy sprawdzone lokale w Poznaniu.</p></details>
-      <details><summary>Czy można zamówić jedzenie?</summary><p>Cateringu nie zapewniamy, ale warsztaty dobrze łączą się z kolacją lub finger food po stronie lokalu, w którym się odbywają. Przy 30 osobach proponujemy jedzenie między turami albo po warsztatach.</p></details>
+      <details><summary>Czy warsztaty odbywają się u Państwa?</summary><p>Warsztaty odbywają się w miejscu wyznaczonym przez Państwa: biuro, wynajęta sala, restauracja. Przy 30 osobach potrzebujemy ok. 20 m² oraz jednego dużego stołu albo 3 stołów po 8 osób. Wody i prądu nie potrzebujemy.</p></details>
+      <details><summary>Czy można zamówić jedzenie?</summary><p>Jedzenia nie zapewniamy – catering organizują Państwo we własnym zakresie. Przy 30 osobach dobrze sprawdza się jedzenie między turami albo po warsztatach.</p></details>
       <details><summary>Jak wyglądają tury przy 30 osobach?</summary><p>Dzielimy grupę na dwie tury po 15 osób, każda ok. 45 minut. Druga grupa w tym czasie ma przerwę na rozmowy i jedzenie. Przy mniejszej grupie, do 15 osób, robimy jedną turę.</p></details>
       <details><summary>Jakie mamy wolne terminy?</summary><p>Proszę podać dwa, trzy terminy, które Państwu pasują, a odpiszemy tego samego dnia, który z nich jest wolny. Rezerwujemy po zaliczce.</p></details>
       <details><summary>Czy część osób może pracować na wersjach bezalkoholowych?</summary><p>Tak, bez dopłaty. Każdy z koktajli z karty ma wersję 0% i robi się go tymi samymi technikami.</p></details>
@@ -536,7 +536,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var mc = $('m-count'); mc.className = 'count'+(cnt<MIN?' bad':''); mc.textContent = cnt<MIN ? 'Wybrane: '+cnt+'. Dobierzcie jeszcze '+(MIN-cnt)+'.' : 'Wybrane: '+cnt+' z '+n;
     $('o-guests').textContent = g + (g===1?' osoba':(g<5?' osoby':' osób'));
     $('h-guests').textContent = (rounds===1 ? 'jedna tura, ok. 1,5–2 h' : rounds + ' tury po ok. ' + Math.ceil(g/rounds) + ' osób, ok. 45 min każda') + ' · każda osoba to ' + fmt(PER) + ' netto składników';
-    $('rounds-note').textContent = rounds===1 ? 'Do 15 osób pracujemy w jednej turze przy wspólnym stole.' : 'Przy ' + g + ' osobach dzielimy grupę na ' + rounds + ' tury. Potrzebujemy ' + (3*rounds) + ' stołów ok. 160 × 80 cm.';
+    $('rounds-note').textContent = rounds===1 ? 'Do 15 osób pracujemy w jednej turze przy wspólnym stole.' : 'Przy ' + g + ' osobach dzielimy grupę na ' + rounds + ' tury. Potrzebujemy ok. ' + Math.ceil(g/1.5) + ' m² i jednego dużego stołu albo ' + Math.ceil(g/rounds/8) + ' stołów po 8 osób na turę.';
     var names = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}).join(', ');
     var name = g + ' osób, ' + cnt + ' koktajle' + (state.tasting?' + degustacja':'') + (state.bar?' + bar 1 h':'');
     $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' za osobę';
