@@ -262,6 +262,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 .hrs input{flex:1;min-width:0}
 .q-day .q-top output{font-size:24px}
 .q input[type=range]{width:100%;height:32px;accent-color:var(--crema);margin:0;cursor:pointer}
+#menu .split.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){#menu .split.three{grid-template-columns:1fr}}
 .split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 @media (max-width:700px){.split{grid-template-columns:1fr}}
 .col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
@@ -367,6 +369,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <div class="toggle" role="group"><button type="button" id="alc-pmb" aria-pressed="true">Kupuje Pimp My Bar<small>zwrot nieotwartych butelek i kegów</small></button><button type="button" id="alc-mia" aria-pressed="false">Dostarcza M i A<small>my dajemy listę zakupów</small></button></div>
         <p class="hours-head"><strong>Szkło do wszystkiego.</strong> Przy 700 osobach to ok. 2 500 sztuk plus zmywanie przez cały wieczór.</p>
         <div class="toggle" role="group"><button type="button" id="gl-pmb" aria-pressed="true">Szkło Pimp My Bar<small>wynajem + 2 osoby do zmywania i zmywarka</small></button><button type="button" id="gl-mia" aria-pressed="false">Szkło M i A<small>po Waszej stronie, razem ze zmywaniem</small></button></div>
+        <p class="hours-head"><strong>KeyKeg: szybciej, taniej.</strong> Spritze, Mojito i Gin &amp; Tonic z kranów na dwóch roll barach. Nalanie trwa kilka sekund, więc 6 barmanów robi to, co normalnie 8, a kolejki po przemówieniach znikają.</p>
+        <div class="toggle" role="group"><button type="button" id="keg-off" aria-pressed="true">Wszystko na żywo<small>8 barmanów, każdy koktajl z shakera</small></button><button type="button" id="keg-on" aria-pressed="false">KeyKeg: szybciej, taniej<small>6 barmanów + 2 roll bary z kranami, 4 koktajle z kega</small></button></div>
         <label class="addon" for="a-brand"><input type="checkbox" id="a-brand" data-add="brand"><span><strong>Branding frontów barów, + 160 zł za moduł</strong><small>Grafika klienta na podświetlanych frontach, projekt po Waszej stronie.</small></span></label>
       </div>
       <aside class="total" aria-live="polite">
@@ -389,16 +393,25 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Menu open baru</h2>
-      <p>Pod to, co napisałeś: koktajle na wódce, whiskey w trzech wydaniach, piwo, wino, mocktaile i softy. Konkretne koktajle dobierzemy razem, poniżej nasza propozycja.</p>
+      <p id="menu-p">Pod to, co napisałeś: koktajle na wódce, whiskey w trzech wydaniach, piwo, wino, mocktaile i softy. Konkretne koktajle dobierzemy razem, poniżej nasza propozycja.</p>
     </div>
-    <div class="split">
+    <div class="split" id="menu-split">
       <div class="col">
-        <span class="label">Koktajle na wódce · 4 × 350 szt.</span>
+        <span class="label" id="vodka-label">Koktajle na wódce · 4 × 350 szt.</span>
         <ul>
           <li><span><b>Red Lady</b> – puree truskawkowe, marakuja, limonka</span></li>
           <li><span><b>Mangolita</b> – puree z mango, marakuja, limonka</span></li>
           <li><span><b>Porn Star Martini</b> – wanilia, marakuja, cytryna, prosecco</span></li>
           <li><span><b>Moscow Mule</b> – limonka, napój imbirowy</span></li>
+        </ul>
+      </div>
+      <div class="col" id="keg-col" hidden>
+        <span class="label">Z kega · KeyKeg · ok. 800 porcji</span>
+        <ul>
+          <li><span><b>Aperitivo Spritz</b> – gotowy mix na prosecco o aromacie gorzkiej pomarańczy; lód i plaster pomarańczy · 2 kegi, 266 porcji</span></li>
+          <li><span><b>Hugo Spritz</b> – prosecco, syrop z czarnego bzu i seltzer; lód i mięta · 1 keg, 200 porcji</span></li>
+          <li><span><b>Mojito</b> – biały rum, sok z trzciny cukrowej, mięta, limonka · 2 kegi, 222 porcje</span></li>
+          <li><span><b>Gin &amp; Tonic</b> – London Dry Gin i klasyczny tonik · 1 keg, 133 porcje</span></li>
         </ul>
       </div>
       <div class="col">
@@ -485,32 +498,41 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
   var BASE_G = 700, BARS = 8, SERVICE = 11500, LOGIST = 800, BRAND = 160;
   var TICKS = ['8 barów, bez kolejek','Każdy koktajl na oczach gości','Piwo z kega, wino z kega','Montaż dzień wcześniej','Zwrot nieotwartych butelek'];
-  var state = { g: 700, alc: true, glass: true, brand: false };
+  var state = { g: 700, alc: true, glass: true, brand: false, keg: false };
+  var KEG_SERVICE = 9600, KEG = [['Aperitivo Spritz',2,499],['Hugo Spritz',1,599],['Mojito',2,849],['Gin & Tonic',1,879]];
   function sc(v){ return Math.round(v * state.g / BASE_G); }
   function render(){
     var g = state.g, items = [];
-    items.push({what:'Obsługa: 8 barmanów, 8 modułów barowych, 2 pomocników', why:'do 8 h, ze sprzętem barowym; 2 moduły jako roll bar do piwa i koktajli', amt:SERVICE});
+    if (state.keg) items.push({what:'Obsługa: 6 barmanów, 6 modułów barowych, 2 pomocników', why:'do 8 h, ze sprzętem barowym; 2 moduły jako roll bar z kranami KeyKeg (koktajle) i piwem', amt:KEG_SERVICE});
+    else items.push({what:'Obsługa: 8 barmanów, 8 modułów barowych, 2 pomocników', why:'do 8 h, ze sprzętem barowym; 2 moduły jako roll bar do piwa i koktajli', amt:SERVICE});
     items.push({what:'Logistyka MTP', why:'montaż 04.02, demontaż po 24:00, auto z windą', amt:LOGIST});
-    var cock = sc(2600);
-    items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli', why:'4 koktajle na wódce (po 350 szt.), Whisky Sour (700), mocktail (500); syropy, puree, owoce, dodatki', amt:sc(6000)});
+    var cock = state.keg ? sc(1900) : sc(2600);
+    if (state.keg) items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli z shakera', why:'4 koktajle na wódce (po 250 szt.), Whisky Sour (700), mocktail (200); syropy, puree, owoce, dodatki', amt:sc(4400)});
+    else items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli', why:'4 koktajle na wódce (po 350 szt.), Whisky Sour (700), mocktail (500); syropy, puree, owoce, dodatki', amt:sc(6000)});
     items.push({what:'Lód, ' + fmtN(sc(350)) + ' kg', why:'do koktajli', amt:sc(1225)});
     if (state.alc){
-      items.push({what:'Wódka, ' + fmtN(sc(80)) + ' but. 0,7 l', why:'na ' + fmtN(sc(1400)) + ' koktajli, ok. 48 zł/but.', amt:sc(3840)});
+      if (state.keg){ var kt = 0, kn = 0; KEG.forEach(function(k){ kt += k[1]*k[2]; kn += k[1]; }); items.push({what:'Koktajle z kega KeyKeg, ' + kn + ' kegów po 20 l', why:'Aperitivo Spritz 2, Hugo 1, Mojito 2, Gin & Tonic 1 – ok. 820 porcji; instalacja i roll bary Wineonline w cenie kega', amt:kt}); }
+      items.push({what:'Wódka, ' + fmtN(sc(state.keg?57:80)) + ' but. 0,7 l', why:'na ' + fmtN(sc(state.keg?1000:1400)) + ' koktajli, ok. 48 zł/but.', amt:sc(state.keg?2740:3840)});
       items.push({what:'Whiskey, ' + fmtN(sc(63)) + ' but. 0,7 l', why:'Whisky Sour ' + fmtN(sc(700)) + ' szt., czysta i z colą ok. ' + fmtN(sc(400)) + '; ok. 65 zł/but.', amt:sc(4100)});
       items.push({what:'Piwo lane, ' + fmtN(sc(14)) + ' kegów 30 l', why:'ok. ' + fmtN(sc(1050)) + ' porcji 0,4 l; zwrot nieotwartych', amt:sc(3640)});
       items.push({what:'Piwo 0%, ' + fmtN(sc(200)) + ' but.', why:'3 smaki, butelki 330 ml', amt:sc(1400)});
       items.push({what:'Wino frizzante z kega, ' + fmtN(sc(6)) + ' kegów', why:'ok. ' + fmtN(sc(600)) + ' porcji 150 ml', amt:sc(2580)});
       items.push({what:'Softy', why:'cola, sprite, woda, soki', amt:sc(2000)});
     }
+    if (state.keg && !state.alc) items.push({what:'Koktajle z kega KeyKeg – kupujecie Wy', why:'6 kegów po 20 l: Aperitivo Spritz 2, Hugo 1, Mojito 2, Gin & Tonic 1 (Wineonline); instalacja w cenie kega', amt:0});
     if (state.glass) items.push({what:'Szkło, ok. ' + fmtN(sc(2500)) + ' szt. + zmywanie', why:'wynajem 0,95 zł/szt., 2 osoby do zmywania i zmywarka przez cały wieczór', amt:sc(2375)+1400});
     if (state.brand) items.push({what:'Branding frontów, ' + BARS + ' × ' + fmt(BRAND), why:'grafika klienta na podświetlanych frontach', amt:BARS*BRAND});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
     items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
-    $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = 'ok. ' + fmtN(cock) + ' koktajli (3,7 na osobę) plus piwo, wino i whiskey';
+    $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = state.keg ? 'ok. ' + fmtN(cock) + ' koktajli z shakera + ok. 820 z kega, plus piwo, wino i whiskey' : 'ok. ' + fmtN(cock) + ' koktajli (3,7 na osobę) plus piwo, wino i whiskey';
+    $('keg-off').setAttribute('aria-pressed', String(!state.keg)); $('keg-on').setAttribute('aria-pressed', String(state.keg));
+    $('keg-col').hidden = !state.keg; $('menu-split').className = state.keg ? 'split three' : 'split';
+    $('vodka-label').textContent = state.keg ? 'Koktajle na wódce · 4 × 250 szt.' : 'Koktajle na wódce · 4 × 350 szt.';
+    $('menu-p').textContent = state.keg ? 'Wersja KeyKeg: spritze, Mojito i Gin & Tonic lecą z kranów w kilka sekund, a barmani przy shakerach robią koktajle na wódce i Whisky Sour. Reszta baru bez zmian.' : 'Pod to, co napisałeś: koktajle na wódce, whiskey w trzech wydaniach, piwo, wino, mocktaile i softy. Konkretne koktajle dobierzemy razem, poniżej nasza propozycja.';
     $('alc-pmb').setAttribute('aria-pressed', String(state.alc)); $('alc-mia').setAttribute('aria-pressed', String(!state.alc));
     $('gl-pmb').setAttribute('aria-pressed', String(state.glass)); $('gl-mia').setAttribute('aria-pressed', String(!state.glass));
-    var name = g + ' osób · alkohol: ' + (state.alc?'Pimp My Bar':'M i A') + ' · szkło: ' + (state.glass?'Pimp My Bar':'M i A') + (state.brand?' · branding':'');
+    var name = g + ' osób' + (state.keg?' · KeyKeg':'') + ' · alkohol: ' + (state.alc?'Pimp My Bar':'M i A') + ' · szkło: ' + (state.glass?'Pimp My Bar':'M i A') + (state.brand?' · branding':'');
     $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' za osobę';
     $('peek').innerHTML = fmt(total) + '<small>netto</small>'; $('choice-text').textContent = name + ', ' + fmt(total) + ' netto';
   }
@@ -519,6 +541,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   document.querySelectorAll('.q-row button').forEach(function(b){ b.addEventListener('click', function(){ var r=$(b.dataset.for), v=+r.value+(+b.dataset.step)*(+r.step); r.value=Math.min(+r.max,Math.max(+r.min,v)); r.dispatchEvent(new Event('input',{bubbles:true})); r.dispatchEvent(new Event('change',{bubbles:true})); }); });
   $('alc-pmb').addEventListener('click', function(){ state.alc = true; render(); }); $('alc-mia').addEventListener('click', function(){ state.alc = false; render(); });
   $('gl-pmb').addEventListener('click', function(){ state.glass = true; render(); }); $('gl-mia').addEventListener('click', function(){ state.glass = false; render(); });
+  $('keg-off').addEventListener('click', function(){ state.keg = false; render(); }); $('keg-on').addEventListener('click', function(){ state.keg = true; render(); });
   $('a-brand').addEventListener('change', function(e){ state.brand = e.target.checked; render(); });
   var ti=0, tk=$('tick'); setInterval(function(){ tk.classList.add('out'); setTimeout(function(){ ti=(ti+1)%TICKS.length; tk.textContent=TICKS[ti]; tk.classList.remove('out'); },350); }, 3200);
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){ var t=$(b.dataset.copy).textContent; navigator.clipboard && navigator.clipboard.writeText(t); b.textContent='Skopiowano'; setTimeout(function(){ b.textContent='Kopiuj'; },1500); }); });
@@ -537,7 +560,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var sent={}; function once(key,msg,tags,prio){ if(sent[key]) return; sent[key]=1; ping(msg,tags,prio); }
   function seen(id,key,msg,tags){ var el=document.getElementById(id); if(el && 'IntersectionObserver' in window){ new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ once(key,msg,tags); o.disconnect(); } },{threshold:.3}).observe(el); } }
   seen('wycena','wyc','Ogląda wycenę','moneybag'); seen('podzial','pod','Czyta „Kto co zapewnia”','clipboard'); seen('akceptacja','dol','Doszedł do samego dołu oferty','checkered_flag');
-  ['alc-pmb','alc-mia','gl-pmb','gl-mia'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ var t=document.getElementById('sum'); ping('Przełączył: '+id+' (razem '+(t?t.textContent:'')+')','gear'); }); });
+  ['alc-pmb','alc-mia','gl-pmb','gl-mia','keg-off','keg-on'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ var t=document.getElementById('sum'); ping('Przełączył: '+id+' (razem '+(t?t.textContent:'')+')','gear'); }); });
   var r=document.getElementById('r-guests'), tm; r.addEventListener('change',function(){ clearTimeout(tm); tm=setTimeout(function(){ var t=document.getElementById('sum'); ping('Suwak gości → '+r.value+' (razem '+(t?t.textContent:'')+')','busts_in_silhouette'); },2500); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Ta wersja mi pasuje” → '+(t?t.textContent:''),'white_check_mark',5); }); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt','telephone_receiver',5); }); });
