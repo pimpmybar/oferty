@@ -75,7 +75,7 @@ body:not(.draft) .todo{background:none;color:inherit;padding:0;font-weight:inher
 /* hero */
 .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:12px 56px}
 .hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
-.hero h1{font-size:clamp(46px,7.2vw,96px);line-height:.88;overflow-wrap:break-word}
+.hero h1{font-size:clamp(44px,6.6vw,88px);line-height:.88;overflow-wrap:break-word}
 .hero h1 em{font-style:normal;color:var(--crema)}
 .facts{display:grid;grid-template-columns:repeat(2,auto);justify-content:start;column-gap:36px;row-gap:10px;margin:0}
 .facts div{display:flex;flex-direction:column;gap:1px}
@@ -273,14 +273,24 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 .team.one{grid-template-columns:1fr}
 
 .reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
-.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:8px}
+.photos{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr) minmax(0,1.3fr);gap:14px;margin-top:8px;align-items:start}
+.photos .film video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px}
+.steps.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.talk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+.talkpics{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:var(--sunk)}
+.talkpics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.talk .col{display:flex;flex-direction:column;gap:14px;border:0;background:none;padding:0}
+.talk h2{font-size:clamp(34px,5vw,54px)}
+.talkbtns{display:flex;flex-wrap:wrap;gap:10px}
+.talk .step{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--crema)}
+@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{max-width:320px}}
 .photos figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--sunk)}
 .photos img{display:block;width:100%;height:100%;object-fit:cover}
 .photos figcaption{font-size:13.5px;color:var(--ink-3);padding:8px 2px 0}
 .photos figure{display:flex;flex-direction:column;aspect-ratio:auto}
 .photos figure img{aspect-ratio:4/5}
 .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
-@media (max-width:560px){.menu{grid-template-columns:1fr}.photos{grid-template-columns:1fr}}
+@media (max-width:560px){.menu{grid-template-columns:1fr}.photos{grid-template-columns:1fr}.steps.three{grid-template-columns:1fr}}
 .drink{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
 .drink:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
 .drink:has(input:disabled){opacity:.45;cursor:not-allowed}
@@ -311,7 +321,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="hero-copy">
       <div class="label">Warsztaty barmańskie dla firm · Poznań</div>
       <h1>Miksujemy <em>razem</em></h1>
-      <p>Dzień dobry, Pani Magdaleno! Każdy z 30 uczestników staje przy własnym stanowisku i pod okiem naszego barmana przygotowuje trzy koktajle od początku do końca. Zaczynamy krótkim pokazem flair, kończymy wspólnym toastem. Przyjeżdżamy do wskazanego miejsca z całym sprzętem, szkłem, alkoholem i owocami.</p>
+      <p>Dzień dobry, Pani Magdaleno! Każdy z 30 uczestników staje przy własnym stanowisku i pod okiem naszego barmana przygotowuje trzy koktajle od początku do końca, każdy inną techniką. Przyjeżdżamy do wskazanego miejsca z całym sprzętem, szkłem, alkoholem i owocami.</p>
       <dl class="facts">
         <div><dt>Uczestnicy</dt><dd>30 osób, 2 tury po 15</dd></div>
         <div><dt>Czas</dt><dd>ok. 2 godziny</dd></div>
@@ -327,7 +337,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <img src="assets/warsztaty-grupa.jpg" alt="Uczestnicy warsztatów barmańskich Pimp My Bar z gotowymi koktajlami">
       <div class="ticker" aria-live="off">
         <span class="label">Z naszych warsztatów</span>
-        <span class="line" id="tick">Toast po pierwszej turze</span>
+        <span class="line" id="tick">Każdy miksuje sam</span>
       </div>
     </div>
   </div>
@@ -337,16 +347,16 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Jak to wygląda</h2>
-      <p>Dwie godziny, cztery etapy. Nikt nie siedzi z boku: każdy uczestnik miksuje sam, a barman podchodzi, poprawia chwyt shakera i podpowiada, jak zbalansować smak.</p>
+      <p>Dwie godziny, trzy etapy. Nikt nie siedzi z boku: każdy uczestnik miksuje sam, a barman podchodzi, poprawia chwyt shakera i podpowiada, jak zbalansować smak.</p>
     </div>
-    <div class="steps">
-      <div class="stp"><span class="n">01 · 10 min</span><h3>Pokaz flair</h3><p>Na otwarcie barman robi krótki pokaz żonglerki butelkami i shakerami w rytm muzyki. Dobre zdjęcia gwarantowane.</p></div>
-      <div class="stp"><span class="n">02 · 15 min</span><h3>Podstawy</h3><p>Sprzęt, miary, techniki: shake, stir, build, muddle. Co robi kwas, co robi cukier i dlaczego lód ma znaczenie.</p></div>
-      <div class="stp"><span class="n">03 · 3 × 20 min</span><h3>Trzy koktajle</h3><p>Każdy robi każdy koktajl samodzielnie, od dozowania po dekorację. Barman prowadzi krok po kroku i koryguje na bieżąco.</p></div>
-      <div class="stp"><span class="n">04 · 15 min</span><h3>Toast i zdjęcia</h3><p>Wspólne zdjęcie z gotowymi koktajlami, karta drinków dla każdego do domu. Opcjonalnie degustacja ciekawych trunków.</p></div>
+    <div class="steps three">
+      <div class="stp"><span class="n">01 · 15 min</span><h3>Podstawy</h3><p>Sprzęt, miary, techniki: shake, stir, build, muddle. Co robi kwas, co robi cukier i dlaczego lód ma znaczenie.</p></div>
+      <div class="stp"><span class="n">02 · 3 × 25 min</span><h3>Trzy koktajle</h3><p>Każdy robi każdy koktajl samodzielnie, od dozowania po dekorację. Barman prowadzi krok po kroku i koryguje na bieżąco.</p></div>
+      <div class="stp"><span class="n">03 · 15 min</span><h3>Zdjęcia i karta drinków</h3><p>Wspólne zdjęcie z gotowymi koktajlami i karta z przepisami dla każdego, żeby powtórzyć je w domu.</p></div>
     </div>
     <div class="photos">
       <figure><img src="assets/warsztaty-stol.jpg" alt="Stanowiska warsztatowe: deski, shakery, jiggery, szkło i owoce" loading="lazy" style="object-position:50% 70%;aspect-ratio:4/3"><figcaption>Stanowiska przed startem: każdy ma własną deskę, shaker, jigger, sitko, szkło i owoce.</figcaption></figure>
+      <figure class="film"><video src="../expo-real-lds/assets/hero.mp4" poster="../expo-real-lds/assets/poster.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>Nasz zespół w akcji.</figcaption></figure>
       <figure><img src="assets/warsztaty-grupa.jpg" alt="Uczestnicy warsztatów podnoszą gotowe koktajle" loading="lazy" style="object-position:50% 88%;aspect-ratio:4/3"><figcaption>Koniec tury: każdy z własnoręcznie zrobionym Porn Star Martini.</figcaption></figure>
     </div>
   </div>
@@ -356,7 +366,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Barman, pokaz, sprzęt, szkło i dojazd po Poznaniu są stałe. Liczbę osób i menu ustawiają Państwo sami, cena przelicza się od razu. Tury dobieramy do liczby osób.</p>
+      <p>Barman, sprzęt, szkło i dojazd po Poznaniu są stałe. Liczbę osób i menu ustawiają Państwo sami, cena przelicza się od razu. Tury dobieramy do liczby osób.</p>
     </div>
     <div class="pricing">
       <div>
@@ -411,7 +421,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div class="col">
         <span class="label">Po naszej stronie</span>
         <ul>
-          <li><span><b>Profesjonalny barman</b> z doświadczeniem w barach w Polsce i za granicą, laureat konkursów flair</span></li>
+          <li><span><b>Profesjonalny barman</b> z doświadczeniem w barach w Polsce i za granicą</span></li>
           <li><span><b>Stanowisko dla każdego uczestnika:</b> deska, shaker, jigger, sitko, muddler, łyżka barmańska</span></li>
           <li><span><b>Szkło</b> do każdego koktajlu i lód w kostkach</span></li>
           <li><span><b>Alkohole, syropy, owoce i dodatki</b> do trzech koktajli na osobę</span></li>
@@ -432,30 +442,15 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   </div>
 </section>
 
-<section>
+<section id="rozmowa">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>Kto prowadzi</h2>
-      <p>Warsztaty prowadzi jeden z naszych barmanów; przy 30 osobach to Tomek lub Patryk.</p>
-    </div>
-    <div class="team">
-      <div class="person">
-        <img class="avatar" src="../wesele/assets/tomek.jpg" alt="Tomasz Malinowski">
-        <div class="who">
-          <span class="label">Założyciel Pimp My Bar · od 2013</span>
-          <h3>Tomasz Malinowski</h3>
-          <div class="chips"><span class="chip k">flair</span><span class="chip">warsztaty dla firm</span><span class="chip">EN · DE</span></div>
-          <p>Pięć lat freestyle flair, ponad 2 000 eventów i kilkadziesiąt warsztatów firmowych, m.in. dla Business Link, Palantir, Duni i Lendi.</p>
-        </div>
-      </div>
-      <div class="person">
-        <img class="avatar" src="../expo-real-lds/assets/patryk.jpg" alt="Patryk Mroczkowski">
-        <div class="who">
-          <span class="label">Head bartender · w Pimp My Bar od 2020</span>
-          <h3>Patryk Mroczkowski</h3>
-          <div class="chips"><span class="chip k">koktajle</span><span class="chip">latte art</span><span class="chip">EN</span></div>
-          <p>Prowadzi bary na eventach firmowych i targach w całej Europie. Spokojny, cierpliwy, dobrze tłumaczy.</p>
-        </div>
+    <div class="talk">
+      <div class="talkpics"><img src="../wesele/assets/tomek-k1.jpg" alt="Tomasz Malinowski" loading="lazy" class="on"></div>
+      <div class="col">
+        <span class="step">Porozmawiajmy</span>
+        <h2>Ma Pani pytania? Proszę pisać do mnie.</h2>
+        <p>Jestem Tomek, prowadzę Pimp My Bar od 2013 roku i sam prowadzę warsztaty dla firm, m.in. dla Business Link, Palantir, Duni i Lendi. Zadzwonię albo odpiszę tego samego dnia: dobierzemy menu, miejsce i termin.</p>
+        <div class="talkbtns"><a class="btn" href="tel:+48513916977">Zadzwoń · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl">Napisz maila</a></div>
       </div>
     </div>
   </div>
@@ -517,7 +512,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     {id:'neg', n:'Negroni', t:'stir · gorzki, mocny', pl:'gin, Martini Rosso, Campari'},
     {id:'ape', n:'Aperol Spritz', t:'build · lekki, gorzko-słodki', pl:'Aperol, prosecco, woda gazowana, pomarańcza'}
   ];
-  var TICKS = ['Toast po pierwszej turze','Pokaz flair na otwarcie','Każdy miksuje sam','Trzy techniki, trzy koktajle','Karta drinków do domu'];
+  var TICKS = ['Każdy miksuje sam','Trzy techniki, trzy koktajle','Stanowisko dla każdego','Karta drinków do domu'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
   var state = { g: 30, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}), fourth:false, tasting:false, bar:false };
@@ -528,7 +523,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 
   function render(){
     var g = state.g, n = maxN(), rounds = Math.ceil(g/ROUND), items = [];
-    items.push({what:'Warsztaty: barman, pokaz flair, sprzęt i szkło', why:'prowadzenie ok. 2 h, stanowisko dla każdego uczestnika, karta drinków, dojazd po Poznaniu', amt:SERVICE});
+    items.push({what:'Warsztaty: barman, sprzęt i szkło', why:'prowadzenie ok. 2 h, stanowisko dla każdego uczestnika, karta drinków, dojazd po Poznaniu', amt:SERVICE});
     items.push({what:'Składniki na 3 koktajle × ' + g + ' osób', why:'alkohole, syropy, owoce, dodatki i lód', amt:g*PER});
     if (state.fourth) items.push({what:'Czwarty koktajl × ' + g + ' osób', why:'składniki, ok. 20 min dłużej', amt:g*FOURTH});
     if (state.tasting) items.push({what:'Degustacja alkoholi, 1 h', why:'prowadzenie; alkohole do degustacji według zakupu, ok. 320 zł', amt:TASTING});
