@@ -325,8 +325,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
           </div>
           <div class="q">
             <div class="q-top"><label for="r-prosecco">Prosecco</label><output id="o-prosecco" for="r-prosecco">100 szt.</output></div>
-            <div class="q-row"><button type="button" data-step="-1" data-for="r-prosecco" aria-label="Mniej Prosecco">−</button><input type="range" id="r-prosecco" min="0" max="600" step="100" value="100"><button type="button" data-step="1" data-for="r-prosecco" aria-label="Więcej Prosecco">+</button></div>
-            <small id="h-prosecco">150 ml w kubku · każde 100 szt. to 600 zł netto</small>
+            <div class="q-row"><button type="button" data-step="-1" data-for="r-prosecco" aria-label="Mniej Prosecco">−</button><input type="range" id="r-prosecco" min="0" max="600" step="5" value="100"><button type="button" data-step="1" data-for="r-prosecco" aria-label="Więcej Prosecco">+</button></div>
+            <small id="h-prosecco">20 butelek · 150 ml w kubku, 5 kubków z butelki · butelka 30 zł netto</small>
           </div>
         </div>
         <label class="addon" for="brand">
@@ -503,7 +503,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     {id:'cups', what:'Kubki z nadrukiem, 1 000 szt.', why:'wspólna pula do kawy, Aperola i Prosecco', amt:680}
   ];
   // ── Pozycje z suwaków: cena za każde 100 szt. ──
-  var COFFEE_100 = 200, APEROL_100 = 950, PROSECCO_100 = 600, CUPS = 1000, DAYS = 3;
+  var COFFEE_100 = 200, APEROL_100 = 950, PROSECCO_BOTTLE = 30, PROSECCO_PER_BOTTLE = 5, CUPS = 1000, DAYS = 3;
   var TICKS = ['Kalibracja przed otwarciem hali','Kawa specialty','Aperol Spritz od 16:00','Kieliszek Prosecco','Jedna osoba, dwa stanowiska','Kubki z nadrukiem'];
 
   var $ = function(id){return document.getElementById(id)};
@@ -515,7 +515,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var items = BASE.slice();
     items.push({id:'coffee', what:'Kawa specialty, ' + c + ' szt.', why:'ziarno z palarni specialty, mleko krowie i roślinne', amt:c/100*COFFEE_100});
     if (a > 0) items.push({id:'aperol', what:'Aperol Spritz, ' + a + ' szt.', why:'Aperol 40 ml, prosecco, woda gazowana, pomarańcze i lód', amt:a/100*APEROL_100});
-    if (p > 0) items.push({id:'prosecco', what:'Prosecco, ' + p + ' szt.', why:'150 ml w kubku, schłodzone', amt:p/100*PROSECCO_100});
+    if (p > 0) items.push({id:'prosecco', what:'Prosecco, ' + p + ' szt. (' + (p/PROSECCO_PER_BOTTLE) + ' butelek)', why:'150 ml w kubku, 5 kubków z butelki, schłodzone', amt:p/PROSECCO_PER_BOTTLE*PROSECCO_BOTTLE});
     if ($('brand').checked) items.push({id:'brand', what:'Branding modułu barowego', why:'front baru 125 cm z Państwa logo lub grafiką', amt:200});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
@@ -531,7 +531,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('h-coffee').textContent = 'ok. ' + Math.round(c/DAYS) + ' dziennie · każde 100 kaw to ' + fmt(COFFEE_100) + ' netto';
     $('h-aperol').textContent = (a === 0 ? 'sama kawa' : a === 100 ? 'np. tylko wieczór 13 stycznia' : 'ok. ' + Math.round(a/DAYS) + ' dziennie') + ' · każde 100 szt. to ' + fmt(APEROL_100) + ' netto';
     $('o-prosecco').textContent = p > 0 ? p + ' szt.' : 'bez Prosecco';
-    $('h-prosecco').textContent = (p === 0 ? 'bez Prosecco' : 'ok. ' + Math.round(p/DAYS) + ' dziennie') + ' · 150 ml w kubku · każde 100 szt. to ' + fmt(PROSECCO_100) + ' netto';
+    $('h-prosecco').textContent = (p === 0 ? 'bez Prosecco' : (p/PROSECCO_PER_BOTTLE) + ' butelek, ok. ' + Math.round(p/DAYS) + ' dziennie') + ' · 150 ml w kubku, 5 kubków z butelki · butelka ' + fmt(PROSECCO_BOTTLE) + ' netto';
     var used = c + a + p;
     $('cups-note').textContent = used <= CUPS ? 'Kubki: ' + used + ' z 1 000 w cenie – wszystko mieści się w jednej puli.' : 'Kubki: ' + used + ', czyli ' + (used - CUPS) + ' ponad pulę 1 000 w cenie – dodruk kubków wycenimy osobno.';
     $('variant-name').textContent = name;
