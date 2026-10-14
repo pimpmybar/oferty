@@ -48,10 +48,10 @@
     cup:'Kubki jednorazowe', glass:'Szkło', lGlass:'Wynajem szkła, {pool} szt.', waiter:'Obsługa kelnerska', waiterS:'Kelner zbiera szkło ze strefy i z sali przez cały event.', glassHint:'Wynajem szkła: {pool} szt. Obsługa kelnerska jest opcjonalna.', cupHint:'Kubki jednorazowe są w cenie.',
     s3:'Krok 3', s3h:'Wygląd barów i dodatki', s3p:'Front barów wybierają Państwo w cenie: lustro srebrne lub złote albo podświetlana klisza. Dodatki są opcjonalne.',
     frontFilm:'Ten sam bar, różne fronty. Wizualizacja.', bvPlay:'▶ Pokaż wszystkie fronty', bvStop:'■ Zatrzymaj', c_black:'Czarny mat', c_sage:'Zielony', c_navy:'Granat', c_blush:'Pudrowy róż', barGreen:'Bar zielony z kasetonami, 2 m', barOlive:'Bar oliwkowy, 3 m', frontN:'Klisza {n}', fSilver:'Lustro srebrne', fGold:'Lustro złote', designed:'Bary zaprojektowane przez Pimp My Bar.',
-    aBrand:'Branding barów logo', aBrandS:'Państwa logo na podświetlanych frontach. Projekt graficzny po Państwa stronie, wizualizację przygotujemy po potwierdzeniu realizacji.',
+    aBrand:'Branding barów logo', aBrandS:'Państwa logo na podświetlanych frontach, 200 zł netto za moduł. Projekt graficzny po Państwa stronie, wizualizację przygotujemy po potwierdzeniu realizacji.',
     aFlair:'Pokaz barmański flair', aFlairS:'Żonglerka butelkami i shakerami, z udziałem uczestników.',
     aCoffee:'Bar kawowy z baristą', aCoffeeS:'Espresso, cappuccino i latte z ekspresu kolbowego przez cały event.',
-    ask:'wycenimy', lAsk:'do wyceny',
+    ask:'wycenimy', lAsk:'do wyceny', perModule:'moduł',
     yourPrice:'Cena', net:' netto', vat:'+ 23% VAT', perPerson:'{a}–{b} zł netto na osobę', lBar:'Obsługa: {b} bary, {b} barmanów',
     inclH:'W cenie', incl:['{b} mobilne bary z wyposażeniem','{b} barmanów, {h}','{pool} mocktaili, {m} pozycje w menu','wszystkie składniki, lód i dodatki','{cups}','wydrukowane menu','transport, montaż i demontaż strefy'],
     inclCup:'kubki jednorazowe',
@@ -106,7 +106,7 @@
     (O.items || []).forEach(function(it){ lines.push([it[0], it[1]]); if (it[1] !== null) total += it[1]; });
     if (state.glass){ lines.push([fill(t('lGlass')), O.glass]); total += O.glass; }
     if ((state.glass || O.waiterIndependent) && state.waiter){ lines.push([t('waiter'), O.waiter]); total += O.waiter; }
-    if (state.own) lines.push([t('aBrand'), null]);
+    if (state.own){ var bp = PRICE.branding*E.bars; lines.push([t('aBrand')+' ('+E.bars+' × '+money(PRICE.branding)+')', bp]); total += bp; }
     if (state.add.flair) lines.push([t('aFlair'), null]);
     if (state.add.coffee) lines.push([t('aCoffee'), null]);
     return {lines:lines, total:total};
@@ -172,7 +172,7 @@
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+L.s3p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name"></p><p class="hint designed">'+L.designed+'</p>';
-    h += addon('own', L.aBrand, L.aBrandS, L.ask);
+    h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding)+' / '+L.perModule);
     h += addon('coffee', L.aCoffee, L.aCoffeeS, L.ask);
     h += addon('flair', L.aFlair, L.aFlairS, L.ask);
     h += '</div></div>';
