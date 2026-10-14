@@ -257,6 +257,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 .q-row{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:10px;align-items:center}
 .q-row button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:var(--sunk);color:var(--ink);font:600 22px/1 var(--body);cursor:pointer}
 .q-row button:hover{border-color:var(--crema)}
+.hours-head{margin-top:22px;font-size:15px;line-height:1.5}
+.hours{margin-top:12px}
+.hrs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hrs label{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2)}
+.hrs input{flex:1;min-width:0}
+.q-day .q-top output{font-size:24px}
 .q input[type=range]{width:100%;height:32px;accent-color:var(--crema);margin:0;cursor:pointer}
 .split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 @media (max-width:700px){.split{grid-template-columns:1fr}}
@@ -281,15 +287,15 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="hero-copy">
       <div class="label">PSI 2027 · Koelnmesse, Kolonia</div>
       <h1>Kawa, Aperol i Prosecco na <em>PSI</em> 2027</h1>
-      <p>Jedna osoba przez trzy dni targowe: w dzień kawa specialty, po południu Aperol Spritz i kieliszek Prosecco. Przyjeżdżamy 11 stycznia wieczorem z własnym ekspresem, kawą i kubkami z nadrukiem.</p>
+      <p>Jedna osoba przez trzy dni targowe: w dzień kawa specialty, po południu Aperol Spritz i Prosecco w jednorazowym kieliszku. Przyjeżdżamy 11 stycznia wieczorem z własnym ekspresem, kawą i kubkami z nadrukiem.</p>
       <dl class="facts">
         <div><dt>Termin</dt><dd>12–14.01.2027</dd></div>
         <div><dt>Godziny targów</dt><dd>8:00–19:00</dd></div>
-        <div><dt>Obsada</dt><dd>1 barista-barman, 8 h dziennie</dd></div>
-        <div><dt>Na start</dt><dd>600 kaw + 300 Aperoli + 100 Prosecco</dd></div>
+        <div><dt>Obsada</dt><dd>1 barista-barman, do 9 h dziennie</dd></div>
+        <div><dt>Na start</dt><dd>600 kaw + 300 Aperoli + 102 Prosecco</dd></div>
       </dl>
       <div class="price-peek">
-        <div class="big num" id="peek">14 870 zł<small>netto</small></div>
+        <div class="big num" id="peek">15 082 zł<small>netto</small></div>
         <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
       </div>
     </div>
@@ -307,7 +313,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Obsługa, bar ze sprzętem, dojazd, nocleg z wyżywieniem i kubki są stałe. Liczbę kaw, Aperoli i Prosecco ustawiają Państwo sami suwakami, a cena przelicza się od razu.</p>
+      <p>Obsługa, bar ze sprzętem, dojazd, nocleg z wyżywieniem i kubki są stałe. Liczbę kaw, Aperoli i Prosecco oraz godziny pracy w każdym dniu ustawiają Państwo sami suwakami, a cena przelicza się od razu.</p>
     </div>
     <div class="pricing">
       <div>
@@ -324,9 +330,27 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-aperol">100 dziennie · każde 100 szt. to 950 zł netto</small>
           </div>
           <div class="q">
-            <div class="q-top"><label for="r-prosecco">Prosecco</label><output id="o-prosecco" for="r-prosecco">100 szt.</output></div>
-            <div class="q-row"><button type="button" data-step="-1" data-for="r-prosecco" aria-label="Mniej Prosecco">−</button><input type="range" id="r-prosecco" min="0" max="600" step="5" value="100"><button type="button" data-step="1" data-for="r-prosecco" aria-label="Więcej Prosecco">+</button></div>
-            <small id="h-prosecco">20 butelek · 150 ml w kubku, 5 kubków z butelki · butelka 30 zł netto</small>
+            <div class="q-top"><label for="r-prosecco">Prosecco</label><output id="o-prosecco" for="r-prosecco">102 szt.</output></div>
+            <div class="q-row"><button type="button" data-step="-1" data-for="r-prosecco" aria-label="Mniej Prosecco">−</button><input type="range" id="r-prosecco" min="0" max="600" step="6" value="102"><button type="button" data-step="1" data-for="r-prosecco" aria-label="Więcej Prosecco">+</button></div>
+            <small id="h-prosecco">17 butelek · 120 ml w kieliszku, 6 z butelki · butelka 30 zł + kieliszek 1 zł netto</small>
+          </div>
+        </div>
+        <p class="hours-head"><strong>Godziny pracy w każdym dniu.</strong> W cenie do 9 godzin dziennie; każda godzina ponad 9 to 100 zł netto. Ustawcie Państwo sami, o której zaczynamy i kończymy.</p>
+        <div class="qty hours">
+          <div class="q q-day" data-day="d1">
+            <div class="q-top"><label for="s-d1">12.01 <small>wt</small></label><output id="o-d1">9:00–17:00</output></div>
+            <div class="hrs"><label>od <input type="range" id="s-d1" min="7" max="23" step="1" value="9"></label><label>do <input type="range" id="e-d1" min="8" max="24" step="1" value="17"></label></div>
+            <small id="h-d1"></small>
+          </div>
+          <div class="q q-day" data-day="d2">
+            <div class="q-top"><label for="s-d2">13.01 <small>śr</small></label><output id="o-d2">11:00–22:00</output></div>
+            <div class="hrs"><label>od <input type="range" id="s-d2" min="7" max="23" step="1" value="11"></label><label>do <input type="range" id="e-d2" min="8" max="24" step="1" value="22"></label></div>
+            <small id="h-d2"></small>
+          </div>
+          <div class="q q-day" data-day="d3">
+            <div class="q-top"><label for="s-d3">14.01 <small>czw</small></label><output id="o-d3">9:00–17:00</output></div>
+            <div class="hrs"><label>od <input type="range" id="s-d3" min="7" max="23" step="1" value="9"></label><label>do <input type="range" id="e-d3" min="8" max="24" step="1" value="17"></label></div>
+            <small id="h-d3"></small>
           </div>
         </div>
         <label class="addon" for="brand">
@@ -337,8 +361,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <p class="note">Jeśli Aperol ma być tylko 13 stycznia od 16:00, wystarczy zjechać suwakiem do 100 sztuk.</p>
       </div>
       <aside class="total" aria-live="polite">
-        <span class="label" id="variant-name">600 kaw + 300 Aperoli + 100 Prosecco</span>
-        <div class="sum" id="sum">14 870 zł</div>
+        <span class="label" id="variant-name">600 kaw + 300 Aperoli + 102 Prosecco</span>
+        <div class="sum" id="sum">15 082 zł</div>
         <span class="sub">netto, do ceny doliczamy VAT</span>
         <hr>
         <ul class="terms">
@@ -362,13 +386,13 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div class="col">
         <span class="label">Po naszej stronie</span>
         <ul>
-          <li><span><b>Barista-barman</b> na trzy dni targowe, do 8 godzin pracy dziennie w godzinach ustalonych z Państwem</span></li>
+          <li><span><b>Barista-barman</b> na trzy dni targowe, do 9 godzin pracy dziennie w godzinach, które ustawią Państwo w wycenie; każda godzina ponad 9 to 100 zł netto</span></li>
           <li><span><b>Moduł barowy 125 cm</b> z możliwością brandingu frontu (+ 200 zł)</span></li>
           <li><span><b>Stanowisko kawowe:</b> ekspres dwugrupowy, młynek, dzbanki, wagi, filtr wody</span></li>
           <li><span><b>Kawa specialty, mleko</b> krowie i roślinne</span></li>
-          <li><span><b>Kubki z nadrukiem</b> – 1 000 sztuk, wspólna pula do kawy, Aperola i Prosecco</span></li>
+          <li><span><b>Kubki z nadrukiem</b> – 1 000 sztuk do kawy i Aperola</span></li>
           <li><span><b>Wszystko do Aperol Spritz:</b> Aperol (40 ml), prosecco, woda gazowana, pomarańcze i lód</span></li>
-          <li><span><b>Prosecco</b> schłodzone, 150 ml w kubku</span></li>
+          <li><span><b>Prosecco</b> schłodzone, 120 ml w jednorazowym kieliszku (kieliszek 1 zł netto)</span></li>
           <li><span><b>Sprzęt barowy</b> i zapasowy młynek w samochodzie</span></li>
         </ul>
       </div>
@@ -390,13 +414,13 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Plan wyjazdu</h2>
-      <p>Przyjazd dzień wcześniej, żeby rano stanowisko było gotowe. Standardowo pracujemy do 8 godzin dziennie, a konkretne godziny ustalimy z Państwem. Poniżej przykładowy układ.</p>
+      <p>Przyjazd dzień wcześniej, żeby rano stanowisko było gotowe. W cenie jest do 9 godzin pracy dziennie, każda kolejna to 100 zł netto. Godziny ustawiają Państwo w wycenie; poniżej układ, od którego zaczęliśmy.</p>
     </div>
     <div class="days">
       <div class="day"><span class="d">11.01 <small>pn</small></span><ul><li><time>wiecz.</time><span>Przyjazd do Kolonii, rozładunek, zameldowanie</span></li></ul></div>
-      <div class="day fair"><span class="d">12.01 <small>wt</small></span><ul><li><time>rano</time><span>Rozstawienie i kalibracja</span></li><li><time>8 h</time><span>Kawa, po południu Aperol Spritz</span></li><li><time>koniec</time><span>Sprzątanie stanowiska</span></li></ul></div>
-      <div class="day fair"><span class="d">13.01 <small>śr</small></span><ul><li><time>rano</time><span>Kalibracja</span></li><li><time>8 h</time><span>Kawa, od 16:00 Aperol Spritz i wieczór na stoisku</span></li><li><time>koniec</time><span>Sprzątanie stanowiska</span></li></ul></div>
-      <div class="day fair"><span class="d">14.01 <small>czw</small></span><ul><li><time>rano</time><span>Kalibracja</span></li><li><time>8 h</time><span>Kawa, po południu Aperol Spritz</span></li><li><time>koniec</time><span>Czyszczenie ekspresu, pakowanie, powrót</span></li></ul></div>
+      <div class="day fair"><span class="d">12.01 <small>wt</small></span><ul><li><time>rano</time><span>Rozstawienie i kalibracja</span></li><li><time>9–17</time><span>Kawa, po południu Aperol Spritz</span></li><li><time>koniec</time><span>Sprzątanie stanowiska</span></li></ul></div>
+      <div class="day fair"><span class="d">13.01 <small>śr</small></span><ul><li><time>rano</time><span>Kalibracja</span></li><li><time>11–22</time><span>Kawa, od 16:00 Aperol Spritz i Prosecco, wieczór na stoisku</span></li><li><time>koniec</time><span>Sprzątanie stanowiska</span></li></ul></div>
+      <div class="day fair"><span class="d">14.01 <small>czw</small></span><ul><li><time>rano</time><span>Kalibracja</span></li><li><time>9–17</time><span>Kawa, po południu Aperol Spritz</span></li><li><time>koniec</time><span>Czyszczenie ekspresu, pakowanie, powrót</span></li></ul></div>
     </div>
   </div>
 </section>
@@ -461,7 +485,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     </div>
     <div class="faq">
       <details><summary>Czy jedna osoba poradzi sobie z kawą i Aperolem?</summary><p>Tak, przy ok. 200 kawach, 100 Aperolach i kilkudziesięciu Prosecco dziennie. Warunek jest jeden: kawa i bar stoją obok siebie, dlatego proponujemy połączyć stanowiska. Jeśli spodziewają się Państwo dużo większego ruchu, dopiszemy drugą osobę.</p></details>
-      <details><summary>W jakich godzinach pracuje barista?</summary><p>W standardowej ofercie obsługa to do 8 godzin dziennie. Targi są otwarte 8:00–19:00, więc godziny pracy ustalimy z Państwem tak, żeby pokryć największy ruch na stoisku, np. 10:00–18:00.</p></details>
+      <details><summary>W jakich godzinach pracuje barista?</summary><p>W cenie jest do 9 godzin dziennie, każda kolejna to 100 zł netto. Targi są otwarte 12.01 8:00–19:00, 13.01 8:00–22:00 i 14.01 8:00–18:00. Godziny ustawiają Państwo suwakami w wycenie; zaczęliśmy od 9:00–17:00 w dni kawowe i 11:00–22:00 w dniu wieczoru z alkoholem.</p></details>
       <details><summary>Co, jeśli kawy, Aperoli albo Prosecco zabraknie?</summary><p>Zapas przywozimy z naddatkiem. Jeśli w trakcie targów wyjdzie więcej, niż Państwo zamówili, rozliczamy różnicę według tych samych stawek: 200 zł za każde 100 kaw i 1 250 zł za każde 100 Aperoli.</p></details>
       <details><summary>Czy możemy zmienić liczbę kaw po akceptacji?</summary><p>Tak, do tygodnia przed targami. Kubki z nadrukiem zamawiamy wcześniej, dlatego ich cena jest stała.</p></details>
       <details><summary>A jeśli ekspres zawiedzie?</summary><p>Mamy własny park maszyn. W samochodzie wieziemy zapasowy młynek i części, więc awaria nie zatrzyma serwisu.</p></details>
@@ -476,7 +500,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div style="display:flex;flex-direction:column;gap:14px">
         <h2>Rezerwujemy termin</h2>
         <p>Proszę odpisać na maila z wybraną wersją albo zadzwonić. Wysyłamy wtedy umowę i fakturę zaliczkową, a po zaksięgowaniu termin jest Państwa.</p>
-        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">600 kaw + 300 Aperoli + 100 Prosecco, 14 870 zł netto</span></p>
+        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">600 kaw + 300 Aperoli + 102 Prosecco, 15 082 zł netto</span></p>
       </div>
       <div class="contact">
         <div class="crow"><span>Tomasz Malinowski</span></div>
@@ -496,14 +520,15 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 (function(){
   // ── Pozycje stałe (PLN netto) ──
   var BASE = [
-    {id:'svc',  what:'Obsługa: barista-barman', why:'1 osoba × 3 dni targowe, do 8 godzin pracy dziennie (godziny do uzgodnienia), kawa i koktajle, z kalibracją i sprzątaniem stanowiska', amt:4800},
+    {id:'svc',  what:'Obsługa: barista-barman', why:'1 osoba × 3 dni targowe, do 9 godzin pracy dziennie (godziny ustawiają Państwo w wycenie), kawa i koktajle, z kalibracją i sprzątaniem stanowiska', amt:4800},
     {id:'kit',  what:'Moduł barowy 125 cm i stanowisko kawowe', why:'nasz bar o długości 125 cm, ekspres dwugrupowy, młynek, akcesoria i filtr wody; przywozimy naszym autem', amt:1200},
     {id:'trip', what:'Dojazd Poznań – Kolonia – Poznań', why:'ok. 1 700 km: czas przejazdu, paliwo i opłaty drogowe', amt:2040},
     {id:'hotel',what:'Nocleg i wyżywienie 11–14.01', why:'3 noce i dieta dla baristy za 3 dni', amt:1500},
-    {id:'cups', what:'Kubki z nadrukiem, 1 000 szt.', why:'wspólna pula do kawy, Aperola i Prosecco', amt:680}
+    {id:'cups', what:'Kubki z nadrukiem, 1 000 szt.', why:'do kawy i Aperola', amt:680}
   ];
   // ── Pozycje z suwaków: cena za każde 100 szt. ──
-  var COFFEE_100 = 200, APEROL_100 = 950, PROSECCO_BOTTLE = 30, PROSECCO_PER_BOTTLE = 5, CUPS = 1000, DAYS = 3;
+  var COFFEE_100 = 200, APEROL_100 = 950, PROSECCO_BOTTLE = 30, PROSECCO_PER_BOTTLE = 6, FLUTE = 1, HOURS_INCL = 9, HOUR_EXTRA = 100, CUPS = 1000, DAYS = 3;
+  var DAYS_CFG = [['d1','12.01'],['d2','13.01'],['d3','14.01']];
   var TICKS = ['Kalibracja przed otwarciem hali','Kawa specialty','Aperol Spritz od 16:00','Kieliszek Prosecco','Jedna osoba, dwa stanowiska','Kubki z nadrukiem'];
 
   var $ = function(id){return document.getElementById(id)};
@@ -515,7 +540,10 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var items = BASE.slice();
     items.push({id:'coffee', what:'Kawa specialty, ' + c + ' szt.', why:'ziarno z palarni specialty, mleko krowie i roślinne', amt:c/100*COFFEE_100});
     if (a > 0) items.push({id:'aperol', what:'Aperol Spritz, ' + a + ' szt.', why:'Aperol 40 ml, prosecco, woda gazowana, pomarańcze i lód', amt:a/100*APEROL_100});
-    if (p > 0) items.push({id:'prosecco', what:'Prosecco, ' + p + ' szt. (' + (p/PROSECCO_PER_BOTTLE) + ' butelek)', why:'150 ml w kubku, 5 kubków z butelki, schłodzone', amt:p/PROSECCO_PER_BOTTLE*PROSECCO_BOTTLE});
+    if (p > 0) { items.push({id:'prosecco', what:'Prosecco, ' + p + ' szt. (' + (p/PROSECCO_PER_BOTTLE) + ' butelek)', why:'120 ml, 6 kieliszków z butelki, schłodzone', amt:p/PROSECCO_PER_BOTTLE*PROSECCO_BOTTLE}); items.push({id:'flutes', what:'Kieliszki jednorazowe do Prosecco, ' + p + ' szt.', why:'1 zł netto za sztukę', amt:p*FLUTE}); }
+    var extra = 0, dayTxt = [];
+    DAYS_CFG.forEach(function(d){ var st = $('s-'+d[0]), en = $('e-'+d[0]); if (+en.value <= +st.value) en.value = +st.value + 1; var h = +en.value - +st.value, ex = Math.max(0, h - HOURS_INCL); extra += ex; $('o-'+d[0]).textContent = st.value + ':00–' + en.value + ':00'; $('h-'+d[0]).textContent = h + ' h pracy' + (ex ? ' · ' + ex + ' h ponad 9 h = ' + fmt(ex*HOUR_EXTRA) + ' netto' : ' · w cenie'); dayTxt.push(d[1] + ' ' + st.value + '–' + en.value); });
+    if (extra > 0) items.push({id:'hours', what:'Dodatkowe godziny pracy, ' + extra + ' h', why:'ponad 9 h dziennie, 100 zł netto za godzinę', amt:extra*HOUR_EXTRA});
     if ($('brand').checked) items.push({id:'brand', what:'Branding modułu barowego', why:'front baru 125 cm z Państwa logo lub grafiką', amt:200});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
@@ -525,14 +553,14 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why;
       ul.appendChild(li);
     });
-    var name = c + ' kaw' + (a > 0 ? ' + ' + a + ' Aperoli' : ', bez Aperola') + (p > 0 ? ' + ' + p + ' Prosecco' : '') + ($('brand').checked ? ' + branding baru' : '');
+    var name = c + ' kaw' + (a > 0 ? ' + ' + a + ' Aperoli' : ', bez Aperola') + (p > 0 ? ' + ' + p + ' Prosecco' : '') + ($('brand').checked ? ' + branding baru' : '') + ' · ' + dayTxt.join(', ');
     $('o-coffee').textContent = c + ' kaw';
     $('o-aperol').textContent = a > 0 ? a + ' szt.' : 'bez Aperola';
     $('h-coffee').textContent = 'ok. ' + Math.round(c/DAYS) + ' dziennie · każde 100 kaw to ' + fmt(COFFEE_100) + ' netto';
     $('h-aperol').textContent = (a === 0 ? 'sama kawa' : a === 100 ? 'np. tylko wieczór 13 stycznia' : 'ok. ' + Math.round(a/DAYS) + ' dziennie') + ' · każde 100 szt. to ' + fmt(APEROL_100) + ' netto';
     $('o-prosecco').textContent = p > 0 ? p + ' szt.' : 'bez Prosecco';
-    $('h-prosecco').textContent = (p === 0 ? 'bez Prosecco' : (p/PROSECCO_PER_BOTTLE) + ' butelek, ok. ' + Math.round(p/DAYS) + ' dziennie') + ' · 150 ml w kubku, 5 kubków z butelki · butelka ' + fmt(PROSECCO_BOTTLE) + ' netto';
-    var used = c + a + p;
+    $('h-prosecco').textContent = (p === 0 ? 'bez Prosecco' : (p/PROSECCO_PER_BOTTLE) + ' butelek, ok. ' + Math.round(p/DAYS) + ' dziennie') + ' · 120 ml w kieliszku, 6 z butelki · butelka ' + fmt(PROSECCO_BOTTLE) + ' + kieliszek ' + fmt(FLUTE) + ' netto';
+    var used = c + a;
     $('cups-note').textContent = used <= CUPS ? 'Kubki: ' + used + ' z 1 000 w cenie – wszystko mieści się w jednej puli.' : 'Kubki: ' + used + ', czyli ' + (used - CUPS) + ' ponad pulę 1 000 w cenie – dodruk kubków wycenimy osobno.';
     $('variant-name').textContent = name;
     $('sum').textContent = fmt(total);
@@ -540,6 +568,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('choice-text').textContent = name + ', ' + fmt(total) + ' netto';
   }
   [rc, ra, rp].forEach(function(r){ r.addEventListener('input', render); });
+  document.querySelectorAll('.hrs input').forEach(function(r){ r.addEventListener('input', render); });
   $('brand').addEventListener('change', render);
   document.querySelectorAll('.q-row button').forEach(function(b){
     b.addEventListener('click', function(){
