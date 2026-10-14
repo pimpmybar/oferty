@@ -352,7 +352,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="steps three">
       <div class="stp"><span class="n">01 · 15 min</span><h3>Podstawy</h3><p>Sprzęt, miary, techniki: shake, stir, build, muddle. Co robi kwas, co robi cukier i dlaczego lód ma znaczenie.</p></div>
       <div class="stp"><span class="n">02 · 3 × 25 min</span><h3>Trzy koktajle</h3><p>Każdy robi każdy koktajl samodzielnie, od dozowania po dekorację. Barman prowadzi krok po kroku i koryguje na bieżąco.</p></div>
-      <div class="stp"><span class="n">03 · 15 min</span><h3>Zdjęcia i karta drinków</h3><p>Wspólne zdjęcie z gotowymi koktajlami i karta z przepisami dla każdego, żeby powtórzyć je w domu.</p></div>
+      <div class="stp"><span class="n">03 · 15 min</span><h3>Zdjęcia na koniec</h3><p>Wspólne zdjęcie z gotowymi koktajlami. Po warsztatach wysyłamy mailem krótki opis, jak powtórzyć koktajle w domu.</p></div>
     </div>
     <div class="photos">
       <figure><img src="assets/warsztaty-stol.jpg" alt="Stanowiska warsztatowe: deski, shakery, jiggery, szkło i owoce" loading="lazy" style="object-position:50% 70%;aspect-ratio:4/3"><figcaption>Stanowiska przed startem: każdy ma własną deskę, shaker, jigger, sitko, szkło i owoce.</figcaption></figure>
@@ -425,7 +425,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
           <li><span><b>Stanowisko dla każdego uczestnika:</b> deska, shaker, jigger, sitko, muddler, łyżka barmańska</span></li>
           <li><span><b>Szkło</b> do każdego koktajlu i lód w kostkach</span></li>
           <li><span><b>Alkohole, syropy, owoce i dodatki</b> do trzech koktajli na osobę</span></li>
-          <li><span><b>Karta drinków</b> z przepisami dla każdego, do zabrania do domu</span></li>
+          <li><span><b>Opis koktajli</b> z warsztatów wysłany mailem po spotkaniu</span></li>
           <li><span><b>Dojazd</b> po Poznaniu i okolicy w cenie; dalej liczymy paliwo</span></li>
         </ul>
       </div>
@@ -512,7 +512,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     {id:'neg', n:'Negroni', t:'stir · gorzki, mocny', pl:'gin, Martini Rosso, Campari'},
     {id:'ape', n:'Aperol Spritz', t:'build · lekki, gorzko-słodki', pl:'Aperol, prosecco, woda gazowana, pomarańcza'}
   ];
-  var TICKS = ['Każdy miksuje sam','Trzy techniki, trzy koktajle','Stanowisko dla każdego','Karta drinków do domu'];
+  var TICKS = ['Każdy miksuje sam','Trzy techniki, trzy koktajle','Stanowisko dla każdego','Opis koktajli mailem po warsztatach'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
   var state = { g: 30, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}), fourth:false, tasting:false, bar:false };
@@ -523,7 +523,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 
   function render(){
     var g = state.g, n = maxN(), rounds = Math.ceil(g/ROUND), items = [];
-    items.push({what:'Warsztaty: barman, sprzęt i szkło', why:'prowadzenie ok. 2 h, stanowisko dla każdego uczestnika, karta drinków, dojazd po Poznaniu', amt:SERVICE});
+    items.push({what:'Warsztaty: barman, sprzęt i szkło', why:'prowadzenie ok. 2 h, stanowisko dla każdego uczestnika, dojazd po Poznaniu', amt:SERVICE});
     items.push({what:'Składniki na 3 koktajle × ' + g + ' osób', why:'alkohole, syropy, owoce, dodatki i lód', amt:g*PER});
     if (state.fourth) items.push({what:'Czwarty koktajl × ' + g + ' osób', why:'składniki, ok. 20 min dłużej', amt:g*FOURTH});
     if (state.tasting) items.push({what:'Degustacja alkoholi, 1 h', why:'prowadzenie; alkohole do degustacji według zakupu, ok. 320 zł', amt:TASTING});
