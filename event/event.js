@@ -130,7 +130,7 @@
   function supply(){
     var sel = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}), n = sel.length || 1, per = Math.ceil((O.poolN || +O.pool) / n), alc = {}, ord = [], gl = {}, gord = [];
     sel.forEach(function(d){ (d.alc||[]).forEach(function(a){ if (!alc[a[0]]){ alc[a[0]] = {ml:0, b:a[2]}; ord.push(a[0]); } alc[a[0]].ml += a[1]*per; }); (d.gl||[]).forEach(function(g){ if (!gl[g]){ gl[g] = 1; gord.push(g); } }); });
-    return {per:per, sel:sel, alc:ord.map(function(k){ var x = alc[k]; return [k, Math.ceil(x.ml/1000/x.b - 1e-9), x.b]; }), gl:gord.map(function(g){ return [g, O.guests]; })};
+    return {per:per, sel:sel, alc:ord.map(function(k){ var x = alc[k]; return [k, Math.ceil(x.ml/1000/x.b - 1e-9), x.b]; }), gl:gord.map(function(g){ return [g, (O.glassCount && O.glassCount[g]) || O.guests]; })};
   }
   function bLab(b){ return (String(b).replace('.',','))+' l'; }
   function supplyHtml(){ var S = supply(), L = T[lang];
