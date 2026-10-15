@@ -361,7 +361,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Obsługa jest stała i obejmuje do 8 godzin, więc 18:00–02:00 i 18:00–24:00 kosztują tyle samo. Składniki, lód i szkło skalują się z liczbą gości. Alkohol możemy kupić my albo Wy.</p>
+      <p>Obsługa obejmuje do 8 godzin, więc 18:00–02:00 i 18:00–24:00 to ta sama cena. Składniki, lód i szkło skalują się z liczbą gości. Alkohol możemy kupić my albo Wy.</p>
     </div>
     <div class="pricing">
       <div>
@@ -373,8 +373,6 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-guests"></small>
           </div>
         </div>
-        <p class="hours-head"><strong>Godziny.</strong> Obie wersje w tej samej cenie – obsługa obejmuje do 8 godzin.</p>
-        <div class="toggle" role="group"><button type="button" id="h-8" aria-pressed="true">18:00–02:00<small>8 godzin</small></button><button type="button" id="h-6" aria-pressed="false">18:00–24:00<small>6 godzin</small></button></div>
         <p class="hours-head"><strong>Alkohol.</strong> Możemy kupić wszystko pod wybrane menu (nieotwarte butelki wracają do Was), albo dostarczacie Wy według naszej listy.</p>
         <div class="toggle" role="group"><button type="button" id="alc-pmb" aria-pressed="true">Kupuje Pimp My Bar<small>wg zakupu, zwrot nieotwartych butelek</small></button><button type="button" id="alc-mia" aria-pressed="false">Dostarczacie Wy<small>dostaniecie listę z ilościami</small></button></div>
         <label class="addon" for="a-wash"><input type="checkbox" id="a-wash" data-add="wash" checked><span><strong>Kelner do zbierania szkła, + 600 zł</strong><small>Zbiera szkło z sali i odnosi na zaplecze przez cały wieczór, barmani nie odchodzą od baru.</small></span></label>
@@ -534,19 +532,17 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var ul = $('lines'); ul.innerHTML='';
     items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
     $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = 'ok. ' + fmtN(cock) + ' koktajli, 3 na osobę';
-    $('h-8').setAttribute('aria-pressed', String(state.h8)); $('h-6').setAttribute('aria-pressed', String(!state.h8));
     $('alc-pmb').setAttribute('aria-pressed', String(state.alc)); $('alc-mia').setAttribute('aria-pressed', String(!state.alc));
     var cnt = state.menu.length;
     document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=5; });
     var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – dobierzcie do 4–5' : 'Wybrane: '+cnt+' z 5';
     var names = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}).join(', ');
-    var name = g + ' osób · ' + (state.h8?'18:00–02:00':'18:00–24:00') + ' · alkohol: ' + (state.alc?'Pimp My Bar':'Wy') + (state.wash?' · kelner do szkła':'') + (state.brand?' · branding':'');
+    var name = g + ' osób · alkohol: ' + (state.alc?'Pimp My Bar':'Wy') + (state.wash?' · kelner do szkła':'') + (state.brand?' · branding':'');
     $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' za osobę';
     $('peek').innerHTML = fmt(total) + '<small>netto</small>'; $('choice-text').textContent = name + ' · menu: ' + names + ', ' + fmt(total) + ' netto';
   }
   $('r-guests').addEventListener('input', function(e){ state.g = +e.target.value; render(); });
   document.querySelectorAll('.q-row button').forEach(function(b){ b.addEventListener('click', function(){ var r=$(b.dataset.for), v=+r.value+(+b.dataset.step)*(+r.step); r.value=Math.min(+r.max,Math.max(+r.min,v)); r.dispatchEvent(new Event('input',{bubbles:true})); r.dispatchEvent(new Event('change',{bubbles:true})); }); });
-  $('h-8').addEventListener('click', function(){ state.h8 = true; render(); }); $('h-6').addEventListener('click', function(){ state.h8 = false; render(); });
   $('alc-pmb').addEventListener('click', function(){ state.alc = true; render(); }); $('alc-mia').addEventListener('click', function(){ state.alc = false; render(); });
   document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){ state[i.dataset.add] = i.checked; render(); }); });
   document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0 && state.menu.length<5) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
@@ -567,7 +563,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var sent={}; function once(key,msg,tags,prio){ if(sent[key]) return; sent[key]=1; ping(msg,tags,prio); }
   function seen(id,key,msg,tags){ var el=document.getElementById(id); if(el && 'IntersectionObserver' in window){ new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ once(key,msg,tags); o.disconnect(); } },{threshold:.3}).observe(el); } }
   seen('wycena','wyc','Ogląda wycenę','moneybag'); seen('podzial','pod','Czyta „Kto co zapewnia”','clipboard'); seen('akceptacja','dol','Doszedł do samego dołu oferty','checkered_flag');
-  ['alc-pmb','alc-mia','h-8','h-6'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ var t=document.getElementById('sum'); ping('Przełączył: '+id+' (razem '+(t?t.textContent:'')+')','gear'); }); });
+  ['alc-pmb','alc-mia'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ var t=document.getElementById('sum'); ping('Przełączył: '+id+' (razem '+(t?t.textContent:'')+')','gear'); }); });
   var r=document.getElementById('r-guests'), tm; r.addEventListener('change',function(){ clearTimeout(tm); tm=setTimeout(function(){ var t=document.getElementById('sum'); ping('Suwak gości → '+r.value+' (razem '+(t?t.textContent:'')+')','busts_in_silhouette'); },2500); });
   document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change',function(){ once('menu','Zmienia menu','cocktail'); }); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Ta wersja nam pasuje” → '+(t?t.textContent:''),'white_check_mark',5); }); });
