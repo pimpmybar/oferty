@@ -343,7 +343,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <div><dt>Termin</dt><dd>12.12.2026, 18:00–02:00 lub 18:00–24:00</dd></div>
         <div><dt>Goście</dt><dd>do 150 osób</dd></div>
         <div><dt>Obsada</dt><dd>2 barmanów + kelner do szkła</dd></div>
-        <div><dt>Koktajle</dt><dd>5 w menu, ok. 450 szt.</dd></div>
+        <div><dt>Koktajle</dt><dd>5 w menu (do 8), ok. 450 szt.</dd></div>
       </dl>
       <div class="price-peek">
         <div class="big num" id="peek"></div>
@@ -398,11 +398,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Menu</h2>
-      <p>Pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund – dokładnie pod „sprawną obsługę bez kolejek”. Zaznaczyliśmy zestaw, który najlepiej idzie na firmówkach w grudniu; możecie wymienić dowolny. Menu nie zmienia ceny obsługi.</p>
+      <p>Zaznaczyliśmy pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund – dokładnie pod „sprawną obsługę bez kolejek”. Możecie wymienić dowolny albo dołożyć kolejne, do ośmiu w menu. Liczba koktajli nie zmienia ceny obsługi; przy alkoholu po naszej stronie lista butelek przelicza się pod wybrane menu.</p>
     </div>
     <div class="split">
       <div class="col">
-        <span class="label">Koktajle · wybierz 5 · ok. 90 szt. każdego</span>
+        <span class="label">Koktajle · od 4 do 8 w menu · razem ok. 450 szt.</span>
         <div class="menu" id="menu-pick" style="margin-top:6px"></div>
         <p class="count" id="m-count"></p>
       </div>
@@ -493,10 +493,10 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     {id:'ws', n:'Whisky Sour', pl:'whiskey, cytryna, syrop cukrowy, Angostura', a:'whiskey', d:1},
     {id:'red', n:'Red Lady', pl:'wódka, puree truskawkowe, marakuja, limonka', a:'wódka', d:1},
     {id:'mule', n:'Moscow Mule', pl:'wódka, limonka, napój imbirowy', a:'wódka', d:1},
-    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco', d:1},
+    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco'},
     {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, cytryna', a:'gin', d:1},
     {id:'man', n:'Mangolita', pl:'wódka, puree z mango, marakuja, limonka', a:'wódka'},
-    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu', a:'prosecco'},
+    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu', a:'prosecco', d:1},
     {id:'gt', n:'Gin & Tonic', pl:'gin, tonik, limonka', a:'gin'},
     {id:'dns', n:"Dark'n'Stormy", pl:'ciemny rum, limonka, napój imbirowy', a:'rum'},
     {id:'cpr', n:'Caipiroska', pl:'wódka, limonka, cukier trzcinowy', a:'wódka'},
@@ -504,11 +504,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     {id:'glu', n:'Grzaniec', pl:'czerwone wino, pomarańcza, przyprawy korzenne – na grudzień', a:'wino'}
   ];
   var ALC = {'whiskey':[65,40],'wódka':[48,40],'gin':[60,40],'rum':[60,40],'Aperol + prosecco':[0,0],'prosecco':[30,100],'wino':[25,150]};
-  var TICKS = ['Każdy koktajl na oczach gości','Pięć szybkich koktajli','Kelner zbiera szkło, barmani przy barze','Wersje 0% bez dopłaty','Winda i schodki – bez problemu'];
+  var TICKS = ['Każdy koktajl na oczach gości','Do ośmiu koktajli w menu','Kelner zbiera szkło, barmani przy barze','Wersje 0% bez dopłaty','Winda i schodki – bez problemu'];
   var state = { g: 150, alc: true, h8: true, wash: true, brand: false, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}) };
   $('menu-pick').innerHTML = DRINKS.map(function(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+d.n+'</strong><small>'+d.pl+'</small></span></label>'; }).join('');
   function alcCost(g){
-    var per = Math.round(g*PER/5), ml = {}, ord = [];
+    var per = Math.round(g*PER/Math.max(1,state.menu.length)), ml = {}, ord = [];
     function add(k, v){ if (!ml[k]){ ml[k]=0; ord.push(k); } ml[k] += v; }
     state.menu.forEach(function(id){ var d = DRINKS.filter(function(x){return x.id===id})[0]; if (!d) return;
       if (d.a==='Aperol + prosecco'){ add('Aperol', 40*per); add('prosecco', 60*per); return; }
@@ -522,7 +522,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var g = state.g, cock = g*PER, items = [];
     items.push({what:'Obsługa: 2 barmanów i 2 moduły barowe', why:'do 8 h, ze sprzętem barowym, transport, montaż i demontaż', amt:SERVICE});
     if (state.wash) items.push({what:'Kelner do zbierania szkła', why:'zbiera szkło z sali przez cały wieczór, barmani nie odchodzą od baru', amt:WASH});
-    items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli', why:'5 koktajli po ok. ' + Math.round(cock/5) + ' szt.; syropy, puree, owoce, dodatki', amt:Math.round(cock*ASORT)});
+    items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli', why:state.menu.length + ' koktajli po ok. ' + Math.round(cock/Math.max(1,state.menu.length)) + ' szt.; syropy, puree, owoce, dodatki', amt:Math.round(cock*ASORT)});
     items.push({what:'Lód, ' + Math.round(g*ICE_KG) + ' kg', why:'do koktajli i chłodzenia', amt:Math.round(g*ICE_KG*ICE)});
     items.push({what:'Wynajem szkła, ' + fmtN(cock) + ' szt.', why:'0,95 zł/szt.; stłuczka 12 zł/szt.', amt:Math.round(cock*GLASS)});
     var a = alcCost(g);
@@ -534,8 +534,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = 'ok. ' + fmtN(cock) + ' koktajli, 3 na osobę';
     $('alc-pmb').setAttribute('aria-pressed', String(state.alc)); $('alc-mia').setAttribute('aria-pressed', String(!state.alc));
     var cnt = state.menu.length;
-    document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=5; });
-    var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – dobierzcie do 4–5' : 'Wybrane: '+cnt+' z 5';
+    document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=8; });
+    var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – dobierzcie co najmniej 4' : 'Wybrane: '+cnt+' z 8';
     var names = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}).join(', ');
     var name = g + ' osób · alkohol: ' + (state.alc?'Pimp My Bar':'Wy') + (state.wash?' · kelner do szkła':'') + (state.brand?' · branding':'');
     $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' za osobę';
@@ -545,7 +545,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   document.querySelectorAll('.q-row button').forEach(function(b){ b.addEventListener('click', function(){ var r=$(b.dataset.for), v=+r.value+(+b.dataset.step)*(+r.step); r.value=Math.min(+r.max,Math.max(+r.min,v)); r.dispatchEvent(new Event('input',{bubbles:true})); r.dispatchEvent(new Event('change',{bubbles:true})); }); });
   $('alc-pmb').addEventListener('click', function(){ state.alc = true; render(); }); $('alc-mia').addEventListener('click', function(){ state.alc = false; render(); });
   document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){ state[i.dataset.add] = i.checked; render(); }); });
-  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0 && state.menu.length<5) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
+  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0 && state.menu.length<8) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
   var ti=0, tk=$('tick'); setInterval(function(){ tk.classList.add('out'); setTimeout(function(){ ti=(ti+1)%TICKS.length; tk.textContent=TICKS[ti]; tk.classList.remove('out'); },350); }, 3200);
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){ var t=$(b.dataset.copy).textContent; navigator.clipboard && navigator.clipboard.writeText(t); b.textContent='Skopiowano'; setTimeout(function(){ b.textContent='Kopiuj'; },1500); }); });
   render();
