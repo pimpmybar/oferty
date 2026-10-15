@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Oferty PMB – panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf8;--card:#fff;--ink:#1d1a16;--mut:#6f675d;--line:#e8e2d9;--acc:#a3591b;--acc2:#f3e7da;--ok:#2f7d4f;--okbg:#e4f3ea;--warn:#b7791f;--warnbg:#fbefd6;--bad:#b3392f;--badbg:#f9e3e0;--hot:#d1452a;--cold:#5b7fa6;--coldbg:#e6eef7}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Instrument Sans",system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3{font-family:"Big Shoulders Display",Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;margin:0}
+h1{font-size:clamp(30px,5vw,48px);font-weight:800}
+h2{font-size:22px;font-weight:800;margin:28px 0 12px}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 16px 80px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header .sub{color:var(--mut);font-size:14px}
+button,.btn{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:8px 13px;cursor:pointer}
+button.p,.btn.p{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+button.s{padding:5px 9px;font-size:13px}
+button:disabled{opacity:.5;cursor:default}
+input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;color:var(--ink)}
+textarea{width:100%;min-height:70px;resize:vertical}
+/* login */
+#login{max-width:380px;margin:60px auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+#login input{width:100%;margin:6px 0 12px}
+.err{color:var(--bad);font-size:14px;min-height:20px}
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:34px;line-height:1;font-weight:800}
+.kpi span{color:var(--mut);font-size:13px}
+.kpi small{display:block;color:var(--mut);font-size:12px;margin-top:4px}
+/* chart */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-x:auto}
+.bars{display:flex;gap:14px;align-items:flex-end;height:150px;padding-top:18px;min-width:320px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:54px;position:relative}
+.bar .st{width:100%;display:flex;gap:3px;align-items:flex-end;height:100%}
+.bar .st i{flex:1;display:block;border-radius:5px 5px 0 0;background:#e3d9cc;position:relative}
+.bar .st i.b{background:var(--ok)}
+.bar .st i.l{background:#e9c7c2}
+.bar .st i::after{content:attr(data-v);position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px;color:var(--mut)}
+.bar .lab{font-size:12px;color:var(--mut);margin-top:6px;white-space:nowrap}
+.bar .conv{font-weight:600;font-size:13px}
+.legend{font-size:12px;color:var(--mut);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 10px;vertical-align:-1px}
+/* today */
+.today{background:var(--acc2);border:1px solid #e9d4bd;border-radius:14px;padding:14px 16px}
+.today ul{margin:8px 0 0;padding-left:18px}
+.today li{margin:4px 0}
+.today .why{color:var(--mut);font-size:13px}
+/* filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+.filters input{min-width:200px;flex:1}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* table */
+.tbl{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);background:#faf7f2;cursor:pointer;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr.row{cursor:pointer}
+tr.row:hover td{background:#fdfbf7}
+.name{font-weight:600}
+.m{color:var(--mut);font-size:13px}
+.tag{display:inline-block;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:600;white-space:nowrap}
+.t-wyslana{background:#eee9e1;color:#5b5349}.t-rozmowa{background:var(--warnbg);color:var(--warn)}.t-zarezerwowana{background:var(--okbg);color:var(--ok)}.t-odrzucona{background:var(--badbg);color:var(--bad)}.t-wygasla{background:#f1f1f1;color:#888}
+.sig{display:inline-block;margin-right:4px;font-size:13px}
+.hot{color:var(--hot);font-weight:600}
+.cold{color:var(--cold)}
+.due{color:var(--bad);font-weight:600}
+.soon{color:var(--warn);font-weight:600}
+.num{text-align:right;white-space:nowrap}
+.hidemob{}
+@media (max-width:760px){.hidemob{display:none}th,td{padding:8px}}
+/* drawer */
+#ov{position:fixed;inset:0;background:rgba(30,25,18,.35);display:none;z-index:9}
+#dr{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .2s;z-index:10;overflow-y:auto;padding:18px 18px 40px}
+#dr.open{transform:none}
+#dr .x{position:absolute;top:12px;right:12px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-size:14px}
+.grid2 .k{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.tl li:last-child{border:0}
+.tl .ic{width:26px;flex:none;text-align:center}
+.tl .t{color:var(--mut);font-size:12px}
+.tl .ev{background:#f6f2ec}
+.frm{display:grid;gap:8px}
+.frm .r{display:flex;gap:8px;flex-wrap:wrap}
+.frm label{font-size:12px;color:var(--mut);display:block;margin-bottom:3px}
+.frm select,.frm input{flex:1;min-width:120px}
+.ok{color:var(--ok);font-size:13px}
+/* ab */
+.ab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.ab .kpi b{font-size:28px}
+.foot{color:var(--mut);font-size:13px;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section id="login">
+  <h1>Oferty PMB</h1>
+  <p class="sub" style="color:var(--mut)">Zaloguj się tym samym kontem, co w PMB Crew.</p>
+  <label>E-mail<input id="l-mail" type="email" autocomplete="username" value=""></label>
+  <label>Hasło<input id="l-pass" type="password" autocomplete="current-password"></label>
+  <div class="err" id="l-err"></div>
+  <button class="p" id="l-go" style="width:100%">Wejdź</button>
+  <p class="m" style="margin-top:12px">Nie pamiętasz hasła? <a href="#" id="l-reset">Wyślij link do zmiany hasła</a></p>
+</section>
+
+<section id="app" style="display:none">
+  <header>
+    <div><h1>Oferty PMB</h1><div class="sub" id="asof"></div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <select id="range"><option value="all">Cały okres</option><option value="30">Ostatnie 30 dni</option><option value="90">Ostatnie 90 dni</option><option value="ytd">Ten rok</option></select>
+      <button id="refresh">Odśwież</button><button id="logout">Wyloguj</button>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Dziś do zrobienia</h2>
+  <div class="today" id="today"></div>
+
+  <h2>Skuteczność w czasie</h2>
+  <div class="chart"><div class="bars" id="bars"></div>
+    <div class="legend"><i style="background:#e3d9cc"></i>wysłane <i style="background:var(--ok)"></i>zarezerwowane <i style="background:#e9c7c2"></i>odrzucone · nad słupkami: liczba, pod miesiącem: konwersja (zarezerwowane / rozstrzygnięte)</div>
+  </div>
+
+  <h2>Wszystkie oferty</h2>
+  <div class="filters">
+    <input id="q" placeholder="Szukaj: klient, kontakt, miejsce…">
+    <div class="chips" id="f-status"></div>
+    <div class="chips" id="f-cat"></div>
+  </div>
+  <div class="tbl"><table id="tbl"><thead><tr>
+    <th data-k="client">Oferta</th><th data-k="sent_at">Wysłana</th><th data-k="event_date" class="hidemob">Impreza</th><th data-k="price_net" class="num">Cena netto</th><th data-k="sessions">Otwarcia</th><th data-k="last_contact" class="hidemob">Ostatni kontakt</th><th data-k="next">Następny krok</th><th data-k="status">Status</th>
+  </tr></thead><tbody id="rows"></tbody></table></div>
+
+  <h2>Porównanie wariantów (A/B)</h2>
+  <div class="ab" id="ab"></div>
+  <p class="m">Wariant nadajesz ofercie w jej szczegółach (np. „wesele-A” / „wesele-B”). Gdy dwie wersje oferty weselnej będą miały po kilkanaście wysyłek, tu zobaczysz, która lepiej sprzedaje.</p>
+
+  <p class="foot">Dane: Supabase <code>offer_sent</code> (rejestr), <code>offer_actions</code> (Twoje kontakty), <code>offer_events</code> (co robi klient na stronie oferty). Rytm przypomnień: dzień 2–3 „doszło?” tylko gdy nieotwarta · dzień 4–5 mail z wartością i terminem · dzień 7–8 telefon · dzień 14 zamknięcie. Powrót do oferty lub ≥3 otwarcia = dzwoń dziś.</p>
+</section>
+</div>
+
+<div id="ov"></div>
+<aside id="dr"><button class="x s" id="dr-x">✕</button><div id="dr-body"></div></aside>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+'use strict';
+var URL_ = 'https://zqpqjgxtefzojhjglppb.supabase.co', KEY = 'sb_publishable__bPrQF9K35vs8RbLdWBRXQ_VBVj2esQ';
+var sb = supabase.createClient(URL_, KEY);
+var $ = function(id){ return document.getElementById(id); };
+var STATUS = ['wyslana','rozmowa','zarezerwowana','odrzucona','wygasla'];
+var SLAB = {wyslana:'wysłana',rozmowa:'rozmowa',zarezerwowana:'zarezerwowana',odrzucona:'odrzucona',wygasla:'wygasła'};
+var CATS = ['wesele','event','przyjecie','warsztaty','targi'];
+var CLAB = {wesele:'wesele',event:'event firmowy',przyjecie:'przyjęcie',warsztaty:'warsztaty',targi:'targi / kawa'};
+var KIND_IC = {telefon:'📞',mail:'✉️',sms:'💬',whatsapp:'🟢',wzk:'💍',spotkanie:'🤝',notatka:'📝',status:'🏷'};
+var offers = [], stats = {}, actions = [], filt = {status:'aktywne', cat:'', q:''}, sort = {k:'next', d:1};
+var DAY = 864e5, today = new Date(); today.setHours(0,0,0,0);
+
+function fmtD(d){ if(!d) return '—'; var x = new Date(d); return x.toLocaleDateString('pl-PL',{day:'2-digit',month:'2-digit',year:'2-digit'}); }
+function fmtDT(d){ var x = new Date(d); return x.toLocaleDateString('pl-PL',{day:'2-digit',month:'2-digit'})+' '+x.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'}); }
+function days(d){ if(!d) return null; return Math.round((new Date(d).setHours(0,0,0,0) - today)/DAY); }
+function pln(n){ return n==null ? '—' : Math.round(+n).toLocaleString('pl-PL')+' zł'; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function mins(s){ if(!s) return '0 min'; return s<60 ? s+' s' : Math.round(s/60)+' min'; }
+
+/* ---------- auth ---------- */
+$('l-go').onclick = function(){
+  $('l-err').textContent = ''; $('l-go').disabled = true;
+  sb.auth.signInWithPassword({email:$('l-mail').value.trim(), password:$('l-pass').value}).then(function(r){
+    $('l-go').disabled = false;
+    if (r.error){ $('l-err').textContent = 'Nie udało się zalogować: '+r.error.message; return; }
+    start();
+  });
+};
+$('l-pass').addEventListener('keydown', function(e){ if(e.key==='Enter') $('l-go').click(); });
+$('l-reset').onclick = function(e){ e.preventDefault(); var m = $('l-mail').value.trim(); if(!m){ $('l-err').textContent = 'Wpisz najpierw e-mail.'; return; }
+  sb.auth.resetPasswordForEmail(m, {redirectTo: location.href.split('#')[0]}).then(function(r){ $('l-err').textContent = r.error ? r.error.message : 'Wysłano link na '+m+'. Kliknij go, wróć tutaj i ustaw nowe hasło.'; }); };
+$('logout').onclick = function(){ sb.auth.signOut().then(function(){ location.reload(); }); };
+try{ $('l-mail').value = localStorage.getItem('pmb-crm-mail') || ''; }catch(e){}
+
+sb.auth.onAuthStateChange(function(ev, sess){
+  if (ev === 'PASSWORD_RECOVERY'){ var p = prompt('Ustaw nowe hasło (min. 8 znaków):'); if (p) sb.auth.updateUser({password:p}).then(function(r){ alert(r.error ? r.error.message : 'Hasło zmienione.'); }); }
+});
+sb.auth.getSession().then(function(r){ if (r.data.session) start(); });
+
+function start(){
+  sb.auth.getUser().then(function(u){ try{ localStorage.setItem('pmb-crm-mail', u.data.user.email); }catch(e){} });
+  $('login').style.display = 'none'; $('app').style.display = '';
+  load();
+}
+
+/* ---------- data ---------- */
+function load(){
+  $('asof').textContent = 'Ładuję…';
+  Promise.all([
+    sb.from('offer_sent').select('*').order('sent_at',{ascending:false}),
+    sb.from('offer_event_stats').select('*'),
+    sb.from('offer_actions').select('*').order('at',{ascending:false})
+  ]).then(function(r){
+    if (r[0].error || r[1].error || r[2].error){ $('asof').textContent = 'Błąd: '+((r[0].error||r[1].error||r[2].error).message); return; }
+    offers = r[0].data; stats = {}; r[1].data.forEach(function(s){ stats[s.offer] = s; }); actions = r[2].data;
+    offers.forEach(decorate);
+    $('asof').textContent = offers.length+' ofert w rejestrze · stan na '+fmtDT(new Date());
+    render();
+  });
+}
+
+/* reguły: co dalej z ofertą */
+function decorate(o){
+  var s = stats[o.offer] || {sessions:0, events:0, returns:0, max_seconds:0};
+  o._s = s;
+  var acts = actions.filter(function(a){ return a.offer === o.offer && a.kind !== 'notatka' && a.kind !== 'status'; });
+  o._acts = actions.filter(function(a){ return a.offer === o.offer; });
+  o._last = acts[0] || null;
+  o._lastContact = o._last ? o._last.at : null;
+  var sinceSent = Math.floor((today - new Date(o.sent_at).setHours(0,0,0,0))/DAY);
+  var sinceContact = o._lastContact ? Math.floor((today - new Date(o._lastContact).setHours(0,0,0,0))/DAY) : null;
+  var toEvent = days(o.event_date);
+  var opened = s.sessions > 0, hot = s.returns > 0 || s.sessions >= 3 || s.clicked_contact || s.clicked_book;
+  o._opened = opened; o._hot = hot;
+  o._sinceSent = sinceSent;
+  var closed = o.status === 'zarezerwowana' || o.status === 'odrzucona' || o.status === 'wygasla';
+  var n = null;
+  if (!closed){
+    if (o.next_action_at){ n = {when: new Date(o.next_action_at), what: o.next_action || 'kontakt', why: 'ustawione ręcznie', manual:true}; }
+    else {
+      var lastT = o._lastContact ? new Date(o._lastContact) : new Date(o.sent_at);
+      var base = new Date(lastT); base.setHours(0,0,0,0);
+      var add = function(d){ var x = new Date(base); x.setDate(x.getDate()+d); return x; };
+      if (toEvent != null && toEvent <= 10 && toEvent >= 0 && (sinceContact == null || sinceContact >= 1)) n = {when: today, what:'telefon', why:'impreza za '+toEvent+' dni'};
+      else if (hot && (sinceContact == null || sinceContact >= 2) && s.last_open && (today - new Date(s.last_open)) < 3*DAY) n = {when: today, what:'telefon', why:'klient wrócił do oferty / mocno czyta'};
+      else if (o.status === 'rozmowa') n = {when: add(3), what:'telefon', why:'po rozmowie – domknij'};
+      else if (!o._last){
+        if (!opened) n = sinceSent < 2 ? {when: add(2), what:'mail „doszło?”', why:'nieotwarta'} : {when: today, what:'mail „doszło?”', why:'nieotwarta od '+sinceSent+' dni'};
+        else n = sinceSent < 4 ? {when: add(4), what:'mail z wartością i terminem', why:'otwarta, brak odpowiedzi'} : {when: today, what: sinceSent >= 7 ? 'telefon' : 'mail z wartością i terminem', why:'otwarta, brak odpowiedzi od '+sinceSent+' dni'};
+      } else {
+        var k = acts.filter(function(a){ return a.kind !== 'notatka'; }).length;
+        if (k === 1) n = {when: add(3), what:'telefon', why:'po 1. przypomnieniu'};
+        else if (k === 2) n = {when: add(6), what:'mail zamykający', why:'po telefonie'};
+        else n = {when: add(14), what:'oznacz jako wygasła lub zadzwoń ostatni raz', why:'3+ kontakty bez decyzji'};
+      }
+    }
+  }
+  o._next = n;
+  o._nextD = n ? Math.round((n.when - today)/DAY) : null;
+}
+
+/* ---------- render ---------- */
+function inRange(o){
+  var r = $('range').value; if (r === 'all') return true;
+  var d = new Date(o.sent_at);
+  if (r === 'ytd') return d.getFullYear() === today.getFullYear();
+  return (today - d) <= (+r)*DAY;
+}
+function render(){ renderKpis(); renderToday(); renderChart(); renderFilters(); renderTable(); renderAB(); }
+
+function renderKpis(){
+  var L = offers.filter(inRange);
+  var sent = L.length, book = L.filter(function(o){ return o.status==='zarezerwowana'; }), lost = L.filter(function(o){ return o.status==='odrzucona'||o.status==='wygasla'; });
+  var open = L.filter(function(o){ return ['zarezerwowana','odrzucona','wygasla'].indexOf(o.status) < 0; });
+  var decided = book.length + lost.length;
+  var conv = decided ? Math.round(100*book.length/decided) : null;
+  var convAll = sent ? Math.round(100*book.length/sent) : 0;
+  var openedPct = sent ? Math.round(100*L.filter(function(o){ return o._opened; }).length/sent) : 0;
+  var val = function(a){ return a.reduce(function(s,o){ return s + (+o.price_net||0); },0); };
+  var touched = L.filter(function(o){ return o._acts.some(function(a){ return a.kind!=='notatka'&&a.kind!=='status'; }); }).length;
+  $('kpis').innerHTML =
+    kpi(sent, 'wysłanych ofert', pln(val(L))+' łącznie') +
+    kpi(book.length, 'zarezerwowanych', pln(val(book))) +
+    kpi(open.length, 'w grze', pln(val(open))+' do zdobycia') +
+    kpi(conv==null ? '—' : conv+'%', 'konwersja', decided ? 'z '+decided+' rozstrzygniętych · '+convAll+'% ze wszystkich' : 'jeszcze nic nie rozstrzygnięte') +
+    kpi(openedPct+'%', 'otwartych przez klienta', L.filter(function(o){ return o._hot; }).length+' „gorących”') +
+    kpi(sent ? Math.round(100*touched/sent)+'%' : '—', 'z przypomnieniem', touched+' ofert z choć 1 kontaktem');
+}
+function kpi(b, l, s){ return '<div class="kpi"><b>'+b+'</b><span>'+l+'</span>'+(s?'<small>'+s+'</small>':'')+'</div>'; }
+
+function renderToday(){
+  var due = offers.filter(function(o){ return o._next && o._nextD <= 0; }).sort(function(a,b){ return (a._nextD-b._nextD) || ((b._hot?1:0)-(a._hot?1:0)); });
+  var soon = offers.filter(function(o){ return o._next && o._nextD > 0 && o._nextD <= 2; });
+  if (!due.length && !soon.length){ $('today').innerHTML = 'Nic pilnego. Wszystkie oferty mają zaplanowany następny krok.'; return; }
+  var h = due.length ? '<b>'+due.length+' do zrobienia dziś</b><ul>'+due.map(function(o){
+    return '<li><a href="#" data-open="'+esc(o.offer)+'">'+esc(o.client)+'</a> — <b>'+esc(o._next.what)+'</b>'+(o.contact_phone?' · '+esc(o.contact_phone):'')+' <span class="why">('+esc(o._next.why)+(o._nextD<0?', zaległe '+(-o._nextD)+' dni':'')+(o._hot?' · 🔥':'')+')</span></li>'; }).join('')+'</ul>' : '<b>Dziś nic zaległego.</b>';
+  if (soon.length) h += '<div class="m" style="margin-top:10px">Najbliżej: '+soon.map(function(o){ return esc(o.client.split(',')[0])+' ('+(o._nextD===1?'jutro':'za 2 dni')+', '+esc(o._next.what)+')'; }).join(' · ')+'</div>';
+  $('today').innerHTML = h;
+}
+
+function renderChart(){
+  var by = {};
+  offers.forEach(function(o){ var k = o.sent_at.slice(0,7); by[k] = by[k] || {s:0,b:0,l:0}; by[k].s++; if (o.status==='zarezerwowana') by[k].b++; if (o.status==='odrzucona'||o.status==='wygasla') by[k].l++; });
+  var keys = Object.keys(by).sort(); var max = Math.max.apply(null, keys.map(function(k){ return by[k].s; }).concat([1]));
+  var prev = null;
+  $('bars').innerHTML = keys.map(function(k){
+    var v = by[k], dec = v.b+v.l, c = dec ? Math.round(100*v.b/dec) : null;
+    var arrow = (c!=null && prev!=null) ? (c>prev ? ' ↑' : c<prev ? ' ↓' : ' →') : ''; if (c!=null) prev = c;
+    var H = function(n){ return Math.max(n ? 4 : 0, Math.round(100*n/max))+'%'; };
+    var d = new Date(k+'-01'); var lab = d.toLocaleDateString('pl-PL',{month:'short',year:'2-digit'});
+    return '<div class="bar"><div class="st"><i style="height:'+H(v.s)+'" data-v="'+v.s+'"></i><i class="b" style="height:'+H(v.b)+'" data-v="'+(v.b||'')+'"></i><i class="l" style="height:'+H(v.l)+'" data-v="'+(v.l||'')+'"></i></div><div class="lab">'+lab+'</div><div class="conv">'+(c==null?'—':c+'%'+arrow)+'</div></div>';
+  }).join('');
+}
+
+function renderFilters(){
+  var cnt = function(f){ return offers.filter(f).length; };
+  var sts = [['aktywne','w grze',function(o){ return o.status==='wyslana'||o.status==='rozmowa'; }],['','wszystkie',function(){ return true; }]].concat(STATUS.map(function(s){ return [s, SLAB[s], function(o){ return o.status===s; }]; }));
+  $('f-status').innerHTML = sts.map(function(x){ return '<span class="chip'+(filt.status===x[0]?' on':'')+'" data-st="'+x[0]+'">'+x[1]+' '+cnt(x[2])+'</span>'; }).join('');
+  $('f-cat').innerHTML = [['','każdy typ']].concat(CATS.map(function(c){ return [c, CLAB[c]]; })).map(function(x){ return '<span class="chip'+(filt.cat===x[0]?' on':'')+'" data-cat="'+x[0]+'">'+x[1]+'</span>'; }).join('');
+}
+function sigs(o){
+  var s = o._s, h = '';
+  if (!o._opened) h += '<span class="sig cold" title="klient nie otworzył">❄️</span>';
+  if (o._hot) h += '<span class="sig hot" title="wraca / długo czyta / kliknął kontakt">🔥</span>';
+  if (s.clicked_book) h += '<span class="sig" title="kliknął Rezerwuję">✅</span>';
+  var te = days(o.event_date); if (te != null && te >= 0 && te <= 14 && o.status!=='zarezerwowana' && o.status!=='odrzucona') h += '<span class="sig soon" title="impreza blisko">⏳</span>';
+  return h;
+}
+function renderTable(){
+  var q = filt.q.toLowerCase();
+  var L = offers.filter(function(o){
+    if (filt.status==='aktywne' && !(o.status==='wyslana'||o.status==='rozmowa')) return false;
+    if (filt.status && filt.status!=='aktywne' && o.status!==filt.status) return false;
+    if (filt.cat && o.category!==filt.cat) return false;
+    if (q && !((o.client||'')+' '+(o.contact_name||'')+' '+(o.notes||'')+' '+(o.offer||'')).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  var val = function(o){ switch(sort.k){ case 'sessions': return o._s.sessions||0; case 'last_contact': return o._lastContact ? +new Date(o._lastContact) : 0; case 'next': return o._nextD==null ? 9e9 : o._nextD; case 'price_net': return +o.price_net||0; case 'event_date': return o.event_date ? +new Date(o.event_date) : 9e15; case 'sent_at': return +new Date(o.sent_at); default: return (o[sort.k]||'').toString().toLowerCase(); } };
+  L.sort(function(a,b){ var x = val(a), y = val(b); return (x>y?1:x<y?-1:0)*sort.d; });
+  $('rows').innerHTML = L.map(function(o){
+    var s = o._s, te = days(o.event_date);
+    var next = o._next ? '<span class="'+(o._nextD<=0?'due':o._nextD<=2?'soon':'')+'">'+(o._nextD<0?'zaległe '+(-o._nextD)+' d':o._nextD===0?'dziś':o._nextD===1?'jutro':'za '+o._nextD+' d')+'</span><div class="m">'+esc(o._next.what)+'</div>' : '<span class="m">—</span>';
+    return '<tr class="row" data-open="'+esc(o.offer)+'">'+
+      '<td><div class="name">'+sigs(o)+esc(o.client)+'</div><div class="m">'+esc(o.contact_name||'')+(o.category?' · '+CLAB[o.category]:'')+(o.source?' · '+esc(o.source):'')+(o.variant?' · <b>'+esc(o.variant)+'</b>':'')+'</div></td>'+
+      '<td>'+fmtD(o.sent_at)+'<div class="m">'+o._sinceSent+' dni temu</div></td>'+
+      '<td class="hidemob">'+fmtD(o.event_date)+(te!=null?'<div class="m">'+(te<0?'minęła':'za '+te+' dni')+'</div>':'')+'</td>'+
+      '<td class="num">'+pln(o.price_net)+'</td>'+
+      '<td>'+(s.sessions? '<b>'+s.sessions+'×</b><div class="m">ost. '+fmtDT(s.last_open)+' · '+mins(s.max_seconds)+(s.reached_bottom?' · do końca':'')+'</div>' : '<span class="cold">nie otwarta</span>')+'</td>'+
+      '<td class="hidemob">'+(o._last ? KIND_IC[o._last.kind]+' '+fmtD(o._last.at)+'<div class="m">'+esc(o._last.outcome||o._last.note||'')+'</div>' : '<span class="m">brak</span>')+'</td>'+
+      '<td>'+next+'</td>'+
+      '<td><span class="tag t-'+o.status+'">'+SLAB[o.status]+'</span></td></tr>';
+  }).join('') || '<tr><td colspan="8" class="m">Brak ofert dla tego filtra.</td></tr>';
+}
+
+function renderAB(){
+  var by = {};
+  offers.forEach(function(o){ var k = o.variant || (o.category ? CLAB[o.category]+' (bez wariantu)' : 'bez wariantu'); by[k] = by[k] || {n:0,b:0,l:0,op:0,t:0,c:0}; var v = by[k]; v.n++; if(o.status==='zarezerwowana') v.b++; if(o.status==='odrzucona'||o.status==='wygasla') v.l++; if(o._opened) v.op++; v.t += o._s.max_seconds||0; if(o._s.clicked_contact||o._s.clicked_book) v.c++; });
+  $('ab').innerHTML = Object.keys(by).sort().map(function(k){ var v = by[k], dec = v.b+v.l;
+    return '<div class="kpi"><span style="font-weight:600;color:var(--ink)">'+esc(k)+'</span><b>'+(dec?Math.round(100*v.b/dec)+'%':'—')+'</b><span>konwersja · '+v.n+' wysłanych, '+v.b+' zarez., '+v.l+' przegr.</span><small>otwarte '+Math.round(100*v.op/v.n)+'% · śr. czas czytania '+mins(Math.round(v.t/v.n))+' · kliknęło kontakt '+v.c+'</small></div>'; }).join('');
+}
+
+/* ---------- drawer ---------- */
+function openDr(id){
+  var o = offers.find(function(x){ return x.offer===id; }); if(!o) return;
+  $('ov').style.display = 'block'; $('dr').classList.add('open');
+  var b = $('dr-body');
+  b.innerHTML = '<h2 style="margin:6px 40px 4px 0">'+esc(o.client)+'</h2><div class="m">'+esc(o.contact_name||'')+(o.contact_phone?' · <a href="tel:'+esc(o.contact_phone)+'">'+esc(o.contact_phone)+'</a>':'')+(o.contact_email?' · <a href="mailto:'+esc(o.contact_email)+'">'+esc(o.contact_email)+'</a>':'')+'</div>'+
+    '<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn" target="_blank" href="'+esc(o.url)+(o.url&&o.url.indexOf('?')<0?'?ja':'&ja')+'">Otwórz ofertę ↗</a>'+(o.contact_phone?'<a class="btn p" href="tel:'+esc(o.contact_phone)+'">📞 Zadzwoń</a>':'')+'</div>'+
+    '<div class="box"><div class="grid2">'+
+      '<div><div class="k">Status</div><select id="d-status">'+STATUS.map(function(s){ return '<option value="'+s+'"'+(o.status===s?' selected':'')+'>'+SLAB[s]+'</option>'; }).join('')+'</select></div>'+
+      '<div><div class="k">Wariant (A/B)</div><input id="d-variant" value="'+esc(o.variant||'')+'" placeholder="np. wesele-A"></div>'+
+      '<div><div class="k">Typ</div><select id="d-cat"><option value="">—</option>'+CATS.map(function(c){ return '<option value="'+c+'"'+(o.category===c?' selected':'')+'>'+CLAB[c]+'</option>'; }).join('')+'</select></div>'+
+      '<div><div class="k">Źródło</div><input id="d-source" value="'+esc(o.source||'')+'" placeholder="wzk / mail / telefon / stały klient"></div>'+
+      '<div><div class="k">Wysłana</div>'+fmtD(o.sent_at)+' ('+o._sinceSent+' dni temu)</div>'+
+      '<div><div class="k">Impreza</div>'+fmtD(o.event_date)+'</div>'+
+      '<div><div class="k">Cena netto</div><input id="d-price" type="number" value="'+(o.price_net||'')+'"></div>'+
+      '<div><div class="k">Goście</div><input id="d-guests" type="number" value="'+(o.guests||'')+'"></div>'+
+      '<div><div class="k">Następny krok – data</div><input id="d-nextat" type="date" value="'+(o.next_action_at||'')+'"></div>'+
+      '<div><div class="k">Następny krok – co</div><input id="d-next" value="'+esc(o.next_action||'')+'" placeholder="telefon / mail / sms"></div>'+
+      '<div style="grid-column:1/-1"><div class="k">Notatki</div><textarea id="d-notes">'+esc(o.notes||'')+'</textarea></div>'+
+      (o.status==='odrzucona'||o.status==='wygasla'?'<div style="grid-column:1/-1"><div class="k">Dlaczego przegrana</div><input id="d-lost" value="'+esc(o.lost_reason||'')+'" placeholder="cena / termin zajęty / brak odpowiedzi / wybrali kogoś innego"></div>':'')+
+    '</div><div style="margin-top:10px;display:flex;gap:8px;align-items:center"><button class="p" id="d-save">Zapisz</button><span class="ok" id="d-ok"></span></div>'+
+    (o._next && !o._next.manual ? '<div class="m" style="margin-top:8px">Podpowiedź systemu: <b>'+esc(o._next.what)+'</b> '+(o._nextD<=0?'dziś':'za '+o._nextD+' dni')+' — '+esc(o._next.why)+'. Wpisz własną datę powyżej, jeśli umówiłeś się inaczej.</div>' : '')+
+    '</div>'+
+    '<div class="box"><b>Dodaj kontakt</b><div class="frm" style="margin-top:8px"><div class="r"><select id="a-kind"><option value="telefon">📞 telefon</option><option value="mail">✉️ mail</option><option value="sms">💬 SMS</option><option value="whatsapp">🟢 WhatsApp</option><option value="wzk">💍 panel WzK</option><option value="spotkanie">🤝 spotkanie</option><option value="notatka">📝 notatka</option></select>'+
+      '<select id="a-out"><option value="">wynik…</option><option>odebrał – rozmawialiśmy</option><option>nie odebrał</option><option>poprosił o czas</option><option>pyta o cenę / rabat</option><option>wysłane, czekam</option><option>zarezerwował</option><option>odmówił</option></select>'+
+      '<input id="a-at" type="datetime-local"></div><textarea id="a-note" placeholder="Co ustaliliście, co obiecałeś, kiedy wrócić…"></textarea>'+
+      '<div class="r"><button class="p" id="a-add">Dodaj</button><span class="ok" id="a-ok"></span></div></div></div>'+
+    '<div class="box"><b>Historia</b><div class="m">Twoje kontakty i wizyty klienta na stronie oferty</div><ul class="tl" id="d-tl"><li class="m">Ładuję…</li></ul></div>';
+  var now = new Date(); now.setMinutes(now.getMinutes()-now.getTimezoneOffset()); $('a-at').value = now.toISOString().slice(0,16);
+
+  $('d-save').onclick = function(){
+    var st = $('d-status').value;
+    var up = {status:st, variant:$('d-variant').value.trim()||null, category:$('d-cat').value||null, source:$('d-source').value.trim()||null, price_net:$('d-price').value?+$('d-price').value:null, guests:$('d-guests').value?+$('d-guests').value:null, next_action_at:$('d-nextat').value||null, next_action:$('d-next').value.trim()||null, notes:$('d-notes').value.trim()||null};
+    if ($('d-lost')) up.lost_reason = $('d-lost').value.trim()||null;
+    var wasClosed = ['zarezerwowana','odrzucona','wygasla'].indexOf(o.status)>=0, isClosed = ['zarezerwowana','odrzucona','wygasla'].indexOf(st)>=0;
+    if (isClosed && !wasClosed) up.closed_at = new Date().toISOString();
+    if (!isClosed && wasClosed) up.closed_at = null;
+    var p = sb.from('offer_sent').update(up).eq('offer', o.offer);
+    p.then(function(r){ if (r.error){ $('d-ok').textContent = 'Błąd: '+r.error.message; return; }
+      var q = st !== o.status ? sb.from('offer_actions').insert({offer:o.offer, kind:'status', note:'Status: '+SLAB[o.status]+' → '+SLAB[st]}) : Promise.resolve({});
+      q.then(function(){ $('d-ok').textContent = 'Zapisano.'; load(); setTimeout(function(){ openDr(o.offer); }, 400); }); });
+  };
+  $('a-add').onclick = function(){
+    var kind = $('a-kind').value, out = $('a-out').value, note = $('a-note').value.trim(), at = $('a-at').value ? new Date($('a-at').value).toISOString() : new Date().toISOString();
+    if (!out && !note){ $('a-ok').textContent = 'Wpisz wynik albo notatkę.'; return; }
+    sb.from('offer_actions').insert({offer:o.offer, kind:kind, outcome:out||null, note:note||null, at:at}).then(function(r){
+      if (r.error){ $('a-ok').textContent = 'Błąd: '+r.error.message; return; }
+      var up = {next_action_at:null};
+      if (kind!=='notatka'){ up.followups = (o.followups||0)+1; up.last_followup_at = at; }
+      if (out==='zarezerwował') up.status = 'zarezerwowana', up.closed_at = at;
+      else if (out==='odmówił') up.status = 'odrzucona', up.closed_at = at;
+      else if (out==='odebrał – rozmawialiśmy' || out==='poprosił o czas' || out==='pyta o cenę / rabat') { if (o.status==='wyslana') up.status = 'rozmowa'; }
+      sb.from('offer_sent').update(up).eq('offer', o.offer).then(function(){ $('a-ok').textContent = 'Dodano.'; load(); setTimeout(function(){ openDr(o.offer); }, 400); });
+    });
+  };
+  // historia
+  sb.from('offer_events').select('session,event,detail,device,created_at').eq('offer', o.offer).order('created_at').then(function(r){
+    var items = [];
+    var raw = r.data ? Object.values(r.data.reduce(function(m,e){ (m[e.session] = m[e.session]||[]).push(e); return m; },{})) : [];
+    raw.sort(function(a,b){ return new Date(a[0].created_at)-new Date(b[0].created_at); });
+    var sess = []; raw.forEach(function(l){ var prev = sess[sess.length-1]; if (prev && (new Date(l[0].created_at)-new Date(prev[0].created_at)) < 15000) { prev.push.apply(prev, l); prev.sort(function(a,b){ return new Date(a.created_at)-new Date(b.created_at); }); } else sess.push(l); });
+    sess.forEach(function(list){ var f = list[0], l = list[list.length-1], secs = 0, bottom = false, acts = [], ret = false;
+      list.forEach(function(e){ if (e.event==='time'){ var v = parseInt((e.detail||'').replace(/\D/g,''),10)||0; if (v>secs) secs=v; } if (e.event==='checkered_flag') bottom = true; if (e.event==='fire' && /Wrócił/.test(e.detail||'')) ret = true;
+        if (['telephone_receiver','speech_balloon','email','white_check_mark','rozmowa','heavy_plus_sign','cocktail','busts_in_silhouette','moneybag','art'].indexOf(e.event)>=0 && e.detail) acts.push(e.detail); });
+      acts = acts.filter(function(x,i,a){ return a.indexOf(x)===i; }).slice(0,6);
+      items.push({at:f.created_at, html:'<div><b>'+(ret?'🔥 Wrócił do oferty':'👀 Otworzył ofertę')+'</b> <span class="t">'+fmtDT(f.created_at)+' · '+esc(f.device||'')+(secs?' · czytał '+mins(secs):'')+(bottom?' · przewinął do końca':'')+'</span>'+(acts.length?'<div class="m">'+acts.map(esc).join(' · ')+'</div>':'')+'</div>', ic:'', cls:'ev'}); });
+    o._acts.forEach(function(a){ items.push({at:a.at, html:'<div><b>'+esc(a.kind==='status'?'Zmiana statusu':a.kind.charAt(0).toUpperCase()+a.kind.slice(1))+'</b>'+(a.outcome?' – '+esc(a.outcome):'')+' <span class="t">'+fmtDT(a.at)+'</span>'+(a.note?'<div class="m">'+esc(a.note)+'</div>':'')+'</div>', ic:KIND_IC[a.kind]||'•'}); });
+    items.push({at:o.sent_at, html:'<div><b>Oferta wysłana</b> <span class="t">'+fmtD(o.sent_at)+'</span></div>', ic:'📨'});
+    items.sort(function(a,b){ return new Date(b.at)-new Date(a.at); });
+    $('d-tl').innerHTML = items.map(function(i){ return '<li class="'+(i.cls||'')+'"><span class="ic">'+i.ic+'</span>'+i.html+'</li>'; }).join('');
+  });
+}
+function closeDr(){ $('ov').style.display = 'none'; $('dr').classList.remove('open'); }
+$('ov').onclick = closeDr; $('dr-x').onclick = closeDr;
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDr(); });
+
+/* ---------- events ---------- */
+document.addEventListener('click', function(e){
+  var t = e.target.closest('[data-open]'); if (t){ e.preventDefault(); openDr(t.dataset.open); return; }
+  var c = e.target.closest('[data-st]'); if (c){ filt.status = c.dataset.st; renderFilters(); renderTable(); return; }
+  var k = e.target.closest('[data-cat]'); if (k){ filt.cat = k.dataset.cat; renderFilters(); renderTable(); return; }
+  var th = e.target.closest('th[data-k]'); if (th){ if (sort.k===th.dataset.k) sort.d = -sort.d; else { sort.k = th.dataset.k; sort.d = 1; } renderTable(); }
+});
+$('q').addEventListener('input', function(){ filt.q = this.value; renderTable(); });
+$('range').addEventListener('change', render);
+$('refresh').onclick = load;
+})();
+</script>
+</body>
+</html>
