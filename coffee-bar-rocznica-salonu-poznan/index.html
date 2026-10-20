@@ -287,17 +287,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Obsługa to stała kwota za cały dzień. Kawę rozliczamy po wydarzeniu za każdy otwarty kilogram ziarna, więc nie muszą Państwo znać liczby gości z góry. Poniżej można sprawdzić, jak zmienia się cena przy większym ruchu.</p>
+      <p>Obsługa to stała kwota za cały dzień, kawa to jeden kilogram ziarna, czyli do 100 kaw. Czy przyjdzie 15, czy 50 gości, cena jest ta sama.</p>
     </div>
     <div class="pricing">
       <div>
         <ul class="lines" id="lines"></ul>
-        <div class="seg" role="group" aria-label="Ile kawy otwieramy" style="margin-top:18px;grid-template-columns:1fr 1fr 1fr">
-          <button type="button" data-kg="1" aria-pressed="true">do 100 kaw</button>
-          <button type="button" data-kg="2" aria-pressed="false">do 200 kaw</button>
-          <button type="button" data-kg="3" aria-pressed="false">do 300 kaw</button>
-        </div>
-        <p class="note" style="margin-top:8px">1 kg kawy to 100 porcji espresso, czyli 100 kaw: espresso, cappuccino czy latte to zawsze jedna porcja. Startujemy od jednego kilograma, kolejne otwieramy tylko wtedy, gdy gości jest więcej, i tylko za te płacą Państwo po wydarzeniu.</p>
+        <p class="note" style="margin-top:14px">Zakładamy 1 kg kawy, czyli do 100 kaw: espresso, cappuccino czy latte to zawsze jedna porcja. Gdyby gości było więcej, otwieramy kolejny kilogram i rozliczamy go po wydarzeniu (200 zł netto za każde kolejne 100 kaw).</p>
         <label class="addon" for="brand">
           <input type="checkbox" id="brand">
           <span><strong>Branding baru Państwa logotypem</strong><small>Na froncie baru drukujemy kliszę z Państwa grafiką (1225 × 1076 mm). Plik potrzebujemy najpóźniej 4 dni robocze przed wydarzeniem. Bez tej opcji bar przyjeżdża w naszej standardowej, eleganckiej okleinie.</small></span>
@@ -489,13 +484,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var TICKS = ['Espresso, cappuccino, latte','Jedna cena, 15 czy 50 gości','Kawa robiona na żywo','Ciasta wydajemy przy barze'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
-  var state = {kg:1, brand:false, cups:'papier'};
+  var state = {brand:false, cups:'papier'};
   var KG = 200;
 
   function render(){
-    var c = BASE.filter(function(i){return i.id==='cof'})[0]; c.amt = KG*state.kg; c.why = state.kg+' kg kawy = do '+(state.kg*100)+' kaw: ziarno, mleko krowie i roślinne, syropy, herbaty. Rozliczenie po wydarzeniu za otwarte kilogramy.';
+    var c = BASE.filter(function(i){return i.id==='cof'})[0]; c.amt = KG; c.why = '1 kg kawy = do 100 kaw: ziarno, mleko krowie i roślinne, syropy, herbaty';
     var b = BASE.filter(function(i){return i.id==='brand'})[0]; b.on = state.brand;
-    document.querySelectorAll('[data-kg]').forEach(function(x){ x.setAttribute('aria-pressed', String(+x.dataset.kg===state.kg)); });
     var total = BASE.reduce(function(s,i){return s+((i.opt&&!i.on)?0:(i.amt||0))},0);
     var ul = $('lines'); ul.innerHTML='';
     BASE.forEach(function(i){
@@ -509,10 +503,9 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('sum').textContent = fmt(total);
     $('peek').innerHTML = fmt(total) + '<small>netto</small>';
     $('variant-name').textContent = 'Coffee bar · 1 dzień' + (state.brand ? ' + branding' : '');
-    $('choice-text').textContent = 'coffee bar 1 dzień do 8 h, 1 barista, do '+(state.kg*100)+' kaw, '+(state.cups==='porcelana'?'porcelana':'kubki papierowe')+(state.brand?', branding baru':'')+', ' + fmt(total) + ' netto';
+    $('choice-text').textContent = 'coffee bar 1 dzień do 8 h, 1 barista, do 100 kaw, '+(state.cups==='porcelana'?'porcelana':'kubki papierowe')+(state.brand?', branding baru':'')+', ' + fmt(total) + ' netto';
   }
   $('brand').addEventListener('change', function(e){state.brand=e.target.checked; render()});
-  document.querySelectorAll('[data-kg]').forEach(function(x){ x.addEventListener('click', function(){ state.kg=+x.dataset.kg; render(); }); });
   document.querySelectorAll('input[name="cups"]').forEach(function(r){ r.addEventListener('change', function(){ state.cups=r.value; render(); }); });
   render();
 
@@ -558,7 +551,6 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   window.addEventListener('scroll',function(){ var h=document.documentElement; var p=Math.round((h.scrollTop+innerHeight)/h.scrollHeight*100); marks.forEach(function(m){ if(p>=m-1 && !hit[m]){ hit[m]=1; if(m===100) ping('Przewinął ofertę do samego dołu','checkered_flag',3); else if(m===50) ping('Przewinął połowę oferty','arrow_down'); } }); },{passive:true});
   var t0=Date.now(); document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden'){ var s=Math.round((Date.now()-t0)/1000); if(s>=20) once('time','Zamknął ofertę po '+(s>=60?Math.round(s/60)+' min':s+' s'),'stopwatch'); } });
   var ck=document.getElementById('brand'); if(ck) ck.addEventListener('change',function(){ if(ck.checked) once('brand','Zaznaczył: branding baru','art',4); });
-  document.querySelectorAll('[data-kg]').forEach(function(b){ b.addEventListener('click',function(){ once('kg'+b.dataset.kg,'Sprawdził wariant: do '+(b.dataset.kg*100)+' kaw','coffee'); }); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Akceptuję” → '+(t?t.textContent:''),'white_check_mark',5); }); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')','telephone_receiver',5); }); });
   document.querySelectorAll('a[href*="instagram.com"]').forEach(function(a){ a.addEventListener('click',function(){ once('ig','Otworzył film z realizacji','movie_camera'); }); });
