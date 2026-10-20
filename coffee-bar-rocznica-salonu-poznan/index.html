@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Coffee bar na rocznicę salonu – oferta Pimp My Bar">
+<meta property="og:description" content="Stand baristy z ekspresem kolbowym na rocznicę salonu meblowego w Poznaniu. Jedna cena, niezależnie od liczby gości.">
+<meta property="og:image" content="https://pimpmybar.github.io/oferty/expo-real-lds/assets/poster.jpg">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Coffee bar na rocznicę salonu – Pimp My Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#fbfaf8; --panel:#ffffff; --sunk:#f2efeb;
+  --ink:#1c1714; --ink-2:#5f5650; --ink-3:#8d847d;
+  --line:#e6e0da; --line-2:#d3cbc3;
+  --crema:#a3591b; --crema-soft:#f5e9dd; --on-crema:#ffffff;
+  --ok:#2f6a45; --ok-soft:#e4efe7;
+  --todo:#fff0a8; --todo-ink:#5a4a00;
+  --scrim:rgba(20,14,10,.62);
+  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#161210; --panel:#1f1a17; --sunk:#1a1613;
+    --ink:#f0eae4; --ink-2:#b9aea5; --ink-3:#877c74;
+    --line:#2f2824; --line-2:#40372f;
+    --crema:#dc9a5c; --crema-soft:#33251a; --on-crema:#1c1410;
+    --ok:#7cc497; --ok-soft:#1a2a20;
+    --todo:#4d4210; --todo-ink:#ffe98a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#161210; --panel:#1f1a17; --sunk:#1a1613;
+  --ink:#f0eae4; --ink-2:#b9aea5; --ink-3:#877c74;
+  --line:#2f2824; --line-2:#40372f;
+  --crema:#dc9a5c; --crema-soft:#33251a; --on-crema:#1c1410;
+  --ok:#7cc497; --ok-soft:#1a2a20;
+  --todo:#4d4210; --todo-ink:#ffe98a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.005em;line-height:.95;margin:0;text-wrap:balance;text-transform:uppercase}
+h2{font-size:clamp(34px,5vw,48px)}
+h3{font-size:22px;font-weight:700;line-height:1.05}
+p{margin:0;max-width:64ch;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--crema)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--crema);outline-offset:3px;border-radius:3px}
+
+/* roboczy tryb — pola do uzupełnienia */
+.todo{background:var(--todo);color:var(--todo-ink);padding:0 .3em;border-radius:3px;font-weight:600}
+.draftbar{background:var(--todo);color:var(--todo-ink);font-size:13.5px;padding-block:9px;text-align:center;font-weight:500}
+body:not(.draft) .draftbar{display:none}
+body:not(.draft) .todo{background:none;color:inherit;padding:0;font-weight:inherit}
+
+/* top */
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
+.brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.brand span{color:var(--crema)}
+.top .label{text-align:right}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:12px 56px}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero h1{font-size:clamp(46px,7.2vw,96px);line-height:.88;overflow-wrap:break-word}
+.hero h1 em{font-style:normal;color:var(--crema)}
+.facts{display:grid;grid-template-columns:repeat(2,auto);justify-content:start;column-gap:36px;row-gap:10px;margin:0}
+.facts div{display:flex;flex-direction:column;gap:1px}
+.facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.facts dd{margin:0;font-weight:600;font-size:17px}
+.price-peek{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:4px}
+.price-peek .big{font-family:var(--display);font-weight:800;font-size:44px;line-height:1}
+.price-peek .big small{font-family:var(--body);font-size:14px;font-weight:500;color:var(--ink-3);letter-spacing:0;text-transform:none;margin-left:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--crema);color:var(--on-crema);font-weight:600;font-size:15.5px;padding:13px 22px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-family:var(--body)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+
+.reel{position:relative;aspect-ratio:9/16;max-height:640px;width:100%;max-width:360px;justify-self:end;border-radius:22px;overflow:hidden;background:#221a15;box-shadow:0 30px 60px -30px rgba(28,23,20,.55)}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,10,0) 45%,var(--scrim) 100%);pointer-events:none}
+.ticker{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#fff;display:flex;flex-direction:column;gap:6px}
+.ticker .label{color:rgba(255,255,255,.75)}
+.ticker .line{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;min-height:2em;transition:opacity .35s}
+.ticker .line.out{opacity:0}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:0}
+  .reel{order:-1;justify-self:stretch;max-width:none;aspect-ratio:4/5;border-radius:16px;max-height:none}
+  .reel::after{background:linear-gradient(180deg,rgba(20,14,10,.1) 20%,var(--scrim) 100%)}
+  .ticker .line{font-size:36px}
+}
+
+/* sections */
+section{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px 48px;align-items:end;margin-bottom:36px}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}}
+
+/* pricing */
+.pricing{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.pricing{grid-template-columns:1fr}}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--sunk);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:18px;max-width:100%}
+.seg button{border:0;background:transparent;font:600 14.5px var(--body);color:var(--ink-2);padding:10px 18px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px var(--line)}
+@media (max-width:460px){.seg{display:grid;width:100%}.seg button{padding:10px 8px;font-size:13.5px;white-space:normal}}
+.lines{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.lines li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding:15px 0;border-bottom:1px solid var(--line)}
+.lines .what{font-weight:600}
+.lines .why{grid-column:1;font-size:14px;color:var(--ink-3)}
+.lines .amt{grid-row:1/span 2;grid-column:2;font-family:var(--mono);font-size:15.5px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.lines li.opt .amt::before{content:"+ ";color:var(--ink-3)}
+.lines li.enter{animation:enter .35s ease-out}
+@keyframes enter{from{background:var(--crema-soft)}to{background:transparent}}
+@media (prefers-reduced-motion:reduce){.lines li.enter{animation:none}}
+.addon{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 16px;border:1px dashed var(--line-2);border-radius:12px;cursor:pointer}
+.addon input{margin-top:4px;accent-color:var(--crema);width:18px;height:18px;flex:none}
+.addon span{display:flex;flex-direction:column;gap:2px}
+.crew{border:0;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.crew legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:0;margin-bottom:8px}
+.crew label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.crew label:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.crew input{margin-top:3px;accent-color:var(--crema);flex:none}
+.crew span{display:flex;flex-direction:column;gap:1px;font-size:14.5px;line-height:1.3}
+.crew small{color:var(--ink-3);font-size:13px;font-family:var(--mono)}
+@media (max-width:640px){.crew{grid-template-columns:1fr}}
+.addon small{color:var(--ink-3);font-size:13.5px}
+
+.total{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 40px -30px rgba(28,23,20,.4)}
+.total .sum{font-family:var(--display);font-weight:800;font-size:clamp(52px,7vw,68px);line-height:.9;font-variant-numeric:tabular-nums}
+.total .sub{font-size:14px;color:var(--ink-3)}
+.total hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.terms{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--ink-2);margin:0;padding:0;list-style:none}
+.terms li{display:flex;justify-content:space-between;gap:12px}
+.terms li b{color:var(--ink);font-weight:600;text-align:right}
+
+/* requirements */
+.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media (max-width:700px){.req{grid-template-columns:1fr}}
+.req div{background:var(--panel);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.req .ask{display:flex;gap:10px;align-items:baseline;font-weight:600;color:var(--ink)}
+.req .ask::before{content:"✓";color:var(--ok);font-weight:700;flex:none}
+.req p{font-size:14.5px}
+
+/* schedule */
+.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.days{grid-template-columns:1fr}}
+.day{border-top:3px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.day.fair{border-top-color:var(--crema)}
+.day .d{font-family:var(--display);font-weight:800;font-size:40px;line-height:.9;text-transform:uppercase}
+.day .d small{font-size:18px;color:var(--ink-3);margin-left:6px}
+.day ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px;color:var(--ink-2)}
+.day li{display:grid;grid-template-columns:48px 1fr;gap:8px}
+.day li time{font-family:var(--mono);font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums;padding-top:1px}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:700px){.team{grid-template-columns:1fr}}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);color:var(--ink-2)}
+.person{flex-direction:row;align-items:flex-start;gap:18px}
+.person .who{display:flex;flex-direction:column;gap:10px;min-width:0}
+.avatar{width:112px;aspect-ratio:4/5;border-radius:12px;object-fit:cover;flex:none;background:var(--sunk);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:36px;color:var(--ink-3)}
+.avatar-ph{border:1px dashed var(--line-2)}
+@media (max-width:420px){.avatar{width:88px}}
+.sca-head{display:flex;flex-direction:column;gap:8px;margin:44px 0 18px;padding-top:28px;border-top:1px dashed var(--line-2)}
+.sca-head .label{color:var(--crema)}
+.sca-head h3{font-size:30px}
+.duo{margin:0 0 18px;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/2;max-width:100%;background:var(--sunk)}
+.duo img{display:block;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#1c1714;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(14px,2.2vw,22px);letter-spacing:.03em;padding:.25em .7em;border-radius:999px;box-shadow:0 6px 18px -6px rgba(0,0,0,.45);white-space:nowrap}
+.tag::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff}
+.chip.k{background:var(--crema-soft);border-color:transparent;color:var(--crema)}
+
+/* work */
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px}
+.gallery figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:var(--sunk)}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;right:10px;color:#fff;font-size:13px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.g1{grid-column:span 7;aspect-ratio:3/2}
+.g2{grid-column:span 5;aspect-ratio:auto}
+.g3,.g4,.g5{grid-column:span 4;aspect-ratio:4/5}
+@media (max-width:640px){.g1,.g2{grid-column:span 12}.g2{aspect-ratio:4/5}.g3,.g4,.g5{grid-column:span 6}.g5{display:none}}
+.refs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px}
+.feature{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:32px}
+@media (max-width:760px){.feature{grid-template-columns:1fr}}
+.fmedia{position:relative;display:block;border-radius:16px;overflow:hidden;aspect-ratio:3/2;background:var(--sunk)}
+.fmedia img,.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.fmedia:hover img{transform:scale(1.03)}
+@media (prefers-reduced-motion:reduce){.fmedia:hover img{transform:none}}
+.play{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1c1714;font-weight:600;font-size:14.5px;padding:10px 16px 10px 12px;border-radius:999px;box-shadow:0 8px 24px -8px rgba(0,0,0,.5)}
+.tri{width:26px;height:26px;border-radius:50%;background:#a3591b;position:relative;flex:none}
+.tri::after{content:"";position:absolute;left:10px;top:7px;border:6px solid transparent;border-left:9px solid #fff;border-right:0}
+.ftext{display:flex;flex-direction:column;gap:10px}
+.ftext h3{font-size:30px}
+.more{font-weight:600;text-decoration:none}
+@media (max-width:760px){.refs{grid-template-columns:1fr}}
+.ref{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.ref .label{color:var(--crema)}
+
+/* kit */
+.kit{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:start}
+@media (max-width:760px){.kit{grid-template-columns:1fr}}
+.kit img{width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover;display:block}
+.spec{width:100%;border-collapse:collapse;font-size:14.5px}
+.spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.spec th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;width:36%;padding-right:14px}
+.note{margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--crema-soft);font-size:14.5px;color:var(--ink)}
+
+/* faq */
+.faq{border-top:1.5px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font-weight:600;font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--display);font-size:30px;color:var(--crema);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding-bottom:18px}
+
+/* evening */
+.evening{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.evening img{width:100%;height:100%;min-height:260px;object-fit:cover;display:block}
+.evening div{padding:28px 28px 28px 0;display:flex;flex-direction:column;gap:12px}
+@media (max-width:700px){.evening{grid-template-columns:1fr}.evening div{padding:0 22px 24px}.evening img{aspect-ratio:3/2;min-height:0}}
+
+/* accept */
+.accept{background:var(--crema-soft);border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:center}
+@media (max-width:760px){.accept{grid-template-columns:1fr}}
+.accept h2{font-size:clamp(40px,6vw,64px)}
+.contact{display:flex;flex-direction:column;gap:10px}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border-radius:12px;padding:12px 14px;border:1px solid var(--line)}
+.crow span{font-weight:600;user-select:all;overflow-wrap:anywhere}
+.copy{border:0;background:var(--sunk);color:var(--ink-2);font:500 13px var(--body);padding:7px 12px;border-radius:999px;cursor:pointer;flex:none}
+.copy.done{background:var(--ok-soft);color:var(--ok)}
+
+footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+<div class="draftbar" role="note">Wersja robocza: żółte pola trzeba uzupełnić przed wysłaniem do klienta.</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://www.pimpmybar.pl" target="_blank" rel="noopener">Pimp My Bar <span>/ Coffee</span></a>
+    <div class="label">Oferta dla Pana Macieja<br>nr PMB-2026-MK-10</div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="label">Rocznica salonu meblowego · Poznań</div>
+      <h1>Kawa od baristy na <em>rocznicę</em> salonu</h1>
+      <p>Dzień dobry, Panie Macieju! Przyjeżdżamy z jednym modułem barowym, ekspresem kolbowym i baristą. Przez cały dzień podajemy klientom salonu espresso, cappuccino, latte i herbatę, a przy okazji wydajemy przygotowane przez Państwa ciasta. Czy gości będzie 15, czy 50, cena obsługi jest jedna.</p>
+      <dl class="facts">
+        <div><dt>Termin</dt><dd>do ustalenia</dd></div>
+        <div><dt>Obsada</dt><dd>1 barista</dd></div>
+        <div><dt>Czas</dt><dd>do 8 godzin</dd></div>
+        <div><dt>Miejsce</dt><dd>salon meblowy, Poznań</dd></div>
+      </dl>
+      <div class="price-peek">
+        <div class="big num" id="peek"></div>
+        <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
+      </div>
+    </div>
+    <div class="reel" aria-label="Film z naszych realizacji kawowych">
+      <video src="../expo-real-lds/assets/hero.mp4" poster="../expo-real-lds/assets/poster.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <div class="ticker" aria-live="off">
+        <span class="label">Pimp My Bar · Coffee</span>
+        <span class="line" id="tick">Espresso, cappuccino, latte</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="wycena">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Wycena</h2>
+      <p>Obsługa to stała kwota za cały dzień. Kawę rozliczamy po wydarzeniu za każdy otwarty kilogram ziarna, więc nie muszą Państwo znać liczby gości z góry. Poniżej można sprawdzić, jak zmienia się cena przy większym ruchu.</p>
+    </div>
+    <div class="pricing">
+      <div>
+        <ul class="lines" id="lines"></ul>
+        <div class="seg" role="group" aria-label="Ile kawy otwieramy" style="margin-top:18px;grid-template-columns:1fr 1fr 1fr">
+          <button type="button" data-kg="1" aria-pressed="true">do 100 kaw</button>
+          <button type="button" data-kg="2" aria-pressed="false">do 200 kaw</button>
+          <button type="button" data-kg="3" aria-pressed="false">do 300 kaw</button>
+        </div>
+        <p class="note" style="margin-top:8px">1 kg kawy to 100 porcji espresso, czyli 100 kaw: espresso, cappuccino czy latte to zawsze jedna porcja. Startujemy od jednego kilograma, kolejne otwieramy tylko wtedy, gdy gości jest więcej, i tylko za te płacą Państwo po wydarzeniu.</p>
+        <label class="addon" for="brand">
+          <input type="checkbox" id="brand">
+          <span><strong>Branding baru Państwa logotypem</strong><small>Na froncie baru drukujemy kliszę z Państwa grafiką (1225 × 1076 mm). Plik potrzebujemy najpóźniej 4 dni robocze przed wydarzeniem. Bez tej opcji bar przyjeżdża w naszej standardowej, eleganckiej okleinie.</small></span>
+        </label>
+        <fieldset class="crew" style="grid-template-columns:1fr 1fr">
+          <legend>W czym podajemy (w cenie, do wyboru)</legend>
+          <label><input type="radio" name="cups" value="papier" checked><span>Kubki papierowe<small>wygodne, goście mogą iść z kawą po salonie</small></span></label>
+          <label><input type="radio" name="cups" value="porcelana"><span>Porcelana<small>filiżanki i spodki, bardziej kawiarnianie</small></span></label>
+        </fieldset>
+      </div>
+      <aside class="total" aria-live="polite">
+        <span class="label" id="variant-name">Coffee bar · 1 dzień</span>
+        <div class="sum" id="sum"></div>
+        <span class="sub">netto, do ceny doliczamy 23% VAT</span>
+        <hr>
+        <ul class="terms">
+          <li>Zaliczka <b>800 zł netto przy podpisaniu umowy</b></li>
+          <li>Reszta <b>przelewem po wydarzeniu</b></li>
+          <li>Czas pracy <b>do 8 h (6 h kosztuje tyle samo)</b></li>
+          <li>Oferta ważna do <b>20.11.2026</b></li>
+        </ul>
+        <a class="btn" href="#akceptacja">Akceptuję ofertę</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Państwa zapytanie</h2>
+      <p>Każdy punkt z maila i to, jak go realizujemy.</p>
+    </div>
+    <div class="req">
+      <div><span class="ask">Stand baristy wydający kawę klientom</span><p>Jeden moduł barowy (1,25 m) z ekspresem kolbowym i młynkiem. Barista robi każdą kawę na żywo: espresso, americano, cappuccino, flat white, latte, także na mleku roślinnym i z syropami. Do tego herbaty.</p></div>
+      <div><span class="ask">Podawanie przygotowanych ciast</span><p>Tak, bez dopłaty. Barista wydaje przy barze ciasta, które Państwo przygotują. Wystarczy postawić je obok baru, resztą zajmujemy się my.</p></div>
+      <div><span class="ask">Długość 6 h albo 8 h</span><p>Cena jest ta sama. Rezerwujemy dla Państwa cały dzień i bar pracuje do 8 godzin, więc 6 godzin mieści się w niej z zapasem.</p></div>
+      <div><span class="ask">Nie wiadomo, ilu będzie klientów: 15 czy 50</span><p>Dlatego obsługa to stała kwota, a kawę rozliczamy po wydarzeniu za otwarte kilogramy. Przy 15 i przy 50 gościach płacą Państwo tyle samo: za jeden kilogram.</p></div>
+      <div><span class="ask">Miejscowość: Poznań</span><p>Jesteśmy z Poznania, dojazd i montaż są w cenie. Przyjeżdżamy około godziny przed startem, demontaż po zakończeniu zajmuje nam pół godziny.</p></div>
+      <div><span class="ask">Kubki</span><p>Kubki papierowe albo porcelana są w cenie usługi. Wybór po Państwa stronie, można go zaznaczyć w wycenie wyżej.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="sprzet">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Co przywozimy i czego potrzebujemy</h2>
+      <p>Jeden moduł barowy z ekspresem kolbowym i młynkiem. Od Państwa potrzebujemy tylko miejsca i gniazdka.</p>
+    </div>
+    <div class="kit">
+      <img src="../expo-real-lds/assets/machine.jpg" alt="Ekspres kolbowy na barze kawowym" loading="lazy">
+      <div>
+        <table class="spec">
+          <tr><th>Bar</th><td>1 moduł barowy 1,25 m, potrzebne ok. 1,5 × 1,5 m miejsca</td></tr>
+          <tr><th>Prąd</th><td>gniazdko 230 V przy barze (najlepiej osobny obwód). Przy przyłączu siłowym 400 V przyjeżdżamy z większym ekspresem, ale nie jest ono konieczne.</td></tr>
+          <tr><th>Woda</th><td>przywozimy własną w kanistrach</td></tr>
+          <tr><th>Kubki</th><td>papierowe albo porcelana, w cenie</td></tr>
+          <tr><th>Grafika</th><td>opcjonalnie klisza 1225 × 1076 mm z Państwa projektu</td></tr>
+        </table>
+        <p class="note">Prosimy o informację mailem, jakie gniazdko będzie dostępne przy barze. Dopasujemy do niego ekspres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Kto przyjedzie</h2>
+      <p>Za barem stanie barista z naszego stałego zespołu kawowego, który obsługuje eventy firmowe i targi w Polsce i za granicą.</p>
+    </div>
+    <figure class="duo">
+      <img src="../expo-real-lds/assets/team-photo.jpg" alt="Patryk i Alicja przy barze kawowym" loading="lazy">
+      <span class="tag" style="left:32%;top:22%">Patryk</span>
+      <span class="tag" style="left:84.5%;top:26%">Alicja</span>
+    </figure>
+    <div class="team">
+      <div class="person">
+        <img class="avatar" src="../expo-real-lds/assets/patryk.jpg" alt="Patryk Mroczkowski">
+        <div class="who">
+          <span class="label">Barista · w Pimp My Bar od 2020</span>
+          <h3>Patryk Mroczkowski</h3>
+          <div class="chips"><span class="chip k">targi zagraniczne</span><span class="chip">latte art</span></div>
+          <p>Obsługiwał stoiska na targach za granicą: Mediolan, Birmingham i Paryż (Sits), Frankfurt i Budapeszt (Niczuk), Düsseldorf (BCS).</p>
+        </div>
+      </div>
+      <div class="person">
+        <img class="avatar" src="../expo-real-lds/assets/alicja.jpg" alt="Alicja Bedynek">
+        <div class="who">
+          <span class="label">Baristka</span>
+          <h3>Alicja Bedynek</h3>
+          <div class="chips"><span class="chip k">Młyńska 12</span><span class="chip">latte art</span></div>
+          <p>Baristka Pimp My Bar na eventach firmowych i targach kawowych. Na co dzień kieruje Młyńską 12 w Poznaniu, kompleksem z restauracją The Time rekomendowaną w Przewodniku Michelin.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Z naszych realizacji</h2>
+      <p>Bary kawowe na eventach firmowych, w salonach i na targach. Wszystkie zdjęcia pochodzą z naszych realizacji.</p>
+    </div>
+    <div class="gallery">
+      <figure class="g1"><img src="../expo-real-lds/assets/stand-wide.jpg" alt="Bar kawowy Pimp My Bar na stoisku" loading="lazy"></figure>
+      <figure class="g2"><img src="../expo-real-lds/assets/stand-barista.jpg" alt="Baristka za barem" loading="lazy"></figure>
+      <figure class="g3"><img src="../expo-real-lds/assets/latte.jpg" alt="Cappuccino z latte art" loading="lazy"></figure>
+      <figure class="g4"><img src="../expo-real-lds/assets/bar-team.jpg" alt="Barista za drewnianym barem" loading="lazy"></figure>
+      <figure class="g5"><img src="../expo-real-lds/assets/cup-bar.jpg" alt="Filiżanka kawy na barze" loading="lazy"></figure>
+    </div>
+    <div class="feature">
+      <a class="fmedia" href="https://www.instagram.com/p/C2c30XzIJnS/" target="_blank" rel="noopener" aria-label="Film z naszego baru kawowego na Instagramie">
+        <img src="../expo-real-lds/assets/bar-wood.jpg" alt="Barista przy barze kawowym Pimp My Bar" loading="lazy" style="object-position:50% 40%">
+        <span class="play"><span class="tri" aria-hidden="true"></span>Zobacz film</span>
+      </a>
+      <div class="ftext">
+        <span class="label">Od 2013</span>
+        <h3>Ponad 2 000 eventów</h3>
+        <p>Firmowe, targowe i prywatne, w Polsce i za granicą. Kawa, koktajle, a często jedno i drugie przy tym samym barze.</p>
+        <a class="more" href="https://www.instagram.com/p/C2c30XzIJnS/" target="_blank" rel="noopener">Film na Instagramie →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Pytania, które zwykle padają</h2>
+      <p>Jeśli czegoś tu brakuje, wystarczy odpisać na maila.</p>
+    </div>
+    <div class="faq">
+      <details><summary>Co jeśli przyjdzie więcej gości, niż zakładamy?</summary><p>Zawsze mamy ze sobą zapas kawy, mleka i kubków na dużo większy ruch. Jeśli zejdzie drugi kilogram, dopiszemy go do faktury po wydarzeniu: 200 zł netto za każde kolejne 100 kaw.</p></details>
+      <details><summary>Czy goście mogą zamawiać różne kawy?</summary><p>Tak, każdy zamawia, co lubi: espresso, americano, cappuccino, flat white, latte, na mleku krowim lub roślinnym, z syropem albo bez. Do tego herbaty. Wszystko liczy się jako jedna porcja.</p></details>
+      <details><summary>Czy możemy podać grafikę na kliszę później?</summary><p>Tak, ale najpóźniej 4 dni robocze przed wydarzeniem, żeby zdążyć z drukiem. Wymiar: 1225 × 1076 mm. Branding jest opcją, bez niego bar i tak wygląda dobrze.</p></details>
+      <details><summary>Jak wygląda rozliczenie?</summary><p>Zaliczka 800 zł netto przy podpisaniu umowy, reszta przelewem po wydarzeniu na podstawie faktury, razem z ewentualnymi dodatkowymi kilogramami kawy.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="evening">
+      <img src="../expo-real-lds/assets/espresso-martini.jpg" alt="Espresso martini" loading="lazy">
+      <div>
+        <span class="label">Na koniec dnia</span>
+        <h3>Koktajle dla klientów przy tym samym barze?</h3>
+        <p>Pimp My Bar zaczynał od koktajli. Jeśli rocznica ma mieć wieczorną część, ten sam bar może podawać espresso martini, Aperol Spritz i koktajle bezalkoholowe. Na życzenie przygotujemy osobną wycenę.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="akceptacja">
+  <div class="wrap">
+    <div class="accept">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <h2>Rezerwujemy termin</h2>
+        <p>Wystarczy odpisać na maila z datą i adresem salonu albo zadzwonić. Wysyłamy umowę i fakturę zaliczkową, a po jej zaksięgowaniu termin jest Państwa.</p>
+        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrany wariant:</strong> <span id="choice-text"></span></p>
+      </div>
+      <div class="contact">
+        <div class="crow"><span>Tomasz Malinowski</span></div>
+        <div class="crow"><span id="c-mail">biuro@pimpmybar.pl</span><button class="copy" type="button" data-copy="c-mail">Kopiuj</button></div>
+        <div class="crow"><span id="c-tel">+48 513 916 977</span><button class="copy" type="button" data-copy="c-tel">Kopiuj</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>Pimp My Bar · Poznań · pimpmybar.pl</span>
+  <span>Ceny netto w PLN. Przygotowane 20.10.2026.</span>
+</footer>
+
+<script>
+(function(){
+  var DRAFT = false;
+  if (DRAFT) document.body.classList.add('draft');
+
+  var BASE = [
+    {id:'svc',  what:'Obsługa baristyczna, 1 dzień', why:'1 barista do 8 h, ekspres kolbowy, młynek, moduł barowy 1,25 m, kubki papierowe lub porcelana, dojazd i montaż w Poznaniu', amt:2200},
+    {id:'cof',  what:'Kawa i asortyment', why:'', amt:200},
+    {id:'brand',what:'Branding baru Państwa logotypem', why:'klisza 1225 × 1076 mm z Państwa projektu, wymiana na miejscu', amt:200, opt:true, on:false}
+  ];
+  var TICKS = ['Espresso, cappuccino, latte','Jedna cena, 15 czy 50 gości','Kawa robiona na żywo','Ciasta wydajemy przy barze'];
+  var $ = function(id){return document.getElementById(id)};
+  var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
+  var state = {kg:1, brand:false, cups:'papier'};
+  var KG = 200;
+
+  function render(){
+    var c = BASE.filter(function(i){return i.id==='cof'})[0]; c.amt = KG*state.kg; c.why = state.kg+' kg kawy = do '+(state.kg*100)+' kaw: ziarno, mleko krowie i roślinne, syropy, herbaty. Rozliczenie po wydarzeniu za otwarte kilogramy.';
+    var b = BASE.filter(function(i){return i.id==='brand'})[0]; b.on = state.brand;
+    document.querySelectorAll('[data-kg]').forEach(function(x){ x.setAttribute('aria-pressed', String(+x.dataset.kg===state.kg)); });
+    var total = BASE.reduce(function(s,i){return s+((i.opt&&!i.on)?0:(i.amt||0))},0);
+    var ul = $('lines'); ul.innerHTML='';
+    BASE.forEach(function(i){
+      if (i.opt && !i.on) return;
+      var li = document.createElement('li');
+      if (i.opt) li.className='opt enter';
+      li.innerHTML = '<span class="what"></span><span class="amt"></span><span class="why"></span>';
+      li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why;
+      ul.appendChild(li);
+    });
+    $('sum').textContent = fmt(total);
+    $('peek').innerHTML = fmt(total) + '<small>netto</small>';
+    $('variant-name').textContent = 'Coffee bar · 1 dzień' + (state.brand ? ' + branding' : '');
+    $('choice-text').textContent = 'coffee bar 1 dzień do 8 h, 1 barista, do '+(state.kg*100)+' kaw, '+(state.cups==='porcelana'?'porcelana':'kubki papierowe')+(state.brand?', branding baru':'')+', ' + fmt(total) + ' netto';
+  }
+  $('brand').addEventListener('change', function(e){state.brand=e.target.checked; render()});
+  document.querySelectorAll('[data-kg]').forEach(function(x){ x.addEventListener('click', function(){ state.kg=+x.dataset.kg; render(); }); });
+  document.querySelectorAll('input[name="cups"]').forEach(function(r){ r.addEventListener('change', function(){ state.cups=r.value; render(); }); });
+  render();
+
+  var t=0, el=$('tick'), reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) setInterval(function(){
+    el.classList.add('out');
+    setTimeout(function(){ t=(t+1)%TICKS.length; el.textContent=TICKS[t]; el.classList.remove('out'); }, 350);
+  }, 2800);
+
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var src=$(b.dataset.copy), txt=src.textContent;
+      var ok=function(){b.textContent='Skopiowano'; b.classList.add('done'); setTimeout(function(){b.textContent='Kopiuj'; b.classList.remove('done')},1600)};
+      var fallback=function(){var r=document.createRange(); r.selectNodeContents(src); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Zaznaczono'};
+      try{ navigator.clipboard.writeText(txt).then(ok, fallback) }catch(e){ fallback() }
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var TOPIC='https://ntfy.sh/pmb-oferty-0d10ca967d', OFERTA='Coffee bar – rocznica salonu meblowego (Maciej)';
+  var owner=false;
+  try{ if(/[?&]ja(=|&|$)/.test(location.search)) localStorage.setItem('pmb_owner','1'); owner=localStorage.getItem('pmb_owner')==='1'; }catch(e){}
+  function ping(msg,tags,prio){
+    if(owner) return;
+    try{
+      var u=TOPIC+'?title='+encodeURIComponent(OFERTA)+'&tags='+encodeURIComponent(tags||'eyes')+(prio?'&priority='+prio:'');
+      fetch(u,{method:'POST',body:msg,keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
+  var dev=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'telefon':'komputer';
+  var first=true; try{ first=!sessionStorage.getItem('pmb_seen_mk'); sessionStorage.setItem('pmb_seen_mk','1'); }catch(e){}
+  if(first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
+  var sent={};
+  function once(key,msg,tags,prio){ if(sent[key]) return; sent[key]=1; ping(msg,tags,prio); }
+  function seen(id,key,msg,tag){ var n=document.getElementById(id); if(n && 'IntersectionObserver' in window){ new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ once(key,msg,tag); o.disconnect(); } },{threshold:.3}).observe(n); } }
+  seen('wycena','wyc','Ogląda wycenę','moneybag');
+  seen('sprzet','spr','Czyta wymagania techniczne (prąd, klisza)','electric_plug');
+  seen('akceptacja','acc0','Doszedł do rezerwacji terminu','checkered_flag');
+  var marks=[25,50,75,100], hit={};
+  window.addEventListener('scroll',function(){ var h=document.documentElement; var p=Math.round((h.scrollTop+innerHeight)/h.scrollHeight*100); marks.forEach(function(m){ if(p>=m-1 && !hit[m]){ hit[m]=1; if(m===100) ping('Przewinął ofertę do samego dołu','checkered_flag',3); else if(m===50) ping('Przewinął połowę oferty','arrow_down'); } }); },{passive:true});
+  var t0=Date.now(); document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden'){ var s=Math.round((Date.now()-t0)/1000); if(s>=20) once('time','Zamknął ofertę po '+(s>=60?Math.round(s/60)+' min':s+' s'),'stopwatch'); } });
+  var ck=document.getElementById('brand'); if(ck) ck.addEventListener('change',function(){ if(ck.checked) once('brand','Zaznaczył: branding baru','art',4); });
+  document.querySelectorAll('[data-kg]').forEach(function(b){ b.addEventListener('click',function(){ once('kg'+b.dataset.kg,'Sprawdził wariant: do '+(b.dataset.kg*100)+' kaw','coffee'); }); });
+  document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Akceptuję” → '+(t?t.textContent:''),'white_check_mark',5); }); });
+  document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')','telephone_receiver',5); }); });
+  document.querySelectorAll('a[href*="instagram.com"]').forEach(function(a){ a.addEventListener('click',function(){ once('ig','Otworzył film z realizacji','movie_camera'); }); });
+  document.querySelectorAll('details').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open) once('faq'+d.querySelector('summary').textContent,'Otworzył pytanie: '+d.querySelector('summary').textContent,'question'); }); });
+})();
+</script>
+
+<script>window.PMB={id:"coffee-rocznica-salonu-mk",title:"Coffee bar – rocznica salonu meblowego (Maciej)"};</script>
+<script src="../wspolne/kontakt.js?v=1"></script>
+</body>
+</html>
