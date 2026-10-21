@@ -51,6 +51,28 @@
     document.addEventListener('visibilitychange', function(){ if (document.visibilityState==='hidden' && active >= 10) track('time', active+' s'); });
   }
 
+  // ── Ostatni wybór klienta (wariant, ilości, menu, dodatki) → offer_events 'wybor' / 'akceptacja' ──
+  // Źródło prawdy: element z podsumowaniem, który silniki i strony samodzielne i tak przeliczają na żywo.
+  (function(){
+    var lastSent = '', timer = null, tries = 0;
+    function node(){ return document.getElementById('choice-text') || document.getElementById('choice'); }
+    function text(){ var n = node(); if (!n) return ''; var t = (n.innerText || n.textContent || '').replace(/\s+/g,' ').trim(); return t.slice(0, 300); }
+    function send(ev){ var t = text(); if (!t) return; if (ev === 'wybor' && t === lastSent) return; lastSent = t; track(ev, t); }
+    function arm(){
+      var n = node();
+      if (!n){ if (tries++ < 20) setTimeout(arm, 500); return; }
+      send('wybor'); // stan startowy (domyślny wariant) – żeby w CRM zawsze był jakiś wybór
+      if ('MutationObserver' in window){
+        new MutationObserver(function(){ clearTimeout(timer); timer = setTimeout(function(){ send('wybor'); }, 1500); }).observe(n, {childList:true, subtree:true, characterData:true});
+      }
+      document.addEventListener('click', function(e){
+        var a = e.target.closest && e.target.closest('[data-book], a[href="#akceptacja"], #send, a[href="#rezerwacja"]');
+        if (a) setTimeout(function(){ send('akceptacja'); }, 50);
+      }, true);
+    }
+    arm();
+  })();
+
   // ── Dymek kontaktowy ──
   var T = TY
     ? {h:'Masz pytania?', p:'Napisz albo zadzwoń – odpowiem od razu.', wa:'WhatsApp', call:'Zadzwoń', msg:'Cześć Tomek, mam pytanie do oferty: '}

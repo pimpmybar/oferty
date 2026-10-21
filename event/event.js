@@ -312,5 +312,5 @@
   if (first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
 
   // Wspólny moduł: alarm „gorący klient” + dymek kontaktowy
-  try{ var ks = document.createElement('script'); ks.src = '../wspolne/kontakt.js?v=1'; document.body.appendChild(ks); }catch(e){}
+  try{ var ks = document.createElement('script'); ks.src = '../wspolne/kontakt.js?v=2'; document.body.appendChild(ks); }catch(e){}
 })();

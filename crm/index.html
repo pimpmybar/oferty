@@ -142,7 +142,7 @@ tr.row:hover td{background:#fdfbf7}
     <div class="chips" id="f-cat"></div>
   </div>
   <div class="tbl"><table id="tbl"><thead><tr>
-    <th data-k="client">Oferta</th><th data-k="sent_at">Wysłana</th><th data-k="event_date" class="hidemob">Impreza</th><th data-k="price_net" class="num">Cena netto</th><th data-k="sessions">Otwarcia</th><th data-k="last_contact" class="hidemob">Ostatni kontakt</th><th data-k="next">Następny krok</th><th data-k="status">Status</th>
+    <th data-k="client">Oferta</th><th data-k="sent_at">Wysłana</th><th data-k="event_date" class="hidemob">Impreza</th><th data-k="price_net" class="num">Cena netto</th><th data-k="choice" class="hidemob">Wybór klienta</th><th data-k="sessions">Otwarcia</th><th data-k="last_contact" class="hidemob">Ostatni kontakt</th><th data-k="next">Następny krok</th><th data-k="status">Status</th>
   </tr></thead><tbody id="rows"></tbody></table></div>
 
   <h2>Porównanie wariantów (A/B)</h2>
@@ -168,7 +168,7 @@ var SLAB = {wyslana:'wysłana',rozmowa:'rozmowa',zarezerwowana:'zarezerwowana',o
 var CATS = ['wesele','event','przyjecie','warsztaty','targi'];
 var CLAB = {wesele:'wesele',event:'event firmowy',przyjecie:'przyjęcie',warsztaty:'warsztaty',targi:'targi / kawa'};
 var KIND_IC = {telefon:'📞',mail:'✉️',sms:'💬',whatsapp:'🟢',wzk:'💍',spotkanie:'🤝',notatka:'📝',status:'🏷'};
-var offers = [], stats = {}, actions = [], filt = {status:'aktywne', cat:'', q:''}, sort = {k:'next', d:1};
+var offers = [], stats = {}, actions = [], choices = {}, filt = {status:'aktywne', cat:'', q:''}, sort = {k:'next', d:1};
 var DAY = 864e5, today = new Date(); today.setHours(0,0,0,0);
 
 function fmtD(d){ if(!d) return '—'; var x = new Date(d); return x.toLocaleDateString('pl-PL',{day:'2-digit',month:'2-digit',year:'2-digit'}); }
@@ -210,10 +210,13 @@ function load(){
   Promise.all([
     sb.from('offer_sent').select('*').order('sent_at',{ascending:false}),
     sb.from('offer_event_stats').select('*'),
-    sb.from('offer_actions').select('*').order('at',{ascending:false})
+    sb.from('offer_actions').select('*').order('at',{ascending:false}),
+    sb.from('offer_events').select('offer,event,detail,created_at,device').in('event',['wybor','akceptacja']).order('created_at',{ascending:false}).limit(3000)
   ]).then(function(r){
     if (r[0].error || r[1].error || r[2].error){ $('asof').textContent = 'Błąd: '+((r[0].error||r[1].error||r[2].error).message); return; }
     offers = r[0].data; stats = {}; r[1].data.forEach(function(s){ stats[s.offer] = s; }); actions = r[2].data;
+    // ostatni wybór klienta na stronie oferty (najnowszy wpis 'wybor' lub 'akceptacja'; akceptacja ma pierwszeństwo, jeśli jest nowsza niż ostatnia zmiana)
+    choices = {}; (r[3].data||[]).forEach(function(e){ var c = choices[e.offer]; if (!c) choices[e.offer] = {last:e, acc:null}; if (e.event==='akceptacja' && !choices[e.offer].acc) choices[e.offer].acc = e; });
     offers.forEach(decorate);
     $('asof').textContent = offers.length+' ofert w rejestrze · stan na '+fmtDT(new Date());
     render();
@@ -224,6 +227,7 @@ function load(){
 function decorate(o){
   var s = stats[o.offer] || {sessions:0, events:0, returns:0, max_seconds:0};
   o._s = s;
+  o._choice = choices[o.offer] || null;
   var acts = actions.filter(function(a){ return a.offer === o.offer && a.kind !== 'notatka' && a.kind !== 'status'; });
   o._acts = actions.filter(function(a){ return a.offer === o.offer; });
   o._last = acts[0] || null;
@@ -327,6 +331,13 @@ function sigs(o){
   var te = days(o.event_date); if (te != null && te >= 0 && te <= 14 && o.status!=='zarezerwowana' && o.status!=='odrzucona') h += '<span class="sig soon" title="impreza blisko">⏳</span>';
   return h;
 }
+function choiceCell(o){
+  var c = o._choice; if (!c) return '<span class="m">—</span>';
+  var e = c.acc || c.last, t = e.detail || '';
+  var m = t.match(/(\d[\d\s\u00a0]*zł)/); var sum = m ? m[1].replace(/\s+/g,' ') : '';
+  var short = t.replace(/\s+/g,' '); if (short.length > 70) short = short.slice(0,70)+'…';
+  return (c.acc ? '<b>✅ zaakceptował</b> ' : '<b>'+esc(sum||'wybór')+'</b> ')+'<div class="m" title="'+esc(t)+'">'+esc(short)+'<br>'+fmtDT(e.created_at)+'</div>';
+}
 function renderTable(){
   var q = filt.q.toLowerCase();
   var L = offers.filter(function(o){
@@ -336,7 +347,7 @@ function renderTable(){
     if (q && !((o.client||'')+' '+(o.contact_name||'')+' '+(o.notes||'')+' '+(o.offer||'')).toLowerCase().includes(q)) return false;
     return true;
   });
-  var val = function(o){ switch(sort.k){ case 'sessions': return o._s.sessions||0; case 'last_contact': return o._lastContact ? +new Date(o._lastContact) : 0; case 'next': return o._nextD==null ? 9e9 : o._nextD; case 'price_net': return +o.price_net||0; case 'event_date': return o.event_date ? +new Date(o.event_date) : 9e15; case 'sent_at': return +new Date(o.sent_at); default: return (o[sort.k]||'').toString().toLowerCase(); } };
+  var val = function(o){ switch(sort.k){ case 'sessions': return o._s.sessions||0; case 'last_contact': return o._lastContact ? +new Date(o._lastContact) : 0; case 'next': return o._nextD==null ? 9e9 : o._nextD; case 'price_net': return +o.price_net||0; case 'choice': return o._choice ? +new Date(o._choice.last.created_at) : 0; case 'event_date': return o.event_date ? +new Date(o.event_date) : 9e15; case 'sent_at': return +new Date(o.sent_at); default: return (o[sort.k]||'').toString().toLowerCase(); } };
   L.sort(function(a,b){ var x = val(a), y = val(b); return (x>y?1:x<y?-1:0)*sort.d; });
   $('rows').innerHTML = L.map(function(o){
     var s = o._s, te = days(o.event_date);
@@ -346,11 +357,12 @@ function renderTable(){
       '<td>'+fmtD(o.sent_at)+'<div class="m">'+o._sinceSent+' dni temu</div></td>'+
       '<td class="hidemob">'+fmtD(o.event_date)+(te!=null?'<div class="m">'+(te<0?'minęła':'za '+te+' dni')+'</div>':'')+'</td>'+
       '<td class="num">'+pln(o.price_net)+'</td>'+
+      '<td class="hidemob">'+choiceCell(o)+'</td>'+
       '<td>'+(s.sessions? '<b>'+s.sessions+'×</b><div class="m">ost. '+fmtDT(s.last_open)+' · '+mins(s.max_seconds)+(s.reached_bottom?' · do końca':'')+'</div>' : '<span class="cold">nie otwarta</span>')+'</td>'+
       '<td class="hidemob">'+(o._last ? KIND_IC[o._last.kind]+' '+fmtD(o._last.at)+'<div class="m">'+esc(o._last.outcome||o._last.note||'')+'</div>' : '<span class="m">brak</span>')+'</td>'+
       '<td>'+next+'</td>'+
       '<td><span class="tag t-'+o.status+'">'+SLAB[o.status]+'</span></td></tr>';
-  }).join('') || '<tr><td colspan="8" class="m">Brak ofert dla tego filtra.</td></tr>';
+  }).join('') || '<tr><td colspan="9" class="m">Brak ofert dla tego filtra.</td></tr>';
 }
 
 function renderAB(){
@@ -383,6 +395,7 @@ function openDr(id){
     '</div><div style="margin-top:10px;display:flex;gap:8px;align-items:center"><button class="p" id="d-save">Zapisz</button><span class="ok" id="d-ok"></span></div>'+
     (o._next && !o._next.manual ? '<div class="m" style="margin-top:8px">Podpowiedź systemu: <b>'+esc(o._next.what)+'</b> '+(o._nextD<=0?'dziś':'za '+o._nextD+' dni')+' — '+esc(o._next.why)+'. Wpisz własną datę powyżej, jeśli umówiłeś się inaczej.</div>' : '')+
     '</div>'+
+    (o._choice ? '<div class="box"><b>'+(o._choice.acc?'✅ Klient zaakceptował ofertę':'Ostatni wybór klienta na stronie')+'</b><div class="m">'+fmtDT((o._choice.acc||o._choice.last).created_at)+' · '+esc((o._choice.acc||o._choice.last).device||'')+(o._choice.acc && o._choice.acc!==o._choice.last ? ' · później jeszcze klikał: '+esc(o._choice.last.detail||'')+' ('+fmtDT(o._choice.last.created_at)+')' : '')+'</div><p style="margin:8px 0 0;white-space:pre-wrap">'+esc((o._choice.acc||o._choice.last).detail||'')+'</p><button class="s" id="d-copy" style="margin-top:8px">Kopiuj do umowy</button></div>' : '<div class="box m">Klient nie zmieniał jeszcze nic w wycenie (brak zapisanego wyboru).</div>')+
     '<div class="box"><b>Dodaj kontakt</b><div class="frm" style="margin-top:8px"><div class="r"><select id="a-kind"><option value="telefon">📞 telefon</option><option value="mail">✉️ mail</option><option value="sms">💬 SMS</option><option value="whatsapp">🟢 WhatsApp</option><option value="wzk">💍 panel WzK</option><option value="spotkanie">🤝 spotkanie</option><option value="notatka">📝 notatka</option></select>'+
       '<select id="a-out"><option value="">wynik…</option><option>odebrał – rozmawialiśmy</option><option>nie odebrał</option><option>poprosił o czas</option><option>pyta o cenę / rabat</option><option>wysłane, czekam</option><option>zarezerwował</option><option>odmówił</option></select>'+
       '<input id="a-at" type="datetime-local"></div><textarea id="a-note" placeholder="Co ustaliliście, co obiecałeś, kiedy wrócić…"></textarea>'+
@@ -390,6 +403,7 @@ function openDr(id){
     '<div class="box"><b>Historia</b><div class="m">Twoje kontakty i wizyty klienta na stronie oferty</div><ul class="tl" id="d-tl"><li class="m">Ładuję…</li></ul></div>';
   var now = new Date(); now.setMinutes(now.getMinutes()-now.getTimezoneOffset()); $('a-at').value = now.toISOString().slice(0,16);
 
+  if ($('d-copy')) $('d-copy').onclick = function(){ var t = (o._choice.acc||o._choice.last).detail||''; try{ navigator.clipboard.writeText(t).then(function(){ $('d-copy').textContent = 'Skopiowano'; }); }catch(e){} };
   $('d-save').onclick = function(){
     var st = $('d-status').value;
     var up = {status:st, variant:$('d-variant').value.trim()||null, category:$('d-cat').value||null, source:$('d-source').value.trim()||null, price_net:$('d-price').value?+$('d-price').value:null, guests:$('d-guests').value?+$('d-guests').value:null, next_action_at:$('d-nextat').value||null, next_action:$('d-next').value.trim()||null, notes:$('d-notes').value.trim()||null};
@@ -423,7 +437,7 @@ function openDr(id){
     var sess = []; raw.forEach(function(l){ var prev = sess[sess.length-1]; if (prev && (new Date(l[0].created_at)-new Date(prev[0].created_at)) < 15000) { prev.push.apply(prev, l); prev.sort(function(a,b){ return new Date(a.created_at)-new Date(b.created_at); }); } else sess.push(l); });
     sess.forEach(function(list){ var f = list[0], l = list[list.length-1], secs = 0, bottom = false, acts = [], ret = false;
       list.forEach(function(e){ if (e.event==='time'){ var v = parseInt((e.detail||'').replace(/\D/g,''),10)||0; if (v>secs) secs=v; } if (e.event==='checkered_flag') bottom = true; if (e.event==='fire' && /Wrócił/.test(e.detail||'')) ret = true;
-        if (['telephone_receiver','speech_balloon','email','white_check_mark','rozmowa','heavy_plus_sign','cocktail','busts_in_silhouette','moneybag','art'].indexOf(e.event)>=0 && e.detail) acts.push(e.detail); });
+        if (['telephone_receiver','speech_balloon','email','white_check_mark','rozmowa','heavy_plus_sign','cocktail','busts_in_silhouette','moneybag','art'].indexOf(e.event)>=0 && e.detail) acts.push(e.detail); if (e.event==='akceptacja') acts.unshift('✅ Akceptuje: '+e.detail); if (e.event==='wybor') acts.push('wybór: '+e.detail); });
       acts = acts.filter(function(x,i,a){ return a.indexOf(x)===i; }).slice(0,6);
       items.push({at:f.created_at, html:'<div><b>'+(ret?'🔥 Wrócił do oferty':'👀 Otworzył ofertę')+'</b> <span class="t">'+fmtDT(f.created_at)+' · '+esc(f.device||'')+(secs?' · czytał '+mins(secs):'')+(bottom?' · przewinął do końca':'')+'</span>'+(acts.length?'<div class="m">'+acts.map(esc).join(' · ')+'</div>':'')+'</div>', ic:'', cls:'ev'}); });
     o._acts.forEach(function(a){ items.push({at:a.at, html:'<div><b>'+esc(a.kind==='status'?'Zmiana statusu':a.kind.charAt(0).toUpperCase()+a.kind.slice(1))+'</b>'+(a.outcome?' – '+esc(a.outcome):'')+' <span class="t">'+fmtDT(a.at)+'</span>'+(a.note?'<div class="m">'+esc(a.note)+'</div>':'')+'</div>', ic:KIND_IC[a.kind]||'•'}); });
