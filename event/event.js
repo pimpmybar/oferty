@@ -174,7 +174,7 @@
     h += '</div><p class="hint" id="f-name"></p><p class="hint designed">'+L.designed+'</p>';
     h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding)+' / '+L.perModule);
     h += addon('coffee', L.aCoffee, L.aCoffeeS, L.ask);
-    h += addon('flair', L.aFlair, L.aFlairS, L.ask);
+    // pokaz flair usunięty z ofert (decyzja 10.2026): PMB nie robi już pokazów barmańskich
     h += '</div></div>';
     h += '<aside class="total" aria-live="polite"><span class="label">'+L.yourPrice+'</span><div class="sum" id="sum"></div><span class="sub" id="pp"></span><hr><ul class="lines" id="lines"></ul><hr><span class="label">'+L.inclH+'</span><ul class="incl" id="incl"></ul><hr><span class="sub">'+t('valid',{d:O.validUntil})+'</span><a class="btn" href="#rezerwacja" data-book>'+L.book+'</a></aside>';
     h += '</div></div></section>';
