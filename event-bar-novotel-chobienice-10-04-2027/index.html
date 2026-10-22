@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Impreza firmowa 10.04.2027, Novotel / Chobienice – Pimp My Bar</title>
+<meta property="og:title" content="Bar na imprezę firmową 10.04.2027 – oferta Pimp My Bar dla STAR ART">
+<meta property="og:description" content="180 osób, 3 barmanów, whisky i koktajle na barze. Novotel Centrum lub Ostoja Chobienice, z alkoholem i bez – cena przelicza się od razu.">
+<meta property="og:image" content="https://pimpmybar.github.io/oferty/warsztaty-erste-leasing-30-os/../wesele/assets/hero.jpg">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#fbfaf8; --panel:#ffffff; --sunk:#f2efeb;
+  --ink:#1c1714; --ink-2:#5f5650; --ink-3:#8d847d;
+  --line:#e6e0da; --line-2:#d3cbc3;
+  --crema:#a3591b; --crema-soft:#f5e9dd; --on-crema:#ffffff;
+  --ok:#2f6a45; --ok-soft:#e4efe7;
+  --todo:#fff0a8; --todo-ink:#5a4a00;
+  --scrim:rgba(20,14,10,.62);
+  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#161210; --panel:#1f1a17; --sunk:#1a1613;
+    --ink:#f0eae4; --ink-2:#b9aea5; --ink-3:#877c74;
+    --line:#2f2824; --line-2:#40372f;
+    --crema:#dc9a5c; --crema-soft:#33251a; --on-crema:#1c1410;
+    --ok:#7cc497; --ok-soft:#1a2a20;
+    --todo:#4d4210; --todo-ink:#ffe98a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#161210; --panel:#1f1a17; --sunk:#1a1613;
+  --ink:#f0eae4; --ink-2:#b9aea5; --ink-3:#877c74;
+  --line:#2f2824; --line-2:#40372f;
+  --crema:#dc9a5c; --crema-soft:#33251a; --on-crema:#1c1410;
+  --ok:#7cc497; --ok-soft:#1a2a20;
+  --todo:#4d4210; --todo-ink:#ffe98a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.005em;line-height:.95;margin:0;text-wrap:balance;text-transform:uppercase}
+h2{font-size:clamp(34px,5vw,48px)}
+h3{font-size:22px;font-weight:700;line-height:1.05}
+p{margin:0;max-width:64ch;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--crema)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--crema);outline-offset:3px;border-radius:3px}
+
+/* roboczy tryb — pola do uzupełnienia */
+.todo{background:var(--todo);color:var(--todo-ink);padding:0 .3em;border-radius:3px;font-weight:600}
+.draftbar{background:var(--todo);color:var(--todo-ink);font-size:13.5px;padding-block:9px;text-align:center;font-weight:500}
+body:not(.draft) .draftbar{display:none}
+body:not(.draft) .todo{background:none;color:inherit;padding:0;font-weight:inherit}
+
+/* top */
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
+.brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.brand span{color:var(--crema)}
+.top .label{text-align:right}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:12px 56px}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero h1{font-size:clamp(44px,6.6vw,88px);line-height:.88;overflow-wrap:break-word}
+.hero h1 em{font-style:normal;color:var(--crema)}
+.facts{display:grid;grid-template-columns:repeat(2,auto);justify-content:start;column-gap:36px;row-gap:10px;margin:0}
+.facts div{display:flex;flex-direction:column;gap:1px}
+.facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.facts dd{margin:0;font-weight:600;font-size:17px}
+.price-peek{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:4px}
+.price-peek .big{font-family:var(--display);font-weight:800;font-size:44px;line-height:1}
+.price-peek .big small{font-family:var(--body);font-size:14px;font-weight:500;color:var(--ink-3);letter-spacing:0;text-transform:none;margin-left:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--crema);color:var(--on-crema);font-weight:600;font-size:15.5px;padding:13px 22px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-family:var(--body)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+
+.reel{position:relative;aspect-ratio:9/16;max-height:640px;width:100%;max-width:360px;justify-self:end;border-radius:22px;overflow:hidden;background:#221a15;box-shadow:0 30px 60px -30px rgba(28,23,20,.55)}
+.reel img,.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,10,0) 45%,var(--scrim) 100%);pointer-events:none}
+.ticker{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#fff;display:flex;flex-direction:column;gap:6px}
+.ticker .label{color:rgba(255,255,255,.75)}
+.ticker .line{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;min-height:2em;transition:opacity .35s}
+.ticker .line.out{opacity:0}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:0}
+  .reel{order:-1;justify-self:stretch;max-width:none;aspect-ratio:4/5;border-radius:16px;max-height:none}
+  .reel::after{background:linear-gradient(180deg,rgba(20,14,10,.1) 20%,var(--scrim) 100%)}
+  .ticker .line{font-size:36px}
+}
+
+/* sections */
+section{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px 48px;align-items:end;margin-bottom:36px}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}}
+
+/* pricing */
+.pricing{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.pricing{grid-template-columns:1fr}}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--sunk);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:18px;max-width:100%}
+.seg button{border:0;background:transparent;font:600 14.5px var(--body);color:var(--ink-2);padding:10px 18px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px var(--line)}
+@media (max-width:460px){.seg{display:grid;width:100%}.seg button{padding:10px 8px;font-size:13.5px;white-space:normal}}
+.lines{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.lines li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding:15px 0;border-bottom:1px solid var(--line)}
+.lines .what{font-weight:600}
+.lines .why{grid-column:1;font-size:14px;color:var(--ink-3)}
+.lines .amt{grid-row:1/span 2;grid-column:2;font-family:var(--mono);font-size:15.5px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.lines li.opt .amt::before{content:"+ ";color:var(--ink-3)}
+.lines li.enter{animation:enter .35s ease-out}
+@keyframes enter{from{background:var(--crema-soft)}to{background:transparent}}
+@media (prefers-reduced-motion:reduce){.lines li.enter{animation:none}}
+.addon{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 16px;border:1px dashed var(--line-2);border-radius:12px;cursor:pointer}
+.addon input{margin-top:4px;accent-color:var(--crema);width:18px;height:18px;flex:none}
+.addon span{display:flex;flex-direction:column;gap:2px}
+.crew{border:0;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.crew legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:0;margin-bottom:8px}
+.crew label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.crew label:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.crew input{margin-top:3px;accent-color:var(--crema);flex:none}
+.crew span{display:flex;flex-direction:column;gap:1px;font-size:14.5px;line-height:1.3}
+.crew small{color:var(--ink-3);font-size:13px;font-family:var(--mono)}
+@media (max-width:640px){.crew{grid-template-columns:1fr}}
+.addon small{color:var(--ink-3);font-size:13.5px}
+
+.total{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 40px -30px rgba(28,23,20,.4)}
+.total .sum{font-family:var(--display);font-weight:800;font-size:clamp(52px,7vw,68px);line-height:.9;font-variant-numeric:tabular-nums}
+.total .sub{font-size:14px;color:var(--ink-3)}
+.total hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.terms{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--ink-2);margin:0;padding:0;list-style:none}
+.terms li{display:flex;justify-content:space-between;gap:12px}
+.terms li b{color:var(--ink);font-weight:600;text-align:right}
+
+/* requirements */
+.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media (max-width:700px){.req{grid-template-columns:1fr}}
+.req div{background:var(--panel);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.req .ask{display:flex;gap:10px;align-items:baseline;font-weight:600;color:var(--ink)}
+.req .ask::before{content:"✓";color:var(--ok);font-weight:700;flex:none}
+.req p{font-size:14.5px}
+
+/* schedule */
+.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.days{grid-template-columns:1fr}}
+.day{border-top:3px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.day.fair{border-top-color:var(--crema)}
+.day .d{font-family:var(--display);font-weight:800;font-size:40px;line-height:.9;text-transform:uppercase}
+.day .d small{font-size:18px;color:var(--ink-3);margin-left:6px}
+.day ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px;color:var(--ink-2)}
+.day li{display:grid;grid-template-columns:48px 1fr;gap:8px}
+.day li time{font-family:var(--mono);font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums;padding-top:1px}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:700px){.team{grid-template-columns:1fr}}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);color:var(--ink-2)}
+.person{flex-direction:row;align-items:flex-start;gap:18px}
+.person .who{display:flex;flex-direction:column;gap:10px;min-width:0}
+.avatar{width:112px;aspect-ratio:4/5;border-radius:12px;object-fit:cover;flex:none;background:var(--sunk);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:36px;color:var(--ink-3)}
+.avatar-ph{border:1px dashed var(--line-2)}
+@media (max-width:420px){.avatar{width:88px}}
+.sca-head{display:flex;flex-direction:column;gap:8px;margin:44px 0 18px;padding-top:28px;border-top:1px dashed var(--line-2)}
+.sca-head .label{color:var(--crema)}
+.sca-head h3{font-size:30px}
+.duo{margin:0 0 18px;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/2;max-width:100%;background:var(--sunk)}
+.duo img{display:block;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#1c1714;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(14px,2.2vw,22px);letter-spacing:.03em;padding:.25em .7em;border-radius:999px;box-shadow:0 6px 18px -6px rgba(0,0,0,.45);white-space:nowrap}
+.tag::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff}
+.chip.k{background:var(--crema-soft);border-color:transparent;color:var(--crema)}
+
+/* work */
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px}
+.gallery figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:var(--sunk)}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;right:10px;color:#fff;font-size:13px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.g1{grid-column:span 7;aspect-ratio:3/2}
+.g2{grid-column:span 5;aspect-ratio:auto}
+.g3,.g4,.g5{grid-column:span 4;aspect-ratio:4/5}
+@media (max-width:640px){.g1,.g2{grid-column:span 12}.g2{aspect-ratio:4/5}.g3,.g4,.g5{grid-column:span 6}.g5{display:none}}
+.refs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px}
+.feature{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:32px}
+@media (max-width:760px){.feature{grid-template-columns:1fr}}
+.fmedia{position:relative;display:block;border-radius:16px;overflow:hidden;aspect-ratio:3/2;background:var(--sunk)}
+.fmedia img,.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.fmedia:hover img{transform:scale(1.03)}
+@media (prefers-reduced-motion:reduce){.fmedia:hover img{transform:none}}
+.play{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1c1714;font-weight:600;font-size:14.5px;padding:10px 16px 10px 12px;border-radius:999px;box-shadow:0 8px 24px -8px rgba(0,0,0,.5)}
+.tri{width:26px;height:26px;border-radius:50%;background:#a3591b;position:relative;flex:none}
+.tri::after{content:"";position:absolute;left:10px;top:7px;border:6px solid transparent;border-left:9px solid #fff;border-right:0}
+.ftext{display:flex;flex-direction:column;gap:10px}
+.ftext h3{font-size:30px}
+.more{font-weight:600;text-decoration:none}
+@media (max-width:760px){.refs{grid-template-columns:1fr}}
+.ref{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.ref .label{color:var(--crema)}
+
+/* kit */
+.kit{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:start}
+@media (max-width:760px){.kit{grid-template-columns:1fr}}
+.kit img{width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover;display:block}
+.spec{width:100%;border-collapse:collapse;font-size:14.5px}
+.spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.spec th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;width:36%;padding-right:14px}
+.note{margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--crema-soft);font-size:14.5px;color:var(--ink)}
+
+/* faq */
+.faq{border-top:1.5px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font-weight:600;font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--display);font-size:30px;color:var(--crema);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding-bottom:18px}
+
+/* evening */
+.evening{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.evening img{width:100%;height:100%;min-height:260px;object-fit:cover;display:block}
+.evening div{padding:28px 28px 28px 0;display:flex;flex-direction:column;gap:12px}
+@media (max-width:700px){.evening{grid-template-columns:1fr}.evening div{padding:0 22px 24px}.evening img{aspect-ratio:3/2;min-height:0}}
+
+/* accept */
+.accept{background:var(--crema-soft);border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:center}
+@media (max-width:760px){.accept{grid-template-columns:1fr}}
+.accept h2{font-size:clamp(40px,6vw,64px)}
+.contact{display:flex;flex-direction:column;gap:10px}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border-radius:12px;padding:12px 14px;border:1px solid var(--line)}
+.crow span{font-weight:600;user-select:all;overflow-wrap:anywhere}
+.copy{border:0;background:var(--sunk);color:var(--ink-2);font:500 13px var(--body);padding:7px 12px;border-radius:999px;cursor:pointer;flex:none}
+.copy.done{background:var(--ok-soft);color:var(--ok)}
+
+footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qty{margin-top:22px;display:grid;gap:14px}
+.q{background:var(--panel);border:1px solid var(--line-2);border-radius:14px;padding:16px 18px;display:grid;gap:10px}
+.q-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.q-top label{font-weight:600;font-size:16px}
+.q-top output{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.q small{color:var(--ink-3);font-size:13.5px}
+.q-row{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:10px;align-items:center}
+.q-row button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:var(--sunk);color:var(--ink);font:600 22px/1 var(--body);cursor:pointer}
+.q-row button:hover{border-color:var(--crema)}
+.hours-head{margin-top:22px;font-size:15px;line-height:1.5}
+.hours{margin-top:12px}
+.hrs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hrs label{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2)}
+.hrs input{flex:1;min-width:0}
+.q-day .q-top output{font-size:24px}
+.q input[type=range]{width:100%;height:32px;accent-color:var(--crema);margin:0;cursor:pointer}
+#menu .split.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){#menu .split.three{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:700px){.split{grid-template-columns:1fr}}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.col li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;font-size:15px;color:var(--ink-2)}
+.col li::before{content:"✓";color:var(--ok);font-weight:700}
+.col.you li::before{content:"→";color:var(--crema)}
+.col li b{color:var(--ink);font-weight:600}
+.team.one{grid-template-columns:1fr}
+
+.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.photos{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr) minmax(0,1.3fr);gap:14px;margin-top:8px;align-items:start}
+.photos .film video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px}
+.steps.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.talk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+.talkpics{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:var(--sunk)}
+.talkpics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.talk .col{display:flex;flex-direction:column;gap:14px;border:0;background:none;padding:0}
+.talk h2{font-size:clamp(34px,5vw,54px)}
+.talkbtns{display:flex;flex-wrap:wrap;gap:10px}
+.talk .step{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--crema)}
+@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{max-width:320px}}
+.photos figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--sunk)}
+.photos img{display:block;width:100%;height:100%;object-fit:cover}
+.photos figcaption{font-size:13.5px;color:var(--ink-3);padding:8px 2px 0}
+.photos figure{display:flex;flex-direction:column;aspect-ratio:auto}
+.photos figure img{aspect-ratio:4/5}
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+@media (max-width:560px){.menu{grid-template-columns:1fr}.photos{grid-template-columns:1fr}.steps.three{grid-template-columns:1fr}}
+.drink{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.drink:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.drink:has(input:disabled){opacity:.45;cursor:not-allowed}
+.drink input{margin-top:3px;accent-color:var(--crema);width:17px;height:17px;flex:none}
+.drink>span{display:flex;flex-direction:column;gap:1px;font-size:14.5px;line-height:1.3;min-width:0}
+.drink small{color:var(--ink-3);font-size:12.5px}
+.drink em{font-style:normal;font-size:13px;color:var(--ink-2)}
+.count{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-top:10px}
+.count.bad{color:#a3391b}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stp{border-top:3px solid var(--crema);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.stp .n{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--ink-3)}
+.stp h3{font-size:22px}
+.stp p{font-size:14.5px;color:var(--ink-2)}
+
+</style>
+</head>
+<body>
+<style>
+.menu{display:grid;grid-template-columns:1fr;gap:8px}
+.drink{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.drink:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.drink:has(input:disabled){opacity:.45;cursor:not-allowed}
+.drink input{margin-top:3px;accent-color:var(--crema);width:17px;height:17px;flex:none}
+.drink>span{display:flex;flex-direction:column;gap:1px;font-size:14px;line-height:1.3}
+.drink small{color:var(--ink-3);font-size:12.5px}
+.count{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-top:10px}
+.count.bad{color:#a3391b}
+.toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.toggle button{padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;background:var(--panel);color:var(--ink);font:600 14.5px var(--body);cursor:pointer;text-align:left}
+.toggle button[aria-pressed="true"]{border-color:var(--crema);background:var(--crema-soft)}
+.toggle button small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:2px}
+.sub-lines{margin:6px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-3);display:grid;gap:3px}
+.sub-lines li{display:flex;justify-content:space-between;gap:12px}
+</style>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://www.pimpmybar.pl" target="_blank" rel="noopener">Pimp My Bar <span>/ Event bar</span></a>
+    <div class="label">Oferta dla: STAR ART<br>nr PMB-2027-04-STARART</div>
+  </header>
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="label">Impreza firmowa · 10.04.2027 · Novotel Centrum lub Ostoja Chobienice</div>
+      <h1>Bar na <em>mocny</em> wieczór</h1>
+      <p>Dzień dobry! Dziękujemy za kolejne zapytanie. Pod Wasze założenia: wódka w stołach po stronie klienta, a u nas na barze koktajle i whisky – czysta lub z colą. Branża budowlana i 18:00–02:00, więc liczymy cztery koktajle na osobę i trzech barmanów, żeby nie było kolejek. Poniżej wybierzecie miejsce, obsadę, menu i wersję z alkoholem lub bez – cena przelicza się od razu.</p>
+      <dl class="facts">
+        <div><dt>Termin</dt><dd>10.04.2027, 18:00–02:00</dd></div>
+        <div><dt>Goście</dt><dd>180 osób</dd></div>
+        <div><dt>Obsada</dt><dd>3 barmanów + kelner do szkła</dd></div>
+        <div><dt>Koktajle</dt><dd>5 w menu (do 8), ok. 720 szt. + whisky</dd></div>
+      </dl>
+      <div class="price-peek">
+        <div class="big num" id="peek"></div>
+        <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
+      </div>
+    </div>
+    <div class="reel" aria-label="Film z naszych realizacji">
+      <video src="../expo-real-lds/assets/hero.mp4" poster="../expo-real-lds/assets/poster.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <div class="ticker" aria-live="off"><span class="label">Pimp My Bar na eventach</span><span class="line" id="tick">Każdy koktajl na oczach gości</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="wycena">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Wycena</h2>
+      <p>Obsługa obejmuje do 8 godzin, czyli całe 18:00–02:00. Składniki, lód i szkło skalują się z liczbą gości. Alkohol do koktajli i whisky na bar możemy kupić my albo Wy; wódka w stołach zostaje po stronie klienta.</p>
+    </div>
+    <div class="pricing">
+      <div>
+        <ul class="lines" id="lines"></ul>
+        <div class="qty">
+          <div class="q">
+            <div class="q-top"><label for="r-guests">Goście</label><output id="o-guests" for="r-guests">180 osób</output></div>
+            <div class="q-row"><button type="button" data-step="-1" data-for="r-guests" aria-label="Mniej gości">−</button><input type="range" id="r-guests" min="120" max="250" step="10" value="180"><button type="button" data-step="1" data-for="r-guests" aria-label="Więcej gości">+</button></div>
+            <small id="h-guests"></small>
+          </div>
+        </div>
+        <p class="hours-head"><strong>Miejsce.</strong> W Novotelu Centrum jesteśmy na miejscu. Do Ostoi Chobienice doliczamy dojazd ekipy i transport barów.</p>
+        <div class="toggle" role="group"><button type="button" id="v-nov" aria-pressed="true">Novotel Centrum, Poznań<small>bez kosztów dojazdu</small></button><button type="button" id="v-cho" aria-pressed="false">Ostoja Chobienice<small>dojazd ekipy i barów, + 450 zł</small></button></div>
+        <p class="hours-head"><strong>Obsada.</strong> Przy 180 osobach, które piją dużo, polecamy trzech barmanów na trzech modułach. Dwóch barmanów to wersja oszczędniejsza, ale w szczycie będą kolejki.</p>
+        <div class="toggle" role="group"><button type="button" id="c-3" aria-pressed="true">3 barmanów, 3 moduły<small>bez kolejek przez cały wieczór</small></button><button type="button" id="c-2" aria-pressed="false">2 barmanów, 2 moduły<small>taniej, wolniejszy serwis w szczycie</small></button></div>
+        <div class="qty">
+          <div class="q">
+            <div class="q-top"><label for="r-whisky">Whisky na bar</label><output id="o-whisky" for="r-whisky">18 butelek</output></div>
+            <div class="q-row"><button type="button" data-step="-1" data-for="r-whisky" aria-label="Mniej whisky">−</button><input type="range" id="r-whisky" min="0" max="40" step="1" value="18"><button type="button" data-step="1" data-for="r-whisky" aria-label="Więcej whisky">+</button></div>
+            <small id="h-whisky">czysta lub z colą, 0,7 l = ok. 17 porcji; cola i lód w cenie składników</small>
+          </div>
+        </div>
+        <p class="hours-head"><strong>Alkohol.</strong> Możemy kupić wszystko pod wybrane menu i whisky na bar (nieotwarte butelki wracają do Was), albo dostarczacie Wy według naszej listy.</p>
+        <div class="toggle" role="group"><button type="button" id="alc-pmb" aria-pressed="true">Kupuje Pimp My Bar<small>wg zakupu, zwrot nieotwartych butelek</small></button><button type="button" id="alc-mia" aria-pressed="false">Dostarczacie Wy<small>dostaniecie listę z ilościami</small></button></div>
+        <label class="addon" for="a-wash"><input type="checkbox" id="a-wash" data-add="wash" checked><span><strong>Kelner do zbierania szkła, + 600 zł</strong><small>Zbiera szkło z sali i odnosi na zaplecze przez cały wieczór, barmani nie odchodzą od baru. Przy 180 osobach i whisky w szkle – polecamy.</small></span></label>
+        <label class="addon" for="a-brand"><input type="checkbox" id="a-brand" data-add="brand"><span><strong>Branding frontów barów, + 200 zł za moduł</strong><small>Logo firmy na podświetlanych frontach, projekt po Waszej stronie.</small></span></label>
+      </div>
+      <aside class="total" aria-live="polite">
+        <span class="label" id="variant-name"></span>
+        <div class="sum" id="sum"></div>
+        <span class="sub">netto, do ceny doliczamy VAT · <span id="pp"></span></span>
+        <hr>
+        <ul class="terms">
+          <li>Zaliczka <b>2 000 zł przy potwierdzeniu</b></li>
+          <li>Reszta <b>przelew po evencie</b></li>
+          <li>Oferta ważna do <b>30.11.2026</b></li>
+        </ul>
+        <a class="btn" href="#akceptacja" style="justify-content:center">Ta wersja nam pasuje</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Menu</h2>
+      <p>Zaznaczyliśmy pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund – pod szybki serwis przy dużym ruchu. Możecie wymienić dowolny albo dołożyć kolejne, do ośmiu w menu. Liczba koktajli nie zmienia ceny obsługi; przy alkoholu po naszej stronie lista butelek przelicza się pod wybrane menu.</p>
+    </div>
+    <div class="split">
+      <div class="col">
+        <span class="label">Koktajle · od 4 do 8 w menu · razem ok. 720 szt.</span>
+        <div class="menu" id="menu-pick" style="margin-top:6px"></div>
+        <p class="count" id="m-count"></p>
+      </div>
+      <div class="col">
+        <span class="label">Poza menu, bez dopłaty</span>
+        <ul>
+          <li><span><b>Whisky</b> czysta lub z colą przez cały wieczór – liczba butelek do ustawienia w wycenie</span></li>
+          <li><span><b>Wódka w stołach</b> po stronie klienta – na barze nie serwujemy czystej wódki</span></li>
+          <li><span><b>Wersje 0%</b> każdego koktajlu z menu dla niepijących i kierowców</span></li>
+          <li><span><b>Szkło</b> do wszystkiego – wynajem w wycenie, zbierane przez naszego kelnera</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="podzial">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Kto co zapewnia</h2>
+      <p>W Novotelu Centrum pracowaliśmy wielokrotnie i znamy wjazd i zaplecze. Ostoję Chobienice obsłużymy tak samo – bary jeżdżą na kółkach.</p>
+    </div>
+    <div class="split">
+      <div class="col">
+        <span class="label">Pimp My Bar</span>
+        <ul>
+          <li><span><b>3 moduły barowe</b> (lub 2) z podświetlanymi frontami (lustro, klisza lub Wasze logo)</span></li>
+          <li><span><b>3 barmanów</b> (lub 2), do 8 h, ze sprzętem: kruszarka, blendery, termoboxy, shakery</span></li>
+          <li><span><b>Kelner do zbierania szkła</b> – zbiera szkło z sali, uzupełnia bar (opcja w wycenie)</span></li>
+          <li><span><b>Szkło</b> na wszystkie koktajle i drinki – wynajem w wycenie</span></li>
+          <li><span><b>Składniki i lód</b> – syropy, puree, owoce, dodatki</span></li>
+          <li><span><b>Alkohol do koktajli i whisky na bar</b> – jeśli wybierzecie „kupuje Pimp My Bar”</span></li>
+          <li><span><b>Transport, montaż i demontaż</b> – wjazd windą, gotowość 30 min przed startem</span></li>
+        </ul>
+      </div>
+      <div class="col you">
+        <span class="label">STAR ART / klient / sala</span>
+        <ul>
+          <li><span><b>Prąd 230 V</b> przy barze i miejsce ok. 4 × 1,5 m na trzy moduły</span></li>
+          <li><span><b>Pomieszczenie</b>, w którym możemy trzymać zapas lodu i szkła</span></li>
+          <li><span><b>Wjazd</b> ok. 1,5 h przed startem</span></li>
+          <li><span><b>Wódka w stołach</b> – kupuje i rozstawia klient</span></li>
+          <li><span><b>Alkohol do koktajli i whisky</b> – tylko przy ustawieniu „dostarczacie Wy”</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rozmowa">
+  <div class="wrap">
+    <div class="talk">
+      <div class="talkpics"><img src="../wesele/assets/tomek-k1.jpg" alt="Tomasz Malinowski" loading="lazy" class="on"></div>
+      <div class="col">
+        <span class="step">Porozmawiajmy</span>
+        <h2>Macie pytania? Piszcie do mnie.</h2>
+        <p>Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Jak wybierzecie wersję, odeślę umowę w takim samym układzie jak zwykle.</p>
+        <div class="talkbtns"><a class="btn" href="tel:+48513916977">Zadzwoń · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl">Napisz maila</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="akceptacja">
+  <div class="wrap">
+    <div class="accept">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <h2>Rezerwujemy termin</h2>
+        <p>Odpiszcie na maila z wybraną wersją albo zadzwońcie. Wysyłamy umowę i fakturę zaliczkową, po zaksięgowaniu termin jest Wasz.</p>
+        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text"></span></p>
+      </div>
+      <div class="contact">
+        <div class="crow"><span>Tomasz Malinowski</span></div>
+        <div class="crow"><span id="c-mail">biuro@pimpmybar.pl</span><button class="copy" type="button" data-copy="c-mail">Kopiuj</button></div>
+        <div class="crow"><span id="c-tel">+48 513 916 977</span><button class="copy" type="button" data-copy="c-tel">Kopiuj</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap"><span>Pimp My Bar · Poznań · pimpmybar.pl</span><span>Ceny netto w PLN. Przygotowane 22.10.2026.</span></footer>
+
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id)};
+  var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
+  var fmtN = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' '); };
+  var CREW = {3:5670, 2:4000}, WASH = 600, BRAND = 200, PER = 4, ASORT = 2.3, ICE_KG = 0.45, ICE = 3.5, GLASS = 0.95, TRAVEL = 450, WHISKY = 65;
+  var DRINKS = [
+    {id:'ws', n:'Whisky Sour', pl:'whiskey, cytryna, syrop cukrowy, Angostura', a:'whiskey', d:1},
+    {id:'red', n:'Red Lady', pl:'wódka, puree truskawkowe, marakuja, limonka', a:'wódka', d:1},
+    {id:'mule', n:'Moscow Mule', pl:'wódka, limonka, napój imbirowy', a:'wódka', d:1},
+    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco'},
+    {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, cytryna', a:'gin', d:1},
+    {id:'man', n:'Mangolita', pl:'wódka, puree z mango, marakuja, limonka', a:'wódka'},
+    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu', a:'prosecco', d:1},
+    {id:'gt', n:'Gin & Tonic', pl:'gin, tonik, limonka', a:'gin'},
+    {id:'dns', n:"Dark'n'Stormy", pl:'ciemny rum, limonka, napój imbirowy', a:'rum'},
+    {id:'cpr', n:'Caipiroska', pl:'wódka, limonka, cukier trzcinowy', a:'wódka'},
+    {id:'esp', n:'Espresso Martini', pl:'wódka, espresso, likier kawowy', a:'wódka'},
+    {id:'ltd', n:'Long Island Iced Tea', pl:'wódka, gin, rum, tequila, cola – mocny klasyk', a:'wódka'}
+  ];
+  var ALC = {'whiskey':[65,40],'wódka':[48,40],'gin':[60,40],'rum':[60,40],'Aperol + prosecco':[0,0],'prosecco':[30,100],'wino':[25,150]};
+  var TICKS = ['Każdy koktajl na oczach gości','Whisky czysta lub z colą na barze','Trzech barmanów, zero kolejek','Kelner zbiera szkło, barmani przy barze','Wersje 0% bez dopłaty'];
+  var state = { g: 180, alc: true, cho: false, crew: 3, whisky: 18, wash: true, brand: false, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}) };
+  $('menu-pick').innerHTML = DRINKS.map(function(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+d.n+'</strong><small>'+d.pl+'</small></span></label>'; }).join('');
+  function alcCost(g){
+    var per = Math.round(g*PER/Math.max(1,state.menu.length)), ml = {}, ord = [];
+    function add(k, v){ if (!ml[k]){ ml[k]=0; ord.push(k); } ml[k] += v; }
+    state.menu.forEach(function(id){ var d = DRINKS.filter(function(x){return x.id===id})[0]; if (!d) return;
+      if (d.a==='Aperol + prosecco'){ add('Aperol', 40*per); add('prosecco', 60*per); return; }
+      add(d.a, ALC[d.a][1]*per); });
+    var PRICE = {'whiskey':[65,700],'wódka':[48,700],'gin':[60,700],'rum':[60,700],'Aperol':[60,700],'prosecco':[30,750],'wino':[25,750]};
+    var sum = 0, parts = [];
+    ord.forEach(function(k){ var p = PRICE[k], b = Math.ceil(ml[k]/p[1]); if (k==='whiskey') b += state.whisky; sum += b*p[0]; parts.push(k+' '+b); });
+    if (ord.indexOf('whiskey')<0 && state.whisky>0){ sum += state.whisky*WHISKY; parts.push('whiskey '+state.whisky); }
+    return {sum:sum, parts:parts};
+  }
+  function render(){
+    var g = state.g, cock = g*PER, items = [];
+    var BARS = state.crew;
+    items.push({what:'Obsługa: '+BARS+' barmanów i '+BARS+' moduły barowe', why:'18:00–02:00 (do 8 h), ze sprzętem barowym, montaż i demontaż', amt:CREW[BARS]});
+    if (state.cho) items.push({what:'Dojazd do Ostoi Chobienice', why:'ekipa i transport barów, Poznań – Chobienice – Poznań', amt:TRAVEL});
+    if (state.wash) items.push({what:'Kelner do zbierania szkła', why:'zbiera szkło z sali przez cały wieczór, barmani nie odchodzą od baru', amt:WASH});
+    items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli i whisky', why:state.menu.length + ' koktajli po ok. ' + Math.round(cock/Math.max(1,state.menu.length)) + ' szt.; syropy, puree, owoce, cola do whisky', amt:Math.round(cock*ASORT)});
+    items.push({what:'Lód, ' + Math.round(g*ICE_KG) + ' kg', why:'do koktajli i chłodzenia', amt:Math.round(g*ICE_KG*ICE)});
+    items.push({what:'Wynajem szkła, ' + fmtN(cock) + ' szt.', why:'0,95 zł/szt.; stłuczka 12 zł/szt.', amt:Math.round(cock*GLASS)});
+    var a = alcCost(g);
+    if (state.alc) items.push({what:'Alkohol do koktajli, wg zakupu', why:'butelki: ' + a.parts.join(', ') + '; nieotwarte wracają do Was', amt:a.sum});
+    if (state.brand) items.push({what:'Branding frontów, ' + BARS + ' × ' + fmt(BRAND), why:'Wasze logo na podświetlanych frontach', amt:BARS*BRAND});
+    var total = items.reduce(function(s,i){return s+i.amt},0);
+    var ul = $('lines'); ul.innerHTML='';
+    items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
+    $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = 'ok. ' + fmtN(cock) + ' koktajli, 4 na osobę (branża budowlana)';
+    $('o-whisky').textContent = state.whisky + ' butelek'; $('h-whisky').textContent = (state.whisky ? 'ok. '+(state.whisky*17)+' porcji whisky, czystej lub z colą; ' : '') + 'cola i lód w cenie składników' + (state.alc ? '' : ' – whisky dostarczacie Wy');
+    $('v-nov').setAttribute('aria-pressed', String(!state.cho)); $('v-cho').setAttribute('aria-pressed', String(state.cho)); $('c-3').setAttribute('aria-pressed', String(state.crew===3)); $('c-2').setAttribute('aria-pressed', String(state.crew===2));
+    $('alc-pmb').setAttribute('aria-pressed', String(state.alc)); $('alc-mia').setAttribute('aria-pressed', String(!state.alc));
+    var cnt = state.menu.length;
+    document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=8; });
+    var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – dobierzcie co najmniej 4' : 'Wybrane: '+cnt+' z 8';
+    var names = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}).join(', ');
+    var name = (state.cho?'Ostoja Chobienice':'Novotel Centrum') + ' · ' + g + ' osób · ' + BARS + ' barmanów · whisky ' + state.whisky + ' but. · alkohol: ' + (state.alc?'Pimp My Bar':'Wy') + (state.wash?' · kelner do szkła':'') + (state.brand?' · branding':'');
+    $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' za osobę';
+    $('peek').innerHTML = fmt(total) + '<small>netto</small>'; $('choice-text').textContent = name + ' · menu: ' + names + ', ' + fmt(total) + ' netto';
+  }
+  $('r-guests').addEventListener('input', function(e){ state.g = +e.target.value; render(); });
+  document.querySelectorAll('.q-row button').forEach(function(b){ b.addEventListener('click', function(){ var r=$(b.dataset.for), v=+r.value+(+b.dataset.step)*(+r.step); r.value=Math.min(+r.max,Math.max(+r.min,v)); r.dispatchEvent(new Event('input',{bubbles:true})); r.dispatchEvent(new Event('change',{bubbles:true})); }); });
+  $('alc-pmb').addEventListener('click', function(){ state.alc = true; render(); }); $('alc-mia').addEventListener('click', function(){ state.alc = false; render(); });
+  $('v-nov').addEventListener('click', function(){ state.cho = false; render(); }); $('v-cho').addEventListener('click', function(){ state.cho = true; render(); });
+  $('c-3').addEventListener('click', function(){ state.crew = 3; render(); }); $('c-2').addEventListener('click', function(){ state.crew = 2; render(); });
+  $('r-whisky').addEventListener('input', function(e){ state.whisky = +e.target.value; render(); });
+  document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){ state[i.dataset.add] = i.checked; render(); }); });
+  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0 && state.menu.length<8) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
+  var ti=0, tk=$('tick'); setInterval(function(){ tk.classList.add('out'); setTimeout(function(){ ti=(ti+1)%TICKS.length; tk.textContent=TICKS[ti]; tk.classList.remove('out'); },350); }, 3200);
+  document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){ var t=$(b.dataset.copy).textContent; navigator.clipboard && navigator.clipboard.writeText(t); b.textContent='Skopiowano'; setTimeout(function(){ b.textContent='Kopiuj'; },1500); }); });
+  render();
+})();
+</script>
+<script>
+(function(){
+  var TOPIC='https://ntfy.sh/pmb-oferty-0d10ca967d', OFERTA='STAR ART 10.04.2027 (Novotel / Chobienice)';
+  var owner=false, TEST=/[?&]test(=|&|$)/.test(location.search);
+  try{ if(/[?&]ja(=|&|$)/.test(location.search)) localStorage.setItem('pmb_owner','1'); owner=localStorage.getItem('pmb_owner')==='1'; }catch(e){}
+  function ping(msg,tags,prio){ if(owner||TEST) return; try{ var u=TOPIC+'?title='+encodeURIComponent(OFERTA)+'&tags='+encodeURIComponent(tags||'eyes')+(prio?'&priority='+prio:''); fetch(u,{method:'POST',body:msg,keepalive:true}).catch(function(){}); }catch(e){} }
+  var dev=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'telefon':'komputer';
+  var first=true; try{ first=!sessionStorage.getItem('pmb_seen_starart0427'); sessionStorage.setItem('pmb_seen_starart0427','1'); }catch(e){}
+  if(first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
+  var sent={}; function once(key,msg,tags,prio){ if(sent[key]) return; sent[key]=1; ping(msg,tags,prio); }
+  function seen(id,key,msg,tags){ var el=document.getElementById(id); if(el && 'IntersectionObserver' in window){ new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ once(key,msg,tags); o.disconnect(); } },{threshold:.3}).observe(el); } }
+  seen('wycena','wyc','Ogląda wycenę','moneybag'); seen('podzial','pod','Czyta „Kto co zapewnia”','clipboard'); seen('akceptacja','dol','Doszedł do samego dołu oferty','checkered_flag');
+  ['alc-pmb','alc-mia','v-nov','v-cho','c-3','c-2'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ var t=document.getElementById('sum'); ping('Przełączył: '+id+' (razem '+(t?t.textContent:'')+')','gear'); }); });
+  var r=document.getElementById('r-guests'), tm; r.addEventListener('change',function(){ clearTimeout(tm); tm=setTimeout(function(){ var t=document.getElementById('sum'); ping('Suwak gości → '+r.value+' (razem '+(t?t.textContent:'')+')','busts_in_silhouette'); },2500); });
+  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change',function(){ once('menu','Zmienia menu','cocktail'); }); });
+  document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Ta wersja nam pasuje” → '+(t?t.textContent:''),'white_check_mark',5); }); });
+  document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt','telephone_receiver',5); }); });
+})();
+</script>
+<script>window.PMB={id:"starart-100427",title:"STAR ART 10.04.2027 (Novotel / Chobienice)"};</script>
+<script src="../wspolne/kontakt.js?v=2"></script>
+</body>
+</html>
