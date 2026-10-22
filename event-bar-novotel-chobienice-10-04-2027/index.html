@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Impreza firmowa 10.04.2027, Novotel / Chobienice – Pimp My Bar</title>
 <meta property="og:title" content="Bar na imprezę firmową 10.04.2027 – oferta Pimp My Bar dla STAR ART">
-<meta property="og:description" content="180 osób, 3 barmanów, whisky i koktajle na barze. Novotel Centrum lub Ostoja Chobienice, z alkoholem i bez – cena przelicza się od razu.">
+<meta property="og:description" content="180 osób, 3 barmanów, 6 męskich koktajli i whisky na barze. Novotel Centrum lub Ostoja Chobienice, z alkoholem i bez – cena przelicza się od razu.">
 <meta property="og:image" content="https://pimpmybar.github.io/oferty/warsztaty-erste-leasing-30-os/../wesele/assets/hero.jpg">
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -338,12 +338,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="hero-copy">
       <div class="label">Impreza firmowa · 10.04.2027 · Novotel Centrum lub Ostoja Chobienice</div>
       <h1>Bar na <em>mocny</em> wieczór</h1>
-      <p>Dzień dobry! Dziękujemy za kolejne zapytanie. Pod Wasze założenia: wódka w stołach po stronie klienta, a u nas na barze koktajle i whisky – czysta lub z colą. Branża budowlana i 18:00–02:00, więc liczymy cztery koktajle na osobę i trzech barmanów, żeby nie było kolejek. Poniżej wybierzecie miejsce, obsadę, menu i wersję z alkoholem lub bez – cena przelicza się od razu.</p>
+      <p>Dzień dobry! Dziękujemy za kolejne zapytanie. Pod Wasze założenia: wódka w stołach po stronie klienta, a u nas na barze koktajle i whisky. Branża budowlana i 18:00–02:00, więc liczymy cztery koktajle na osobę i trzech barmanów, żeby nie było kolejek. Poniżej wybierzecie miejsce, obsadę, menu i wersję z alkoholem lub bez – cena przelicza się od razu.</p>
       <dl class="facts">
         <div><dt>Termin</dt><dd>10.04.2027, 18:00–02:00</dd></div>
         <div><dt>Goście</dt><dd>180 osób</dd></div>
-        <div><dt>Obsada</dt><dd>3 barmanów + kelner do szkła</dd></div>
-        <div><dt>Koktajle</dt><dd>5 w menu (do 8), ok. 720 szt. + whisky</dd></div>
+        <div><dt>Obsada</dt><dd>3 barmanów (lub 2)</dd></div>
+        <div><dt>Koktajle</dt><dd>6 w menu + wersje 0%, ok. 720 szt. + whisky</dd></div>
       </dl>
       <div class="price-peek">
         <div class="big num" id="peek"></div>
@@ -373,20 +373,22 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-guests"></small>
           </div>
         </div>
-        <p class="hours-head"><strong>Miejsce.</strong> W Novotelu Centrum jesteśmy na miejscu. Do Ostoi Chobienice doliczamy dojazd ekipy i transport barów.</p>
-        <div class="toggle" role="group"><button type="button" id="v-nov" aria-pressed="true">Novotel Centrum, Poznań<small>bez kosztów dojazdu</small></button><button type="button" id="v-cho" aria-pressed="false">Ostoja Chobienice<small>dojazd ekipy i barów, + 450 zł</small></button></div>
+        <p class="hours-head"><strong>Miejsce.</strong> Moduły jadą autem dostawczym, stąd osobna pozycja za transport, montaż i demontaż: 400 zł w Poznaniu, 500 zł w Chobienicach.</p>
+        <div class="toggle" role="group"><button type="button" id="v-nov" aria-pressed="true">Novotel Centrum, Poznań<small>transport, montaż i demontaż 400 zł</small></button><button type="button" id="v-cho" aria-pressed="false">Ostoja Chobienice<small>transport, montaż i demontaż 500 zł</small></button></div>
         <p class="hours-head"><strong>Obsada.</strong> Przy 180 osobach, które piją dużo, polecamy trzech barmanów na trzech modułach. Dwóch barmanów to wersja oszczędniejsza, ale w szczycie będą kolejki.</p>
         <div class="toggle" role="group"><button type="button" id="c-3" aria-pressed="true">3 barmanów, 3 moduły<small>bez kolejek przez cały wieczór</small></button><button type="button" id="c-2" aria-pressed="false">2 barmanów, 2 moduły<small>taniej, wolniejszy serwis w szczycie</small></button></div>
         <div class="qty">
           <div class="q">
             <div class="q-top"><label for="r-whisky">Whisky na bar</label><output id="o-whisky" for="r-whisky">18 butelek</output></div>
             <div class="q-row"><button type="button" data-step="-1" data-for="r-whisky" aria-label="Mniej whisky">−</button><input type="range" id="r-whisky" min="0" max="40" step="1" value="18"><button type="button" data-step="1" data-for="r-whisky" aria-label="Więcej whisky">+</button></div>
-            <small id="h-whisky">czysta lub z colą, 0,7 l = ok. 17 porcji; cola i lód w cenie składników</small>
+            <small id="h-whisky">0,7 l = ok. 17 porcji; cola i lód w cenie składników</small>
           </div>
         </div>
+        <p class="hours-head"><strong>Szkło.</strong> W standardzie przywozimy 250 szt. własnego szkła, a obsługa lokalu zbiera je z sali i myje na bieżąco – tak jak kieliszki do wina. Druga opcja: wynajem szkła na wszystkie koktajle, zbieramy je i myjemy u siebie.</p>
+        <div class="toggle" role="group"><button type="button" id="g-250" aria-pressed="true">250 szt. naszego szkła, mycie w lokalu<small>w cenie; lokal zbiera i myje na bieżąco</small></button><button type="button" id="g-all" aria-pressed="false">Wynajem szkła na wszystkie koktajle<small>0,95 zł/szt., zbieramy i myjemy u siebie</small></button></div>
         <p class="hours-head"><strong>Alkohol.</strong> Możemy kupić wszystko pod wybrane menu i whisky na bar (nieotwarte butelki wracają do Was), albo dostarczacie Wy według naszej listy.</p>
         <div class="toggle" role="group"><button type="button" id="alc-pmb" aria-pressed="true">Kupuje Pimp My Bar<small>wg zakupu, zwrot nieotwartych butelek</small></button><button type="button" id="alc-mia" aria-pressed="false">Dostarczacie Wy<small>dostaniecie listę z ilościami</small></button></div>
-        <label class="addon" for="a-wash"><input type="checkbox" id="a-wash" data-add="wash" checked><span><strong>Kelner do zbierania szkła, + 600 zł</strong><small>Zbiera szkło z sali i odnosi na zaplecze przez cały wieczór, barmani nie odchodzą od baru. Przy 180 osobach i whisky w szkle – polecamy.</small></span></label>
+        <label class="addon" for="a-wash"><input type="checkbox" id="a-wash" data-add="wash"><span><strong>Kelner do zbierania szkła, + 600 zł</strong><small>Opcja. Zbiera szkło z sali i odnosi na zaplecze przez cały wieczór, barmani nie odchodzą od baru.</small></span></label>
         <label class="addon" for="a-brand"><input type="checkbox" id="a-brand" data-add="brand"><span><strong>Branding frontów barów, + 200 zł za moduł</strong><small>Logo firmy na podświetlanych frontach, projekt po Waszej stronie.</small></span></label>
       </div>
       <aside class="total" aria-live="polite">
@@ -409,21 +411,21 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Menu</h2>
-      <p>Zaznaczyliśmy pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund – pod szybki serwis przy dużym ruchu. Możecie wymienić dowolny albo dołożyć kolejne, do ośmiu w menu. Liczba koktajli nie zmienia ceny obsługi; przy alkoholu po naszej stronie lista butelek przelicza się pod wybrane menu.</p>
+      <p>Męskie menu pod branżę: whisky, bourbon, gin, tequila i wódka, każdy koktajl do zrobienia w kilkadziesiąt sekund. Całe menu jest w cenie, a każdy koktajl robimy też w wersji 0%. Jeśli chcecie coś odjąć, odznaczcie – przy alkoholu po naszej stronie lista butelek przeliczy się sama.</p>
     </div>
     <div class="split">
       <div class="col">
-        <span class="label">Koktajle · od 4 do 8 w menu · razem ok. 720 szt.</span>
+        <span class="label">Menu · 6 koktajli, wszystkie w cenie · razem ok. 720 szt.</span>
         <div class="menu" id="menu-pick" style="margin-top:6px"></div>
         <p class="count" id="m-count"></p>
       </div>
       <div class="col">
         <span class="label">Poza menu, bez dopłaty</span>
         <ul>
-          <li><span><b>Whisky</b> czysta lub z colą przez cały wieczór – liczba butelek do ustawienia w wycenie</span></li>
+          <li><span><b>Whisky</b> na barze przez cały wieczór – liczba butelek do ustawienia w wycenie</span></li>
           <li><span><b>Wódka w stołach</b> po stronie klienta – na barze nie serwujemy czystej wódki</span></li>
-          <li><span><b>Wersje 0%</b> każdego koktajlu z menu dla niepijących i kierowców</span></li>
-          <li><span><b>Szkło</b> do wszystkiego – wynajem w wycenie, zbierane przez naszego kelnera</span></li>
+          <li><span><b>Wersje 0%</b> każdego koktajlu z menu dla niepijących i kierowców – bez dopłaty</span></li>
+          <li><span><b>Szkło</b> – 250 szt. naszego w standardzie albo wynajem na całość, do wyboru w wycenie</span></li>
         </ul>
       </div>
     </div>
@@ -442,11 +444,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <ul>
           <li><span><b>3 moduły barowe</b> (lub 2) z podświetlanymi frontami (lustro, klisza lub Wasze logo)</span></li>
           <li><span><b>3 barmanów</b> (lub 2), do 8 h, ze sprzętem: kruszarka, blendery, termoboxy, shakery</span></li>
-          <li><span><b>Kelner do zbierania szkła</b> – zbiera szkło z sali, uzupełnia bar (opcja w wycenie)</span></li>
-          <li><span><b>Szkło</b> na wszystkie koktajle i drinki – wynajem w wycenie</span></li>
+          <li><span><b>Kelner do zbierania szkła</b> – opcja, do zaznaczenia w wycenie</span></li>
+          <li><span><b>Szkło</b> – 250 szt. w standardzie (mycie w lokalu) lub wynajem na całość</span></li>
           <li><span><b>Składniki i lód</b> – syropy, puree, owoce, dodatki</span></li>
           <li><span><b>Alkohol do koktajli i whisky na bar</b> – jeśli wybierzecie „kupuje Pimp My Bar”</span></li>
-          <li><span><b>Transport, montaż i demontaż</b> – wjazd windą, gotowość 30 min przed startem</span></li>
+          <li><span><b>Transport, montaż i demontaż</b> – gotowość 30 min przed startem</span></li>
         </ul>
       </div>
       <div class="col you">
@@ -454,6 +456,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <ul>
           <li><span><b>Prąd 230 V</b> przy barze i miejsce ok. 4 × 1,5 m na trzy moduły</span></li>
           <li><span><b>Pomieszczenie</b>, w którym możemy trzymać zapas lodu i szkła</span></li>
+          <li><span><b>Zbieranie i mycie szkła</b> na bieżąco przez obsługę sali – w wersji z 250 szt. naszego szkła</span></li>
           <li><span><b>Wjazd</b> ok. 1,5 h przed startem</span></li>
           <li><span><b>Wódka w stołach</b> – kupuje i rozstawia klient</span></li>
           <li><span><b>Alkohol do koktajli i whisky</b> – tylko przy ustawieniu „dostarczacie Wy”</span></li>
@@ -501,24 +504,18 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
   var fmtN = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' '); };
-  var CREW = {3:5670, 2:4000}, WASH = 600, BRAND = 200, PER = 4, ASORT = 2.3, ICE_KG = 0.45, ICE = 3.5, GLASS = 0.95, TRAVEL = 450, WHISKY = 65;
+  var CREW = {3:5670, 2:4000}, WASH = 600, BRAND = 200, PER = 4, ASORT = 2.3, ICE_KG = 0.45, ICE = 3.5, GLASS = 0.95, TRAVEL = {nov:400, cho:500}, WHISKY = 65;
   var DRINKS = [
-    {id:'ws', n:'Whisky Sour', pl:'whiskey, cytryna, syrop cukrowy, Angostura', a:'whiskey', d:1},
-    {id:'red', n:'Red Lady', pl:'wódka, puree truskawkowe, marakuja, limonka', a:'wódka', d:1},
+    {id:'ws', n:'Whisky Sour', pl:'whisky, sok z cytryny, syrop cukrowy, Angostura Bitters', a:'whiskey', d:1},
+    {id:'of', n:'Old Fashioned', pl:'bourbon, Angostura Bitters, cukier, skórka pomarańczy', a:'whiskey', d:1},
     {id:'mule', n:'Moscow Mule', pl:'wódka, limonka, napój imbirowy', a:'wódka', d:1},
-    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco'},
-    {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, cytryna', a:'gin', d:1},
-    {id:'man', n:'Mangolita', pl:'wódka, puree z mango, marakuja, limonka', a:'wódka'},
-    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu', a:'prosecco', d:1},
-    {id:'gt', n:'Gin & Tonic', pl:'gin, tonik, limonka', a:'gin'},
-    {id:'dns', n:"Dark'n'Stormy", pl:'ciemny rum, limonka, napój imbirowy', a:'rum'},
-    {id:'cpr', n:'Caipiroska', pl:'wódka, limonka, cukier trzcinowy', a:'wódka'},
-    {id:'esp', n:'Espresso Martini', pl:'wódka, espresso, likier kawowy', a:'wódka'},
-    {id:'ltd', n:'Long Island Iced Tea', pl:'wódka, gin, rum, tequila, cola – mocny klasyk', a:'wódka'}
+    {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, sok z cytryny, syrop cukrowy', a:'gin', d:1},
+    {id:'pal', n:'Paloma', pl:'tequila, grejpfrut, limonka, sól, woda gazowana', a:'tequila', d:1},
+    {id:'cpr', n:'Caipi', pl:'wódka, świeża limonka, cukier trzcinowy – do wyboru: mango, marakuja, truskawka', a:'wódka', d:1}
   ];
-  var ALC = {'whiskey':[65,40],'wódka':[48,40],'gin':[60,40],'rum':[60,40],'Aperol + prosecco':[0,0],'prosecco':[30,100],'wino':[25,150]};
-  var TICKS = ['Każdy koktajl na oczach gości','Whisky czysta lub z colą na barze','Trzech barmanów, zero kolejek','Kelner zbiera szkło, barmani przy barze','Wersje 0% bez dopłaty'];
-  var state = { g: 180, alc: true, cho: false, crew: 3, whisky: 18, wash: true, brand: false, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}) };
+  var ALC = {'whiskey':[65,40],'wódka':[48,40],'gin':[60,40],'tequila':[78,40]};
+  var TICKS = ['Każdy koktajl na oczach gości','Whisky na barze przez cały wieczór','Trzech barmanów, zero kolejek','Sześć męskich koktajli, każdy też 0%'];
+  var state = { g: 180, alc: true, cho: false, gall: false, crew: 3, whisky: 18, wash: false, brand: false, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}) };
   $('menu-pick').innerHTML = DRINKS.map(function(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+d.n+'</strong><small>'+d.pl+'</small></span></label>'; }).join('');
   function alcCost(g){
     var per = Math.round(g*PER/Math.max(1,state.menu.length)), ml = {}, ord = [];
@@ -526,7 +523,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     state.menu.forEach(function(id){ var d = DRINKS.filter(function(x){return x.id===id})[0]; if (!d) return;
       if (d.a==='Aperol + prosecco'){ add('Aperol', 40*per); add('prosecco', 60*per); return; }
       add(d.a, ALC[d.a][1]*per); });
-    var PRICE = {'whiskey':[65,700],'wódka':[48,700],'gin':[60,700],'rum':[60,700],'Aperol':[60,700],'prosecco':[30,750],'wino':[25,750]};
+    var PRICE = {'whiskey':[65,700],'wódka':[48,700],'gin':[60,700],'tequila':[78,700]};
     var sum = 0, parts = [];
     ord.forEach(function(k){ var p = PRICE[k], b = Math.ceil(ml[k]/p[1]); if (k==='whiskey') b += state.whisky; sum += b*p[0]; parts.push(k+' '+b); });
     if (ord.indexOf('whiskey')<0 && state.whisky>0){ sum += state.whisky*WHISKY; parts.push('whiskey '+state.whisky); }
@@ -535,27 +532,28 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   function render(){
     var g = state.g, cock = g*PER, items = [];
     var BARS = state.crew;
-    items.push({what:'Obsługa: '+BARS+' barmanów i '+BARS+' moduły barowe', why:'18:00–02:00 (do 8 h), ze sprzętem barowym, montaż i demontaż', amt:CREW[BARS]});
-    if (state.cho) items.push({what:'Dojazd do Ostoi Chobienice', why:'ekipa i transport barów, Poznań – Chobienice – Poznań', amt:TRAVEL});
+    items.push({what:'Obsługa: '+BARS+' barmanów i '+BARS+' moduły barowe', why:'18:00–02:00 (do 8 h), ze sprzętem barowym', amt:CREW[BARS]});
+    items.push({what:'Transport, montaż i demontaż', why:(state.cho?'Poznań – Chobienice – Poznań, auto dostawcze z barami':'Novotel Centrum, auto dostawcze z barami'), amt:state.cho?TRAVEL.cho:TRAVEL.nov});
     if (state.wash) items.push({what:'Kelner do zbierania szkła', why:'zbiera szkło z sali przez cały wieczór, barmani nie odchodzą od baru', amt:WASH});
     items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli i whisky', why:state.menu.length + ' koktajli po ok. ' + Math.round(cock/Math.max(1,state.menu.length)) + ' szt.; syropy, puree, owoce, cola do whisky', amt:Math.round(cock*ASORT)});
-    items.push({what:'Lód, ' + Math.round(g*ICE_KG) + ' kg', why:'do koktajli i chłodzenia', amt:Math.round(g*ICE_KG*ICE)});
-    items.push({what:'Wynajem szkła, ' + fmtN(cock) + ' szt.', why:'0,95 zł/szt.; stłuczka 12 zł/szt.', amt:Math.round(cock*GLASS)});
+    items.push({what:'Lód, ' + Math.round(g*ICE_KG) + ' kg', why:'do koktajli', amt:Math.round(g*ICE_KG*ICE)});
+    if (state.gall) items.push({what:'Wynajem szkła, ' + fmtN(cock) + ' szt.', why:'0,95 zł/szt.; zbieramy i myjemy u siebie; stłuczka 12 zł/szt.', amt:Math.round(cock*GLASS)});
+    else items.push({what:'Szkło, 250 szt.', why:'nasze szkło, mycie cykliczne w lokalu przez obsługę sali', amt:0});
     var a = alcCost(g);
     if (state.alc) items.push({what:'Alkohol do koktajli, wg zakupu', why:'butelki: ' + a.parts.join(', ') + '; nieotwarte wracają do Was', amt:a.sum});
     if (state.brand) items.push({what:'Branding frontów, ' + BARS + ' × ' + fmt(BRAND), why:'Wasze logo na podświetlanych frontach', amt:BARS*BRAND});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
-    items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
+    items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=i.amt ? fmt(i.amt) : 'w cenie'; li.children[2].textContent=i.why; ul.appendChild(li); });
     $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = 'ok. ' + fmtN(cock) + ' koktajli, 4 na osobę (branża budowlana)';
-    $('o-whisky').textContent = state.whisky + ' butelek'; $('h-whisky').textContent = (state.whisky ? 'ok. '+(state.whisky*17)+' porcji whisky, czystej lub z colą; ' : '') + 'cola i lód w cenie składników' + (state.alc ? '' : ' – whisky dostarczacie Wy');
-    $('v-nov').setAttribute('aria-pressed', String(!state.cho)); $('v-cho').setAttribute('aria-pressed', String(state.cho)); $('c-3').setAttribute('aria-pressed', String(state.crew===3)); $('c-2').setAttribute('aria-pressed', String(state.crew===2));
+    $('o-whisky').textContent = state.whisky + ' butelek'; $('h-whisky').textContent = (state.whisky ? 'ok. '+(state.whisky*17)+' porcji whisky; ' : '') + 'cola i lód w cenie składników' + (state.alc ? '' : ' – whisky dostarczacie Wy');
+    $('g-250').setAttribute('aria-pressed', String(!state.gall)); $('g-all').setAttribute('aria-pressed', String(state.gall)); $('v-nov').setAttribute('aria-pressed', String(!state.cho)); $('v-cho').setAttribute('aria-pressed', String(state.cho)); $('c-3').setAttribute('aria-pressed', String(state.crew===3)); $('c-2').setAttribute('aria-pressed', String(state.crew===2));
     $('alc-pmb').setAttribute('aria-pressed', String(state.alc)); $('alc-mia').setAttribute('aria-pressed', String(!state.alc));
     var cnt = state.menu.length;
-    document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=8; });
-    var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – dobierzcie co najmniej 4' : 'Wybrane: '+cnt+' z 8';
+    document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = false; });
+    var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – zostawcie co najmniej 4' : 'W menu: '+cnt+' koktajli, każdy także w wersji 0%';
     var names = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}).join(', ');
-    var name = (state.cho?'Ostoja Chobienice':'Novotel Centrum') + ' · ' + g + ' osób · ' + BARS + ' barmanów · whisky ' + state.whisky + ' but. · alkohol: ' + (state.alc?'Pimp My Bar':'Wy') + (state.wash?' · kelner do szkła':'') + (state.brand?' · branding':'');
+    var name = (state.cho?'Ostoja Chobienice':'Novotel Centrum') + ' · ' + g + ' osób · ' + BARS + ' barmanów · whisky ' + state.whisky + ' but. · szkło: ' + (state.gall?'wynajem na całość':'250 szt., mycie w lokalu') + ' · alkohol: ' + (state.alc?'Pimp My Bar':'Wy') + (state.wash?' · kelner do szkła':'') + (state.brand?' · branding':'');
     $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' za osobę';
     $('peek').innerHTML = fmt(total) + '<small>netto</small>'; $('choice-text').textContent = name + ' · menu: ' + names + ', ' + fmt(total) + ' netto';
   }
@@ -563,10 +561,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   document.querySelectorAll('.q-row button').forEach(function(b){ b.addEventListener('click', function(){ var r=$(b.dataset.for), v=+r.value+(+b.dataset.step)*(+r.step); r.value=Math.min(+r.max,Math.max(+r.min,v)); r.dispatchEvent(new Event('input',{bubbles:true})); r.dispatchEvent(new Event('change',{bubbles:true})); }); });
   $('alc-pmb').addEventListener('click', function(){ state.alc = true; render(); }); $('alc-mia').addEventListener('click', function(){ state.alc = false; render(); });
   $('v-nov').addEventListener('click', function(){ state.cho = false; render(); }); $('v-cho').addEventListener('click', function(){ state.cho = true; render(); });
+  $('g-250').addEventListener('click', function(){ state.gall = false; render(); }); $('g-all').addEventListener('click', function(){ state.gall = true; render(); });
   $('c-3').addEventListener('click', function(){ state.crew = 3; render(); }); $('c-2').addEventListener('click', function(){ state.crew = 2; render(); });
   $('r-whisky').addEventListener('input', function(e){ state.whisky = +e.target.value; render(); });
   document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){ state[i.dataset.add] = i.checked; render(); }); });
-  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0 && state.menu.length<8) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
+  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
   var ti=0, tk=$('tick'); setInterval(function(){ tk.classList.add('out'); setTimeout(function(){ ti=(ti+1)%TICKS.length; tk.textContent=TICKS[ti]; tk.classList.remove('out'); },350); }, 3200);
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){ var t=$(b.dataset.copy).textContent; navigator.clipboard && navigator.clipboard.writeText(t); b.textContent='Skopiowano'; setTimeout(function(){ b.textContent='Kopiuj'; },1500); }); });
   render();
