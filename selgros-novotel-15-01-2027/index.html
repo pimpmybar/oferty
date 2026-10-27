@@ -31,71 +31,72 @@ window.OFFER = {
  "poolN": 1360,
  "price": 7100,
  "items": [
-  ["Menu bezalkoholowe, 250 koktajli + wydrukowana karta na bar", 600],
-  ["Lód, 200 kg", 700]
+  ["Lód, 200 kg (koktajle alkoholowe i bezalkoholowe)", 700]
  ],
  "supply": true,
  "ownDefault": true,
  "menuMin": 8,
  "menuMax": 8,
  "glassCount": {
-  "Coupette (kieliszek koktajlowy)": 200,
-  "Short (szklanka niska)": 300,
-  "Kieliszek do wina": 100,
-  "Long (szklanka wysoka)": 150,
+  "Coupette (kieliszek koktajlowy)": 80,
+  "Short (szklanka niska)": 200,
+  "Kieliszek do wina": 80,
+  "Long (szklanka wysoka)": 200,
   "Shot (kieliszek do wódki)": 100
  },
  "drinks": [
-  {"id":"szarlotka","n":"POLSKA · Szarlotka","d":1,"pl":"Żubrówka, sok jabłkowy, cynamon","t":{"pl":"wódka · klasyk"},"alc":[["Żubrówka",40.0,0.7]],"gl":["Long (szklanka wysoka)"]},
-  {"id":"hugo","n":"NIEMCY · Hugo","d":1,"pl":"Prosecco, syrop z kwiatu bzu, mięta, limonka, woda gazowana","t":{"pl":"prosecco · lekki"}, "alc":[["Prosecco",80.0,0.75]],"gl":["Kieliszek do wina"]},
-  {"id":"strudel","n":"AUSTRIA · Strudel Sour","d":1,"pl":"Whisky, sok jabłkowy, cynamon, cytryna, syrop cukrowy","t":{"pl":"whisky · sour"},"alc":[["Whisky",40.0,0.7]],"gl":["Short (szklanka niska)"]},
-  {"id":"swiss","n":"SZWAJCARIA · Swiss Chocolate Espresso Martini","d":1,"pl":"Wódka, espresso, likier czekoladowy","t":{"pl":"wódka · deserowy"},"alc":[["Wódka",40.0,0.7],["Likier czekoladowy (np. Mozart Dark)",20.0,0.7]],"gl":["Coupette (kieliszek koktajlowy)"]},
-  {"id":"french","n":"FRANCJA · French Martini","d":1,"pl":"Wódka, purée malinowe, sok ananasowy","t":{"pl":"wódka · owocowy"},"alc":[["Wódka",40.0,0.7]],"gl":["Coupette (kieliszek koktajlowy)"]},
-  {"id":"copa","n":"HISZPANIA · Gin Tonic Copa","d":1,"pl":"Gin, pomarańcza, rozmaryn, tonik","t":{"pl":"gin · long drink"},"alc":[["Gin",40.0,0.7]],"gl":["Kieliszek do wina"]},
-  {"id":"mule","n":"RUMUNIA · Carpathian Mule","d":1,"pl":"Wódka, śliwka, limonka, piwo imbirowe","t":{"pl":"wódka · imbirowy"},"alc":[["Wódka",40.0,0.7]],"gl":["Long (szklanka wysoka)"]},
+  {"id":"polishgarden","n":"POLSKA · Polish Garden","d":1,"pl":"Wódka, bazylia, cytryna, syrop z kwiatu bzu, woda gazowana","t":{"pl":"wódka · świeży, ziołowy"},"alc":[["Wódka",40.0,0.7]],"gl":["Short (szklanka niska)"]},
+  {"id":"jagermule","n":"NIEMCY · Jäger Mule","d":1,"pl":"Jägermeister, limonka, piwo imbirowe","t":{"pl":"Jägermeister · imbirowy"},"alc":[["Jägermeister",40.0,0.7]],"gl":["Long (szklanka wysoka)"]},
+  {"id":"strudel","n":"AUSTRIA · Strudel Sour","d":1,"pl":"Whisky, sok jabłkowy, cynamon, cytryna, syrop cukrowy","t":{"pl":"whisky · sour"},"alc":[["Whisky / bourbon",40.0,0.7]],"gl":["Short (szklanka niska)"]},
+  {"id":"alpinegt","n":"SZWAJCARIA · Alpine Gin Tonic","d":1,"pl":"Gin, syrop z kwiatu bzu, ogórek, rozmaryn, tonik","t":{"pl":"gin · alpejski, lekki"},"alc":[["Gin",40.0,0.7]],"gl":["Kieliszek do wina"]},
+  {"id":"royalmojito","n":"FRANCJA · Royal Mojito","d":1,"pl":"Rum, mięta, limonka, cukier trzcinowy, dopełniony Prosecco","t":{"pl":"rum · z bąbelkami"},"alc":[["Rum biały",40.0,0.7],["Prosecco",80.0,0.75]],"gl":["Long (szklanka wysoka)"]},
+  {"id":"paloma","n":"HISZPANIA · Paloma","d":1,"pl":"Tequila, różowy grejpfrut, limonka, syrop, woda gazowana","t":{"pl":"tequila · orzeźwiający"},"alc":[["Tequila",40.0,0.7]],"gl":["Long (szklanka wysoka)"]},
+  {"id":"plumsour","n":"RUMUNIA · Plum Sour","d":1,"pl":"Bourbon, śliwka, cytryna, cynamon","t":{"pl":"bourbon · sour, śliwkowy"},"alc":[["Whisky / bourbon",40.0,0.7]],"gl":["Short (szklanka niska)"]},
   {"id":"psm","n":"PASSPORT · Porn Star Martini","d":1,"pl":"Wódka, wanilia, marakuja, limonka, Prosecco","t":{"pl":"hit zeszłego roku"},"alc":[["Wódka",40.0,0.7],["Passoa",20.0,0.7],["Prosecco",40.0,0.75]],"gl":["Coupette (kieliszek koktajlowy)","Shot (kieliszek do wódki)"]}
  ],
  "extraMenu": {
-  "h": "Menu bezalkoholowe – 250 koktajli, wydrukowana karta na bar",
+  "h": "Menu bezalkoholowe – 250 koktajli, wydrukowana karta na bar (w cenie obsługi)",
   "p": "Trzy pozycje z degustacji Pepsi (1:1 jak na ulotce) i dwie nasze w wersji zero cukru.",
   "drinks": [
    {"n":"Pepsi Herbal Swizzle","t":"Pepsi","pl":"Pepsi, limonka, bazylia, kardamon, mięta"},
    {"n":"7-Up Passion Fruit","t":"7-Up","pl":"7-Up, marakuja, wanilia, limonka"},
    {"n":"Mirinda Melonberry","t":"Mirinda","pl":"Mirinda, syrop poziomkowy, arbuz, limonka"},
    {"n":"Porn Star Zero","t":"zero cukru","pl":"marakuja, wanilia, limonka, woda gazowana"},
-   {"n":"Hugo Zero","t":"zero cukru","pl":"kwiat bzu, mięta, limonka, woda gazowana"}
+   {"n":"Polish Garden Zero","t":"zero cukru","pl":"bazylia, cytryna, kwiat bzu, woda gazowana"}
   ]
  },
  "supplyExtra": [
   ["Asortyment do zapewnienia przez organizatora", [
-   ["Sok z cytryny / limonki, butelkowany","16 l"],
-   ["Limonka","90 szt."],
-   ["Pomarańcze","30 szt."],
-   ["Sok jabłkowy klarowany 1 l","22 szt."],
-   ["Cynamon mielony + laski cynamonu do dekoracji","50 g + 50 szt."],
-   ["Syrop z kwiatu czarnego bzu 0,7 l","7 but."],
-   ["Mięta świeża","12 pęczków"],
-   ["Rozmaryn świeży","5 pęczków"],
-   ["Mrożone maliny (lub pulpa malinowa 850 g)","5 kg (5 puszek)"],
-   ["Sok ananasowy 1 l","9 szt."],
+   ["Sok z cytryny / limonki, butelkowany","28 l"],
+   ["Limonka","160 szt."],
+   ["Cytryna","20 szt."],
+   ["Sok z różowego grejpfruta 1 l","10 szt."],
+   ["Sok jabłkowy klarowany 1 l","6 szt."],
+   ["Cynamon mielony","50 g"],
+   ["Laski cynamonu do dekoracji","60 szt."],
+   ["Syrop z kwiatu czarnego bzu 0,7 l","10 but."],
+   ["Bazylia świeża","600 g"],
+   ["Mięta świeża","1 200 g"],
+   ["Rozmaryn świeży","400 g"],
+   ["Ogórek szklarniowy","6 szt."],
    ["Powidła / pulpa śliwkowa","5 kg"],
    ["Pulpa marakuja 850 g","8 puszek"],
    ["Marakuja (owoc)","40 szt."],
    ["Syrop waniliowy","3 but."],
-   ["Syrop cukrowy","8 l"],
-   ["Angostura Bitters","1 but."],
-   ["Bazylia świeża / kardamon mielony","3 pęczki / 20 g"],
-   ["Syrop poziomkowy / arbuz","1 but. / 2 szt."],
-   ["Espresso do Swiss Chocolate Espresso Martini","zapewnia Pimp My Bar"]
+   ["Syrop cukrowy","10 l"],
+   ["Cukier trzcinowy","1,5 kg"],
+   ["Angostura Bitters","2 but."],
+   ["Kardamon mielony","20 g"],
+   ["Syrop poziomkowy / arbuz","1 but. / 2 szt."]
   ]],
   ["Napoje do zapewnienia przez organizatora", [
    ["Pepsi (lub Pepsi Zero) 1 l","10 szt."],
    ["7-Up 1 l","8 szt."],
    ["Mirinda 1 l","8 szt."],
-   ["Piwo imbirowe 200 ml","60 but."],
+   ["Piwo imbirowe 200 ml","120 but."],
    ["Tonik 850 ml","30 but."],
-   ["Woda gazowana 1 l","20 szt."],
-   ["Pozostałe softy (woda n/g, cola, cola zero)","zapewnia Novotel"]
+   ["Woda gazowana 1 l","30 szt."],
+   ["Cola, Sprite, woda niegazowana","wg Państwa uznania"]
   ]]
  ],
  "validUntil": "10.11.2026",
@@ -106,7 +107,7 @@ window.OFFER = {
    "label": "Oferta eventowa · Novotel Poznań Centrum · 30 lat Transgourmet",
    "h1": "Podróż ze smakiem na <em>30-lecie Transgourmet</em>",
    "guestsLabel": "320 osób",
-   "lead": "Dzień dobry, Pani Marzeno! Dziękujemy za kolejne zaproszenie. Poniżej oferta na Przyjęcie Noworoczne 15 stycznia 2027: cztery bary, czterech barmanów z pomocnikiem, menu ośmiu koktajli na kraje oddziałów Transgourmet i karta bezalkoholowa na bar. Układ jak w ubiegłych latach, alkohol i asortyment po Państwa stronie.",
+   "lead": "Dzień dobry, Pani Marzeno! Dziękujemy za kolejne zaproszenie. Poniżej oferta na Przyjęcie Noworoczne 15 stycznia 2027: cztery bary, czterech barmanów z pomocnikiem, menu ośmiu koktajli na kraje oddziałów Transgourmet i karta bezalkoholowa na bar. Układ jak w ubiegłych latach: alkohol, asortyment i napoje po Państwa stronie, szkło i obsługa kelnerska po stronie Novotelu.",
    "howP": "Bary stoją na sali od 19:00 do 3:00. Goście podchodzą, wybierają koktajl z karty i dostają go od barmana po chwili, przygotowany na ich oczach. Każdy kraj z listy Państwa oddziałów ma swój koktajl.",
    "c1h": "Koktajle robione na żywo",
    "c1p": "Każdy koktajl barman przygotowuje przy gościu, w shakerze, ze świeżymi owocami, lodem i dekoracją. Porn Star Martini, hit zeszłego roku, zostaje w karcie.",
@@ -117,11 +118,11 @@ window.OFFER = {
    "cfgH": "Przyjęcie Noworoczne 2027",
    "cfgP": "Menu i lista zakupów. Poniżej karta koktajli na kraje oddziałów, menu bezalkoholowe oraz lista alkoholi, asortymentu i szkła do zapewnienia przez organizatora i Novotel.",
    "s1h": "Menu „Podróż ze smakiem”",
-   "s1p": "Osiem koktajli, po 170 sztuk każdy, razem 1 360 koktajli (ok. 4 na osobę). Nazwy na karcie prowadzą gości przez kraje oddziałów Transgourmet. Jeśli któryś kraj ma dostać inny koktajl, zmienimy go bez wpływu na cenę.",
+   "s1p": "Osiem koktajli, po 170 sztuk każdy (10 butelek na pozycję), razem 1 360 koktajli, ok. 4 na osobę, jak w ubiegłym roku. Nazwy na karcie prowadzą gości przez kraje oddziałów Transgourmet. Jeśli któryś kraj ma dostać inny koktajl, zmienimy go bez wpływu na cenę.",
    "picked": "Menu stałe: {n} pozycji",
    "s2h": "Lista zakupów: alkohole, asortyment i szkło",
-   "cup": "alkohole i asortyment: organizator · szkło: Novotel",
-   "s2p": "Alkohol i asortyment zapewnia organizator (jak co roku), szkło i softy zapewnia Novotel. Liczba butelek zaokrąglona w górę do pełnych, przy 40 ml alkoholu w koktajlu.",
+   "cup": "alkohole, asortyment i napoje: organizator · szkło i obsługa kelnerska: Novotel",
+   "s2p": "Alkohol i asortyment zapewnia organizator (jak co roku), szkło i obsługę kelnerską zapewnia Novotel. Liczba butelek zaokrąglona w górę do pełnych, przy 40 ml alkoholu w koktajlu.",
    "s3h": "Wygląd barów",
    "s3p": "W cenie: lustro srebrne lub złote albo nasza podświetlana klisza. Branding kliszą z Państwa projektem 30-lecia zaznaczony jest poniżej jako opcja, tak jak w ubiegłych latach.",
    "aBrandS": "Klisze z Państwa projektem na podświetlanych frontach 4 barów: 200 zł netto za moduł, razem 800 zł. Projekt graficzny po Państwa stronie (1225 × 1076 mm, krzywe), plik najpóźniej 5 dni roboczych przed eventem.",
@@ -131,15 +132,15 @@ window.OFFER = {
     "4 mobilne bary z pełnym wyposażeniem barowym (kruszarki, blendery, termoboxy, shakery)",
     "4 barmanów + 1 pomocnik, 19:00–3:00",
     "1 360 koktajli, 8 pozycji w menu",
-    "250 koktajli bezalkoholowych, 5 pozycji + wydrukowana karta na bar",
+    "250 koktajli bezalkoholowych, 5 pozycji + wydrukowana karta na bar (bez dopłaty)",
     "lód 200 kg",
     "transport, montaż i demontaż"
    ],
    "sumPer": "1 360 koktajli + 250 bezalkoholowych",
    "faq": [
-    ["Co obejmuje cena?", "4 mobilne bary z wyposażeniem, 4 barmanów i pomocnika od 19:00 do 3:00, menu 8 koktajli (1 360 szt.), menu bezalkoholowe (250 szt.) z kartą na bar, lód oraz transport, montaż i demontaż. Alkohol i asortyment zapewnia organizator, szkło i softy Novotel. Branding klisz z Państwa projektem to opcja 200 zł netto za moduł. Do cen netto doliczamy 23% VAT."],
-    ["Ile koktajli jest w cenie?", "1 360 koktajli alkoholowych (ok. 4 na osobę) i 250 bezalkoholowych. To pula wspólna, nie limit dla gościa. Jeśli alkohol się skończy wcześniej, barmani dają znać organizatorowi na bieżąco."],
-    ["Co zapewnia organizator, a co Novotel?", "Organizator: alkohole, asortyment i napoje z listy w kroku 2 (Pepsi, 7-Up, Mirinda, piwo imbirowe, tonik, woda gazowana). Novotel: szkło według listy, pozostałe softy, obsługę kelnerską zbierającą i myjącą szkło oraz prąd przy barach."],
+    ["Co obejmuje cena?", "4 mobilne bary z wyposażeniem, 4 barmanów i pomocnika od 19:00 do 3:00, menu 8 koktajli (1 360 szt.), menu bezalkoholowe (250 szt.) z kartą na bar bez dopłaty, lód oraz transport, montaż i demontaż. Alkohol, asortyment i napoje zapewnia organizator, szkło i obsługę kelnerską Novotel. Branding klisz z Państwa projektem to opcja 200 zł netto za moduł. Do cen netto doliczamy 23% VAT."],
+    ["Ile koktajli jest w cenie?", "1 360 koktajli alkoholowych (ok. 4 na osobę, jak w ubiegłym roku) i 250 bezalkoholowych. To pula wspólna, nie limit dla gościa. Jeśli alkohol się skończy wcześniej, barmani dają znać organizatorowi na bieżąco."],
+    ["Co zapewnia organizator, a co Novotel?", "Organizator: alkohole, asortyment i wszystkie napoje z listy w kroku 2 (Pepsi, 7-Up, Mirinda, piwo imbirowe, tonik, woda, cola, Sprite). Novotel: szkło według listy, obsługę kelnerską zbierającą i myjącą szkło oraz prąd przy barach."],
     ["Czy menu można zmienić?", "Tak. Każdy kraj może dostać inny koktajl z naszej karty, a proporcje między pozycjami też da się zmienić. Zmiana menu nie zmienia ceny, zmienia tylko listę zakupów."],
     ["Jak potwierdzamy realizację?", "Klikają Państwo „Potwierdzam realizację” albo odpisują na maila. Przesyłamy link do formularza umowy jak w ubiegłych latach, do tego faktura proforma na zaliczkę 2 000 zł netto. Termin 14.01.2028 również mamy zarezerwowany."]
    ],
@@ -149,7 +150,7 @@ window.OFFER = {
    "supCock": "Koktajle (1 360 szt. łącznie)",
    "supAlc": "Alkohole do zapewnienia przez organizatora",
    "supGl": "Szkło do zapewnienia przez Novotel",
-   "supHint": "Liczba butelek zaokrąglona w górę. Ilości szkła przy myciu na bieżąco przez obsługę hotelu. Prąd przy barach zapewnia Novotel."
+   "supHint": "Liczba butelek zaokrąglona w górę. Ilości szkła przy myciu na bieżąco przez obsługę hotelu. Obsługę kelnerską i prąd przy barach zapewnia Novotel."
   }
  }
 };
