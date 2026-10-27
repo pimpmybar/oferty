@@ -87,7 +87,7 @@
   var E = { bars: O.bars || 3, per: O.perGuest || 3, gMin: O.guestsMin || O.guests, gMax: O.guestsMax || O.guests };
   var state = {
     menu: (O.drinks ? DRINKS.filter(function(d){return d.d}) : DRINKS).map(function(d){return d.id}),
-    front: 'silver', own: false, glass: false, waiter: false,
+    front: 'silver', own: !!O.ownDefault, glass: false, waiter: false,
     add: {flair:false, coffee:false}
   };
 
@@ -136,10 +136,13 @@
   function supplyHtml(){ var S = supply(), L = T[lang];
     return '<span class="label">'+L.supCock+'</span><ul class="lines">'+S.sel.map(function(d){ return '<li>'+esc(d.n)+' <b>'+S.per+' szt.</b></li>'; }).join('')+'</ul><hr>'
       +'<span class="label">'+L.supAlc+'</span><ul class="lines">'+S.alc.map(function(a){ return '<li>'+esc(a[0])+' <b>'+a[1]+' × '+bLab(a[2])+'</b></li>'; }).join('')+'</ul><hr>'
-      +'<span class="label">'+L.supGl+'</span><ul class="lines">'+S.gl.map(function(g){ return '<li>'+esc(g[0])+' <b>'+g[1]+' szt.</b></li>'; }).join('')+'</ul><p class="hint">'+L.supHint+'</p>';
+      +'<span class="label">'+L.supGl+'</span><ul class="lines">'+S.gl.map(function(g){ return '<li>'+esc(g[0])+' <b>'+g[1]+' szt.</b></li>'; }).join('')+'</ul>'
+      +(O.supplyExtra||[]).map(function(x){ return '<hr><span class="label">'+esc(x[0])+'</span><ul class="lines">'+x[1].map(function(a){ return '<li>'+esc(a[0])+' <b>'+esc(a[1])+'</b></li>'; }).join('')+'</ul>'; }).join('')
+      +'<p class="hint">'+L.supHint+'</p>';
   }
   function supplyTxt(){ var S = supply(), L = T[lang];
-    return '\n'+L.supAlc+':\n'+S.alc.map(function(a){ return '- '+a[0]+': '+a[1]+' × '+bLab(a[2]); }).join('\n')+'\n'+L.supGl+':\n'+S.gl.map(function(g){ return '- '+g[0]+': '+g[1]+' szt.'; }).join('\n')+'\n';
+    return '\n'+L.supAlc+':\n'+S.alc.map(function(a){ return '- '+a[0]+': '+a[1]+' × '+bLab(a[2]); }).join('\n')+'\n'+L.supGl+':\n'+S.gl.map(function(g){ return '- '+g[0]+': '+g[1]+' szt.'; }).join('\n')+'\n'
+      +(O.supplyExtra||[]).map(function(x){ return x[0]+':\n'+x[1].map(function(a){ return '- '+a[0]+': '+a[1]; }).join('\n')+'\n'; }).join('');
   }
   function priceTxt(){ return money(calc().total)+T[lang].net; }
   function summary(){
@@ -166,13 +169,15 @@
     h += '<section id="bar"><div class="wrap"><div class="sec-head"><h2>'+L.cfgH+'</h2><p>'+L.cfgP+'</p></div><div class="cfg"><div>';
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="menu">';
     DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; });
-    h += '</div><p class="count" id="m-count" aria-live="polite"></p></div>';
+    h += '</div><p class="count" id="m-count" aria-live="polite"></p>';
+    if (O.extraMenu) h += '<h3 style="margin-top:22px">'+esc(O.extraMenu.h)+'</h3><p>'+esc(O.extraMenu.p||'')+'</p><div class="menu">'+O.extraMenu.drinks.map(function(d){ return '<label class="drink" style="cursor:default"><input type="checkbox" checked disabled><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t||'')+'</em><small>'+esc(d.pl)+'</small></span></label>'; }).join('')+'</div>';
+    h += '</div>';
     if (O.supply) h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div id="supply"></div></div>';
     else h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p>'+(O.glass==null ? '' : '<div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div>')+'<p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+L.s3p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
     h += '</div><p class="hint" id="f-name"></p><p class="hint designed">'+L.designed+'</p>';
-    h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding)+' / '+L.perModule);
+    if (!O.noBrandAddon) h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding)+' / '+L.perModule);
     h += addon('coffee', L.aCoffee, L.aCoffeeS, L.ask);
     // pokaz flair usunięty z ofert (decyzja 10.2026): PMB nie robi już pokazów barmańskich
     h += '</div></div>';
