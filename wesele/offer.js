@@ -1,6 +1,7 @@
 /* Pimp My Bar – ofertomat weselny. Dane oferty: window.OFFER (w index.html danej oferty). */
 (function(){
   var O = window.OFFER, A = O.assets || '../wesele/assets/';
+  var HERO_SLIDES = ['hero.jpg?v=2','crew-1.jpg','menu-board.jpg','crew-4.jpg','welcome.jpg','pour.jpg'];
 
   // ── Cennik (PLN). Zmiana tutaj zmienia wszystkie oferty weselne. ──
   var PRICE = {
@@ -298,10 +299,10 @@
     h += '<div class="hero"><div class="hero-copy"><div class="label">'+esc(P.label || L.offerFor)+'</div><h1>'+(P.h1 || L.h1)+'</h1><p>'+esc(P.lead || L.lead)+'</p>';
     h += '<dl class="facts"><div><dt>'+L.fDate+'</dt><dd>'+esc(O.date)+'</dd></div><div><dt>'+L.fPlace+'</dt><dd>'+esc(O.venue)+'</dd></div><div><dt>'+L.fGuests+'</dt><dd>'+esc(P.guestsLabel || t('guestsN',{n:O.guests}))+'</dd></div><div><dt>'+L.fTime+'</dt><dd>'+L.hours+'</dd></div></dl>';
     h += '<div class="price-peek"><div class="big num" id="peek"></div><a class="btn" href="#bar">'+L.cta+'</a></div></div>';
-    h += '<button type="button" class="film" id="film" aria-label="'+esc(L.play)+'"><img src="'+A+'hero.jpg?v=2" alt=""><span class="play"><span class="tri" aria-hidden="true"></span>'+L.play+'</span></button></div></div>';
+    h += '<button type="button" class="film" id="film" aria-label="'+esc(L.play)+'">'+HERO_SLIDES.map(function(f,i){ return '<img class="slide'+(i===0?' on':'')+'" src="'+A+f+'" alt=""'+(i?' loading="lazy"':'')+'>'; }).join('')+'<span class="play"><span class="tri" aria-hidden="true"></span>'+L.play+'</span></button></div></div>';
 
-    h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.howH+'</h2><p>'+L.howP+'</p></div><div class="trio">';
-    [['stir.jpg','c1'],['bar-artdeco.jpg','c2'],['cocktail.jpg','c3']].forEach(function(c){ h += '<div class="card"><img src="'+A+c[0]+'" alt="" loading="lazy"><h3>'+L[c[1]+'h']+'</h3><p>'+L[c[1]+'p']+'</p></div>'; });
+    h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.howH+'</h2><p>'+L.howP+'</p></div><div class="mosaic">';
+    [['lights.jpg','c3',' big','50% 35%'],['crew-3.jpg','c1','','50% 30%'],['bar-oliwkowy-3m.jpg','c2','','50% 70%']].forEach(function(c){ h += '<div class="tile'+c[2]+'"><img src="'+A+c[0]+'" alt="" loading="lazy" style="object-position:'+c[3]+'"><div class="tx"><h3>'+L[c[1]+'h']+'</h3><p>'+L[c[1]+'p']+'</p></div></div>'; });
     h += '</div></div></section>';
 
     h += '<section id="bar"><div class="wrap"><div class="sec-head"><h2>'+L.cfgH+'</h2><p>'+L.cfgP+'</p></div><div class="cfg"><div>';
@@ -418,6 +419,8 @@
       var id = i.dataset.add; if (id==='own') state.own = i.checked; else state.add[id] = i.checked; render();
       if (i.checked) once('add'+id,'Dodał: '+T.pl[{own:'aBrand',flair:'aFlair',tower:'aTower',welcome:'aWelcome',coffee:'aCoffee'}[id]]+' → '+summary().total,'heavy_plus_sign');
     }); });
+    (function(){ var f = $('film'), i = 0; if (!f || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var tm = setInterval(function(){ if (f.classList.contains('playing')){ clearInterval(tm); return; } var sl = f.querySelectorAll('.slide'); if (sl.length < 2) return; sl[i].classList.remove('on'); i = (i+1) % sl.length; sl[i].classList.add('on'); }, 3800); })();
     $('film').addEventListener('click', function(){ var f = $('film'); if (f.classList.contains('playing')) return; f.classList.add('playing');
       f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/Btc8eqYrPd8?autoplay=1&rel=0" title="Showreel – Pimp My Bar" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; once('film','Ogląda showreel','movie_camera'); });
     document.querySelectorAll('[data-book]').forEach(function(a){ a.addEventListener('click', function(){ var s = summary(); once('book','Kliknął „Rezerwuję termin” → '+s.total+' · '+s.head,'white_check_mark',5); }); });
