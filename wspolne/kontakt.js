@@ -16,8 +16,30 @@
   var DEV = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'telefon' : 'komputer';
   var SID = 'k'+Math.random().toString(36).slice(2,9)+Date.now().toString(36);
 
+  // ── PostHog (nagrania sesji, lejki, kto otworzył którą ofertę) ──
+  // Klucz projektu (phc_…) i host z PostHog → Settings → Project. Pusty klucz = PostHog wyłączony.
+  var PH_KEY = 'PH_KEY_TUTAJ', PH_HOST = 'https://eu.i.posthog.com';
+  var ph = null;
+  if (PH_KEY && PH_KEY.indexOf('phc_') === 0 && !owner){
+    try{
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init(PH_KEY, {api_host: PH_HOST, person_profiles: 'always', capture_pageview: true, capture_pageleave: true, session_recording: {maskAllInputs: false}, autocapture: true});
+      posthog.register({oferta: (TEST?'TEST-':'')+ID, oferta_tytul: TITLE, urzadzenie: DEV, test: TEST});
+      posthog.group('oferta', (TEST?'TEST-':'')+ID, {name: TITLE});
+      ph = posthog;
+    }catch(e){ ph = null; }
+  }
+  function phCapture(ev, detail){
+    if (!ph) return;
+    try{ ph.capture('oferta:'+String(ev).slice(0,40), {szczegoly: detail==null?null:String(detail).slice(0,300), sesja_pmb: SID}); }catch(e){}
+  }
+  // Silniki ofert (wesele/offer.js, event/event.js…) mają własne track() – dublują zdarzenia tutaj.
+  window.__pmbTrack = phCapture;
+  try{ (window.__pmbQ||[]).forEach(function(q){ phCapture(q[0], q[1]); }); window.__pmbQ = []; }catch(e){}
+
   function track(ev, detail){
     if (owner || O.noPing) return;
+    phCapture(ev, detail);
     try{ fetch(SB, {method:'POST', keepalive:true, headers:{'apikey':SBK,'Authorization':'Bearer '+SBK,'Content-Type':'application/json','Prefer':'return=minimal'},
       body: JSON.stringify({offer:(TEST?'TEST-':'')+ID.slice(0,75), session:SID, event:String(ev).slice(0,40), detail: detail==null?null:String(detail).slice(0,300), device:DEV, lang:document.documentElement.lang||'pl'})}).catch(function(){}); }catch(e){}
   }

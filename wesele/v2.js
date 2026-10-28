@@ -466,6 +466,7 @@
   var SID = Math.random().toString(36).slice(2,10)+Date.now().toString(36), T0 = Date.now();
   function track(ev, detail){
     if (owner || O.noPing) return;
+    try{ if (window.__pmbTrack) window.__pmbTrack(ev, detail); else (window.__pmbQ = window.__pmbQ || []).push([ev, detail]); }catch(e){}
     try{ fetch(SB, {method:'POST', keepalive:true, headers:{'apikey':SBK,'Authorization':'Bearer '+SBK,'Content-Type':'application/json','Prefer':'return=minimal'},
       body: JSON.stringify({offer:String(O.id||O.title||'').slice(0,80), session:SID, event:String(ev).slice(0,40), detail: detail==null ? null : String(detail).slice(0,300), device:DEV, lang:lang})}).catch(function(){}); }catch(e){}
   }
@@ -483,4 +484,7 @@
   try{ first = !sessionStorage.getItem('pmb_seen_'+O.id); sessionStorage.setItem('pmb_seen_'+O.id,'1'); }catch(e){}
   track('wejscie', first ? 'pierwsze w tej karcie' : 'odświeżenie');
   if (first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
+
+  // Wspólny moduł: PostHog + alarm „gorący klient” + dymek kontaktowy
+  try{ var ks = document.createElement('script'); ks.src = '../wspolne/kontakt.js?v=3'; document.body.appendChild(ks); }catch(e){}
 })();
