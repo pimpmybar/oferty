@@ -329,7 +329,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <div><dt>Czas</dt><dd>ok. 1,5–2 godziny</dd></div>
       </dl>
       <div class="price-peek">
-        <div class="big num" id="peek">4 100 zł<small>netto</small></div>
+        <div class="big num" id="peek">3 800 zł<small>netto</small></div>
         <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
       </div>
     </div>
@@ -397,7 +397,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       </div>
       <aside class="total" aria-live="polite">
         <span class="label" id="variant-name">30 osób, 3 koktajle</span>
-        <div class="sum" id="sum">4 100 zł</div>
+        <div class="sum" id="sum">3 800 zł</div>
         <span class="sub">netto, do ceny doliczamy VAT</span>
         <hr>
         <ul class="terms">
@@ -481,7 +481,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div style="display:flex;flex-direction:column;gap:14px">
         <h2>Rezerwujemy termin</h2>
         <p>Proszę odpisać na maila z wybraną wersją i miejscem albo zadzwonić. Potwierdzenie mailowe wystarczy – termin jest Państwa. Zaliczki nie pobieramy.</p>
-        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">30 osób, 3 koktajle, 4 100 zł netto</span></p>
+        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">30 osób, 3 koktajle, 3 800 zł netto</span></p>
       </div>
       <div class="contact">
         <div class="crow"><span>Tomasz Malinowski</span></div>
@@ -499,7 +499,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 
 <script>
 (function(){
-  var SERVICE = 2700, PER = 30, FOURTH = 10, TASTING = 590, BAR = 500, ROUND = 20, TRAVEL = 500;
+  var SERVICE = 2700, PER = 30, FOURTH = 10, TASTING = 590, BAR = 500, ROUND = 20, TRAVEL = 500, RABAT = 300;
   var DRINKS = [
     {id:'ws', n:'Whisky Sour', d:1, t:'shake · klasyczny, słodko-kwaśny', pl:'whisky, cytryna, syrop cukrowy, Angostura'},
     {id:'psm', n:'Porn Star Martini', d:1, t:'shake · owocowy, waniliowy', pl:'wódka, wanilia, marakuja, cytryna, kieliszek prosecco'},
@@ -531,6 +531,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     if (state.fourth) items.push({what:'Czwarty koktajl × ' + g + ' osób', why:'składniki, ok. 20 min dłużej', amt:g*FOURTH});
     if (state.tasting) items.push({what:'Degustacja alkoholi, 1 h', why:'prowadzenie; alkohole do degustacji według zakupu, ok. 320 zł', amt:TASTING});
     if (state.bar) items.push({what:'Bar po warsztatach, 1 h', why:'barman serwuje koktajle z menu; składniki po 6 zł za koktajl', amt:BAR});
+    items.push({what:'Rabat dla Hotelu Partner', why:'za ponowne zaproszenie do współpracy', amt:-RABAT});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
     items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
