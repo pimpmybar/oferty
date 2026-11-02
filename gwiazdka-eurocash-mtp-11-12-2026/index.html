@@ -374,7 +374,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
           </div>
         </div>
         <p class="hours-head"><strong>Bar.</strong> Jeden bar na całą imprezę, z frontem ok. <span id="bar-len">8,75 m</span>, żeby 7 barmanów mogło pracować obok siebie. Jak rok temu możecie zapewnić bar sami (np. cały z lodu z logo Frisco) albo wziąć nasze moduły.</p>
-        <div class="toggle three" role="group"><button type="button" id="bar-none" aria-pressed="true">Bar po Waszej stronie<small>np. cały z lodu z logo Frisco, jak rok temu bez naszych barów</small></button><button type="button" id="bar-pmb" aria-pressed="false">Bar Pimp My Bar<small>7 modułów po 125 cm z kliszą na froncie</small></button><button type="button" id="bar-mix" aria-pressed="false">Nasz bar + lodowy moduł<small>5 naszych modułów, lodowy front z logo Frisco na środku po Waszej stronie</small></button></div>
+        <div class="toggle three" role="group"><button type="button" id="bar-none" aria-pressed="true">Bar po Waszej stronie<small>np. cały z lodu z logo Frisco, jak rok temu bez naszych barów</small></button><button type="button" id="bar-pmb" aria-pressed="false">Bar Pimp My Bar<small>7 modułów po 125 cm z kliszą na froncie</small></button><button type="button" id="bar-mix" aria-pressed="false">Nasz bar + lodowy moduł<small>4 nasze moduły (po 2 z każdej strony), lodowy front z logo Frisco na środku po Waszej stronie</small></button></div>
         <p class="hours-head"><strong>Dodatkowe alkohole.</strong> Whisky, gin, likier kawowy i blue curaçao do menu. Możemy je kupić my albo dostarcza Frisco.</p>
         <div class="toggle" role="group"><button type="button" id="alc-pmb" aria-pressed="true">Kupuje Pimp My Bar<small>zwrot nieotwartych butelek</small></button><button type="button" id="alc-ec" aria-pressed="false">Dostarcza Frisco / Eurocash<small>dajemy dokładną listę</small></button></div>
         <p class="hours-head"><strong>Szkło.</strong> Przy ok. 2 500 drinkach to ok. 2 500 szklanek albo szkło lokalu myte na bieżąco.</p>
@@ -457,7 +457,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <div class="col">
         <span class="label">Jeśli bar z lodu</span>
         <ul>
-          <li><span><b>Lodowy moduł centralny</b> – ok. 2,5 m frontu z logo Frisco na środku, po bokach 5 naszych podświetlanych modułów (6,25 m). Daje efekt na zdjęciach przy niższym koszcie.</span></li>
+          <li><span><b>Lodowy moduł centralny</b> – ok. 3,75 m frontu z logo Frisco na środku, po bokach 4 nasze podświetlane moduły – po 2 z każdej strony (5 m). Daje efekt na zdjęciach przy niższym koszcie.</span></li>
           <li><span><b>Cały bar z lodu</b> – ok. 8,75 m frontu po Waszej stronie, razem z back barem i stołami roboczymi za nim (regały na lód, szkło i butelki).</span></li>
           <li><span><b>Blat roboczy przed barmanem</b> nie może być z lodu – na lodowym froncie zostawiamy własny blat ze stali albo drewna</span></li>
           <li><span><b>Odpływ wody i tace</b> pod lodem przez całą noc – to po stronie wykonawcy baru lodowego</span></li>
@@ -578,7 +578,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       items.push({what:'Logistyka baru', why:'wynajem auta ' + fmt(CAR) + ' + montaż i demontaż ' + fmt(MONT), amt:CAR+MONT});
     }
     if (state.bar === 'pmb') barLines(cr.mod, 'front ok. ' + lenM + ' m, back bar, regały i stoły robocze');
-    if (state.bar === 'mix') barLines(cr.mod-2, 'po bokach lodowego modułu centralnego (ok. 2,5 m) z logo Frisco – lodowy moduł po Waszej stronie');
+    if (state.bar === 'mix') barLines(cr.mod-3, 'po 2 z każdej strony lodowego modułu centralnego (ok. 3,75 m) z logo Frisco – lodowy moduł po Waszej stronie');
     items.push({what:'Składniki do ' + nf(c.tot) + ' koktajli', why:'syropy, puree, owoce, zioła, piana i dekoracje – ' + MENU.length + ' pozycji z menu', amt:Math.round(c.tot*ASORT/10)*10});
     items.push({what:'Mocktaile 0%, ' + nf(c.mock) + ' szt.', why:'Polarna Gwiazdka 0% i wersje 0% koktajli z menu', amt:Math.round(c.mock/100*MOCK_100)});
     var gbt = Math.ceil(c.mule/3);
