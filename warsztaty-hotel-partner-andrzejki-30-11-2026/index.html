@@ -356,7 +356,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     </div>
     <div class="photos">
       <figure><img src="../warsztaty-erste-leasing-30-os/assets/warsztaty-stol.jpg" alt="Stanowiska warsztatowe: deski, shakery, jiggery, szkło i owoce" loading="lazy" style="object-position:50% 70%;aspect-ratio:4/3"><figcaption>Stanowiska przed startem: każdy ma własną deskę, shaker, jigger, sitko, szkło i owoce.</figcaption></figure>
-      <figure><img src="../wesele/assets/stir.jpg" alt="Barman Pimp My Bar w rozmowie z gośćmi przy barze" loading="lazy" style="object-position:55% 40%;aspect-ratio:4/3"><figcaption>Barman prowadzi, podpowiada i odpowiada na pytania.</figcaption></figure>
+      <figure class="film"><video id="film" src="../expo-real-lds/assets/hero.mp4" poster="../expo-real-lds/assets/poster.jpg" autoplay muted loop playsinline webkit-playsinline preload="auto"></video><figcaption>Nasz zespół w akcji.</figcaption></figure>
       <figure><img src="../warsztaty-erste-leasing-30-os/assets/warsztaty-grupa.jpg" alt="Uczestnicy warsztatów podnoszą gotowe koktajle" loading="lazy" style="object-position:50% 88%;aspect-ratio:4/3"><figcaption>Koniec tury: każdy z własnoręcznie zrobionym Porn Star Martini.</figcaption></figure>
     </div>
   </div>
@@ -573,6 +573,16 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change',function(){ once('menu','Zmienia menu warsztatów','cocktail'); }); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Akceptuję” → '+(t?t.textContent:''),'white_check_mark',5); }); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt','telephone_receiver',5); }); });
+})();
+</script>
+<script>
+(function(){
+  var v=document.getElementById('film'); if(!v) return;
+  v.muted=true;
+  function go(){ var p=v.play(); if(p&&p.catch) p.catch(function(){ v.setAttribute('controls',''); }); }
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(e){ e.forEach(function(x){ if(x.isIntersecting) go(); else v.pause(); }); },{threshold:.25}).observe(v); } else go();
+  v.addEventListener('click',function(){ if(v.paused) go(); });
+  document.addEventListener('touchstart',function t(){ go(); document.removeEventListener('touchstart',t); },{passive:true});
 })();
 </script>
 <script>window.PMB={id:"warsztaty-hotel-partner-301126",title:"Warsztaty Hotel Partner Andrzejki 30.11 (Anna W.)"};</script>
