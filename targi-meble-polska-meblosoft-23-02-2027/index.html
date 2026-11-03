@@ -351,10 +351,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-cocktails"></small>
           </div>
         </div>
-        <label class="addon" for="whisky">
-          <input type="checkbox" id="whisky">
-          <span><strong>Whisky do podania solo, + 300 zł</strong><small>2 butelki single malt (np. Glenmorangie 10) dla gości, którzy piją whisky czystą lub z lodem. Do Whisky Sour zostaje whisky blended.</small></span>
-        </label>
+        <p class="hours-head"><strong>Single malt dla gości, którzy piją whisky solo lub z lodem.</strong> Do Whisky Sour używamy Jamesona. Jeśli chcą Państwo podawać też whisky single malt, wystarczy ustawić liczbę butelek – z butelki wychodzi ok. 17 porcji po 40 ml.</p>
+        <div class="qty" id="malts"></div>
         <p class="note">Niewykorzystaną kawę i nieotwarte butelki odejmujemy od faktury końcowej i zabieramy z powrotem, tak jak w 2025 roku. Jeśli w trakcie targów zabraknie, dowozimy i rozliczamy według tych samych stawek.</p>
       </div>
       <aside class="total" aria-live="polite">
@@ -384,7 +382,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     </div>
     <ul class="menu-list" id="menu-list">
       <li><span class="n">Aperol Spritz</span><span class="k" data-k>40 szt.</span><span class="c">Aperol, prosecco, woda gazowana, pomarańcza, lód</span></li>
-      <li><span class="n">Whisky Sour</span><span class="k" data-k>40 szt.</span><span class="c">whisky, sok z cytryny, syrop cukrowy, aquafaba</span></li>
+      <li><span class="n">Whisky Sour</span><span class="k" data-k>40 szt.</span><span class="c">Jameson, sok z cytryny, syrop cukrowy, aquafaba</span></li>
       <li><span class="n">Mojito</span><span class="k" data-k>40 szt.</span><span class="c">rum, limonka, mięta, cukier trzcinowy, woda gazowana</span></li>
       <li><span class="n">Red Lady <span class="zero">TEŻ 0%</span></span><span class="k" data-k>40 szt.</span><span class="c">wódka, truskawki, limonka, syrop waniliowy</span></li>
       <li><span class="n">Mango Passion <span class="zero">TEŻ 0%</span></span><span class="k" data-k>40 szt.</span><span class="c">wódka, mango, marakuja, limonka</span></li>
@@ -498,7 +496,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <p>Jeśli czegoś tu brakuje, wystarczy odpisać na maila.</p>
     </div>
     <div class="faq">
-      <details><summary>Czy whisky może być lepsza niż w koktajlach?</summary><p>Tak. Do Whisky Sour używamy whisky blended, bo w koktajlu smak tworzą też cytryna i syrop. Dla gości, którzy piją whisky solo lub z lodem, proponujemy dodatkowo single malt – wystarczy zaznaczyć opcję w wycenie. Jeśli wolą Państwo konkretną markę, prosimy o informację przy umowie.</p></details>
+      <details><summary>Jaka whisky będzie na stoisku?</summary><p>Do Whisky Sour – Jameson. Dla gości, którzy piją whisky solo lub z lodem, proponujemy single malty: Singleton 12, Glenlivet 12, Glenmorangie 12, Talisker 10 (dymny) i Glenfiddich 12. Liczbę butelek każdej z nich ustawiają Państwo w wycenie. Jeśli wolą Państwo inną markę, dobierzemy ją przy umowie.</p></details>
       <details><summary>Czy trzeba doprowadzić wodę na stoisko?</summary><p>Nie. W 2025 roku pracowaliśmy bez przyłącza wody. Potrzebny jest prąd do ekspresu na osobnym bezpieczniku i lodówka.</p></details>
       <details><summary>W jakich godzinach pracuje barista?</summary><p>W cenie jest 8 godzin dziennie, czyli cały czas otwarcia hali. Każda dodatkowa godzina, np. wieczór na stoisku, to 200 zł netto.</p></details>
       <details><summary>Co, jeśli kawy albo koktajli zabraknie lub zostanie?</summary><p>Przywozimy zapas. Niewykorzystaną kawę i nieotwarte butelki odejmujemy od faktury, a jeśli trzeba dowieźć więcej – rozliczamy według tych samych stawek, jak w 2025 roku.</p></details>
@@ -535,11 +533,27 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   // ── Cennik (PLN netto) ──
   var SVC = {3:4960, 4:5840};          // 2025: 4 500 (3 dni) / 5 300 (4 dni) + 5% rocznie
   var MACHINE_DAY = 200, PORCELAIN = 60, GLASS = 95, SOFTS = 175;
-  var COFFEE_100 = 200, COCKTAIL_100 = 760, WHISKY = 300, MENU_N = 5;
+  var COFFEE_100 = 200, COCKTAIL_100 = 760, MENU_N = 5, MALT_SHIP = 20;
+  // Single malty – ceny Dom Whisky 03.11.2026, brutto / 1,23
+  var MALTS = [
+    {id:'singleton', name:'The Singleton of Dufftown 12', note:'Speyside, łagodny, miodowo-owocowy', net:113},
+    {id:'glenlivet', name:'The Glenlivet 12 Double Oak', note:'Speyside, gruszka, wanilia', net:126},
+    {id:'glenmorangie', name:'Glenmorangie Original 12', note:'Highlands, cytrusy, wanilia', net:134},
+    {id:'talisker', name:'Talisker 10', note:'wyspa Skye, dymny i morski', net:142},
+    {id:'glenfiddich', name:'Glenfiddich 12', note:'Speyside, świeża gruszka, dąb', net:150}
+  ];
   var TICKS = ['Kalibracja przed otwarciem hali','Cappuccino z latte art','Aperol Spritz','Whisky Sour','Mojito','Red Lady, też 0%'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
   var days = 3, rc = $('r-coffee'), rk = $('r-cocktails'), coffeeTouched = false;
+  var mb = $('malts');
+  MALTS.forEach(function(m){
+    var d=document.createElement('div'); d.className='q';
+    d.innerHTML='<div class="q-top"><label for="m-'+m.id+'"></label><output id="o-'+m.id+'"></output></div><div class="q-row"><button type="button" data-step="-1" data-for="m-'+m.id+'" aria-label="Mniej butelek">−</button><input type="range" id="m-'+m.id+'" min="0" max="6" step="1" value="0"><button type="button" data-step="1" data-for="m-'+m.id+'" aria-label="Więcej butelek">+</button></div><small></small>';
+    d.querySelector('label').textContent=m.name;
+    d.querySelector('small').textContent=m.note+' · 0,7 l · '+m.net+' zł netto za butelkę';
+    mb.appendChild(d);
+  });
 
   function setDays(d){
     days = d;
@@ -558,9 +572,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       {what:'Szkło do koktajli, 100 szt.', why:'myjemy na bieżąco za barem', amt:GLASS},
       {what:'Kawa, ' + c + ' szt.', why:'ziarno, mleko krowie i roślinne, cukier, mieszadełka', amt:c/100*COFFEE_100}
     ];
-    if (k>0) items.push({what:'Koktajle, ' + k + ' szt.', why:'alkohole (40 ml na koktajl), owoce, syropy, soki i lód; ' + MENU_N + ' pozycji po ' + Math.round(k/MENU_N) + ' szt.', amt:k/100*COCKTAIL_100});
+    if (k>0) items.push({what:'Koktajle, ' + k + ' szt.', why:'alkohole (40 ml na koktajl, do Whisky Sour Jameson), owoce, syropy, soki i lód; ' + MENU_N + ' pozycji po ' + Math.round(k/MENU_N) + ' szt.', amt:k/100*COCKTAIL_100});
     items.push({what:'Woda i soki na stoisko', why:'woda gaz. i niegaz. 26 × 1,5 l, sok pomarańczowy i jabłkowy 16 × 1 l', amt:SOFTS});
-    if ($('whisky').checked) items.push({what:'Whisky single malt do podania solo', why:'2 butelki, np. Glenmorangie 10', amt:WHISKY});
+    var maltBottles = 0, maltNames = [];
+    MALTS.forEach(function(m){ var n=+$('m-'+m.id).value; $('o-'+m.id).textContent = n ? n + ' but.' : '–'; if(n){ maltBottles+=n; maltNames.push(n+'× '+m.name.replace('The ','')); items.push({what:m.name+', '+n+' but.', why:'single malt do podania solo lub z lodem, ok. '+(n*17)+' porcji po 40 ml', amt:n*m.net}); } });
+    if (maltBottles) items.push({what:'Dostawa single maltów', why:'zamawiamy pod Państwa wybór', amt:MALT_SHIP});
     var total = items.reduce(function(s,i){return s+i.amt},0);
     var ul = $('lines'); ul.innerHTML='';
     items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt num"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
@@ -569,7 +585,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('o-cocktails').textContent = k>0 ? k + ' szt.' : 'bez koktajli';
     $('h-cocktails').textContent = (k>0 ? 'ok. ' + Math.round(k/days) + ' dziennie · ' : 'sama kawa · ') + 'każde 100 koktajli to ' + fmt(COCKTAIL_100) + ' netto';
     document.querySelectorAll('[data-k]').forEach(function(s){ s.textContent = k>0 ? Math.round(k/MENU_N) + ' szt.' : '–'; });
-    var name = days + ' dni · ' + c + ' kaw' + (k>0 ? ' + ' + k + ' koktajli' : ', bez koktajli') + ($('whisky').checked ? ' + single malt' : '');
+    var name = days + ' dni · ' + c + ' kaw' + (k>0 ? ' + ' + k + ' koktajli' : ', bez koktajli') + (maltBottles ? ' + single malt: ' + maltNames.join(', ') : '');
     $('variant-name').textContent = name;
     $('sum').textContent = fmt(total);
     $('peek').innerHTML = fmt(total) + '<small>netto</small>';
@@ -579,7 +595,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   $('d4').addEventListener('click', function(){ setDays(4); });
   rc.addEventListener('input', function(){ coffeeTouched = true; render(); });
   rk.addEventListener('input', render);
-  $('whisky').addEventListener('change', render);
+  document.querySelectorAll('#malts input').forEach(function(r){ r.addEventListener('input', render); });
   document.querySelectorAll('.q-row button').forEach(function(b){
     b.addEventListener('click', function(){
       var r = $(b.dataset.for), v = +r.value + (+b.dataset.step) * (+r.step);
@@ -632,7 +648,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var tm; function later(ev,msg){ clearTimeout(tm); tm=setTimeout(function(){ ping(ev,msg+' → '+last()); },2500); }
   ['r-coffee','r-cocktails'].forEach(function(id){ document.getElementById(id).addEventListener('change',function(){ later('wariant','Suwak '+(id==='r-coffee'?'kawy':'koktajli')); }); });
   ['d3','d4'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ later('wariant','Zmiana liczby dni'); }); });
-  document.getElementById('whisky').addEventListener('change',function(e){ if(e.target.checked) later('wariant','Zaznaczył single malt'); });
+  document.querySelectorAll('#malts input').forEach(function(r){ r.addEventListener('change',function(){ later('wariant','Suwak single malt'); }); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ once('acc','white_check_mark','Kliknął „Akceptuję” → '+last(),5); }); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'telephone_receiver','Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')',5); }); });
 })();
