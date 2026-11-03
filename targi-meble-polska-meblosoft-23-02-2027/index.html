@@ -507,7 +507,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="accept">
       <div style="display:flex;flex-direction:column;gap:14px">
         <h2>Rezerwujemy termin</h2>
-        <p>Wystarczy odpisać na maila z wybraną wersją albo zadzwonić. Wysyłamy wtedy formularz do umowy, a po wpłacie zaliczki termin jest Państwa.</p>
+        <p>Wystarczy wypełnić formularz – na jego podstawie wygenerujemy umowę i wystawimy fakturę zaliczkową. Po wpłacie zaliczki termin jest Państwa. W razie pytań proszę odpisać na maila albo zadzwonić.</p>
+        <p><a class="btn" id="form-btn" href="https://forms.gle/csZm2bgHQaGBXjwM6" target="_blank" rel="noopener">Wypełnij formularz do umowy →</a></p>
         <p class="num" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text"></span></p>
       </div>
       <div class="contact">
@@ -669,6 +670,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   ['d3','d4'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ later('wariant','Zmiana liczby dni'); }); });
   document.querySelectorAll('#malts input').forEach(function(r){ r.addEventListener('change',function(){ later('wariant','Suwak single malt'); }); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ once('acc','white_check_mark','Kliknął „Akceptuję” → '+last(),5); }); });
+  document.getElementById('form-btn').addEventListener('click',function(){ once('form','memo','Otworzył formularz do umowy → '+last(),5); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'telephone_receiver','Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')',5); }); });
 })();
 </script>
