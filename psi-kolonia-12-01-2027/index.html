@@ -531,8 +531,9 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="accept">
       <div style="display:flex;flex-direction:column;gap:14px">
-        <h2>Rezerwujemy termin</h2>
-        <p>Proszę odpisać na maila z wybraną wersją albo zadzwonić. Wysyłamy wtedy umowę i fakturę zaliczkową, a po zaksięgowaniu termin jest Państwa.</p>
+        <h2>Ostatni krok: formularz</h2>
+        <p>Termin jest zarezerwowany dla Państwa. Prosimy o wypełnienie formularza zgłoszeniowego – na jego podstawie przygotujemy umowę i fakturę zaliczkową.</p>
+        <a class="btn" id="form-btn" href="https://forms.gle/KV83BtzYWwUakzX76" target="_blank" rel="noopener" style="align-self:flex-start">Wypełnij formularz zgłoszeniowy</a>
         <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text">600 kaw + 200 Aperoli + 204 Prosecco + branding baru, 14 744 zł netto</span></p>
       </div>
       <div class="contact">
@@ -662,6 +663,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   });
   var br=document.getElementById('brand'); if(br) br.addEventListener('change',function(){ if(br.checked) once('brand','Zaznaczył branding baru (+200)','art'); });
   document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Akceptuję” → '+(t?t.textContent:''),'white_check_mark',5); }); });
+  var fb=document.getElementById('form-btn'); if(fb) fb.addEventListener('click',function(){ once('form','Otworzył formularz zgłoszeniowy','memo',5); });
   document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt ('+(b.dataset.copy==='c-tel'?'telefon':'e-mail')+')','telephone_receiver',5); }); });
   document.querySelectorAll('a[href*="instagram.com"]').forEach(function(a){ a.addEventListener('click',function(){ once('ig'+a.href,'Otworzył film z realizacji','movie_camera'); }); });
 })();
