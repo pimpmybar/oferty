@@ -260,7 +260,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="hero-copy">
       <div class="label">MTP Poznań · pawilon 6 · 17–20.11.2026 · 10:00–17:00</div>
       <h1>Kawa od baristy przez <em>4 dni</em> w pawilonie 6</h1>
-      <p>Dzień dobry, Pani Katarzyno! Dziękujemy za kolejne zapytanie. Termin 17–20 listopada jest dla Państwa, a pawilon 6 znamy dobrze. Przyjeżdżamy z modułem barowym, ekspresem kolbowym, baristami i wszystkimi produktami, łącznie z kubkami jednorazowymi. Przy 350–400 osobach dziennie za barem stoi dwóch baristów, żeby nie było kolejek w przerwach. Ponieważ to 4 dni, obsługę liczymy po obniżonej stawce 2 400 zł dziennie. Poniżej ustawi Pani liczbę kaw, a cena przeliczy się od razu.</p>
+      <p>Dzień dobry, Pani Katarzyno! Dziękujemy za kolejne zapytanie. Termin 17–20 listopada jest dla Państwa, a pawilon 6 znamy dobrze. Przyjeżdżamy z modułem barowym, ekspresem kolbowym, baristami i wszystkimi produktami, łącznie z kubkami jednorazowymi. Przy 350–400 osobach dziennie za barem stoi dwóch baristów, żeby nie było kolejek w przerwach. Ponieważ to 4 dni, obsługę liczymy w cenie pakietowej 8 200 zł za całe wydarzenie. Poniżej ustawi Pani liczbę kaw, a cena przeliczy się od razu.</p>
       <dl class="facts">
         <div><dt>Termin</dt><dd>17–20.11.2026</dd></div>
         <div><dt>Godziny</dt><dd>10:00–17:00</dd></div>
@@ -291,7 +291,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     <div class="pricing">
       <div>
         <ul class="lines" id="lines"></ul>
-        <p class="note" style="margin-top:18px">Przy 4 dniach liczymy obniżoną stawkę dzienną: 2 baristów za barem za 2 400 zł netto dziennie, razem 9 600 zł netto za obsługę całego wydarzenia.</p>
+        <p class="note" style="margin-top:18px">Przy 4 dniach liczymy cenę pakietową: 2 baristów za barem przez całe wydarzenie za 8 200 zł netto.</p>
         <div class="label" style="margin:22px 0 8px">Ile kaw dziennie przygotowujemy</div>
         <div class="seg" role="group" aria-label="Ile kaw dziennie" style="grid-template-columns:1fr 1fr 1fr">
           <button type="button" data-kg="3" aria-pressed="false">do 300 / dzień</button>
@@ -478,7 +478,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 
 <script>
 (function(){
-  var DAYS = 4, KG = 200, DAY = 2400;
+  var DAYS = 4, KG = 200, SVC = 8200;
   var TICKS = ['Espresso, cappuccino, latte','4 dni w pawilonie 6','Kawa robiona na żywo','Kubki jednorazowe w cenie'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
@@ -486,7 +486,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 
   function render(){
     var rows = [
-      {what:'Obsługa baristyczna, 4 dni (17–20.11)', why:'2 baristów, 4 dni × '+fmt(DAY)+' (stawka przy kilku dniach), do 8 h dziennie, ekspres kolbowy, młynek, moduł barowy 1,25 m, dojazd, montaż i demontaż', amt:DAY*DAYS},
+      {what:'Obsługa baristyczna, 4 dni (17–20.11)', why:'2 baristów przez 4 dni (cena pakietowa za całe wydarzenie), do 8 h dziennie, ekspres kolbowy, młynek, moduł barowy 1,25 m, dojazd, montaż i demontaż', amt:SVC},
       {what:'Kawa, herbata i kubki', why:'do '+(state.kg*100)+' kaw dziennie, razem do '+(state.kg*100*DAYS)+' porcji ('+(state.kg*DAYS)+' kg): ziarno, mleko krowie i roślinne, syropy, herbaty, kubki z pokrywkami. Rozliczenie po wydarzeniu za otwarte kilogramy.', amt:KG*state.kg*DAYS}
     ];
     if (state.brand) rows.push({what:'Branding baru Państwa logotypem', why:'klisza 1225 × 1076 mm z Państwa projektu, na wszystkie 4 dni', amt:200, opt:true});
