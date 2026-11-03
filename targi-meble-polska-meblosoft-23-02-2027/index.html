@@ -312,7 +312,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <div><dt>Bar</dt><dd>w Państwa zabudowie</dd></div>
       </dl>
       <div class="price-peek">
-        <div class="big num" id="peek">8 010 zł<small>netto</small></div>
+        <div class="big num" id="peek">7 875 zł<small>netto</small></div>
         <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
       </div>
     </div>
@@ -330,7 +330,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Zakres jak w 2025 roku. Liczbę dni, kaw i koktajli ustawiają Państwo sami, a cena przelicza się od razu. Stawka za obsługę to stawka z 2025 roku + 5% za każdy rok; ceny kawy, szkła i porcelany bez zmian.</p>
+      <p>Zakres jak w 2025 roku. Liczbę dni, kaw i koktajli ustawiają Państwo sami, a cena przelicza się od razu. Stawka za obsługę to stawka z 2025 roku powiększona o inflację z dwóch lat według GUS: 3,6% za 2025 rok i 3,5% za ostatnie 12 miesięcy (październik 2026), razem 7,2%. Ceny kawy, szkła i porcelany bez zmian.</p>
     </div>
     <div class="pricing">
       <div>
@@ -357,7 +357,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       </div>
       <aside class="total" aria-live="polite">
         <span class="label" id="variant-name"></span>
-        <div class="sum num" id="sum">8 010 zł</div>
+        <div class="sum num" id="sum">7 875 zł</div>
         <span class="sub">netto, do ceny doliczamy VAT</span>
         <hr>
         <ul class="terms">
@@ -531,7 +531,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 <script>
 (function(){
   // ── Cennik (PLN netto) ──
-  var SVC = {3:4960, 4:5840};          // 2025: 4 500 (3 dni) / 5 300 (4 dni) + 5% rocznie
+  var SVC = {3:4825, 4:5683};          // 2025: 4 500 / 5 300 × 1,036 × 1,035 (inflacja GUS: 2025 śr. 3,6%, X 2026 r/r 3,5%)
   var MACHINE_DAY = 200, PORCELAIN = 60, GLASS = 95, SOFTS = 175;
   var COFFEE_100 = 200, COCKTAIL_100 = 760, MENU_N = 5, MALT_SHIP = 20;
   // Single malty – ceny Dom Whisky 03.11.2026, brutto / 1,23
@@ -566,7 +566,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   function render(){
     var c = +rc.value, k = +rk.value;
     var items = [
-      {what:'Obsługa: barista-barman, ' + days + ' dni', why:'8 h dziennie, bez modułu barowego – pracujemy za barem w Państwa zabudowie; stawka 2025 + 5% rocznie', amt:SVC[days]},
+      {what:'Obsługa: barista-barman, ' + days + ' dni', why:'8 h dziennie, bez modułu barowego – pracujemy za barem w Państwa zabudowie; stawka 2025 + inflacja GUS za 2 lata (7,2%)', amt:SVC[days]},
       {what:'Ekspres i młynek, ' + days + ' dni', why:MACHINE_DAY + ' zł za dzień, jak w 2025', amt:days*MACHINE_DAY},
       {what:'Porcelana, 50 kompletów', why:'filiżanki i spodki do kawy', amt:PORCELAIN},
       {what:'Szkło do koktajli, 100 szt.', why:'myjemy na bieżąco za barem', amt:GLASS},
