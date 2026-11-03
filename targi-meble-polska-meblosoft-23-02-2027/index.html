@@ -288,6 +288,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 .menu-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:14px 0;border-bottom:1px solid var(--line)}
 .menu-list .n{font-family:var(--display);font-weight:800;font-size:24px;text-transform:uppercase;line-height:1}
 .menu-list .c{grid-column:1;font-size:14px;color:var(--ink-3)}
+.menu-list .b{grid-column:1;font-family:var(--mono);font-size:12.5px;color:var(--crema)}
 .menu-list .k{grid-row:1/span 2;grid-column:2;font-family:var(--mono);font-size:15px;align-self:center;white-space:nowrap}
 .zero{font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:var(--ok-soft);color:var(--ok);padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:middle}
 </style>
@@ -351,7 +352,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-cocktails"></small>
           </div>
         </div>
-        <p class="hours-head"><strong>Single malt dla gości, którzy piją whisky solo lub z lodem.</strong> Do Whisky Sour używamy Jamesona. Jeśli chcą Państwo podawać też whisky single malt, wystarczy ustawić liczbę butelek – z butelki wychodzi ok. 17 porcji po 40 ml.</p>
+        <p class="hours-head"><strong>Single malt dla gości, którzy piją whisky solo lub z lodem.</strong> Do New York Sour używamy Jamesona. Jeśli chcą Państwo podawać też whisky single malt, wystarczy ustawić liczbę butelek – z butelki wychodzi ok. 17 porcji po 40 ml.</p>
         <div class="qty" id="malts"></div>
         <p class="note">Niewykorzystaną kawę i nieotwarte butelki odejmujemy od faktury końcowej i zabieramy z powrotem, tak jak w 2025 roku. Jeśli w trakcie targów zabraknie, dowozimy i rozliczamy według tych samych stawek.</p>
       </div>
@@ -378,15 +379,10 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Menu koktajli</h2>
-      <p>Menu, które wybrali Państwo w 2025 roku. Pula koktajli z wyceny dzieli się po równo na pięć pozycji. Dowolną pozycję możemy wymienić na inną z naszej karty – cena się nie zmienia.</p>
+      <p>Pięć koktajli – pula z wyceny dzieli się po równo. Przy każdym widać, ile sztuk przygotujemy i ile butelek alkoholu przywozimy (40 ml na koktajl). Liczby zmieniają się razem z suwakiem koktajli. Nieotwarte butelki odejmujemy od faktury.</p>
     </div>
-    <ul class="menu-list" id="menu-list">
-      <li><span class="n">Aperol Spritz</span><span class="k" data-k>40 szt.</span><span class="c">Aperol, prosecco, woda gazowana, pomarańcza, lód</span></li>
-      <li><span class="n">Whisky Sour</span><span class="k" data-k>40 szt.</span><span class="c">Jameson, sok z cytryny, syrop cukrowy, aquafaba</span></li>
-      <li><span class="n">Mojito</span><span class="k" data-k>40 szt.</span><span class="c">rum, limonka, mięta, cukier trzcinowy, woda gazowana</span></li>
-      <li><span class="n">Red Lady <span class="zero">TEŻ 0%</span></span><span class="k" data-k>40 szt.</span><span class="c">wódka, truskawki, limonka, syrop waniliowy</span></li>
-      <li><span class="n">Mango Passion <span class="zero">TEŻ 0%</span></span><span class="k" data-k>40 szt.</span><span class="c">wódka, mango, marakuja, limonka</span></li>
-    </ul>
+    <ul class="menu-list" id="menu-list"></ul>
+    <p class="note" id="bottles-note" style="margin-top:18px"></p>
   </div>
 </section>
 
@@ -496,11 +492,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       <p>Jeśli czegoś tu brakuje, wystarczy odpisać na maila.</p>
     </div>
     <div class="faq">
-      <details><summary>Jaka whisky będzie na stoisku?</summary><p>Do Whisky Sour – Jameson. Dla gości, którzy piją whisky solo lub z lodem, proponujemy single malty: Singleton 12, Glenlivet 12, Glenmorangie 12, Talisker 10 (dymny) i Glenfiddich 12. Liczbę butelek każdej z nich ustawiają Państwo w wycenie. Jeśli wolą Państwo inną markę, dobierzemy ją przy umowie.</p></details>
+      <details><summary>Jaka whisky będzie na stoisku?</summary><p>Do New York Sour – Jameson. Dla gości, którzy piją whisky solo lub z lodem, proponujemy single malty: Singleton 12, Glenlivet 12, Glenmorangie 12, Talisker 10 (dymny) i Glenfiddich 12. Liczbę butelek każdej z nich ustawiają Państwo w wycenie. Jeśli wolą Państwo inną markę, dobierzemy ją przy umowie.</p></details>
       <details><summary>Czy trzeba doprowadzić wodę na stoisko?</summary><p>Nie. W 2025 roku pracowaliśmy bez przyłącza wody. Potrzebny jest prąd do ekspresu na osobnym bezpieczniku i lodówka.</p></details>
       <details><summary>W jakich godzinach pracuje barista?</summary><p>W cenie jest 8 godzin dziennie, czyli cały czas otwarcia hali. Każda dodatkowa godzina, np. wieczór na stoisku, to 200 zł netto.</p></details>
       <details><summary>Co, jeśli kawy albo koktajli zabraknie lub zostanie?</summary><p>Przywozimy zapas. Niewykorzystaną kawę i nieotwarte butelki odejmujemy od faktury, a jeśli trzeba dowieźć więcej – rozliczamy według tych samych stawek, jak w 2025 roku.</p></details>
-      <details><summary>Czy można zmienić menu?</summary><p>Tak, do tygodnia przed targami. Każdą pozycję możemy wymienić na inną z naszej karty, bez zmiany ceny.</p></details>
+      <details><summary>Czy można zmienić menu?</summary><p>Tak, do tygodnia przed targami. Każdą pozycję możemy wymienić na inną z naszej karty – cenę przeliczymy według butelek alkoholu.</p></details>
       <details><summary>Jak wygląda rozliczenie?</summary><p>Po akceptacji wysyłamy link do formularza, który generuje umowę i fakturę proformę na zaliczkę 2 500 zł netto. Reszta fakturą końcową po targach, z uwzględnieniem remanentu.</p></details>
     </div>
   </div>
@@ -533,7 +529,15 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   // ── Cennik (PLN netto) ──
   var SVC = {3:4825, 4:5683};          // 2025: 4 500 / 5 300 × 1,036 × 1,035 (inflacja GUS: 2025 śr. 3,6%, X 2026 r/r 3,5%)
   var MACHINE_DAY = 200, PORCELAIN = 60, GLASS = 95, SOFTS = 175;
-  var COFFEE_100 = 200, COCKTAIL_100 = 760, MENU_N = 5, MALT_SHIP = 20;
+  var COFFEE_100 = 200, MENU_N = 5, MALT_SHIP = 20, ASSORT = 3.0; // asortyment 2,30 + lód 0,70 zł na koktajl
+  // Menu: alkohol bazowy [nazwa, porcji z butelki, cena netto za butelkę]
+  var MENU = [
+    {n:'Hugo', c:'prosecco, syrop z kwiatu czarnego bzu, mięta, limonka, woda gazowana', alc:[['prosecco 0,75 l',6,30]]},
+    {n:'New York Sour', c:'Jameson, sok z cytryny, syrop cukrowy, aquafaba, na wierzchu czerwone wino', alc:[['Jameson 0,7 l',17,65],['wino czerwone 0,75 l',37,25]]},
+    {n:'Bramble', c:'gin, sok z cytryny, puree z jeżyn, lód kruszony', alc:[['gin 0,7 l',17,60]]},
+    {n:"Dark'n'Stormy", c:'rum ciemny, ginger beer, limonka', alc:[['rum ciemny 0,7 l',17,60]]},
+    {n:'Mangolita', zero:true, c:'wódka, mango, limonka, syrop; wersja 0% bez wódki', alc:[['wódka 0,7 l',17,45]]}
+  ];
   // Single malty – ceny Dom Whisky 03.11.2026, brutto / 1,23
   var MALTS = [
     {id:'singleton', name:'The Singleton of Dufftown 12', note:'Speyside, łagodny, miodowo-owocowy', net:113},
@@ -542,7 +546,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     {id:'talisker', name:'Talisker 10', note:'wyspa Skye, dymny i morski', net:142},
     {id:'glenfiddich', name:'Glenfiddich 12', note:'Speyside, świeża gruszka, dąb', net:150}
   ];
-  var TICKS = ['Kalibracja przed otwarciem hali','Cappuccino z latte art','Aperol Spritz','Whisky Sour','Mojito','Red Lady, też 0%'];
+  var TICKS = ['Kalibracja przed otwarciem hali','Cappuccino z latte art','Hugo','New York Sour','Bramble',"Dark'n'Stormy",'Mangolita, też 0%'];
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
   var days = 3, rc = $('r-coffee'), rk = $('r-cocktails'), coffeeTouched = false;
@@ -572,7 +576,23 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       {what:'Szkło do koktajli, 100 szt.', why:'myjemy na bieżąco za barem', amt:GLASS},
       {what:'Kawa, ' + c + ' szt.', why:'ziarno, mleko krowie i roślinne, cukier, mieszadełka', amt:c/100*COFFEE_100}
     ];
-    if (k>0) items.push({what:'Koktajle, ' + k + ' szt.', why:'alkohole (40 ml na koktajl, do Whisky Sour Jameson), owoce, syropy, soki i lód; ' + MENU_N + ' pozycji po ' + Math.round(k/MENU_N) + ' szt.', amt:k/100*COCKTAIL_100});
+    var per = Math.round(k/MENU_N), alcAmt = 0, alcTxt = [], ml = document.getElementById('menu-list');
+    ml.innerHTML = '';
+    MENU.forEach(function(m){
+      var bt = m.alc.map(function(a){ var n = per ? Math.ceil(per/a[1]) : 0; alcAmt += n*a[2]; if(n) alcTxt.push(n+'× '+a[0].replace(/ 0,7.*$/,'')); return n+' × '+a[0]; });
+      var li=document.createElement('li');
+      li.innerHTML='<span class="n"></span><span class="k"></span><span class="c"></span><span class="b"></span>';
+      li.children[0].textContent=m.n; if(m.zero){ var z=document.createElement('span'); z.className='zero'; z.textContent='TEŻ 0%'; li.children[0].appendChild(z); }
+      li.children[1].textContent = per ? per+' szt.' : '–';
+      li.children[2].textContent = m.c;
+      li.children[3].textContent = per ? 'Alkohol: ' + bt.join(' + ') : 'bez koktajli';
+      ml.appendChild(li);
+    });
+    document.getElementById('bottles-note').textContent = k>0 ? 'Razem przywozimy: ' + alcTxt.join(', ') + '. Wersje 0% Mangolity mieszczą się w puli Mangolity.' : 'Bez koktajli – sama kawa.';
+    if (k>0){
+      items.push({what:'Alkohole do koktajli', why: alcTxt.join(', ') + ' – ' + MENU_N + ' koktajli po ' + per + ' szt., 40 ml na koktajl; nieotwarte butelki odejmujemy od faktury', amt:alcAmt});
+      items.push({what:'Asortyment i lód, ' + k + ' koktajli', why:'owoce, puree, syropy, soki, ginger beer, lód', amt:k*ASSORT});
+    }
     items.push({what:'Woda i soki na stoisko', why:'woda gaz. i niegaz. 26 × 1,5 l, sok pomarańczowy i jabłkowy 16 × 1 l', amt:SOFTS});
     var maltBottles = 0, maltNames = [];
     MALTS.forEach(function(m){ var n=+$('m-'+m.id).value; $('o-'+m.id).textContent = n ? n + ' but.' : '–'; if(n){ maltBottles+=n; maltNames.push(n+'× '+m.name.replace('The ','')); items.push({what:m.name+', '+n+' but.', why:'single malt do podania solo lub z lodem, ok. '+(n*17)+' porcji po 40 ml', amt:n*m.net}); } });
@@ -583,8 +603,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('o-coffee').textContent = c + ' kaw';
     $('h-coffee').textContent = 'ok. ' + Math.round(c/days) + ' dziennie · każde 100 kaw to ' + fmt(COFFEE_100) + ' netto';
     $('o-cocktails').textContent = k>0 ? k + ' szt.' : 'bez koktajli';
-    $('h-cocktails').textContent = (k>0 ? 'ok. ' + Math.round(k/days) + ' dziennie · ' : 'sama kawa · ') + 'każde 100 koktajli to ' + fmt(COCKTAIL_100) + ' netto';
-    document.querySelectorAll('[data-k]').forEach(function(s){ s.textContent = k>0 ? Math.round(k/MENU_N) + ' szt.' : '–'; });
+    $('h-cocktails').textContent = k>0 ? 'ok. ' + Math.round(k/days) + ' dziennie · po ' + per + ' szt. z każdej z 5 pozycji menu' : 'sama kawa';
     var name = days + ' dni · ' + c + ' kaw' + (k>0 ? ' + ' + k + ' koktajli' : ', bez koktajli') + (maltBottles ? ' + single malt: ' + maltNames.join(', ') : '');
     $('variant-name').textContent = name;
     $('sum').textContent = fmt(total);
