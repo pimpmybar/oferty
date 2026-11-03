@@ -347,8 +347,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
             <small id="h-coffee"></small>
           </div>
           <div class="q">
-            <div class="q-top"><label for="r-cocktails">Koktajle</label><output id="o-cocktails">200 szt.</output></div>
-            <div class="q-row"><button type="button" data-step="-1" data-for="r-cocktails" aria-label="Mniej koktajli">−</button><input type="range" id="r-cocktails" min="0" max="600" step="50" value="200"><button type="button" data-step="1" data-for="r-cocktails" aria-label="Więcej koktajli">+</button></div>
+            <div class="q-top"><label for="r-cocktails">Koktajle</label><output id="o-cocktails">169 szt.</output></div>
+            <div class="q-row"><button type="button" data-step="-1" data-for="r-cocktails" aria-label="Mniej koktajli">−</button><input type="range" id="r-cocktails" min="0" max="6" step="1" value="2"><button type="button" data-step="1" data-for="r-cocktails" aria-label="Więcej koktajli">+</button></div>
             <small id="h-cocktails"></small>
           </div>
         </div>
@@ -358,7 +358,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       </div>
       <aside class="total" aria-live="polite">
         <span class="label" id="variant-name"></span>
-        <div class="sum num" id="sum">7 875 zł</div>
+        <div class="sum num" id="sum">7 467 zł</div>
         <span class="sub">netto, do ceny doliczamy VAT</span>
         <hr>
         <ul class="terms">
@@ -379,7 +379,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Menu koktajli</h2>
-      <p>Pięć koktajli – pula z wyceny dzieli się po równo. Przy każdym widać, ile sztuk przygotujemy i ile butelek alkoholu przywozimy (mocny alkohol 40 ml na koktajl – 17 koktajli z butelki 0,7 l; Hugo 90 ml prosecco – ok. 8 z butelki 0,75 l). Liczby zmieniają się razem z suwakiem koktajli. Nieotwarte butelki odejmujemy od faktury.</p>
+      <p>Pięć koktajli. Liczymy je z pełnych butelek: mocny alkohol 40 ml na koktajl, czyli 17 koktajli z butelki 0,7 l; Hugo 90 ml prosecco, czyli 8 koktajli z butelki 0,75 l. Przy każdym widać, ile sztuk przygotujemy i ile butelek przywozimy – liczby zmieniają się razem z suwakiem koktajli. Nieotwarte butelki odejmujemy od faktury.</p>
     </div>
     <ul class="menu-list" id="menu-list"></ul>
     <p class="note" id="bottles-note" style="margin-top:18px"></p>
@@ -533,7 +533,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var COFFEE_100 = 200, MENU_N = 5, MALT_SHIP = 20, ASSORT = 3.0; // asortyment 2,30 + lód 0,70 zł na koktajl
   // Menu: alkohol bazowy [nazwa, porcji z butelki, cena netto za butelkę]
   var MENU = [
-    {n:'Hugo', c:'prosecco 90 ml, syrop z kwiatu czarnego bzu, mięta, limonka, woda gazowana', alc:[['prosecco 0,75 l',750/90,30]]},
+    {n:'Hugo', lvl:2, c:'prosecco 90 ml, syrop z kwiatu czarnego bzu, mięta, limonka, woda gazowana', alc:[['prosecco 0,75 l',750/90,30]]},
     {n:'New York Sour', c:'Jameson 40 ml, sok z cytryny, syrop cukrowy, aquafaba, na wierzchu czerwone wino', alc:[['Jameson 0,7 l',17,65],['wino czerwone 0,75 l',750/20,25]]},
     {n:'Bramble', c:'gin 40 ml, sok z cytryny, puree z jeżyn, lód kruszony', alc:[['gin 0,7 l',17,60]]},
     {n:"Dark'n'Stormy", c:'rum ciemny 40 ml, ginger beer, limonka', alc:[['rum ciemny 0,7 l',17,60]]},
@@ -569,7 +569,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     render();
   }
   function render(){
-    var c = +rc.value, k = +rk.value;
+    var c = +rc.value, k = +rk.value;  // k = butelki mocnego alkoholu na koktajl; niżej zamieniane na liczbę koktajli
     var items = [
       {what:'Obsługa: barista-barman, ' + days + ' dni', why:'8 h dziennie, bez modułu barowego – pracujemy za barem w Państwa zabudowie; stawka 2025 + inflacja GUS za 2 lata (7,2%)', amt:SVC[days]},
       {what:'Ekspres i młynek, ' + days + ' dni', why:MACHINE_DAY + ' zł za dzień, jak w 2025', amt:days*MACHINE_DAY},
@@ -577,10 +577,13 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       {what:'Szkło do koktajli, 100 szt.', why:'myjemy na bieżąco za barem', amt:GLASS},
       {what:'Kawa, ' + c + ' szt.', why:'ziarno, mleko krowie i roślinne, cukier, mieszadełka', amt:c/100*COFFEE_100}
     ];
-    var per = Math.round(k/MENU_N), alcAmt = 0, alcTxt = [], ml = document.getElementById('menu-list');
+    var L = k; k = 0;
+    var alcAmt = 0, alcTxt = [], perTxt = [], ml = document.getElementById('menu-list');
     ml.innerHTML = '';
     MENU.forEach(function(m){
-      var bt = m.alc.map(function(a){ var n = per ? Math.ceil(per/a[1]) : 0; alcAmt += n*a[2]; if(n) alcTxt.push(n+'× '+a[0].replace(/ 0,7.*$/,'')); return n+' × '+a[0]; });
+      var b0 = L * (m.lvl || 1), cnt = Math.floor(b0 * m.alc[0][1] + 1e-9); k += cnt; perTxt.push(m.n + ' ' + cnt);
+      var bt = m.alc.map(function(a,i){ var n = i===0 ? b0 : (cnt ? Math.ceil(cnt/a[1]) : 0); alcAmt += n*a[2]; if(n) alcTxt.push(n+'× '+a[0].replace(/ 0,7.*$/,'')); return n+' × '+a[0]; });
+      var per = cnt;
       var li=document.createElement('li');
       li.innerHTML='<span class="n"></span><span class="k"></span><span class="c"></span><span class="b"></span>';
       li.children[0].textContent=m.n; if(m.zero){ var z=document.createElement('span'); z.className='zero'; z.textContent='TEŻ 0%'; li.children[0].appendChild(z); }
@@ -591,7 +594,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     });
     document.getElementById('bottles-note').textContent = k>0 ? 'Razem przywozimy: ' + alcTxt.join(', ') + '. Wersje 0% Mangolity mieszczą się w puli Mangolity.' : 'Bez koktajli – sama kawa.';
     if (k>0){
-      items.push({what:'Alkohole do koktajli', why: alcTxt.join(', ') + ' – ' + MENU_N + ' koktajli po ' + per + ' szt.; mocny alkohol 40 ml (17 koktajli z butelki 0,7 l), prosecco do Hugo 90 ml; nieotwarte butelki odejmujemy od faktury', amt:alcAmt});
+      items.push({what:'Alkohole do koktajli', why: alcTxt.join(', ') + ' – ' + perTxt.join(', ') + ' szt.; mocny alkohol 40 ml (17 koktajli z butelki 0,7 l), prosecco do Hugo 90 ml (8 z butelki); nieotwarte butelki odejmujemy od faktury', amt:alcAmt});
       items.push({what:'Asortyment i lód, ' + k + ' koktajli', why:'owoce, puree, syropy, soki, ginger beer, lód', amt:k*ASSORT});
     }
     items.push({what:'Woda i soki na stoisko', why:'woda gaz. i niegaz. 26 × 1,5 l, sok pomarańczowy i jabłkowy 16 × 1 l', amt:SOFTS});
@@ -604,7 +607,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     $('o-coffee').textContent = c + ' kaw';
     $('h-coffee').textContent = 'ok. ' + Math.round(c/days) + ' dziennie · każde 100 kaw to ' + fmt(COFFEE_100) + ' netto';
     $('o-cocktails').textContent = k>0 ? k + ' szt.' : 'bez koktajli';
-    $('h-cocktails').textContent = k>0 ? 'ok. ' + Math.round(k/days) + ' dziennie · po ' + per + ' szt. z każdej z 5 pozycji menu' : 'sama kawa';
+    $('h-cocktails').textContent = k>0 ? L + ' but. mocnego alkoholu na koktajl (Hugo: ' + (2*L) + ' but. prosecco) · ' + perTxt.join(', ') + ' · ok. ' + Math.round(k/days) + ' dziennie' : 'sama kawa';
     var name = days + ' dni · ' + c + ' kaw' + (k>0 ? ' + ' + k + ' koktajli' : ', bez koktajli') + (maltBottles ? ' + single malt: ' + maltNames.join(', ') : '');
     $('variant-name').textContent = name;
     $('sum').textContent = fmt(total);
