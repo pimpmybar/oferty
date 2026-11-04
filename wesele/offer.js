@@ -322,7 +322,7 @@
     h += '<p class="hint designed">'+L.designed+'</p>';
     if (FRONT_FILM) h += '<figure class="frontfilm"><video src="'+FRONT_FILM+'" poster="'+A+'bar-ref.jpg" autoplay muted loop playsinline preload="metadata"></video><figcaption>'+L.frontFilm+'</figcaption></figure>';
     h += addon('own', L.aBrand, L.aBrandS, '+ '+money(PRICE.branding));
-    h += addon('flair', L.aFlair, L.aFlairS, '+ '+money(PRICE.flair));
+    if (!O.noFlair) h += addon('flair', L.aFlair, L.aFlairS, '+ '+money(PRICE.flair));
     h += addon('tower', L.aTower, L.aTowerS, L.from+money(PRICE.tower));
     h += addon('welcome', L.aWelcome, L.aWelcomeS, L.ask);
     h += addon('coffee', L.aCoffee, L.aCoffeeS, L.ask);
