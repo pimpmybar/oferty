@@ -5,66 +5,613 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>Bar koktajlowy na imprezę firmową – Pimp My Bar</title>
-<meta property="og:title" content="Bar koktajlowy na imprezę firmową – Pimp My Bar">
-<meta property="og:description" content="Koktajle robione na żywo przy gościach. Impreza firmowa, ok. 70–80 osób.">
+<meta property="og:title" content="Bar koktajlowy na imprezę firmową – oferta Pimp My Bar">
+<meta property="og:description" content="Ok. 70–80 osób, koktajle robione na żywo. Cena netto i brutto liczy się od razu.">
 <meta property="og:image" content="https://pimpmybar.github.io/oferty/wesele/assets/hero.jpg">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../wesele/offer.css?v=16">
+<style>
+:root{
+  --ground:#fbfaf8; --panel:#ffffff; --sunk:#f2efeb;
+  --ink:#1c1714; --ink-2:#5f5650; --ink-3:#8d847d;
+  --line:#e6e0da; --line-2:#d3cbc3;
+  --crema:#a3591b; --crema-soft:#f5e9dd; --on-crema:#ffffff;
+  --ok:#2f6a45; --ok-soft:#e4efe7;
+  --todo:#fff0a8; --todo-ink:#5a4a00;
+  --scrim:rgba(20,14,10,.62);
+  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#161210; --panel:#1f1a17; --sunk:#1a1613;
+    --ink:#f0eae4; --ink-2:#b9aea5; --ink-3:#877c74;
+    --line:#2f2824; --line-2:#40372f;
+    --crema:#dc9a5c; --crema-soft:#33251a; --on-crema:#1c1410;
+    --ok:#7cc497; --ok-soft:#1a2a20;
+    --todo:#4d4210; --todo-ink:#ffe98a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#161210; --panel:#1f1a17; --sunk:#1a1613;
+  --ink:#f0eae4; --ink-2:#b9aea5; --ink-3:#877c74;
+  --line:#2f2824; --line-2:#40372f;
+  --crema:#dc9a5c; --crema-soft:#33251a; --on-crema:#1c1410;
+  --ok:#7cc497; --ok-soft:#1a2a20;
+  --todo:#4d4210; --todo-ink:#ffe98a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.005em;line-height:.95;margin:0;text-wrap:balance;text-transform:uppercase}
+h2{font-size:clamp(34px,5vw,48px)}
+h3{font-size:22px;font-weight:700;line-height:1.05}
+p{margin:0;max-width:64ch;color:var(--ink-2)}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--crema)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--crema);outline-offset:3px;border-radius:3px}
+
+/* roboczy tryb — pola do uzupełnienia */
+.todo{background:var(--todo);color:var(--todo-ink);padding:0 .3em;border-radius:3px;font-weight:600}
+.draftbar{background:var(--todo);color:var(--todo-ink);font-size:13.5px;padding-block:9px;text-align:center;font-weight:500}
+body:not(.draft) .draftbar{display:none}
+body:not(.draft) .todo{background:none;color:inherit;padding:0;font-weight:inherit}
+
+/* top */
+.top{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
+.brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.brand span{color:var(--crema)}
+.top .label{text-align:right}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:12px 56px}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero h1{font-size:clamp(44px,6.6vw,88px);line-height:.88;overflow-wrap:break-word}
+.hero h1 em{font-style:normal;color:var(--crema)}
+.facts{display:grid;grid-template-columns:repeat(2,auto);justify-content:start;column-gap:36px;row-gap:10px;margin:0}
+.facts div{display:flex;flex-direction:column;gap:1px}
+.facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.facts dd{margin:0;font-weight:600;font-size:17px}
+.price-peek{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:4px}
+.price-peek .big{font-family:var(--display);font-weight:800;font-size:44px;line-height:1}
+.price-peek .big small{font-family:var(--body);font-size:14px;font-weight:500;color:var(--ink-3);letter-spacing:0;text-transform:none;margin-left:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--crema);color:var(--on-crema);font-weight:600;font-size:15.5px;padding:13px 22px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-family:var(--body)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+
+.reel{position:relative;aspect-ratio:9/16;max-height:640px;width:100%;max-width:360px;justify-self:end;border-radius:22px;overflow:hidden;background:#221a15;box-shadow:0 30px 60px -30px rgba(28,23,20,.55)}
+.reel img,.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,10,0) 45%,var(--scrim) 100%);pointer-events:none}
+.ticker{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#fff;display:flex;flex-direction:column;gap:6px}
+.ticker .label{color:rgba(255,255,255,.75)}
+.ticker .line{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;min-height:2em;transition:opacity .35s}
+.ticker .line.out{opacity:0}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:0}
+  .reel{order:-1;justify-self:stretch;max-width:none;aspect-ratio:4/5;border-radius:16px;max-height:none}
+  .reel::after{background:linear-gradient(180deg,rgba(20,14,10,.1) 20%,var(--scrim) 100%)}
+  .ticker .line{font-size:36px}
+}
+
+/* sections */
+section{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px 48px;align-items:end;margin-bottom:36px}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}}
+
+/* pricing */
+.pricing{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.pricing{grid-template-columns:1fr}}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--sunk);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:18px;max-width:100%}
+.seg button{border:0;background:transparent;font:600 14.5px var(--body);color:var(--ink-2);padding:10px 18px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px var(--line)}
+@media (max-width:460px){.seg{display:grid;width:100%}.seg button{padding:10px 8px;font-size:13.5px;white-space:normal}}
+.lines{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.lines li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding:15px 0;border-bottom:1px solid var(--line)}
+.lines .what{font-weight:600}
+.lines .why{grid-column:1;font-size:14px;color:var(--ink-3)}
+.lines .amt{grid-row:1/span 2;grid-column:2;font-family:var(--mono);font-size:15.5px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.lines li.opt .amt::before{content:"+ ";color:var(--ink-3)}
+.lines li.enter{animation:enter .35s ease-out}
+@keyframes enter{from{background:var(--crema-soft)}to{background:transparent}}
+@media (prefers-reduced-motion:reduce){.lines li.enter{animation:none}}
+.addon{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 16px;border:1px dashed var(--line-2);border-radius:12px;cursor:pointer}
+.addon input{margin-top:4px;accent-color:var(--crema);width:18px;height:18px;flex:none}
+.addon span{display:flex;flex-direction:column;gap:2px}
+.crew{border:0;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.crew legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:0;margin-bottom:8px}
+.crew label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.crew label:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.crew input{margin-top:3px;accent-color:var(--crema);flex:none}
+.crew span{display:flex;flex-direction:column;gap:1px;font-size:14.5px;line-height:1.3}
+.crew small{color:var(--ink-3);font-size:13px;font-family:var(--mono)}
+@media (max-width:640px){.crew{grid-template-columns:1fr}}
+.addon small{color:var(--ink-3);font-size:13.5px}
+
+.total{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 40px -30px rgba(28,23,20,.4)}
+.total .sum{font-family:var(--display);font-weight:800;font-size:clamp(52px,7vw,68px);line-height:.9;font-variant-numeric:tabular-nums}
+.total .sub{font-size:14px;color:var(--ink-3)}
+.total hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.terms{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--ink-2);margin:0;padding:0;list-style:none}
+.terms li{display:flex;justify-content:space-between;gap:12px}
+.terms li b{color:var(--ink);font-weight:600;text-align:right}
+
+/* requirements */
+.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media (max-width:700px){.req{grid-template-columns:1fr}}
+.req div{background:var(--panel);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.req .ask{display:flex;gap:10px;align-items:baseline;font-weight:600;color:var(--ink)}
+.req .ask::before{content:"✓";color:var(--ok);font-weight:700;flex:none}
+.req p{font-size:14.5px}
+
+/* schedule */
+.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.days{grid-template-columns:1fr}}
+.day{border-top:3px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.day.fair{border-top-color:var(--crema)}
+.day .d{font-family:var(--display);font-weight:800;font-size:40px;line-height:.9;text-transform:uppercase}
+.day .d small{font-size:18px;color:var(--ink-3);margin-left:6px}
+.day ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px;color:var(--ink-2)}
+.day li{display:grid;grid-template-columns:48px 1fr;gap:8px}
+.day li time{font-family:var(--mono);font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums;padding-top:1px}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:700px){.team{grid-template-columns:1fr}}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);color:var(--ink-2)}
+.person{flex-direction:row;align-items:flex-start;gap:18px}
+.person .who{display:flex;flex-direction:column;gap:10px;min-width:0}
+.avatar{width:112px;aspect-ratio:4/5;border-radius:12px;object-fit:cover;flex:none;background:var(--sunk);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:36px;color:var(--ink-3)}
+.avatar-ph{border:1px dashed var(--line-2)}
+@media (max-width:420px){.avatar{width:88px}}
+.sca-head{display:flex;flex-direction:column;gap:8px;margin:44px 0 18px;padding-top:28px;border-top:1px dashed var(--line-2)}
+.sca-head .label{color:var(--crema)}
+.sca-head h3{font-size:30px}
+.duo{margin:0 0 18px;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/2;max-width:100%;background:var(--sunk)}
+.duo img{display:block;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#1c1714;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(14px,2.2vw,22px);letter-spacing:.03em;padding:.25em .7em;border-radius:999px;box-shadow:0 6px 18px -6px rgba(0,0,0,.45);white-space:nowrap}
+.tag::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff}
+.chip.k{background:var(--crema-soft);border-color:transparent;color:var(--crema)}
+
+/* work */
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px}
+.gallery figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:var(--sunk)}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;right:10px;color:#fff;font-size:13px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.g1{grid-column:span 7;aspect-ratio:3/2}
+.g2{grid-column:span 5;aspect-ratio:auto}
+.g3,.g4,.g5{grid-column:span 4;aspect-ratio:4/5}
+@media (max-width:640px){.g1,.g2{grid-column:span 12}.g2{aspect-ratio:4/5}.g3,.g4,.g5{grid-column:span 6}.g5{display:none}}
+.refs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:32px}
+.feature{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:32px}
+@media (max-width:760px){.feature{grid-template-columns:1fr}}
+.fmedia{position:relative;display:block;border-radius:16px;overflow:hidden;aspect-ratio:3/2;background:var(--sunk)}
+.fmedia img,.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.fmedia:hover img{transform:scale(1.03)}
+@media (prefers-reduced-motion:reduce){.fmedia:hover img{transform:none}}
+.play{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1c1714;font-weight:600;font-size:14.5px;padding:10px 16px 10px 12px;border-radius:999px;box-shadow:0 8px 24px -8px rgba(0,0,0,.5)}
+.tri{width:26px;height:26px;border-radius:50%;background:#a3591b;position:relative;flex:none}
+.tri::after{content:"";position:absolute;left:10px;top:7px;border:6px solid transparent;border-left:9px solid #fff;border-right:0}
+.ftext{display:flex;flex-direction:column;gap:10px}
+.ftext h3{font-size:30px}
+.more{font-weight:600;text-decoration:none}
+@media (max-width:760px){.refs{grid-template-columns:1fr}}
+.ref{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.ref .label{color:var(--crema)}
+
+/* kit */
+.kit{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:start}
+@media (max-width:760px){.kit{grid-template-columns:1fr}}
+.kit img{width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover;display:block}
+.spec{width:100%;border-collapse:collapse;font-size:14.5px}
+.spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.spec th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;width:36%;padding-right:14px}
+.note{margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--crema-soft);font-size:14.5px;color:var(--ink)}
+
+/* faq */
+.faq{border-top:1.5px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font-weight:600;font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--display);font-size:30px;color:var(--crema);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding-bottom:18px}
+
+/* evening */
+.evening{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.evening img{width:100%;height:100%;min-height:260px;object-fit:cover;display:block}
+.evening div{padding:28px 28px 28px 0;display:flex;flex-direction:column;gap:12px}
+@media (max-width:700px){.evening{grid-template-columns:1fr}.evening div{padding:0 22px 24px}.evening img{aspect-ratio:3/2;min-height:0}}
+
+/* accept */
+.accept{background:var(--crema-soft);border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:center}
+@media (max-width:760px){.accept{grid-template-columns:1fr}}
+.accept h2{font-size:clamp(40px,6vw,64px)}
+.contact{display:flex;flex-direction:column;gap:10px}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border-radius:12px;padding:12px 14px;border:1px solid var(--line)}
+.crow span{font-weight:600;user-select:all;overflow-wrap:anywhere}
+.copy{border:0;background:var(--sunk);color:var(--ink-2);font:500 13px var(--body);padding:7px 12px;border-radius:999px;cursor:pointer;flex:none}
+.copy.done{background:var(--ok-soft);color:var(--ok)}
+
+footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qty{margin-top:22px;display:grid;gap:14px}
+.q{background:var(--panel);border:1px solid var(--line-2);border-radius:14px;padding:16px 18px;display:grid;gap:10px}
+.q-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.q-top label{font-weight:600;font-size:16px}
+.q-top output{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.q small{color:var(--ink-3);font-size:13.5px}
+.q-row{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:10px;align-items:center}
+.q-row button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:var(--sunk);color:var(--ink);font:600 22px/1 var(--body);cursor:pointer}
+.q-row button:hover{border-color:var(--crema)}
+.hours-head{margin-top:22px;font-size:15px;line-height:1.5}
+.hours{margin-top:12px}
+.hrs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hrs label{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2)}
+.hrs input{flex:1;min-width:0}
+.q-day .q-top output{font-size:24px}
+.q input[type=range]{width:100%;height:32px;accent-color:var(--crema);margin:0;cursor:pointer}
+#menu .split.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){#menu .split.three{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:700px){.split{grid-template-columns:1fr}}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.col li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;font-size:15px;color:var(--ink-2)}
+.col li::before{content:"✓";color:var(--ok);font-weight:700}
+.col.you li::before{content:"→";color:var(--crema)}
+.col li b{color:var(--ink);font-weight:600}
+.team.one{grid-template-columns:1fr}
+
+.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.photos{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr) minmax(0,1.3fr);gap:14px;margin-top:8px;align-items:start}
+.photos .film video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px}
+.steps.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.talk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+.talkpics{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:var(--sunk)}
+.talkpics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.talk .col{display:flex;flex-direction:column;gap:14px;border:0;background:none;padding:0}
+.talk h2{font-size:clamp(34px,5vw,54px)}
+.talkbtns{display:flex;flex-wrap:wrap;gap:10px}
+.talk .step{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--crema)}
+@media (max-width:760px){.talk{grid-template-columns:1fr}.talkpics{max-width:320px}}
+.photos figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--sunk)}
+.photos img{display:block;width:100%;height:100%;object-fit:cover}
+.photos figcaption{font-size:13.5px;color:var(--ink-3);padding:8px 2px 0}
+.photos figure{display:flex;flex-direction:column;aspect-ratio:auto}
+.photos figure img{aspect-ratio:4/5}
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+@media (max-width:560px){.menu{grid-template-columns:1fr}.photos{grid-template-columns:1fr}.steps.three{grid-template-columns:1fr}}
+.drink{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.drink:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.drink:has(input:disabled){opacity:.45;cursor:not-allowed}
+.drink input{margin-top:3px;accent-color:var(--crema);width:17px;height:17px;flex:none}
+.drink>span{display:flex;flex-direction:column;gap:1px;font-size:14.5px;line-height:1.3;min-width:0}
+.drink small{color:var(--ink-3);font-size:12.5px}
+.drink em{font-style:normal;font-size:13px;color:var(--ink-2)}
+.count{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-top:10px}
+.count.bad{color:#a3391b}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stp{border-top:3px solid var(--crema);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.stp .n{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--ink-3)}
+.stp h3{font-size:22px}
+.stp p{font-size:14.5px;color:var(--ink-2)}
+
+</style>
 </head>
 <body>
-<div id="app"></div>
+<style>
+.menu{display:grid;grid-template-columns:1fr;gap:8px}
+.drink{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;background:var(--panel)}
+.drink:has(input:checked){border-color:var(--crema);background:var(--crema-soft)}
+.drink:has(input:disabled){opacity:.45;cursor:not-allowed}
+.drink input{margin-top:3px;accent-color:var(--crema);width:17px;height:17px;flex:none}
+.drink>span{display:flex;flex-direction:column;gap:1px;font-size:14px;line-height:1.3}
+.drink small{color:var(--ink-3);font-size:12.5px}
+.count{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-top:10px}
+.count.bad{color:#a3391b}
+.toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.toggle button{padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;background:var(--panel);color:var(--ink);font:600 14.5px var(--body);cursor:pointer;text-align:left}
+.toggle button[aria-pressed="true"]{border-color:var(--crema);background:var(--crema-soft)}
+.toggle button small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:2px}
+.sub-lines{margin:6px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-3);display:grid;gap:3px}
+.sub-lines li{display:flex;justify-content:space-between;gap:12px}
+</style>
+<style>
+.crew{grid-template-columns:repeat(2,minmax(0,1fr))}
+.terms li.big b{font-size:16px}
+.zero{display:grid;gap:8px;margin-top:6px}
+.zero div{display:flex;flex-direction:column;gap:1px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--sunk);font-size:14px}
+.zero small{color:var(--ink-3);font-size:12.5px}
+</style>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://www.pimpmybar.pl" target="_blank" rel="noopener">Pimp My Bar <span>/ Event bar</span></a>
+    <div class="label">Oferta dla: Pani Lidia<br>impreza firmowa</div>
+  </header>
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="label">Impreza firmowa · ok. 70–80 osób</div>
+      <h1>Bar koktajlowy na <em>imprezę firmową</em></h1>
+      <p>Dzień dobry, Pani Lidio! Dziękujemy za informację o liczbie gości. Stawiamy własny mobilny bar z barmanem, który każdy koktajl przygotowuje na oczach gości, pod ich smak. Alkohole i składniki możemy kupić my – nie trzeba niczego dokupować. Poniżej mogą Państwo wybrać obsadę, menu i dodatki, w tym pokaz barmański – cena netto i brutto przelicza się od razu.</p>
+      <dl class="facts">
+        <div><dt>Termin</dt><dd>do ustalenia</dd></div>
+        <div><dt>Goście</dt><dd>ok. 70–80 osób</dd></div>
+        <div><dt>Czas pracy baru</dt><dd>do 8 godzin</dd></div>
+        <div><dt>Koktajle</dt><dd>6 w menu + wersje 0%</dd></div>
+      </dl>
+      <div class="price-peek">
+        <div class="big num" id="peek"></div>
+        <a class="btn" href="#wycena">Zobacz wycenę ↓</a>
+      </div>
+    </div>
+    <div class="reel" aria-label="Film z naszych realizacji">
+      <video src="../expo-real-lds/assets/hero.mp4" poster="../expo-real-lds/assets/poster.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <div class="ticker" aria-live="off"><span class="label">Pimp My Bar na eventach</span><span class="line" id="tick">Każdy koktajl na oczach gości</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="wycena">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Wycena</h2>
+      <p>Bar pracuje do 8 godzin – rezerwujemy dla Państwa cały dzień, więc krótsza impreza to ta sama cena obsługi. Składniki, lód i alkohol skalują się z liczbą gości.</p>
+    </div>
+    <div class="pricing">
+      <div>
+        <ul class="lines" id="lines"></ul>
+        <div class="qty">
+          <div class="q">
+            <div class="q-top"><label for="r-guests">Goście</label><output id="o-guests" for="r-guests">75 osób</output></div>
+            <div class="q-row"><button type="button" data-step="-1" data-for="r-guests" aria-label="Mniej gości">−</button><input type="range" id="r-guests" min="40" max="150" step="5" value="75"><button type="button" data-step="1" data-for="r-guests" aria-label="Więcej gości">+</button></div>
+            <small id="h-guests"></small>
+          </div>
+        </div>
+        <fieldset class="crew">
+          <legend>Obsada</legend>
+          <label><input type="radio" name="crew" value="1" checked><span><strong>1 barman + 1 moduł barowy</strong><small>do ok. 80 gości</small></span></label>
+          <label><input type="radio" name="crew" value="2"><span><strong>2 barmanów + 2 moduły</strong><small>bez kolejek przy barze</small></span></label>
+        </fieldset>
+        <p class="hours-head"><strong>Alkohol.</strong> Kupujemy wszystko pod wybrane menu (nieotwarte butelki odliczamy od faktury), albo dostarczają Państwo według naszej listy.</p>
+        <div class="toggle" role="group"><button type="button" id="alc-pmb" aria-pressed="true">Kupuje Pimp My Bar<small>nieotwarte butelki odliczamy</small></button><button type="button" id="alc-you" aria-pressed="false">Dostarczają Państwo<small>dostaną Państwo listę z ilościami</small></button></div>
+        <label class="addon" for="a-show"><input type="checkbox" id="a-show" data-add="show"><span><strong>Pokaz barmański, + 2 200 zł</strong><small>Żonglerka butelkami i shakerami, z udziałem gości. Ok. 10 minut + animacja przy barze.</small></span></label>
+        <label class="addon" for="a-brand"><input type="checkbox" id="a-brand" data-add="brand"><span><strong>Branding frontu baru, + 200 zł za moduł</strong><small>Logo firmy na podświetlanym froncie baru, projekt po Państwa stronie.</small></span></label>
+        <label class="addon" for="a-wash"><input type="checkbox" id="a-wash" data-add="wash"><span><strong>Kelner do zbierania szkła, + 600 zł</strong><small>Zbiera szkło z sali przez cały wieczór, barman nie odchodzi od baru.</small></span></label>
+      </div>
+      <aside class="total" aria-live="polite">
+        <span class="label" id="variant-name"></span>
+        <div class="sum" id="sum"></div>
+        <span class="sub">netto · <span id="pp"></span></span>
+        <hr>
+        <ul class="terms">
+          <li>Netto <b id="t-net"></b></li>
+          <li>VAT 23% <b id="t-vat"></b></li>
+          <li class="big">Brutto <b id="t-gross"></b></li>
+        </ul>
+        <hr>
+        <ul class="terms">
+          <li>Zaliczka <b>1 000 zł przy rezerwacji</b></li>
+          <li>Reszta <b id="t-rest"></b></li>
+          <li>Oferta ważna do <b>18.11.2026</b></li>
+        </ul>
+        <a class="btn" href="#akceptacja" style="justify-content:center">Ta wersja nam pasuje</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Menu</h2>
+      <p>Zaznaczyliśmy sześć koktajli, które goście na firmowych imprezach wybierają najczęściej. Można wymienić dowolny albo dołożyć kolejne, do ośmiu w menu. Menu nie zmienia ceny obsługi; przy alkoholu po naszej stronie lista butelek przelicza się pod wybrane koktajle.</p>
+    </div>
+    <div class="split">
+      <div class="col">
+        <span class="label">Koktajle · od 4 do 8 w menu · <span id="m-total"></span></span>
+        <div class="menu" id="menu-pick" style="margin-top:6px"></div>
+        <p class="count" id="m-count"></p>
+      </div>
+      <div class="col">
+        <span class="label">Wersje 0% · w cenie, bez dopłaty</span>
+        <p style="font-size:14.5px">Dla kierowców i osób niepijących – ten sam smak, bez alkoholu.</p>
+        <div class="zero">
+          <div><strong>Bramble 0%</strong><small>puree z jeżyn, cytryna, syrop</small></div>
+          <div><strong>Dark'n'Stormy 0%</strong><small>limonka, napój imbirowy, syrop z cukru trzcinowego</small></div>
+          <div><strong>Mangolita 0%</strong><small>puree z mango, marakuja, limonka</small></div>
+          <div><strong>Red Lady 0%</strong><small>puree truskawkowe, marakuja, limonka</small></div>
+          <div><strong>Porn Star Martini 0%</strong><small>marakuja, wanilia, cytryna, prosecco 0%</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="podzial">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Kto co zapewnia</h2>
+      <p>Przywozimy cały bar – lokal zapewnia tylko miejsce, prąd i mycie szkła.</p>
+    </div>
+    <div class="split">
+      <div class="col">
+        <span class="label">Pimp My Bar</span>
+        <ul>
+          <li><span><b>Moduł barowy</b> z podświetlanym frontem – lustro, klisza albo logo firmy (opcja)</span></li>
+          <li><span><b>Barman</b> do 8 h, ze sprzętem: shakery, kruszarka, blender, termoboxy</span></li>
+          <li><span><b>Składniki i lód</b> – syropy, puree, owoce, dodatki</span></li>
+          <li><span><b>Alkohol</b> – jeśli wybiorą Państwo „kupuje Pimp My Bar”</span></li>
+          <li><span><b>Szkło</b> – 250 szt. w kilku rodzajach</span></li>
+          <li><span><b>Wydrukowane menu</b> i koktajl firmowy z dedykowaną nazwą</span></li>
+          <li><span><b>Transport, montaż i demontaż</b> – w Poznaniu w cenie; przy dalszym dojeździe doliczymy go po poznaniu miejsca</span></li>
+        </ul>
+      </div>
+      <div class="col you">
+        <span class="label">Państwo / lokal</span>
+        <ul>
+          <li><span><b>Miejsce na bar</b> ok. 2 × 2 m (przy dwóch modułach ok. 3 × 2 m)</span></li>
+          <li><span><b>Prąd 230 V</b> przy barze</span></li>
+          <li><span><b>Mycie szkła</b> na bieżąco w zmywalni lokalu</span></li>
+          <li><span><b>Alkohol</b> – tylko przy ustawieniu „dostarczają Państwo”</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head"><h2>Pytania</h2><p>Jeśli czegoś tu brakuje, proszę napisać albo zadzwonić.</p></div>
+    <div class="faq">
+      <details><summary>Czy alkohol jest w cenie?</summary><p>Tak, w ustawieniu „kupuje Pimp My Bar” – kupujemy alkohol pod wybrane menu, a nieotwarte butelki odliczamy od faktury końcowej. Można też dostarczyć alkohol samemu według naszej listy.</p></details>
+      <details><summary>Ile godzin trwa usługa?</summary><p>Bar pracuje do 8 godzin. Przyjeżdżamy wcześniej, rozstawiamy bar i jesteśmy gotowi, zanim pojawią się goście. Dokładne godziny ustalimy przed imprezą.</p></details>
+      <details><summary>Ile koktajli przygotujecie?</summary><p>Liczymy 3 koktajle na osobę jako pulę na całą imprezę – jedni wypiją pięć, inni żadnego. Wersje 0% są w cenie.</p></details>
+      <details><summary>Jak wygląda płatność?</summary><p>Przy rezerwacji zaliczka 1 000 zł na podstawie faktury, reszta przelewem po imprezie. Ceny są netto, doliczamy 23% VAT.</p></details>
+      <details><summary>Jak zarezerwować termin?</summary><p>Wystarczy podać datę i miejsce imprezy – sprawdzimy termin od ręki. Wysyłamy umowę i fakturę zaliczkową, po wpłacie termin jest Państwa.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="rozmowa">
+  <div class="wrap">
+    <div class="talk">
+      <div class="talkpics"><img src="../wesele/assets/tomek-k1.jpg" alt="Tomasz Malinowski" loading="lazy" class="on"></div>
+      <div class="col">
+        <span class="step">Porozmawiajmy</span>
+        <h2>Pytania? Proszę pytać śmiało.</h2>
+        <p>Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Proszę zadzwonić albo napisać – doradzę menu pod Państwa gości i potwierdzę termin.</p>
+        <div class="talkbtns"><a class="btn" href="tel:+48513916977">Zadzwoń · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl">Napisz maila</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="akceptacja">
+  <div class="wrap">
+    <div class="accept">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <h2>Rezerwujemy termin</h2>
+        <p>Proszę odpisać z wybraną wersją, datą i miejscem imprezy albo zadzwonić. Wysyłamy umowę i fakturę zaliczkową na 1 000 zł – po wpłacie termin jest Państwa.</p>
+        <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text"></span></p>
+      </div>
+      <div class="contact">
+        <div class="crow"><span>Tomasz Malinowski</span></div>
+        <div class="crow"><span id="c-mail">biuro@pimpmybar.pl</span><button class="copy" type="button" data-copy="c-mail">Kopiuj</button></div>
+        <div class="crow"><span id="c-tel">+48 513 916 977</span><button class="copy" type="button" data-copy="c-tel">Kopiuj</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap"><span>Pimp My Bar · Poznań · pimpmybar.pl</span><span>Ceny netto w PLN + 23% VAT. Przygotowane 04.11.2026.</span></footer>
+
 <script>
-// Dane tej oferty. Silnik: ../wesele/offer.js, teksty przyjęć: ../przyjecie/przyjecie.js
-// Zapytanie z panelu (lidiapiaskowska89) 29.10.2026, liczba gości 04.11.2026: 70–80 os. Termin i miejsce – do ustalenia.
-window.OFFER = {
-  "id": "impreza-firmowa-lidia-041126",
-  "title": "Impreza firmowa 70–80 os. (Lidia, lidiapiaskowska89) – termin do ustalenia",
-  "lang": "pl",
-  "date": "do ustalenia",
-  "venue": "do ustalenia",
-  "guests": 75,
-  "price": 4000,
-  "pricing": { "base": 1000, "perGuest": 40 },
-  "guestsRange": [40, 150, 5],
-  "noFlair": true,
-  "menuMin": 4, "menuMax": 6,
-  "menuDefault": ["psm", "man", "red", "ws", "hug"],
-  "validUntil": "18.11.2026",
-  "prepared": "04.11.2026",
-  "t": {
-    "pl": {
-      "label": "Oferta dla Pani Lidii · impreza firmowa",
-      "title": "Impreza firmowa – bar koktajlowy",
-      "h1": "Bar koktajlowy na <em>imprezę firmową</em>",
-      "guestsLabel": "ok. 70–80 osób",
-      "hours": "do 8 godzin",
-      "tag": "/ Eventy firmowe",
-      "howP": "Bar stoi na sali przez całą imprezę. Goście podchodzą, rozmawiają z barmanem i dostają koktajl przygotowany specjalnie dla nich, na ich oczach.",
-      "crewHint": "{crew} · ok. {n} koktajli na całą imprezę",
-      "s2p": "Od tego zależy, ile koktajli potrzeba. Gdy wódka stoi na stołach, wystarczają średnio 3 koktajle na osobę. Gdy wszystko idzie z baru, liczymy 4.",
-      "lead": "Dzień dobry, Pani Lidio! Dziękujemy za informację o liczbie gości. Poniżej oferta na bar koktajlowy dla ok. 75 osób. Każdy koktajl barman przygotowuje na oczach gości, pod ich smak – to najlepsza atrakcja przy barze, bo goście sami do niego przychodzą i rozmawiają z barmanem. W jednej cenie jest wszystko: barman do 8 godzin, alkohole i składniki do koktajli, szkło, lód i bar z wyposażeniem. Poniżej mogą Państwo ułożyć menu, wybrać wygląd baru i od razu zobaczyć cenę.",
-      "c3h": "Koktajl firmowy",
-      "c3p": "Przed imprezą ustalamy z Państwem koktajl autorski, np. w kolorach firmy i z jej nazwą. Dla kierowców i osób niepijących są wersje 0%.",
-      "s1p": "Cena jest liczona dla ok. 75 dorosłych gości. Jeśli liczba się zmieni, wystarczy przesunąć suwak.",
-      "aBrandS": "Logo firmy albo hasło imprezy na podświetlanym froncie baru.",
-      "incl": ["{crew} do 8 godzin", "alkohole do koktajli, soki, puree, owoce i lód", "mobilny bar z wybranym frontem", "szkło w 5 rodzajach i cały sprzęt", "wydrukowane menu i koktajl firmowy", "dojazd, montaż i demontaż"],
-      "faq": [
-        ["Czy alkohol jest w cenie?", "Tak. W cenie są alkohole do koktajli (gin, rum, whisky, tequila, likiery, wino musujące), soki, puree, owoce i lód. Jeśli na imprezie będzie wódka na stołach, koktajle na wódce robimy z niej – ile butelek, podamy po wyborze menu. Nie trzeba niczego dokupować."],
-        ["Ile godzin trwa usługa?", "Bar pracuje do 8 godzin – rezerwujemy dla Państwa cały dzień. Przyjeżdżamy wcześniej, rozstawiamy bar i jesteśmy gotowi, zanim pojawią się goście. Dokładne godziny ustalimy przed imprezą."],
-        ["Czy robicie pokaz barmański?", "Pokazów flair już nie robimy. Stawiamy na to, co przy barze działa najlepiej: koktajle przygotowywane na żywo, w rozmowie z każdym gościem. Na firmowej imprezie to integruje bardziej niż pokaz – goście sami podchodzą do baru."],
-        ["Płacimy za koktajl czy za godzinę?", "Ani tak, ani tak. Jest jedna cena za całą imprezę, liczona od liczby gości. Obejmuje do 8 godzin pracy baru i pulę koktajli na wszystkich."],
-        ["Co znaczy „3 koktajle na osobę”?", "To pula na całą imprezę, a nie limit dla gościa. Przy {g} gościach przygotowujemy ok. {n} koktajli. Jedni wypiją pięć, inni żadnego."],
-        ["Czy cena jest netto?", "Tak, to cena netto – do faktury dla firmy doliczamy 23% VAT. Dojazd w Poznaniu i okolicy jest w cenie. Przy dalszym dojeździe dopiszemy koszt paliwa, gdy poznamy miejsce."],
-        ["Co musi zapewnić lokal?", "Miejsce na bar ok. 2 × 2 m, gniazdko prądu w pobliżu i mycie szkła w zmywalni. Resztę przywozimy sami."],
-        ["Jak zarezerwować termin?", "Wystarczy podać datę i miejsce imprezy – sprawdzimy termin od ręki. Potem kliknąć „Rezerwuję termin” albo zadzwonić. Wysyłamy umowę, a termin jest Państwa po jej podpisaniu."]
-      ]
-    }
+(function(){
+  var $ = function(id){return document.getElementById(id)};
+  var fmt = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' zł'};
+  var fmtN = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' '); };
+  var SERVICE = {1:3200, 2:4000}, SHOW = 2200, WASH = 600, BRAND = 200, PER = 3, ASORT = 2.3, ICE_KG = 0.4, ICE = 3.5, GLASS_N = 250, GLASS = 0.95, DEPOSIT = 1000;
+  var DRINKS = [
+    {id:'ws', n:'Whisky Sour', pl:'whiskey, cytryna, syrop cukrowy, Angostura', a:'whiskey', d:1},
+    {id:'red', n:'Red Lady', pl:'wódka, puree truskawkowe, marakuja, limonka', a:'wódka', d:1},
+    {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, cytryna', a:'gin', d:1},
+    {id:'dns', n:"Dark'n'Stormy", pl:'ciemny rum, limonka, napój imbirowy', a:'rum', d:1},
+    {id:'psm', n:'Porn Star Martini', pl:'wódka, marakuja, wanilia, cytryna, shot prosecco', a:'wódka', d:1},
+    {id:'man', n:'Mangolita', pl:'wódka, puree z mango, marakuja, limonka', a:'wódka', d:1},
+    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu', a:'prosecco'},
+    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco'},
+    {id:'mule', n:'Moscow Mule', pl:'wódka, limonka, napój imbirowy', a:'wódka'},
+    {id:'pal', n:'Paloma', pl:'tequila, grejpfrut, limonka, woda gazowana', a:'tequila'},
+    {id:'gt', n:'Gin & Tonic', pl:'gin, tonik, limonka', a:'gin'},
+    {id:'esp', n:'Espresso Martini', pl:'wódka, espresso, likier kawowy', a:'wódka'}
+  ];
+  var ML = {'whiskey':40,'wódka':40,'gin':40,'rum':40,'tequila':40,'prosecco':90};
+  var BOT = {'whiskey':[60,700],'wódka':[52.5,700],'gin':[60,700],'rum':[60,700],'tequila':[78,700],'Aperol':[60,700],'prosecco':[30,750]};
+  var TICKS = ['Każdy koktajl na oczach gości','Do ośmiu koktajli w menu','Wersje 0% bez dopłaty','Pokaz barmański w opcji','Logo firmy na froncie baru'];
+  var state = { g: 75, crew: 1, alc: true, show: false, brand: false, wash: false, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}) };
+  $('menu-pick').innerHTML = DRINKS.map(function(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+d.n+'</strong><small>'+d.pl+'</small></span></label>'; }).join('');
+  function alcCost(g){
+    var per = Math.round(g*PER/Math.max(1,state.menu.length)), ml = {}, ord = [];
+    function add(k, v){ if (!ml[k]){ ml[k]=0; ord.push(k); } ml[k] += v; }
+    state.menu.forEach(function(id){ var d = DRINKS.filter(function(x){return x.id===id})[0]; if (!d) return;
+      if (d.a==='Aperol + prosecco'){ add('Aperol', 40*per); add('prosecco', 60*per); return; }
+      if (d.id==='psm'){ add('wódka', 40*per); add('prosecco', 30*per); return; }
+      add(d.a, ML[d.a]*per); });
+    var sum = 0, parts = [];
+    ord.forEach(function(k){ var p = BOT[k], b = Math.ceil(ml[k]/p[1]); sum += b*p[0]; parts.push(k+' '+b); });
+    return {sum:sum, parts:parts};
   }
-};
+  function render(){
+    var g = state.g, c = state.crew, cock = g*PER, items = [];
+    items.push({what:'Obsługa: ' + (c===1?'1 barman i 1 moduł barowy':'2 barmanów i 2 moduły barowe'), why:'do 8 h, ze sprzętem barowym, transport, montaż i demontaż', amt:SERVICE[c]});
+    items.push({what:'Składniki do ' + fmtN(cock) + ' koktajli', why:state.menu.length + ' koktajli po ok. ' + Math.round(cock/Math.max(1,state.menu.length)) + ' szt.; syropy, puree, owoce, dodatki; wersje 0%', amt:Math.round(cock*ASORT)});
+    items.push({what:'Lód, ' + Math.round(g*ICE_KG) + ' kg', why:'do koktajli', amt:Math.round(g*ICE_KG*ICE)});
+    items.push({what:'Szkło, ' + GLASS_N + ' szt.', why:'kilka rodzajów; myte na bieżąco w zmywalni lokalu', amt:Math.round(GLASS_N*GLASS)});
+    var a = alcCost(g);
+    if (state.alc) items.push({what:'Alkohol do koktajli, wg zakupu', why:'butelki: ' + a.parts.join(', ') + '; nieotwarte odliczamy od faktury', amt:a.sum});
+    if (state.show) items.push({what:'Pokaz barmański', why:'żonglerka butelkami i shakerami, z udziałem gości', amt:SHOW});
+    if (state.brand) items.push({what:'Branding frontu, ' + c + ' × ' + fmt(BRAND), why:'logo firmy na podświetlanym froncie', amt:c*BRAND});
+    if (state.wash) items.push({what:'Kelner do zbierania szkła', why:'zbiera szkło z sali przez cały wieczór', amt:WASH});
+    var total = items.reduce(function(s,i){return s+i.amt},0), vat = Math.round(total*0.23), gross = total + vat;
+    var ul = $('lines'); ul.innerHTML='';
+    items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
+    $('o-guests').textContent = g + ' osób'; $('h-guests').textContent = 'ok. ' + fmtN(cock) + ' koktajli, 3 na osobę' + (g>80 && c===1 ? ' · przy ponad 80 gościach polecamy 2 barmanów' : '');
+    $('m-total').textContent = 'razem ok. ' + fmtN(cock) + ' szt.';
+    $('alc-pmb').setAttribute('aria-pressed', String(state.alc)); $('alc-you').setAttribute('aria-pressed', String(!state.alc));
+    var cnt = state.menu.length;
+    document.querySelectorAll('[data-drink]').forEach(function(i){ var on = state.menu.indexOf(i.dataset.drink)>-1; i.checked = on; i.disabled = !on && cnt>=8; });
+    var mc = $('m-count'); mc.className = 'count'+(cnt<4?' bad':''); mc.textContent = cnt<4 ? 'Wybrane: '+cnt+' – proszę dobrać co najmniej 4' : 'Wybrane: '+cnt+' z 8';
+    var names = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}).join(', ');
+    var name = g + ' osób · ' + (c===1?'1 barman':'2 barmanów') + ' · alkohol: ' + (state.alc?'Pimp My Bar':'Państwo') + (state.show?' · pokaz':'') + (state.brand?' · branding':'') + (state.wash?' · kelner do szkła':'');
+    $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('pp').textContent = 'ok. ' + fmt(total/g) + ' netto za osobę';
+    $('t-net').textContent = fmt(total); $('t-vat').textContent = fmt(vat); $('t-gross').textContent = fmt(gross); $('t-rest').textContent = fmt(total-DEPOSIT) + ' netto po imprezie';
+    $('peek').innerHTML = fmt(total) + '<small>netto · ' + fmt(gross) + ' brutto</small>'; $('choice-text').textContent = name + ' · menu: ' + names + ' · ' + fmt(total) + ' netto / ' + fmt(gross) + ' brutto';
+  }
+  $('r-guests').addEventListener('input', function(e){ state.g = +e.target.value; render(); });
+  document.querySelectorAll('.q-row button').forEach(function(b){ b.addEventListener('click', function(){ var r=$(b.dataset.for), v=+r.value+(+b.dataset.step)*(+r.step); r.value=Math.min(+r.max,Math.max(+r.min,v)); r.dispatchEvent(new Event('input',{bubbles:true})); r.dispatchEvent(new Event('change',{bubbles:true})); }); });
+  document.querySelectorAll('input[name=crew]').forEach(function(i){ i.addEventListener('change', function(){ state.crew = +i.value; render(); }); });
+  $('alc-pmb').addEventListener('click', function(){ state.alc = true; render(); }); $('alc-you').addEventListener('click', function(){ state.alc = false; render(); });
+  document.querySelectorAll('[data-add]').forEach(function(i){ i.addEventListener('change', function(){ state[i.dataset.add] = i.checked; render(); }); });
+  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change', function(){ var id=i.dataset.drink, k=state.menu.indexOf(id); if (i.checked && k<0 && state.menu.length<8) state.menu.push(id); if (!i.checked && k>-1) state.menu.splice(k,1); render(); }); });
+  var ti=0, tk=$('tick'); setInterval(function(){ tk.classList.add('out'); setTimeout(function(){ ti=(ti+1)%TICKS.length; tk.textContent=TICKS[ti]; tk.classList.remove('out'); },350); }, 3200);
+  document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){ var t=$(b.dataset.copy).textContent; navigator.clipboard && navigator.clipboard.writeText(t); b.textContent='Skopiowano'; setTimeout(function(){ b.textContent='Kopiuj'; },1500); }); });
+  render();
+})();
 </script>
-<script src="../przyjecie/przyjecie.js?v=1"></script>
-<script src="../wesele/offer.js?v=34"></script>
+<script>
+(function(){
+  var TOPIC='https://ntfy.sh/pmb-oferty-0d10ca967d', OFERTA='Impreza firmowa Lidia 70–80 os.';
+  var owner=false, TEST=/[?&]test(=|&|$)/.test(location.search);
+  try{ if(/[?&]ja(=|&|$)/.test(location.search)) localStorage.setItem('pmb_owner','1'); owner=localStorage.getItem('pmb_owner')==='1'; }catch(e){}
+  function ping(msg,tags,prio){ if(owner||TEST) return; try{ var u=TOPIC+'?title='+encodeURIComponent(OFERTA)+'&tags='+encodeURIComponent(tags||'eyes')+(prio?'&priority='+prio:''); fetch(u,{method:'POST',body:msg,keepalive:true}).catch(function(){}); }catch(e){} }
+  var dev=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'telefon':'komputer';
+  var first=true; try{ first=!sessionStorage.getItem('pmb_seen_lidia'); sessionStorage.setItem('pmb_seen_lidia','1'); }catch(e){}
+  if(first) ping('Ktoś otworzył ofertę ('+dev+')','eyes',4);
+  var sent={}; function once(key,msg,tags,prio){ if(sent[key]) return; sent[key]=1; ping(msg,tags,prio); }
+  function seen(id,key,msg,tags){ var el=document.getElementById(id); if(el && 'IntersectionObserver' in window){ new IntersectionObserver(function(e,o){ if(e[0].isIntersecting){ once(key,msg,tags); o.disconnect(); } },{threshold:.3}).observe(el); } }
+  seen('wycena','wyc','Ogląda wycenę','moneybag'); seen('menu','men','Ogląda menu','cocktail'); seen('akceptacja','dol','Doszedł do samego dołu oferty','checkered_flag');
+  ['alc-pmb','alc-you'].forEach(function(id){ document.getElementById(id).addEventListener('click',function(){ var t=document.getElementById('sum'); ping('Przełączył: '+id+' (razem '+(t?t.textContent:'')+')','gear'); }); });
+  document.querySelectorAll('[data-add],input[name=crew]').forEach(function(i){ i.addEventListener('change',function(){ var t=document.getElementById('sum'); ping('Zmienił opcję: '+(i.dataset.add||('obsada '+i.value))+' '+(i.checked?'✓':'✗')+' (razem '+(t?t.textContent:'')+')','gear'); }); });
+  var r=document.getElementById('r-guests'), tm; r.addEventListener('change',function(){ clearTimeout(tm); tm=setTimeout(function(){ var t=document.getElementById('sum'); ping('Suwak gości → '+r.value+' (razem '+(t?t.textContent:'')+')','busts_in_silhouette'); },2500); });
+  document.querySelectorAll('[data-drink]').forEach(function(i){ i.addEventListener('change',function(){ once('menu','Zmienia menu','cocktail'); }); });
+  document.querySelectorAll('a[href="#akceptacja"]').forEach(function(a){ a.addEventListener('click',function(){ var t=document.getElementById('choice-text'); once('acc','Kliknął „Ta wersja nam pasuje” → '+(t?t.textContent:''),'white_check_mark',5); }); });
+  document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click',function(){ once('copy'+b.dataset.copy,'Skopiował kontakt','telephone_receiver',5); }); });
+})();
+</script>
+<script>window.PMB={id:"impreza-firmowa-lidia-041126",title:"Impreza firmowa Lidia 70–80 os. (WzK lidiapiaskowska89)"};</script>
+<script src="../wspolne/kontakt.js?v=3"></script>
 </body>
 </html>
