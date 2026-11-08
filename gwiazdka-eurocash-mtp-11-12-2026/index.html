@@ -444,7 +444,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <ul>
           <li><span><b>Szkło na zapleczu baru przed 18:00</b>, czyste, w skrzynkach</span></li>
           <li><span><b>Zbieranie z sali i mycie na bieżąco</b> przez catering, najlepiej 1 osoba przypisana do baru na całą noc</span></li>
-          <li><span><b>Bez mycia w trakcie</b> potrzeba 1 szklanki na każdy drink (ok. <span id="gl-tot">2 700</span> szt.)</span></li>
+          <li><span><b>Bez mycia w trakcie</b> potrzeba 1 szklanki na każdy drink – razem ok. <span id="gl-tot">2 800</span> szt.</span></li>
         </ul>
       </div>
     </div>
@@ -626,13 +626,24 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
       '<li><span><b>Ginger beer: ' + nf(gbt) + ' but. 200 ml</b> – do Moscow Mule</span></li>' +
       '<li><span><b>Lód: ' + nf(ice) + ' kg</b></span></li>' +
       (state.alc ? EXTRA.map(xl).join('') : '');
-    var gst = ['hb','rk','cp','wn'].map(function(t){ var n=c.gl[t], need=Math.ceil(n*0.65/50)*50; return '<li><span><b>' + GLN[t] + ': min. ' + nf(need) + ' szt.</b> – na ok. ' + nf(n) + ' drinków przy myciu na bieżąco</span></li>'; });
-    $('z-glass').innerHTML = gst.join('');
+    function w(n){ return Math.ceil(n*0.65/50)*50; }
+    var hbA = c.mm + c.gt + c.pal, rk = c.ws + c.bra, cp = c.psm, mockW = r10(200*k()), shots = r10(100*k());
+    var G = [
+      ['Szklanka wysoka (highball, 300–350 ml)', 'Moscow Mule, Gin Tonic, Paloma', w(hbA), hbA],
+      ['Szklanka niska (rocks / whisky, 250–300 ml)', 'Whisky Sour, Bramble', w(rk), rk],
+      ['Kieliszek koktajlowy (coupette, 150–180 ml)', 'Porn Star Martini', w(cp), cp],
+      ['Szkło do koktajli bez alkoholu (highball + kieliszek do wina)', 'Mangolita 0%, Hugo 0%', mockW, c.mock],
+      ['Kieliszek do shotów (40–50 ml)', 'wódka przy barze', shots, shots]
+    ];
+    var tw = 0, tn = 0;
+    $('z-glass').innerHTML = G.map(function(x){ tw += x[2]; tn += x[3]; return '<li><span><b>' + x[0] + ': ' + nf(x[2]) + ' szt.</b> przy myciu na bieżąco · <b>' + nf(x[3]) + ' szt.</b> bez mycia – ' + x[1] + '</span></li>'; }).join('') +
+      '<li><span><b>Razem: ok. ' + nf(tw) + ' szt.</b> przy myciu na bieżąco · <b>ok. ' + nf(tn) + ' szt.</b> bez mycia na miejscu</span></li>' +
+      '<li><span><b>Jeśli coupette będzie problemem</b> – Porn Star Martini podamy w szklance niskiej pod zmienioną nazwą. Wtedy rocks: ' + nf(w(rk + cp)) + ' szt. przy myciu · ' + nf(rk + cp) + ' bez mycia, a coupette niepotrzebne.</span></li>';
+    $('gl-tot').textContent = nf(tn);
     // texty
     $('o-guests').textContent = g + ' osób';
     $('h-guests').textContent = 'ok. ' + nf(c.tot) + ' koktajli (ok. 3 na osobę) + ' + nf(c.mock) + ' mocktaili · ' + cr.b + ' barmanów';
     $('f-crew').textContent = cr.b + ' barmanów + ' + cr.h + ' pomocników'; $('p-crew').textContent = cr.b + ' barmanów i ' + cr.h + ' pomocników';
-    $('gl-tot').textContent = nf(c.tot + c.mock);
     $('f-cock').textContent = 'ok. ' + nf(c.tot) + ' + ' + nf(c.mock) + ' bez alkoholu';
     $('bar-len').textContent = lenM + ' m';
     ['none','pmb','mix'].forEach(function(b){ $('bar-'+b).setAttribute('aria-pressed', String(state.bar===b)); });
