@@ -369,12 +369,12 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         <p class="hours-head"><strong>Obsada.</strong> Przy 800 osobach i jednym barze polecamy 8 barmanów – obsługa idzie szybko i bez kolejek. 7 barmanów też da radę, ale w szczycie kolejka będzie dłuższa.</p>
         <div class="toggle" role="group"><button type="button" id="cr-8" aria-pressed="true">8 barmanów + 2 pomocników<small>polecamy · 9 900 zł</small></button><button type="button" id="cr-7" aria-pressed="false">7 barmanów + 2 pomocników<small>jak rok temu · 8 900 zł</small></button></div>
         <p class="hours-head"><strong>Bar.</strong> Jeden bar na całą imprezę, z frontem ok. <span id="bar-len">10 m</span>, żeby <span id="bar-crew">8 barmanów</span> mogło pracować obok siebie. Jak rok temu możecie zapewnić bar sami (np. cały z lodu z logo Frisco) albo wziąć nasze moduły.</p>
-        <div class="toggle three" role="group"><button type="button" id="bar-none" aria-pressed="true">Bar po Waszej stronie<small>np. cały z lodu z logo Frisco, jak rok temu bez naszych barów</small></button><button type="button" id="bar-pmb" aria-pressed="false">Bar Pimp My Bar<small><span id="bar-mods">8 modułów</span> po 125 cm, 400 zł/moduł + logistyka</small></button><button type="button" id="bar-mix" aria-pressed="false">Nasz bar + lodowy moduł<small>4 nasze moduły (po 2 z każdej strony), 400 zł/moduł + logistyka; lodowy front z logo Frisco na środku po Waszej stronie</small></button></div>
+        <div class="toggle three" role="group"><button type="button" id="bar-none" aria-pressed="true">Bar po Waszej stronie<small>np. cały z lodu z logo Frisco, jak rok temu bez naszych barów</small></button><button type="button" id="bar-pmb" aria-pressed="false">Bar Pimp My Bar<small><span id="bar-mods">8 modułów</span> po 125 cm, 400 zł/moduł</small></button><button type="button" id="bar-mix" aria-pressed="false">Nasz bar + lodowy moduł<small>4 nasze moduły (po 2 z każdej strony), 400 zł/moduł; lodowy front z logo Frisco na środku po Waszej stronie</small></button></div>
         <div class="qty" id="brand-box" hidden>
           <div class="q">
             <div class="q-top"><label for="r-brand">Branding baru (klisza z grafiką na froncie)</label><output id="o-brand" for="r-brand">0 modułów</output></div>
             <div class="q-row"><button type="button" data-step="-1" data-for="r-brand" aria-label="Mniej">−</button><input type="range" id="r-brand" min="0" max="8" step="1" value="0"><button type="button" data-step="1" data-for="r-brand" aria-label="Więcej">+</button></div>
-            <small>200 zł netto za moduł · np. Polarna Gwiazdka / Frisco, grafikę dostajemy od Was</small>
+            <small>160 zł netto za moduł · np. Polarna Gwiazdka / Frisco, grafikę dostajemy od Was</small>
           </div>
         </div>
         <p class="hours-head"><strong>Gin, whisky, tequila i prosecco 0%.</strong> Zakładamy, że dostarcza je Frisco – dokładna lista jest niżej. Jeśli Frisco nie da rady, kupimy je my.</p>
@@ -557,7 +557,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var nf = function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ')};
   var fmt = function(n){return nf(n) + ' zł'};
   var PER = 17;            // koktajli z butelki 0,7 l przy 40 ml
-  var ASORT = 2.3, ICE_KG = 3.5, MOD = 400, BRAND = 200, CAR = 400, MONT = 300, MOCK_U = 2.5, GB = 4, G = 800;
+  var ASORT = 2.3, ICE_KG = 3.5, MOD = 400, BRAND = 160, LOG = 600, MOCK_U = 2.5, GB = 5.5, G = 800;
   var TICKS = ['Jeden bar, bez kolejek','Każdy koktajl na oczach gości','Czwarta Gwiazdka z Eurocash','Do 04:00 bez dopłat','Zwrot nieotwartych butelek'];
   var state = { crew: 8, bar: 'none', alc: false, brand: 0, mont: 'day', b: {gin:0, whisky:0, tequila:0} };
   // szacowana sprzedaż przy 800 os., 40 ml alkoholu bazowego na koktajl
@@ -601,14 +601,14 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var lenM = String(cr.mod * 1.25).replace('.',',');
     if (m){
       items.push({what:'Bar: ' + m + (m<5?' moduły':' modułów') + ' po 125 cm × ' + fmt(MOD), why: state.bar==='pmb' ? 'front ok. ' + lenM + ' m, back bar, regały i stoły robocze' : 'po 2 z każdej strony lodowego modułu centralnego (ok. ' + String((cr.mod-4)*1.25).replace('.',',') + ' m) z logo Frisco – lodowy moduł po Waszej stronie', amt:m*MOD});
-      items.push({what:'Logistyka baru', why:'wynajem auta ' + fmt(CAR) + ' + montaż i demontaż ' + fmt(MONT), amt:CAR+MONT});
       if (state.brand > m) state.brand = m;
       if (state.brand) items.push({what:'Branding: ' + state.brand + ' × ' + fmt(BRAND), why:'klisze z grafiką na fronty modułów – grafikę dostajemy od Was', amt:state.brand*BRAND});
     } else state.brand = 0;
+    items.push({what:'Logistyka, montaż i demontaż', why: m ? 'transport barów, sprzętu, lodu i składników, montaż i demontaż' : 'transport sprzętu, lodu i składników, rozstawienie i zwinięcie stanowisk', amt:LOG});
     items.push({what:'Składniki do ' + nf(c.tot) + ' koktajli', why:'bittersy, syropy, puree, zioła, owoce, rurki, serwetki – 6 pozycji z menu', amt:Math.round(c.tot*ASORT/10)*10});
     items.push({what:'Koktajle bez alkoholu, ' + nf(c.mock) + ' szt.', why:'Mangolita 0% i Hugo 0% – składniki (prosecco 0% osobno)', amt:Math.round(c.mock*MOCK_U)});
-    var gbt = Math.ceil(c.mm/2);
-    items.push({what:'Ginger beer, ' + nf(gbt) + ' but. 200 ml', why:'do Moscow Mule – ok. 100 ml na drink', amt:gbt*GB});
+    var gbt = c.mm;
+    items.push({what:'Ginger beer, ' + nf(gbt) + ' but. 200 ml', why:'do Moscow Mule – butelka na drink', amt:Math.round(gbt*GB)});
     var ice = Math.ceil((c.tot + c.mock)/8/10)*10;
     items.push({what:'Lód, ' + nf(ice) + ' kg', why:'kostka i kruszony do koktajli', amt:ice*ICE_KG});
     var X = Object.keys(BRANDS).map(function(key){ var o = BRANDS[key].o[state.b[key]]; return {key:key, n:BRANDS[key].lab + ' ' + o[0], p:o[1], bt:c.bt[key], use:BRANDS[key].use, k:c.sp[key]}; });
