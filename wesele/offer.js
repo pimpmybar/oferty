@@ -282,8 +282,8 @@
   function bvCurrent(){ return state.own ? 'sage' : (state.front==='color' ? 'sage' : state.front); }
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   function summary(){
-    var c = calc(), parts = [t('sumGuests',{g:state.guests}), state.vodka?t('sumVodkaY'):t('sumVodkaN'), t('sumPer',{n:perGuest()}),
-      t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
+    var c = calc(), parts = [t('sumGuests',{g:state.guests})].concat(O.noVodkaStep ? [] : [state.vodka?t('sumVodkaY'):t('sumVodkaN')]).concat([t('sumPer',{n:perGuest()}),
+      t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})]);
     var adds = c.lines.slice(1).filter(function(l){return l[0]!==t('lFourth')}).map(function(l){return l[0]});
     return {head: parts.join(' · '), menu: menuNames().join(', '), adds: adds.length ? adds.join(', ') : t('none'), total: (c.from?t('from'):'')+money(c.total)};
   }
@@ -341,7 +341,7 @@
 
     h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.faqH+'</h2><p>'+L.faqP+'</p></div><div class="faq" id="faq"></div></div></section>';
 
-    h += '<section id="rezerwacja"><div class="wrap"><div class="accept"><div class="col"><h2>'+L.accH+'</h2><p>'+L.accP+'</p><div class="choice"><span class="label">'+L.yourChoice+'</span><div id="choice"></div></div><a class="btn" id="send" href="#">'+L.send+'</a></div>';
+    h += '<section id="rezerwacja"><div class="wrap"><div class="accept"><div class="col"><h2>'+L.accH+'</h2><p>'+L.accP+'</p><div class="choice"><span class="label">'+L.yourChoice+'</span><div id="choice"></div></div>'+(O.contractForm ? '<ol class="steps">'+(P.formSteps||[]).map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol><a class="btn" id="form" href="#" target="_blank" rel="noopener">'+esc(P.formBtn||'Rezerwuję termin')+'</a><p class="fnote">'+esc(P.formNote||'')+'</p><a class="btn ghost" id="send" href="#">'+(P.sendAlt||L.send)+'</a>' : '<a class="btn" id="send" href="#">'+L.send+'</a>')+'</div>';
     h += '<div class="contact"><div class="crow"><span>Tomasz Malinowski</span></div><div class="crow"><span id="c-mail">biuro@pimpmybar.pl</span><button class="copy" type="button" data-copy="c-mail">'+L.copy+'</button></div><div class="crow"><a href="tel:+48513916977" id="c-tel">+48 513 916 977</a><button class="copy" type="button" data-copy="c-tel">'+L.copy+'</button></div></div></div></div></section>';
     h += '<section id="rozmowa"><div class="wrap"><div class="talk"><div class="talkpics" id="talkpics" role="img" aria-label="Tomasz Malinowski">'+[1,2,3].map(function(n){ return '<img src="'+A+'tomek-k'+n+'.jpg" alt="" loading="lazy"'+(n===1?' class="on"':'')+'>'; }).join('')+'</div><div class="col"><span class="step">'+L.talkStep+'</span><h2>'+L.talkH+'</h2><p>'+L.talkP+'</p><div class="talkbtns"><a class="btn" href="tel:+48513916977" id="t-call">'+L.talkCall+' · 513 916 977</a><a class="btn ghost" href="mailto:biuro@pimpmybar.pl" id="t-mail">'+L.talkMail+'</a></div>';
     h += '</div></div></div></section>';
@@ -381,6 +381,23 @@
     $('choice').innerHTML = '<strong>'+esc(s.total)+'</strong> · '+esc(s.head)+'<br><span class="label">'+L.menuL+'</span> '+esc(s.menu)+'<br><span class="label">'+L.addL+'</span> '+esc(s.adds);
     var body = L.mailHi+'\n'+O.date+', '+O.venue+'\n'+s.head+'\n'+L.menuL+': '+s.menu+'\n'+L.addL+': '+s.adds+'\n'+L.yourPrice+': '+s.total+'\n'+L.mailBye;
     $('send').href = 'mailto:biuro@pimpmybar.pl?subject='+encodeURIComponent(t('mailSubj',{d:O.date,v:O.venue}))+'&body='+encodeURIComponent(body);
+    if (O.contractForm && $('form')) $('form').href = formUrl(s);
+  }
+  // Formularz „Dane do umowy” (Google Forms) z wypełnionym Załącznikiem nr 1 = wybór z tej strony
+  function formUrl(s){
+    var F = O.contractForm, e = F.entries || {}, q = [], d = O.date.split('.');
+    function put(k, v){ if (e[k] && v !== undefined && v !== null && v !== '') q.push('entry.'+e[k]+'='+encodeURIComponent(v)); }
+    var P0 = O.t && O.t[lang] || {}; var z = ['ZAŁĄCZNIK NR 1 – wybór z oferty online', (P0.title||''), O.date+', '+O.venue,
+      'Cena: '+s.total+(F.priceNote ? ' ('+F.priceNote+')' : ''),
+      s.head, 'Obsada: '+(O.crew||crewN(state.guests))+' barman · '+(F.hours||'do 8 godzin'),
+      'Menu: '+s.menu, (F.extraLine||''), 'Dodatki: '+s.adds,
+      'Oferta: '+location.origin+location.pathname, '', 'Uwagi / zmiany: '].filter(function(x,i){ return x!=='' || i>9; });
+    put('service', F.service || 'EVENT BAR');
+    if (d.length===3) put('date', d[2]+'-'+d[1]+'-'+d[0]);
+    put('guests', state.guests); put('city', F.city || O.venue);
+    put('crew', O.crew || crewN(state.guests)); put('modules', F.modules);
+    put('notes', z.join('\n'));
+    return F.url + (F.url.indexOf('?')>-1 ? '&' : '?') + 'usp=pp_url&' + q.join('&');
   }
 
   function bind(){
@@ -426,6 +443,7 @@
     $('film').addEventListener('click', function(){ var f = $('film'); if (f.classList.contains('playing')) return; f.classList.add('playing');
       f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/Btc8eqYrPd8?autoplay=1&rel=0" title="Showreel – Pimp My Bar" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; once('film','Ogląda showreel','movie_camera'); });
     document.querySelectorAll('[data-book]').forEach(function(a){ a.addEventListener('click', function(){ var s = summary(); once('book','Kliknął „Rezerwuję termin” → '+s.total+' · '+s.head,'white_check_mark',5); }); });
+    if ($('form')) $('form').addEventListener('click', function(){ var s = summary(); once('form','OTWORZYŁ FORMULARZ UMOWY → '+s.total+' · '+s.menu,'rotating_light',5); });
     $('send').addEventListener('click', function(){ var s = summary(); once('send','WYSYŁA WYBÓR MAILEM → '+s.total+' · '+s.head+' · '+s.menu,'tada',5); });
     document.querySelector('[data-film2]').addEventListener('click', function(){ once('film2','Otworzył film kawowy z targów','coffee'); });
     document.querySelectorAll('.copy').forEach(function(b){ b.addEventListener('click', function(){

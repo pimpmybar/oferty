@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../wesele/offer.css?v=16">
+<link rel="stylesheet" href="../wesele/offer.css?v=17">
 </head>
 <body>
 <div id="app"></div>
@@ -34,6 +34,14 @@ window.OFFER = {
   "menuDefault": ["psm", "man", "hug", "ws", "bra", "pal"],
   "validUntil": "24.11.2026",
   "prepared": "10.11.2026",
+  "contractForm": {
+    "url": "https://docs.google.com/forms/d/e/1FAIpQLSfYNTzILE3w77Vx96DqUbx4vqlgqCID5bMQPp76UqK6SmGOlQ/viewform",
+    "entries": { "service": "399920053", "date": "1904277049", "guests": "578949915", "city": "677305500", "crew": "682544170", "modules": "143571991", "notes": "1777569244" },
+    "modules": "Jeden moduł barowy",
+    "city": "Wrocław",
+    "priceNote": "wszystko w cenie, łącznie z dojazdem",
+    "extraLine": "Koktajl autorski dla Jubilatki – do ustalenia przed przyjęciem; koktajle 0% w cenie"
+  },
   "t": {
     "pl": {
       "label": "Oferta dla Pani Katarzyny · 40. urodziny",
@@ -53,9 +61,15 @@ window.OFFER = {
         ["Ile miejsca potrzebujecie?", "Przyjeżdżamy z jednym modułem baru. Potrzebujemy na niego ok. 1,5 × 1,5 m miejsca i jednego gniazdka 230 V w pobliżu. Resztę, łącznie ze szkłem i lodem, przywozimy sami."],
         ["Kiedy przyjedziecie?", "Tak, żeby bar był gotowy, zanim przyjdą pierwsi goście. Godziny pracy baru ustalimy razem."],
         ["Czy można zmienić menu później?", "Tak. Menu zamykamy kilka dni przed przyjęciem. To, co Pani wybierze teraz, jest punktem wyjścia do rozmowy."],
-        ["Jak zarezerwować termin?", "Wystarczy kliknąć „Rezerwuję termin” albo napisać. Termin jest Pani po naszym potwierdzeniu. Nie pobieramy zadatku."]
+        ["Jak zarezerwować termin?", "Klika Pani „Rezerwuję termin” na dole strony i wypełnia krótki formularz do umowy – Pani wybór z oferty jest już w nim wpisany. Odsyłamy umowę do podpisu i termin jest zarezerwowany. Nie pobieramy zadatku."],
+        ["Co, jeśli zrezygnuję?", "Z naszej usługi może Pani zrezygnować bez kosztów. Wystarczy dać nam znać mailem albo telefonicznie."]
       ],
-      "accP": "Po kliknięciu otworzy się gotowy mail z Pani wyborem. Można też po prostu zadzwonić.",
+      "accH": "Rezerwacja terminu",
+      "accP": "Podpisana umowa rezerwuje dla Pani 11 czerwca. Nie pobieramy zadatku, a z naszej usługi może Pani zrezygnować bez żadnych kosztów – termin ma Pani zaklepany od razu, bez ryzyka.",
+      "formSteps": ["Klika Pani „Rezerwuję termin” – otworzy się krótki formularz danych do umowy.", "Pani wybór z tej strony (menu, wygląd baru, cena) jest już wpisany w ostatnim polu – to będzie Załącznik nr 1 do umowy.", "Uzupełnia Pani swoje dane, a my odsyłamy umowę do podpisu. Po podpisie termin jest Pani."],
+      "formBtn": "Rezerwuję termin",
+      "formNote": "Menu i szczegóły można zmieniać aż do kilku dni przed przyjęciem.",
+      "sendAlt": "Mam pytania – napiszę maila",
       "yourChoice": "Pani wybór",
       "mailHi": "Dzień dobry,\n\nchcę zarezerwować bar koktajlowy na 40. urodziny 11.06.2027 we Wrocławiu.\n"
     }
@@ -63,6 +77,6 @@ window.OFFER = {
 };
 </script>
 <script src="../przyjecie/przyjecie.js?v=1"></script>
-<script src="../wesele/offer.js?v=32"></script>
+<script src="../wesele/offer.js?v=33"></script>
 </body>
 </html>
