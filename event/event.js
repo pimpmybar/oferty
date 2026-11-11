@@ -169,10 +169,10 @@
     var L = T[lang], P = O.t && O.t[lang] || {};
     var h = '';
     h += '<div class="wrap"><header class="top"><a class="brand" href="https://www.pimpmybar.pl" target="_blank" rel="noopener">Pimp My Bar <span>'+L.tag+'</span></a></header>';
-    h += '<div class="hero"><div class="hero-copy"><div class="label">'+esc(P.label || L.offerFor)+'</div><h1>'+(P.h1 || L.h1)+'</h1><p>'+esc(P.lead || L.lead)+'</p>';
+    h += '<div class="hero'+(O.heroVideo?' wide':'')+'"><div class="hero-copy"><div class="label">'+esc(P.label || L.offerFor)+'</div><h1>'+(P.h1 || L.h1)+'</h1><p>'+esc(P.lead || L.lead)+'</p>';
     h += '<dl class="facts"><div><dt>'+L.fDate+'</dt><dd>'+esc(O.date)+'</dd></div><div><dt>'+L.fPlace+'</dt><dd>'+esc(O.venue)+'</dd></div><div><dt>'+L.fGuests+'</dt><dd>'+esc(gLabel())+'</dd></div><div><dt>'+L.fTime+'</dt><dd>'+esc(O.time)+'</dd></div></dl>';
     h += '<div class="price-peek"><div class="big num" id="peek"></div><a class="btn" href="#bar">'+L.cta+'</a></div></div>';
-    h += '<button type="button" class="film" id="film" aria-label="'+esc(L.play)+'"><img src="'+A+'hero.jpg?v=2" alt=""><span class="play"><span class="tri" aria-hidden="true"></span>'+L.play+'</span></button></div></div>';
+    h += '<button type="button" class="film" id="film" aria-label="'+esc(L.play)+'">'+(O.heroVideo ? '<video src="'+A+O.heroVideo+'" poster="'+A+(O.heroPoster||'hero.jpg?v=2')+'" autoplay muted loop playsinline preload="auto"></video>' : '<img src="'+A+'hero.jpg?v=2" alt="">')+'<span class="play"><span class="tri" aria-hidden="true"></span>'+(O.heroVideo ? 'Włącz dźwięk' : L.play)+'</span></button></div></div>';
 
     h += '<section><div class="wrap"><div class="sec-head"><h2>'+L.howH+'</h2><p>'+L.howP+'</p></div><div class="trio">';
     [['stir.jpg','c1'],['bar-artdeco.jpg','c2'],['cocktail.jpg','c3']].forEach(function(c){ h += '<div class="card"><img src="'+A+c[0]+'" alt="" loading="lazy"><h3>'+L[c[1]+'h']+'</h3><p>'+esc(fill(L[c[1]+'p']))+'</p></div>'; });
@@ -299,7 +299,10 @@
       var id = i.dataset.add; if (id==='own') state.own = i.checked; else state.add[id] = i.checked; render();
       if (i.checked) once('add'+id,'Dodał: '+T.pl[{own:'aBrand',flair:'aFlair',coffee:'aCoffee'}[id]],'heavy_plus_sign',4);
     }); });
-    $('film').addEventListener('click', function(){ var f = $('film'); if (f.classList.contains('playing')) return; f.classList.add('playing');
+    $('film').addEventListener('click', function(){ var f = $('film'); if (f.classList.contains('playing')) return;
+      if (O.heroVideo) { var hv = f.querySelector('video'), on = hv.muted; hv.muted = !on; if (on) { hv.currentTime = 0; hv.play(); once('film','Ogląda showreel z dźwiękiem','movie_camera'); }
+        f.querySelector('.play').lastChild.nodeValue = on ? 'Wyłącz dźwięk' : 'Włącz dźwięk'; return; }
+      f.classList.add('playing');
       f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/Btc8eqYrPd8?autoplay=1&rel=0" title="Showreel – Pimp My Bar" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; once('film','Ogląda showreel','movie_camera'); });
     document.querySelectorAll('[data-book]').forEach(function(a){ a.addEventListener('click', function(){ var s = summary(); once('book','Kliknął „Potwierdzam realizację” → '+s.total+' · '+s.head,'white_check_mark',5); }); });
     $('send').addEventListener('click', function(){ var s = summary(); once('send','WYSYŁA WYBÓR MAILEM → '+s.total+' · '+s.head+' · '+s.menu,'tada',5); });
