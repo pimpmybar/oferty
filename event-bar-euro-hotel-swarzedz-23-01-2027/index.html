@@ -70,6 +70,7 @@ window.OFFER = {
  "waiterIndependent": true,
  "waiterDefault": true,
  "collapse": true,
+ "perOptions": {"def": 3, "list": [[3, "Tak, alkohol na stołach"], [4, "Nie, tylko bar · 4 na osobę"], [5, "Nie, tylko bar · 5 na osobę"]]},
  "supply": true,
  "noGlassList": true,
  "menuMin": 4,
@@ -1272,7 +1273,7 @@ window.OFFER = {
    "label": "Oferta dla STAR ART · Euro Hotel Swarzędz",
    "h1": "Bar bez <em>kolejek</em>",
    "guestsSuffix": " (maks. 120)",
-   "lead": "Dzień dobry! Dziękujemy za zapytanie – miło znów dla Was pracować. Wycena w tym samym układzie co poprzednio: dwóch barmanów i dwa moduły barowe, kelner do zbierania szkła, nasze standardowe menu pięciu koktajli, składniki, lód i szkło. Liczbę gości ustawicie suwakiem, menu wybierzecie z pełnej karty, a alkohol może kupić nasz albo Wasz – cena przelicza się od razu.",
+   "lead": "Dzień dobry! Dziękujemy za zapytanie – miło znów dla Was pracować. Wycena w tym samym układzie co poprzednio: dwóch barmanów i dwa moduły barowe, kelner do zbierania szkła, nasze standardowe menu pięciu koktajli, składniki, lód i szkło. Liczbę gości ustawicie suwakiem, zaznaczycie, czy na stołach będzie alkohol, menu wybierzecie z pełnej karty, a alkohol do koktajli kupimy my albo dostarczycie Wy. Cena przelicza się od razu.",
    "fGuests": "Goście",
    "howP": "Dwa bary stoją na sali przez cały wieczór. Goście podchodzą, wybierają koktajl z menu i dostają go po chwili, przygotowany na ich oczach. Kelner zbiera szkło z sali, więc barmani nie odchodzą od baru.",
    "c1h": "Koktajle robione na żywo",
@@ -1282,8 +1283,11 @@ window.OFFER = {
    "c3h": "Dwa bary, bez kolejek",
    "c3p": "Przy {g} gościach pracujemy na dwóch barach z dwoma barmanami i kelnerem do szkła.",
    "cfgH": "Wasz event bar",
-   "cfgP": "Ustawiacie liczbę gości, menu, alkohol i wygląd barów. Cena po prawej przelicza się od razu, a na końcu wysyłacie nam gotowy wybór.",
-   "s0p": "Finalną liczbę gości podajecie do 7 dni przed imprezą i według niej rozliczamy. Składniki, lód i szkło skalują się z liczbą gości.",
+   "cfgP": "Ustawiacie liczbę gości, alkohol na stołach, menu i wygląd barów. Cena po prawej przelicza się od razu, a na końcu wysyłacie nam gotowy wybór.",
+   "s0": "Krok 1", "sT": "Krok 2", "s1": "Krok 3", "s2": "Krok 4", "s3": "Krok 5",
+  "sTp": "Od tego zależy liczba koktajli. Gdy na stołach stoi wódka albo wino, liczymy 3 koktajle na osobę. Gdy bar jest jedynym źródłem alkoholu, potrzeba 4–5 koktajli na osobę, żeby wystarczyło na cały wieczór.",
+  "sThint": "Liczymy {p} na osobę, razem {pool} koktajli. Składniki, lód, szkło i alkohol przeliczają się same.",
+  "s0p": "Finalną liczbę gości podajecie do 7 dni przed imprezą i według niej rozliczamy. Składniki, lód i szkło skalują się z liczbą gości.",
    "s0hint": "ok. {pool} koktajli, {p} na osobę",
    "s1h": "Menu koktajli",
    "s1p": "Zaznaczyliśmy nasze standardowe pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund. Możecie wymienić dowolny albo dołożyć kolejne z pełnej karty Pimp My Bar, do ośmiu w menu. Liczba koktajli nie zmienia ceny obsługi.",
@@ -1326,7 +1330,7 @@ window.OFFER = {
     ],
     [
      "Ile koktajli jest w cenie?",
-     "{pool} koktajli, czyli 3 na osobę. To pula wspólna, a nie limit dla gościa."
+     "{pool} koktajli, czyli {p} na osobę. To pula wspólna, a nie limit dla gościa. Przy alkoholu na stołach liczymy 3 na osobę, bez niego 4–5."
     ],
     [
      "Jak rozliczamy alkohol?",
@@ -1353,6 +1357,6 @@ window.OFFER = {
  }
 };
 </script>
-<script src="../event/event.js?v=12"></script>
+<script src="../event/event.js?v=13"></script>
 </body>
 </html>

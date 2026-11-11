@@ -76,6 +76,7 @@
     talkStep:'Porozmawiajmy', talkH:'Mają Państwo pytania? Proszę pytać.', talkP:'Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Proszę zadzwonić albo napisać: odpowiem na wszystkie pytania i dopasuję strefę do Państwa eventu.', talkCall:'Zadzwoń', talkMail:'Napisz maila',
     accH:'Potwierdzamy realizację', accP:'Po kliknięciu otworzy się gotowy mail z Państwa wyborem. Można też po prostu zadzwonić.',
     yourChoice:'Państwa wybór', send:'Wyślij wybór mailem', copy:'Kopiuj', copied:'Skopiowano',
+    sT:'Krok', sTh:'Czy na stołach będzie alkohol?', sTp:'', sThint:'Liczymy {p} na osobę, razem {pool} koktajli.',
     s0:'Krok 0', s0h:'Liczba gości', s0p:'Składniki, lód i szkło skalują się z liczbą gości.', s0hint:'ok. {pool} koktajli, {p} na osobę', lIngr:'Składniki do {pool} koktajli', lIce:'Lód, {kg} kg', lGlassD:'Wynajem szkła, {n} szt.', lAlc:'Alkohol do koktajli, wg zakupu', alcPmb:'Alkohol kupuje Pimp My Bar', alcYou:'Alkohol po Państwa stronie', supAlcPmb:'Alkohol, który kupujemy', supHintPmb:'Liczba butelek zaokrąglona w górę. Nieotwarte butelki odliczamy od faktury końcowej.', moreOpen:'Pokaż pełną kartę koktajli ↓', moreClose:'Zwiń pełną kartę ↑',
     sumGuests:'{g} osób', sumPer:'{pool} mocktaili', sumFront:'front: {f}', sumOwn:'branding logo',
     mailSubj:'Strefa mocktaili {d} – potwierdzenie', mailHi:'Dzień dobry,\n\npotwierdzamy zainteresowanie strefą mocktaili.\n', mailBye:'\nPozdrawiam',
@@ -89,7 +90,7 @@
   var state = {
     menu: (O.drinks ? DRINKS.filter(function(d){return d.d}) : DRINKS).map(function(d){return d.id}),
     front: 'silver', own: !!O.ownDefault, glass: false, waiter: !!O.waiterDefault,
-    g: O.dyn ? O.dyn.def : O.guests, alcPmb: O.alcBuy ? O.alcBuy.def !== false : false,
+    g: O.dyn ? O.dyn.def : O.guests, per: (O.perOptions && O.perOptions.def) || 0, alcPmb: O.alcBuy ? O.alcBuy.def !== false : false,
     add: {flair:false, coffee:false}
   };
 
@@ -99,17 +100,18 @@
   function money(n){ var r = Math.round(n*100)/100, z = Math.floor(r), gr = Math.round((r-z)*100); return String(z).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')+(gr ? ','+(gr<10?'0':'')+gr : '')+' zł'; }
   function gLabel(){ var P = O.t && O.t[lang] || {}; if (O.dyn) return t('guestsN',{n:state.g}) + (P.guestsSuffix || ''); return P.guestsLabel || t('guestsN',{n:O.guests}); }
   function gRange(){ return E.gMin===E.gMax ? String(E.gMin) : E.gMin+'–'+E.gMax; }
-  function poolN(){ return O.dyn ? state.g*E.per : (O.poolN || +O.pool || E.gMin*E.per); }
-  function pool(){ return O.dyn ? String(state.g*E.per).replace(/\B(?=(\d{3})+(?!\d))/g,' ') : String(O.pool || E.gMin*E.per); }
-  function fill(s){ return s.split('{b}').join(E.bars).split('{p}').join(E.per).split('{g}').join(gRange()).split('{pool}').join(pool()).split('{m}').join(state.menu.length).split('{h}').join(O.hours).split('{price}').join(s.indexOf('{price}')>-1 ? money(baseTotal()) : '').split('{glassP}').join(money(O.glass)).split('{waiterP}').join(money(O.waiter)).split('{cups}').join(T[lang].inclCup); }
+  function PER(){ return state.per || E.per; }
+  function poolN(){ return O.dyn ? state.g*PER() : (O.poolN || +O.pool || E.gMin*E.per); }
+  function pool(){ return O.dyn ? String(state.g*PER()).replace(/\B(?=(\d{3})+(?!\d))/g,' ') : String(O.pool || E.gMin*E.per); }
+  function fill(s){ return s.split('{b}').join(E.bars).split('{p}').join(PER()).split('{g}').join(gRange()).split('{pool}').join(pool()).split('{m}').join(state.menu.length).split('{h}').join(O.hours).split('{price}').join(s.indexOf('{price}')>-1 ? money(baseTotal()) : '').split('{glassP}').join(money(O.glass)).split('{waiterP}').join(money(O.waiter)).split('{cups}').join(T[lang].inclCup); }
   function baseTotal(){ if (O.dyn) return calc().total; var x = O.price; (O.items||[]).forEach(function(it){ if (it[1] !== null) x += it[1]; }); return x; }
 
   function calc(){
     var lines = [[fill(t('lBar')), O.price]], total = O.price;
     (O.items || []).forEach(function(it){ lines.push([it[0], it[1]]); if (it[1] !== null) total += it[1]; });
-    if (O.dyn){ var D = O.dyn, n = state.g*E.per, dl = [
+    if (O.dyn){ var D = O.dyn, n = state.g*PER(), dl = [
       [fill(t('lIngr')), Math.round(n*D.asort)],
-      [t('lIce',{kg:Math.round(state.g*D.iceKg)}), Math.round(state.g*D.iceKg*D.ice)],
+      [t('lIce',{kg:Math.round(n*D.iceKg/3)}), Math.round(n*D.iceKg/3*D.ice)],
       [t('lGlassD',{n:pool()}), Math.round(n*D.glass)] ];
       dl.forEach(function(l){ lines.push(l); total += l[1]; }); }
     if (O.alcBuy && state.alcPmb){ var ab = alcBuy(); lines.push([t('lAlc'), ab.sum]); total += ab.sum; }
@@ -156,7 +158,7 @@
   }
   function priceTxt(){ return money(calc().total)+T[lang].net; }
   function summary(){
-    var c = calc(), parts = [gLabel(), fill(t('sumPer'))].concat(O.alcBuy ? [state.alcPmb ? t('alcPmb') : t('alcYou')] : []).concat([ (state.glass ? t('glass') : t('cup'))+(state.waiter && (state.glass || O.waiterIndependent) ? ' + '+t('waiter').toLowerCase() : ''), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})]);
+    var c = calc(), parts = [gLabel(), fill(t('sumPer'))+(O.perOptions ? ' ('+PER()+' na osobę)' : '')].concat(O.alcBuy ? [state.alcPmb ? t('alcPmb') : t('alcYou')] : []).concat([ (state.glass ? t('glass') : t('cup'))+(state.waiter && (state.glass || O.waiterIndependent) ? ' + '+t('waiter').toLowerCase() : ''), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})]);
     var adds = c.lines.slice(1+(O.items||[]).length+(O.dyn?3:0)+(O.alcBuy && state.alcPmb ? 1 : 0)).map(function(l){return l[0]+' ('+(l[1]===null ? T[lang].lAsk : money(l[1]))+')'});
     return {head: parts.join(' · '), menu: menuNames().join(', '), adds: adds.length ? adds.join(', ') : t('none'), total: priceTxt()};
   }
@@ -178,6 +180,7 @@
 
     h += '<section id="bar"><div class="wrap"><div class="sec-head"><h2>'+L.cfgH+'</h2><p>'+L.cfgP+'</p></div><div class="cfg"><div>';
     if (O.dyn) h += '<div class="block"><span class="step">'+L.s0+'</span><h3>'+L.s0h+'</h3><p>'+L.s0p+'</p><div class="q"><div class="q-top"><label for="r-guests">'+L.fGuests+'</label><output id="o-guests" for="r-guests"></output></div><input type="range" id="r-guests" min="'+O.dyn.min+'" max="'+O.dyn.max+'" step="'+O.dyn.step+'" value="'+state.g+'"><small id="h-guests"></small></div></div>';
+    if (O.perOptions) h += '<div class="block"><span class="step">'+L.sT+'</span><h3>'+L.sTh+'</h3><p>'+L.sTp+'</p><div class="seg" role="group">'+O.perOptions.list.map(function(o){ return '<button type="button" data-per="'+o[0]+'">'+esc(o[1])+'</button>'; }).join('')+'</div><p class="hint" id="per-hint"></p></div>';
     function dHtml(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; }
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="menu">';
     if (O.collapse){
@@ -243,6 +246,7 @@
     if (!bvTimer) bvPaint(bvCurrent());
     document.querySelectorAll('[data-add]').forEach(function(i){ i.checked = i.dataset.add==='own' ? state.own : state.add[i.dataset.add]; });
     if (O.dyn){ E.gMin = E.gMax = state.g; $('o-guests').textContent = t('guestsN',{n:state.g}); $('h-guests').textContent = fill(L.s0hint); }
+    document.querySelectorAll('[data-per]').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.per===PER())); }); if ($('per-hint')) $('per-hint').textContent = fill(L.sThint);
     if ($('alc-pmb')){ $('alc-pmb').setAttribute('aria-pressed', String(state.alcPmb)); $('alc-you').setAttribute('aria-pressed', String(!state.alcPmb)); }
     var tot = priceTxt(), pp = t('perPerson',{a:Math.round(c.total/E.gMax), b:Math.round(c.total/E.gMin)})+' · '+L.vat;
     $('sum').textContent = tot; $('pp').textContent = pp; $('bar-sum').textContent = money(c.total); $('bar-pp').textContent = 'netto '+L.vat; $('peek').textContent = tot;
@@ -280,6 +284,7 @@
     SEQ.forEach(function(k){ var i = new Image(); if (/^k\d+$/.test(k)){ i.src = klUrl(k,'l'); new Image().src = klUrl(k,'r'); } else i.src = BV[k] || BV.base; });
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
     if ($('menu-more')) $('menu-more').addEventListener('click', function(){ var m = $('menu-all'), o = m.hidden; m.hidden = !o; $('menu-more').textContent = o ? T[lang].moreClose : T[lang].moreOpen; if (o) once('menuall','Otworzył pełną kartę koktajli','cocktail'); });
+    document.querySelectorAll('[data-per]').forEach(function(b){ b.addEventListener('click', function(){ state.per = +b.dataset.per; render(); ping('Koktajli na osobę: '+state.per+' → '+priceTxt(),'gear'); }); });
     if ($('r-guests')){ var gt; $('r-guests').addEventListener('input', function(e){ state.g = +e.target.value; render(); clearTimeout(gt); gt = setTimeout(function(){ ping('Suwak gości → '+state.g+' ('+priceTxt()+')','busts_in_silhouette'); }, 2500); }); }
     if ($('alc-pmb')){ $('alc-pmb').addEventListener('click', function(){ state.alcPmb = true; render(); ping('Alkohol: kupuje PMB → '+priceTxt(),'gear'); }); $('alc-you').addEventListener('click', function(){ state.alcPmb = false; render(); ping('Alkohol: dostarczają sami → '+priceTxt(),'gear'); }); }
     if ($('s-cup')) $('s-cup').addEventListener('click', function(){ state.glass = false; render(); });
