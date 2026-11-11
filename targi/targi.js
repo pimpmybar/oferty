@@ -67,7 +67,7 @@
     h += '<div class="hero"><div class="hero-copy"><div class="label">' + esc(T.kicker) + '</div><h1>' + T.h1 + '</h1><p class="lead">' + T.lead + '</p>';
     h += '<dl class="facts">' + (T.facts || []).map(function(f){ return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>';
     h += '<div class="price-peek"><div class="big num" id="peek"></div><a class="btn" href="#wycena">Zobacz wycenę ↓</a></div></div>';
-    h += '<div class="reel" aria-label="Film z naszych realizacji kawowych"><video id="reel-v" src="' + M + 'hero.mp4" poster="' + M + 'poster.jpg" autoplay muted loop playsinline preload="auto"></video><div class="ticker" aria-live="off"><span class="label">Pimp My Bar · Coffee</span><span class="line" id="tick"></span></div></div></div></div>';
+    h += '<div class="reel" aria-label="Film z naszych realizacji: targi, kawa i koktajle"><video id="reel-v" src="' + (O.heroVideo || M + 'hero.mp4') + '" poster="' + (O.heroPoster || M + 'poster.jpg') + '" autoplay muted loop playsinline preload="auto"></video><div class="ticker" aria-live="off"><span class="label">Pimp My Bar · Coffee</span><span class="line" id="tick"></span></div></div></div></div>';
 
     // 1. Odpowiedź na zapytanie – każdy punkt z maila i liczba obok
     h += '<section id="odpowiedz"><div class="wrap"><div class="ans"><div class="ans-head"><h2>' + esc(T.ansH) + '</h2>' + (T.ansOk ? '<span class="okchip">✓ ' + esc(T.ansOk) + '</span>' : '') + '</div><dl>';
@@ -97,6 +97,8 @@
     // 3. Co jest w cenie
     h += '<section id="zakres"><div class="wrap"><div class="sec-head"><h2>' + esc(T.inclH || 'Co jest w cenie') + '</h2><p>' + (T.inclP || '') + '</p></div><ul class="incl">' + li(T.incl) + '</ul></div></section>';
 
+    // Film: showreel między zakresem a wymaganiami
+    if (T.reel !== false){ var R = T.reel || {}; h += '<section id="film" class="noprint"><div class="wrap"><div class="showreel"><button type="button" class="srmedia" id="sr" aria-label="Odtwórz film"><video id="sr-v" src="' + (R.src || '../wesele/assets/showreel-loop.mp4') + '" poster="' + (R.poster || '../targi/showreel-poster.jpg') + '" preload="none" playsinline></video><span class="play"><span class="tri" aria-hidden="true"></span>' + esc(R.btn || 'Zobacz film · 76 s') + '</span></button><div class="srtext"><span class="label">' + esc(R.label || 'Showreel') + '</span><h3>' + esc(R.h || 'Targi, kawa i koktajle w 76 sekund') + '</h3><p>' + (R.p || 'Tak pracujemy na stoiskach i eventach firmowych: bar kawowy i koktajlowy, wszystko robione na żywo przy gościach.') + '</p></div></div></div></section>'; }
     // 4. Wymagania na stoisku: miejsce, prąd, woda, wjazd
     h += '<section id="wymagania"><div class="wrap"><div class="sec-head"><h2>' + esc(T.specH || 'Czego potrzebujemy na stoisku') + '</h2><p>' + (T.specP || '') + '</p></div><div class="kit"><img src="' + M + 'machine.jpg" alt="Ekspres kolbowy na barze kawowym" loading="lazy"><div><table class="spec">' + (T.spec || []).map(function(r){ return '<tr><th>' + esc(r[0]) + '</th><td>' + r[1] + '</td></tr>'; }).join('') + '</table>' + (T.specNote ? '<p class="note">' + T.specNote + '</p>' : '') + '</div></div></div></section>';
 
@@ -125,7 +127,8 @@
     h += '</div></div></section>';
 
     // 8. Realizacje
-    h += '<section id="realizacje" class="noprint"><div class="wrap"><div class="sec-head"><h2>' + esc(T.refsH || 'Z naszych realizacji') + '</h2><p>' + (T.refsP || '') + '</p></div><div class="gallery">';
+    h += '<section id="realizacje" class="noprint"><div class="wrap"><div class="sec-head"><h2>' + esc(T.refsH || 'Z naszych realizacji') + '</h2><p>' + (T.refsP || '') + '</p></div>';
+    h += '<div class="gallery">';
     h += '<figure class="g1"><img src="' + M + 'stand-wide.jpg" alt="Bar kawowy Pimp My Bar na stoisku targowym" loading="lazy"></figure><figure class="g2"><img src="' + M + 'stand-barista.jpg" alt="Baristka za barem" loading="lazy"></figure><figure class="g3"><img src="' + M + 'latte.jpg" alt="Cappuccino z latte art" loading="lazy"></figure><figure class="g4"><img src="' + M + 'bar-team.jpg" alt="Barista za drewnianym barem" loading="lazy"></figure><figure class="g5"><img src="' + M + 'cup-bar.jpg" alt="Filiżanka kawy na barze" loading="lazy"></figure></div>';
     if (T.film) h += '<div class="feature"><a class="fmedia" href="' + T.film.url + '" target="_blank" rel="noopener" aria-label="' + esc(T.film.h) + '"><img src="' + M + 'bar-wood.jpg" alt="Barista przy barze kawowym Pimp My Bar" loading="lazy" style="object-position:50% 40%"><span class="play"><span class="tri" aria-hidden="true"></span>Zobacz film</span></a><div class="ftext"><span class="label">' + esc(T.film.label) + '</span><h3>' + esc(T.film.h) + '</h3><p>' + T.film.p + '</p><a class="more" href="' + T.film.url + '" target="_blank" rel="noopener">Film na YouTube →</a></div></div>';
     h += '</div></section>';
@@ -278,6 +281,8 @@
     // film: autoodtwarzanie, a gdy przeglądarka je blokuje – start przy pierwszym dotknięciu
     var v = $('reel-v');
     if (v){ var play = function(){ try{ v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function(){}); }catch(e){} }; play(); document.addEventListener('touchstart', function t(){ play(); document.removeEventListener('touchstart', t); }, {passive:true}); }
+    var sr = $('sr'), srv = $('sr-v');
+    if (sr && srv) sr.addEventListener('click', function(){ if (sr.classList.contains('on')) return; sr.classList.add('on'); srv.controls = true; srv.muted = false; var p = srv.play(); if (p && p.catch) p.catch(function(){}); once('reel', 'Ogląda showreel z dźwiękiem', 'movie_camera'); });
     var ticks = T.ticks || [], ti = 0, el = $('tick'); if (el && ticks.length){ el.textContent = ticks[0]; if (ticks.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(function(){ el.classList.add('out'); setTimeout(function(){ ti = (ti + 1) % ticks.length; el.textContent = ticks[ti]; el.classList.remove('out'); }, 350); }, 2800); }
   }
 
