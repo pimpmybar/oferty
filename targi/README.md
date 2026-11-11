@@ -11,15 +11,15 @@ Wygląd (`targi.css`) i logika (`targi.js`) są wspólne. Wzór: `coffee-bar-pol
    - `rates` – progi stawki dziennej obsługi `[[od ilu dni, stawka netto], …]`
    - `coffee` – `per100` (cena 100 kaw), `options` (limity dzienne do wyboru), `def`
    - `deposit`, `hoursIncl`, `extraHour`
-   - `brand` (front baru z logo) i `cups` (kubki z nadrukiem) – usuń klucz, jeśli opcji nie ma
+   - `brand` (front baru z logo), `cups` (kubki z nadrukiem), `lids` (pokrywki) – usuń klucz, jeśli opcji nie ma; nakład kubków i pokrywek liczy się sam: limit kaw × dni, w górę do pełnej paczki `per`
    - `form` – formularz umowy: `url`, `entries` (id pól), `prefill` (tylko dane firmy z rejestru, bez danych osobowych)
-   - `t` – wszystkie teksty; tokeny `{total}`, `{perDay}`, `{rate}`, `{n}`, `{dni}`, `{limit}`, `{deposit}`… przeliczają się na żywo
+   - `t` – wszystkie teksty; tokeny `{total}`, `{totalAlt}` i `{limitAlt}` (suma przy drugim limicie kaw), `{perDay}`, `{rate}`, `{n}`, `{dni}`, `{limit}`, `{cupsQty}`, `{cupsSel}`, `{lidsQty}`, `{deposit}`… przeliczają się na żywo
 3. Liczby do potwierdzenia przez właściciela oznacz `<span class="todo">…</span>` – podświetlają się tylko w podglądzie `?ja`.
 
 ## Podgląd
 - `?ja` – podgląd właściciela: bez powiadomień i statystyk, widoczne pola do potwierdzenia
 - `?test` – klikanie bez powiadomień, zdarzenia zapisują się z prefiksem `TEST-`
-- „Wersja do druku (PDF)” – 3 strony A4 dla działu zakupów
+- „Wersja do druku (PDF)” – 3–4 strony A4 dla działu zakupów
 
 ## Zdarzenia (Supabase `offer_events`)
 `wejscie`, `eyes`, `moneybag` (wycena), `electric_plug` (wymagania), `cup_with_straw` (kubki), `calendar` (zmiana dni),

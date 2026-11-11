@@ -35,15 +35,20 @@
   function tierOf(n){ var k = 0; RATES.forEach(function(x, i){ if (n >= x[0]) k = i; }); return k; }
   function tierLabel(i){ var a = RATES[i][0], z = RATES[i + 1] ? RATES[i + 1][0] - 1 : DAYS.length; return (a === z ? a + ' ' + dni(a) : a + '–' + z + ' dni') + ' · ' + zl(RATES[i][1]); }
 
-  var S = { on: DAYS.map(function(){ return true; }), limit: C.def, brand: false, cups: false, cupsQty: O.cups ? O.cups.qty[0] : 0 };
-  function calc(){
+  var S = { on: DAYS.map(function(){ return true; }), limit: C.def, brand: false, cups: false, lids: false };
+  // Nakład kubków i pokrywek idzie za liczbą kaw: limit dzienny × dni, w górę do pełnej paczki (np. 1 000 szt.).
+  function pack(lim, n, per){ return Math.max(per, Math.ceil(lim * n / per) * per); }
+  function calc(lim){
+    var L = lim || S.limit;
     var sel = DAYS.filter(function(d){ return S.on[d.i]; }), n = sel.length, r = rate(n), top = RATES[0][1];
-    var svc = n * r, cofDay = S.limit / 100 * C.per100, cof = n * cofDay;
+    var svc = n * r, cofDay = L / 100 * C.per100, cof = n * cofDay;
     var brand = S.brand && O.brand ? O.brand.price : 0;
-    var cups = S.cups && O.cups ? O.cups.price * S.cupsQty / O.cups.per : 0;
-    var total = svc + cof + brand + cups;
+    var cupsQty = O.cups ? pack(L, n, O.cups.per) : 0, lidsQty = O.lids ? pack(L, n, O.lids.per) : 0;
+    var cups = S.cups && O.cups ? O.cups.price * cupsQty / O.cups.per : 0;
+    var lids = S.lids && O.lids ? O.lids.price * lidsQty / O.lids.per : 0;
+    var total = svc + cof + brand + cups + lids;
     var dep = O.deposit ? Math.min(O.deposit, Math.round(total * 0.3 / 100) * 100) : 0;
-    return { sel:sel, n:n, rate:r, svc:svc, cofDay:cofDay, cof:cof, brand:brand, cups:cups, total:total, perDay:r + cofDay, save:n * (top - r), dep:dep, daysTotal:svc + cof };
+    return { sel:sel, n:n, rate:r, svc:svc, cofDay:cofDay, cof:cof, brand:brand, cups:cups, cupsQty:cupsQty, lids:lids, lidsQty:lidsQty, total:total, perDay:r + cofDay, save:n * (top - r), dep:dep, daysTotal:svc + cof };
   }
   function datesShort(sel){
     var by = {}, ord = [];
@@ -81,9 +86,10 @@
     h += '<div class="dsum"><span id="dsum-l"></span><b id="dsum-v"></b></div></div>';
     h += '<div class="tiers" id="tiers">' + RATES.map(function(r, i){ return '<span class="tier" data-tier="' + i + '">' + tierLabel(i) + '</span>'; }).join('') + '</div>';
     h += '<p class="hint np">' + fill(T.tiersP) + '</p>';
-    h += '<div class="ctl"><span class="label">' + esc(T.limitL) + '</span><div class="seg s3" role="group" aria-label="' + esc(T.limitL) + '">' + C.options.map(function(v){ return '<button type="button" data-limit="' + v + '">do ' + v + ' kaw</button>'; }).join('') + '</div><p class="note" style="margin-top:0">' + fill(T.limitP) + '</p></div>';
-    if (O.brand) h += '<div class="addon" id="brand-box"><input type="checkbox" id="brand"><div class="ab"><label for="brand"><strong>' + esc(T.brandH) + ', + ' + zl(O.brand.price) + '</strong><small>' + T.brandP + '</small></label></div></div>';
-    if (O.cups) h += '<div class="addon" id="cups-box"><input type="checkbox" id="cups"><div class="ab"><label for="cups"><strong>' + esc(T.cupsOptH) + ', + <span data-v="cupsSel"></span></strong><small>' + fill(T.cupsOptP) + '</small></label><div class="sub"><div class="seg" role="group" aria-label="Liczba kubków">' + O.cups.qty.map(function(q){ return '<button type="button" data-cups="' + q + '">' + nf(q) + ' szt.</button>'; }).join('') + '</div></div></div></div>';
+    h += '<div class="ctl"><span class="label">' + esc(T.limitL) + '</span><div class="seg' + (C.options.length === 3 ? ' s3' : '') + '" role="group" aria-label="' + esc(T.limitL) + '">' + C.options.map(function(v){ return '<button type="button" data-limit="' + v + '">do ' + v + ' kaw</button>'; }).join('') + '</div><p class="note" style="margin-top:0">' + fill(T.limitP) + '</p></div>';
+    if (O.brand) h += '<div class="addon" id="brand-box"><input type="checkbox" id="brand"><div class="ab"><label for="brand"><strong>' + esc(T.brandH) + ', +\u00a0' + zl(O.brand.price) + '</strong><small>' + T.brandP + '</small></label></div></div>';
+    if (O.cups) h += '<div class="addon" id="cups-box"><input type="checkbox" id="cups"><div class="ab"><label for="cups"><strong>' + esc(T.cupsOptH) + ', <span data-v="cupsQty"></span> szt., +\u00a0<span data-v="cupsSel"></span></strong><small>' + fill(T.cupsOptP) + '</small></label></div></div>';
+    if (O.lids) h += '<div class="addon" id="lids-box"><input type="checkbox" id="lids"><div class="ab"><label for="lids"><strong>' + esc(T.lidsH || 'Pokrywki do kubków') + ', <span data-v="lidsQty"></span> szt., +\u00a0<span data-v="lidsSel"></span></strong><small>' + fill(T.lidsP || '') + '</small></label></div></div>';
     h += '</div><aside class="total" aria-live="polite"><span class="label" id="variant-name"></span><div class="sum" id="sum"></div><span class="sub" id="sum-sub"></span><hr><ul class="brk" id="brk"></ul><hr><ul class="terms">';
     h += (O.deposit ? '<li>Zaliczka <b id="dep"></b></li>' : '') + '<li>Reszta <b>' + esc(T.restTerm || 'faktura po ostatnim terminie') + '</b></li><li>Kawa <b>rozliczana za otwarte kg</b></li><li>Oferta ważna do <b>' + esc(O.validUntil) + '</b></li></ul>';
     h += '<a class="btn" href="#akceptacja">' + esc(T.bookShort || 'Rezerwuję terminy') + '</a><button class="btn ghost" type="button" data-print>Wersja do druku (PDF)</button></aside></div></div></section>';
@@ -139,17 +145,17 @@
   }
 
   // ── Podsumowania: tekst wyboru, Załącznik nr 1 do formularza, mail ──
-  function addons(c){ var a = []; if (c.brand) a.push('front baru z logo (' + zl(c.brand) + ')'); if (c.cups) a.push('kubki z logo ' + nf(S.cupsQty) + ' szt. (' + zl(c.cups) + ')'); return a; }
+  function addons(c){ var a = []; if (c.brand) a.push('front baru z logo (' + zl(c.brand) + ')'); if (c.cups) a.push('kubki z logo ' + nf(c.cupsQty) + ' szt. (' + zl(c.cups) + ')'); if (c.lids) a.push('pokrywki ' + nf(c.lidsQty) + ' szt. (' + zl(c.lids) + ')'); return a; }
   function choice(c){
-    return c.n + ' ' + dni(c.n) + ' (' + datesShort(c.sel) + ') · 1 barista + bar + ekspres · do ' + S.limit + ' kaw dziennie · ' + (addons(c).join(', ') || 'bez dodatków') + ' · ' + zl(c.total) + ' netto';
+    return c.n + ' ' + dni(c.n) + ' (' + datesShort(c.sel) + ') · 1 barista + bar + ekspres · w wycenie ' + S.limit + ' kaw dziennie · ' + (addons(c).join(', ') || 'bez dodatków') + ' · ' + zl(c.total) + ' netto';
   }
   function annex(c){
     var L = ['ZAŁĄCZNIK NR 1 – wybór z oferty online (' + O.nr + ')', T.annexTitle || 'Coffee bar na stoisku targowym', 'Terminy (' + c.n + ' ' + dni(c.n) + '):'];
     c.sel.forEach(function(d){ L.push('- ' + d.full + ' (' + d.wd + ') ' + d.from + '–' + d.to); });
     L.push('Zakres: ' + (T.annexScope || '1 barista do 8 h dziennie, moduł barowy 125 cm, ekspres kolbowy, młynek, kawa, mleko, herbata, kubki; transport, montaż i demontaż w cenie.'));
-    L.push('Kawa: do ' + S.limit + ' kaw dziennie (razem ' + nf(S.limit * c.n) + '); rozliczenie za otwarte kg, ' + zl(C.per100) + ' netto za każde 100 kaw.');
+    L.push('Kawa: w wycenie ' + S.limit + ' kaw dziennie (razem ' + nf(S.limit * c.n) + '); rozliczenie po ostatnim terminie za faktycznie otwarte kilogramy, 1 kg = ok. 100 kaw = ' + zl(C.per100) + ' netto.');
     L.push('Dodatki: ' + (addons(c).join(', ') || 'brak'));
-    L.push('Cena: ' + zl(c.total) + ' netto + 23% VAT (obsługa ' + c.n + ' × ' + zl(c.rate) + ', kawa ' + zl(c.cof) + (c.brand + c.cups ? ', dodatki ' + zl(c.brand + c.cups) : '') + ')');
+    L.push('Cena: ' + zl(c.total) + ' netto + 23% VAT (obsługa ' + c.n + ' × ' + zl(c.rate) + ', kawa ' + zl(c.cof) + (c.brand + c.cups + c.lids ? ', dodatki ' + zl(c.brand + c.cups + c.lids) : '') + ')');
     if (c.dep) L.push('Zaliczka: ' + zl(c.dep) + ' netto, faktura proforma');
     L.push('Oferta: ' + location.origin + location.pathname);
     L.push('', 'Uwagi / zmiany: ');
@@ -169,11 +175,13 @@
 
   // ── Przeliczenie i odświeżenie liczb ──
   function paint(){
-    var c = calc(), V = {
+    var c = calc(), altL = C.options.filter(function(v){ return v !== S.limit; })[0], ca = altL ? calc(altL) : null, V = {
       n:c.n, dni:dni(c.n), nAll:DAYS.length, total:zl(c.total), perDay:zl(c.perDay), rate:zl(c.rate), svc:zl(c.svc), coffeeDay:zl(c.cofDay), coffee:zl(c.cof),
       limit:nf(S.limit), limitAll:nf(S.limit * c.n), per100:zl(C.per100), top:zl(RATES[0][1]), rateAll:zl(rate(DAYS.length)), save:zl(c.save),
       deposit:zl(O.deposit || 0), validUntil:O.validUntil, hoursIncl:O.hoursIncl || 8, extraHour:zl(O.extraHour || 200),
-      cupsPrice:O.cups ? zl(O.cups.price) : '', cupsPer:O.cups ? nf(O.cups.per) : '', cupsDeadline:O.cups ? O.cups.deadline : '', cupsSel:O.cups ? zl(O.cups.price * S.cupsQty / O.cups.per) : '', brandPrice:O.brand ? zl(O.brand.price) : ''
+      cupsPrice:O.cups ? zl(O.cups.price) : '', cupsPer:O.cups ? nf(O.cups.per) : '', cupsDeadline:O.cups ? O.cups.deadline : '', cupsSel:O.cups ? zl(O.cups.price * c.cupsQty / O.cups.per) : '', cupsQty:nf(c.cupsQty), brandPrice:O.brand ? zl(O.brand.price) : '',
+      lidsPrice:O.lids ? zl(O.lids.price) : '', lidsPer:O.lids ? nf(O.lids.per) : '', lidsQty:nf(c.lidsQty), lidsSel:O.lids ? zl(O.lids.price * c.lidsQty / O.lids.per) : '',
+      limitAlt:altL ? nf(altL) : '', totalAlt:ca ? zl(ca.total) : '', perDayAlt:ca ? zl(ca.perDay) : ''
     };
     [].forEach.call(document.querySelectorAll('[data-v]'), function(n){ var k = n.getAttribute('data-v'); if (V[k] !== undefined) n.textContent = V[k]; });
     DAYS.forEach(function(d){
@@ -186,12 +194,13 @@
     $('dsum-v').textContent = zl(c.daysTotal);
     var tk = tierOf(c.n); [].forEach.call(document.querySelectorAll('[data-tier]'), function(n){ n.className = 'tier' + (+n.getAttribute('data-tier') === tk ? ' on' : ''); });
     [].forEach.call(document.querySelectorAll('[data-limit]'), function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-limit') === S.limit)); });
-    [].forEach.call(document.querySelectorAll('[data-cups]'), function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-cups') === S.cupsQty)); });
     if ($('brand')){ $('brand').checked = S.brand; $('brand-box').className = 'addon' + (S.brand ? ' picked' : ''); }
     if ($('cups')){ $('cups').checked = S.cups; $('cups-box').className = 'addon' + (S.cups ? ' picked' : ''); if ($('kubki')) $('kubki').className = S.cups ? '' : 'np-off'; } // w druku szczegóły kubków tylko, gdy opcja wybrana
-    var brk = [['Obsługa, ' + c.n + ' × ' + zl(c.rate), zl(c.svc)], ['Kawa, do ' + S.limit + ' dziennie', zl(c.cof)]];
+    if ($('lids')){ $('lids').checked = S.lids; $('lids-box').className = 'addon' + (S.lids ? ' picked' : ''); }
+    var brk = [['Obsługa, ' + c.n + ' × ' + zl(c.rate), zl(c.svc)], ['Kawa, ' + S.limit + ' dziennie', zl(c.cof)]];
     if (c.brand) brk.push(['Front baru z logo', zl(c.brand)]);
-    if (c.cups) brk.push(['Kubki z logo, ' + nf(S.cupsQty) + ' szt.', zl(c.cups)]);
+    if (c.cups) brk.push(['Kubki z logo, ' + nf(c.cupsQty) + ' szt.', zl(c.cups)]);
+    if (c.lids) brk.push(['Pokrywki, ' + nf(c.lidsQty) + ' szt.', zl(c.lids)]);
     var bh = brk.map(function(r){ return '<li><span>' + esc(r[0]) + '</span><span>' + esc(r[1]) + '</span></li>'; }).join('');
     if (c.save > 0) bh += '<li class="save"><span>w tym rabat za liczbę dni</span><span>−' + zl(c.save) + '</span></li>';
     $('brk').innerHTML = bh;
@@ -241,7 +250,7 @@
     [].forEach.call(document.querySelectorAll('[data-limit]'), function(b){ b.addEventListener('click', function(){ S.limit = +b.getAttribute('data-limit'); var c = paint(); once('lim' + S.limit, 'Sprawdził wariant: do ' + S.limit + ' kaw dziennie → ' + zl(c.total), 'coffee'); }); });
     if ($('brand')) $('brand').addEventListener('change', function(e){ S.brand = e.target.checked; paint(); if (S.brand) once('brand', 'Zaznaczył: front baru z logo', 'art', 4); });
     if ($('cups')) $('cups').addEventListener('change', function(e){ S.cups = e.target.checked; paint(); if (S.cups) once('cups', 'Zaznaczył: kubki z logo', 'art', 4); });
-    [].forEach.call(document.querySelectorAll('[data-cups]'), function(b){ b.addEventListener('click', function(){ S.cupsQty = +b.getAttribute('data-cups'); S.cups = true; paint(); once('cq' + S.cupsQty, 'Kubki z logo: ' + nf(S.cupsQty) + ' szt.', 'art'); }); });
+    if ($('lids')) $('lids').addEventListener('change', function(e){ S.lids = e.target.checked; paint(); if (S.lids) once('lids', 'Zaznaczył: pokrywki do kubków', 'art', 4); });
     [].forEach.call(document.querySelectorAll('[data-print]'), function(b){ b.addEventListener('click', function(){ once('print', 'Otworzył wersję do druku (PDF) – oferta idzie dalej w firmie', 'printer', 5); setTimeout(function(){ try{ window.print(); }catch(e){} }, 60); }); });
     var open = [];
     window.addEventListener('beforeprint', function(){ open = []; [].forEach.call(document.querySelectorAll('details'), function(d){ if (!d.open){ open.push(d); d.open = true; } }); });
