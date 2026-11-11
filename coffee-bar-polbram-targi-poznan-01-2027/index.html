@@ -38,7 +38,7 @@ window.OFFER = {
   ],
 
   // Cennik (PLN netto). Stawka dzienna obsługi: [od ilu dni, zł za dzień]
-  rates: [[1,1600],[3,1530],[5,1460],[7,1390]],
+  rates: [[1,1600],[3,1530],[5,1460],[7,1350]],
   coffee: { per100: 200, options: [100, 200], def: 100 },
   hoursIncl: 8, extraHour: 200,
   deposit: 2500,
@@ -70,7 +70,7 @@ window.OFFER = {
       { q: "Dostępność w 8 terminach", a: "<b>Potwierdzamy wszystkie osiem dni:</b> 7–8, 11–12, 13–14 i 18–19 stycznia 2027, w godzinach z Pana maila." },
       { q: "Zakres usługi", a: "<b>Wszystko z Pana listy jest w cenie:</b> barista, ekspres kolbowy, młynek, kawa, mleko krowie i roślinne, kubki i akcesoria. Do tego nasz moduł barowy 125 cm i herbaty." },
       { q: "Cena jednego dnia", a: "<span class=\"n\">{perDay}</span> netto za dzień: obsługa {rate} i kawa {coffeeDay} (przy {limit} kawach). Każdy dzień jest rozpisany w tabeli poniżej." },
-      { q: "Łączny koszt", a: "<span class=\"n\">{total}</span> netto za {n} {dni} przy {limit} kawach dziennie. Przy {limitAlt} kawach dziennie: <b>{totalAlt}</b>. Płacą Państwo za tyle kawy, ile faktycznie zejdzie. Do cen doliczamy 23% VAT.<br><b>To już cena pakietowa.</b> Pojedyncze dwudniowe targi obsługujemy za 3 600 zł netto, czyli 1 800 zł za dzień. Przy komplecie ośmiu dni wychodzi 1 590 zł za dzień, razem 1 680 zł mniej niż za cztery osobne zlecenia." },
+      { q: "Łączny koszt", a: "<span class=\"n\">{total}</span> netto za {n} {dni} przy {limit} kawach dziennie. Przy {limitAlt} kawach dziennie: <b>{totalAlt}</b>. Płacą Państwo za tyle kawy, ile faktycznie zejdzie. Do cen doliczamy 23% VAT.<br><b>To już cena pakietowa.</b> Pojedyncze dwudniowe targi obsługujemy za 3 600 zł netto, czyli 1 800 zł za dzień. Przy komplecie ośmiu dni wychodzi 1 550 zł za dzień, razem 2 000 zł mniej niż za cztery osobne zlecenia." },
       { q: "Transport, montaż, demontaż", a: "<b>W cenie</b>, przy każdym z czterech terminów. Jesteśmy z Poznania, więc nie doliczamy dojazdu ani noclegów." },
       { q: "Limit kaw", a: "W wycenie przyjmujemy <b>{limit} kaw dziennie</b>, razem {limitAll} na {n} {dni}, i jesteśmy przygotowani na więcej. Espresso, cappuccino, latte czy herbata to zawsze jedna porcja." },
       { q: "Koszt przekroczenia limitu", a: "<b>{per100} netto za każdy kolejny otwarty kilogram kawy</b>, czyli ok. 100 kaw z mlekiem i kubkami. Przykład: 100 kaw to 200 zł, 130 kaw to 400 zł, bo otwieramy drugi kilogram. Działa to też w drugą stronę: nieotwartych kilogramów nie fakturujemy." },
@@ -81,7 +81,7 @@ window.OFFER = {
 
     priceH: "Wycena",
     priceP: "Cena dnia to obsługa i kawa. Obsługa obejmuje baristę do 8 godzin dziennie, moduł barowy, ekspres, młynek, transport, montaż i demontaż. Im więcej dni, tym niższa stawka dzienna. Dni można odznaczać, cena przelicza się od razu.",
-    tiersP: "Stawka dzienna obsługi zależy od liczby wybranych dni. Aktualna jest podświetlona. Dwudniowe targi liczymy po 1 600 zł za dzień obsługi, komplet ośmiu dni po 1 390 zł. Najniższa stawka jest już w tej wycenie.",
+    tiersP: "Stawka dzienna obsługi zależy od liczby wybranych dni. Aktualna jest podświetlona. Dwudniowe targi liczymy po 1 600 zł za dzień obsługi, komplet ośmiu dni po 1 350 zł. Najniższa stawka jest już w tej wycenie.",
     limitL: "Ile kaw dziennie przyjmujemy w wycenie",
     limitP: "Bazą jest 100 kaw dziennie, a zapas mamy zawsze ze sobą. Każde kolejne 100 kaw, czyli otwarty kilogram kawy, to {per100} netto z mlekiem, herbatą i kubkami. Przykład: 100 kaw to 200 zł, 130 kaw to 400 zł, bo otwieramy drugi kilogram. Rozliczamy po ostatnim terminie, tylko za otwarte kilogramy.",
     brandH: "Front baru z logo Polbram",
@@ -171,6 +171,6 @@ window.OFFER = {
   }
 };
 </script>
-<script src="../targi/targi.js?v=5"></script>
+<script src="../targi/targi.js?v=6"></script>
 </body>
 </html>
