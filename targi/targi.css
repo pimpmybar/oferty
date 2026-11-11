@@ -208,7 +208,7 @@ section{padding-block:clamp(48px,7vw,84px);border-top:1px solid var(--line)}
 /* kit */
 .kit{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:start}
 @media (max-width:760px){.kit{grid-template-columns:1fr}}
-.kit img{width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover;display:block}
+.kit img{width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover;object-position:72% 50%;display:block}
 .spec{width:100%;border-collapse:collapse;font-size:14.5px}
 .spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .spec th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500;width:36%;padding-right:14px}
