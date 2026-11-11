@@ -76,6 +76,7 @@
     talkStep:'Porozmawiajmy', talkH:'Mają Państwo pytania? Proszę pytać.', talkP:'Jestem Tomek, prowadzę Pimp My Bar od 2013 roku. Proszę zadzwonić albo napisać: odpowiem na wszystkie pytania i dopasuję strefę do Państwa eventu.', talkCall:'Zadzwoń', talkMail:'Napisz maila',
     accH:'Potwierdzamy realizację', accP:'Po kliknięciu otworzy się gotowy mail z Państwa wyborem. Można też po prostu zadzwonić.',
     yourChoice:'Państwa wybór', send:'Wyślij wybór mailem', copy:'Kopiuj', copied:'Skopiowano',
+    s0:'Krok 0', s0h:'Liczba gości', s0p:'Składniki, lód i szkło skalują się z liczbą gości.', s0hint:'ok. {pool} koktajli, {p} na osobę', lIngr:'Składniki do {pool} koktajli', lIce:'Lód, {kg} kg', lGlassD:'Wynajem szkła, {n} szt.', lAlc:'Alkohol do koktajli, wg zakupu', alcPmb:'Alkohol kupuje Pimp My Bar', alcYou:'Alkohol po Państwa stronie', supAlcPmb:'Alkohol, który kupujemy', supHintPmb:'Liczba butelek zaokrąglona w górę. Nieotwarte butelki odliczamy od faktury końcowej.', moreOpen:'Pokaż pełną kartę koktajli ↓', moreClose:'Zwiń pełną kartę ↑',
     sumGuests:'{g} osób', sumPer:'{pool} mocktaili', sumFront:'front: {f}', sumOwn:'branding logo',
     mailSubj:'Strefa mocktaili {d} – potwierdzenie', mailHi:'Dzień dobry,\n\npotwierdzamy zainteresowanie strefą mocktaili.\n', mailBye:'\nPozdrawiam',
     foot:'Pimp My Bar · Poznań · pimpmybar.pl', footR:'Ceny netto w PLN. Oferta przygotowana {d}.', menuL:'Menu', addL:'Opcje', none:'brak'
@@ -87,7 +88,8 @@
   var E = { bars: O.bars || 3, per: O.perGuest || 3, gMin: O.guestsMin || O.guests, gMax: O.guestsMax || O.guests };
   var state = {
     menu: (O.drinks ? DRINKS.filter(function(d){return d.d}) : DRINKS).map(function(d){return d.id}),
-    front: 'silver', own: !!O.ownDefault, glass: false, waiter: false,
+    front: 'silver', own: !!O.ownDefault, glass: false, waiter: !!O.waiterDefault,
+    g: O.dyn ? O.dyn.def : O.guests, alcPmb: O.alcBuy ? O.alcBuy.def !== false : false,
     add: {flair:false, coffee:false}
   };
 
@@ -95,15 +97,22 @@
   function t(k, v){ var s = T[lang][k]; if (v) for (var p in v) s = s.split('{'+p+'}').join(v[p]); return s; }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]}); }
   function money(n){ var r = Math.round(n*100)/100, z = Math.floor(r), gr = Math.round((r-z)*100); return String(z).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')+(gr ? ','+(gr<10?'0':'')+gr : '')+' zł'; }
-  function gLabel(){ var P = O.t && O.t[lang] || {}; return P.guestsLabel || t('guestsN',{n:O.guests}); }
+  function gLabel(){ var P = O.t && O.t[lang] || {}; if (O.dyn) return t('guestsN',{n:state.g}) + (P.guestsSuffix || ''); return P.guestsLabel || t('guestsN',{n:O.guests}); }
   function gRange(){ return E.gMin===E.gMax ? String(E.gMin) : E.gMin+'–'+E.gMax; }
-  function pool(){ return String(O.pool || E.gMin*E.per); }
-  function fill(s){ return s.split('{b}').join(E.bars).split('{p}').join(E.per).split('{g}').join(gRange()).split('{pool}').join(pool()).split('{m}').join(state.menu.length).split('{h}').join(O.hours).split('{price}').join(money(baseTotal())).split('{glassP}').join(money(O.glass)).split('{waiterP}').join(money(O.waiter)).split('{cups}').join(T[lang].inclCup); }
-  function baseTotal(){ var x = O.price; (O.items||[]).forEach(function(it){ if (it[1] !== null) x += it[1]; }); return x; }
+  function poolN(){ return O.dyn ? state.g*E.per : (O.poolN || +O.pool || E.gMin*E.per); }
+  function pool(){ return O.dyn ? String(state.g*E.per).replace(/\B(?=(\d{3})+(?!\d))/g,' ') : String(O.pool || E.gMin*E.per); }
+  function fill(s){ return s.split('{b}').join(E.bars).split('{p}').join(E.per).split('{g}').join(gRange()).split('{pool}').join(pool()).split('{m}').join(state.menu.length).split('{h}').join(O.hours).split('{price}').join(s.indexOf('{price}')>-1 ? money(baseTotal()) : '').split('{glassP}').join(money(O.glass)).split('{waiterP}').join(money(O.waiter)).split('{cups}').join(T[lang].inclCup); }
+  function baseTotal(){ if (O.dyn) return calc().total; var x = O.price; (O.items||[]).forEach(function(it){ if (it[1] !== null) x += it[1]; }); return x; }
 
   function calc(){
     var lines = [[fill(t('lBar')), O.price]], total = O.price;
     (O.items || []).forEach(function(it){ lines.push([it[0], it[1]]); if (it[1] !== null) total += it[1]; });
+    if (O.dyn){ var D = O.dyn, n = state.g*E.per, dl = [
+      [fill(t('lIngr')), Math.round(n*D.asort)],
+      [t('lIce',{kg:Math.round(state.g*D.iceKg)}), Math.round(state.g*D.iceKg*D.ice)],
+      [t('lGlassD',{n:pool()}), Math.round(n*D.glass)] ];
+      dl.forEach(function(l){ lines.push(l); total += l[1]; }); }
+    if (O.alcBuy && state.alcPmb){ var ab = alcBuy(); lines.push([t('lAlc'), ab.sum]); total += ab.sum; }
     if (state.glass){ lines.push([fill(t('lGlass')), O.glass]); total += O.glass; }
     if ((state.glass || O.waiterIndependent) && state.waiter){ lines.push([t('waiter'), O.waiter]); total += O.waiter; }
     if (state.own){ var bp = PRICE.branding*E.bars; lines.push([t('aBrand')+' ('+E.bars+' × '+money(PRICE.branding)+')', bp]); total += bp; }
@@ -128,26 +137,27 @@
   function menuNames(){ return DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}).map(function(d){return d.n}); }
   // Lista dla organizatora: alkohole (butelki) i szkło dla wybranego menu
   function supply(){
-    var sel = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}), n = sel.length || 1, per = Math.ceil((O.poolN || +O.pool) / n), alc = {}, ord = [], gl = {}, gord = [];
+    var sel = DRINKS.filter(function(d){return state.menu.indexOf(d.id)>-1}), n = sel.length || 1, per = Math.ceil(poolN() / n), alc = {}, ord = [], gl = {}, gord = [];
     sel.forEach(function(d){ (d.alc||[]).forEach(function(a){ if (!alc[a[0]]){ alc[a[0]] = {ml:0, b:a[2]}; ord.push(a[0]); } alc[a[0]].ml += a[1]*per; }); (d.gl||[]).forEach(function(g){ if (!gl[g]){ gl[g] = 1; gord.push(g); } }); });
     return {per:per, sel:sel, alc:ord.map(function(k){ var x = alc[k]; return [k, Math.ceil(x.ml/1000/x.b - 1e-9), x.b]; }), gl:gord.map(function(g){ return [g, (O.glassCount && O.glassCount[g]) || O.guests]; })};
   }
+  function alcBuy(){ var S = supply(), P = O.alcBuy.price, sum = 0; S.alc.forEach(function(a){ sum += a[1]*(P[a[0]] || 0); }); return {sum:sum, alc:S.alc}; }
   function bLab(b){ return (String(b).replace('.',','))+' l'; }
   function supplyHtml(){ var S = supply(), L = T[lang];
     return '<span class="label">'+L.supCock+'</span><ul class="lines">'+S.sel.map(function(d){ return '<li>'+esc(d.n)+' <b>'+S.per+' szt.</b></li>'; }).join('')+'</ul><hr>'
-      +'<span class="label">'+L.supAlc+'</span><ul class="lines">'+S.alc.map(function(a){ return '<li>'+esc(a[0])+' <b>'+a[1]+' × '+bLab(a[2])+'</b></li>'; }).join('')+'</ul><hr>'
-      +'<span class="label">'+L.supGl+'</span><ul class="lines">'+S.gl.map(function(g){ return '<li>'+esc(g[0])+' <b>'+g[1]+' szt.</b></li>'; }).join('')+'</ul>'
+      +'<span class="label">'+(O.alcBuy && state.alcPmb ? L.supAlcPmb : L.supAlc)+'</span><ul class="lines">'+S.alc.map(function(a){ return '<li>'+esc(a[0])+' <b>'+a[1]+' × '+bLab(a[2])+'</b></li>'; }).join('')+'</ul><hr>'
+      +(O.noGlassList ? '' : '<span class="label">'+L.supGl+'</span><ul class="lines">'+S.gl.map(function(g){ return '<li>'+esc(g[0])+' <b>'+g[1]+' szt.</b></li>'; }).join('')+'</ul>')
       +(O.supplyExtra||[]).map(function(x){ return '<hr><span class="label">'+esc(x[0])+'</span><ul class="lines">'+x[1].map(function(a){ return '<li>'+esc(a[0])+' <b>'+esc(a[1])+'</b></li>'; }).join('')+'</ul>'; }).join('')
-      +'<p class="hint">'+L.supHint+'</p>';
+      +'<p class="hint">'+(O.alcBuy && state.alcPmb ? L.supHintPmb : L.supHint)+'</p>';
   }
   function supplyTxt(){ var S = supply(), L = T[lang];
-    return '\n'+L.supAlc+':\n'+S.alc.map(function(a){ return '- '+a[0]+': '+a[1]+' × '+bLab(a[2]); }).join('\n')+'\n'+L.supGl+':\n'+S.gl.map(function(g){ return '- '+g[0]+': '+g[1]+' szt.'; }).join('\n')+'\n'
+    return '\n'+(O.alcBuy && state.alcPmb ? L.supAlcPmb : L.supAlc)+':\n'+S.alc.map(function(a){ return '- '+a[0]+': '+a[1]+' × '+bLab(a[2]); }).join('\n')+'\n'+(O.noGlassList ? '' : L.supGl+':\n'+S.gl.map(function(g){ return '- '+g[0]+': '+g[1]+' szt.'; }).join('\n')+'\n')
       +(O.supplyExtra||[]).map(function(x){ return x[0]+':\n'+x[1].map(function(a){ return '- '+a[0]+': '+a[1]; }).join('\n')+'\n'; }).join('');
   }
   function priceTxt(){ return money(calc().total)+T[lang].net; }
   function summary(){
-    var c = calc(), parts = [gLabel(), fill(t('sumPer')), (state.glass ? t('glass') : t('cup'))+(state.waiter && (state.glass || O.waiterIndependent) ? ' + '+t('waiter').toLowerCase() : ''), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})];
-    var adds = c.lines.slice(1+(O.items||[]).length).map(function(l){return l[0]+' ('+(l[1]===null ? T[lang].lAsk : money(l[1]))+')'});
+    var c = calc(), parts = [gLabel(), fill(t('sumPer'))].concat(O.alcBuy ? [state.alcPmb ? t('alcPmb') : t('alcYou')] : []).concat([ (state.glass ? t('glass') : t('cup'))+(state.waiter && (state.glass || O.waiterIndependent) ? ' + '+t('waiter').toLowerCase() : ''), t('sumFront',{f: state.own ? t('sumOwn') : frontName(state.front)})]);
+    var adds = c.lines.slice(1+(O.items||[]).length+(O.dyn?3:0)+(O.alcBuy && state.alcPmb ? 1 : 0)).map(function(l){return l[0]+' ('+(l[1]===null ? T[lang].lAsk : money(l[1]))+')'});
     return {head: parts.join(' · '), menu: menuNames().join(', '), adds: adds.length ? adds.join(', ') : t('none'), total: priceTxt()};
   }
 
@@ -167,12 +177,25 @@
     h += '</div></div></section>';
 
     h += '<section id="bar"><div class="wrap"><div class="sec-head"><h2>'+L.cfgH+'</h2><p>'+L.cfgP+'</p></div><div class="cfg"><div>';
+    if (O.dyn) h += '<div class="block"><span class="step">'+L.s0+'</span><h3>'+L.s0h+'</h3><p>'+L.s0p+'</p><div class="q"><div class="q-top"><label for="r-guests">'+L.fGuests+'</label><output id="o-guests" for="r-guests"></output></div><input type="range" id="r-guests" min="'+O.dyn.min+'" max="'+O.dyn.max+'" step="'+O.dyn.step+'" value="'+state.g+'"><small id="h-guests"></small></div></div>';
+    function dHtml(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; }
     h += '<div class="block"><span class="step">'+L.s1+'</span><h3>'+L.s1h+'</h3><p>'+L.s1p+'</p><div class="menu">';
-    DRINKS.forEach(function(d){ h += '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t[lang])+'</em><small>'+esc(d[lang])+'</small></span></label>'; });
-    h += '</div><p class="count" id="m-count" aria-live="polite"></p>';
+    if (O.collapse){
+      DRINKS.filter(function(d){ return d.d; }).forEach(function(d){ h += dHtml(d); });
+      h += '</div><p class="count" id="m-count" aria-live="polite"></p><button type="button" class="btn ghost" id="menu-more" style="margin-top:14px">'+L.moreOpen+'</button><div id="menu-all" hidden>';
+      var grp = [], gm = {}; DRINKS.filter(function(d){ return !d.d; }).forEach(function(d){ var k = d.t[lang]; if (!gm[k]){ gm[k] = []; grp.push(k); } gm[k].push(d); });
+      grp.forEach(function(k){ h += '<span class="label" style="display:block;margin:18px 0 8px">'+esc(k)+'</span><div class="menu">'+gm[k].map(dHtml).join('')+'</div>'; });
+      h += '</div>';
+    } else {
+      DRINKS.forEach(function(d){ h += dHtml(d); });
+      h += '</div><p class="count" id="m-count" aria-live="polite"></p>';
+    }
     if (O.extraMenu) h += '<h3 style="margin-top:22px">'+esc(O.extraMenu.h)+'</h3><p>'+esc(O.extraMenu.p||'')+'</p><div class="menu">'+O.extraMenu.drinks.map(function(d){ return '<label class="drink" style="cursor:default"><input type="checkbox" checked disabled><span><strong>'+esc(d.n)+'</strong><em class="taste">'+esc(d.t||'')+'</em><small>'+esc(d.pl)+'</small></span></label>'; }).join('')+'</div>';
     h += '</div>';
-    if (O.supply) h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p><div id="supply"></div></div>';
+    if (O.supply) h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p>'
+      +(O.alcBuy ? '<div class="seg" role="group"><button type="button" id="alc-pmb">'+L.alcPmb+'</button><button type="button" id="alc-you">'+L.alcYou+'</button></div>' : '')
+      +(O.waiterIndependent && O.waiter ? '<label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label>' : '')
+      +'<div id="supply" style="margin-top:16px"></div></div>';
     else h += '<div class="block"><span class="step">'+L.s2+'</span><h3>'+L.s2h+'</h3><p>'+L.s2p+'</p>'+(O.glass==null ? '' : '<div class="seg" role="group"><button type="button" id="s-cup">'+L.cup+'</button><button type="button" id="s-glass">'+L.glass+' · + '+money(O.glass)+'</button></div>')+'<p class="hint" id="s-hint"></p><label class="addon" for="waiter"><input type="checkbox" id="waiter"><span><strong>'+L.waiter+'</strong><small>'+L.waiterS+'</small></span><b>+ '+money(O.waiter)+'</b></label></div>';
     h += '<div class="block"><span class="step">'+L.s3+'</span><h3>'+L.s3h+'</h3><p>'+L.s3p+'</p><figure class="barview" id="barview"><img id="bv-img" src="'+BV.base+'" alt=""><i class="pl"></i><i class="pr"></i><video id="bv-film" src="'+A+'fronty-film.mp4" muted loop playsinline preload="metadata" hidden></video><figcaption><span id="bv-cap"></span><button type="button" id="bv-play">'+L.bvPlay+'</button></figcaption></figure><div class="fronts" role="group">';
     FRONTS.forEach(function(f){ h += '<button type="button" class="front '+(f.css||'')+'" data-front="'+f.id+'" aria-label="'+esc(frontName(f.id))+'">'+(f.img ? '<img src="'+A+f.img+'" alt="" loading="lazy">' : '')+(f.k ? '<span>'+esc(frontName(f.id))+'</span>' : '')+'</button>'; });
@@ -219,6 +242,8 @@
     $('f-name').textContent = state.own ? t('sumOwn') : frontName(state.front);
     if (!bvTimer) bvPaint(bvCurrent());
     document.querySelectorAll('[data-add]').forEach(function(i){ i.checked = i.dataset.add==='own' ? state.own : state.add[i.dataset.add]; });
+    if (O.dyn){ E.gMin = E.gMax = state.g; $('o-guests').textContent = t('guestsN',{n:state.g}); $('h-guests').textContent = fill(L.s0hint); }
+    if ($('alc-pmb')){ $('alc-pmb').setAttribute('aria-pressed', String(state.alcPmb)); $('alc-you').setAttribute('aria-pressed', String(!state.alcPmb)); }
     var tot = priceTxt(), pp = t('perPerson',{a:Math.round(c.total/E.gMax), b:Math.round(c.total/E.gMin)})+' · '+L.vat;
     $('sum').textContent = tot; $('pp').textContent = pp; $('bar-sum').textContent = money(c.total); $('bar-pp').textContent = 'netto '+L.vat; $('peek').textContent = tot;
     $('lines').innerHTML = c.lines.map(function(l){ return '<li>'+esc(l[0])+' <b>'+(l[1]===null ? L.lAsk : money(l[1]))+'</b></li>'; }).join('');
@@ -254,6 +279,9 @@
     })();
     SEQ.forEach(function(k){ var i = new Image(); if (/^k\d+$/.test(k)){ i.src = klUrl(k,'l'); new Image().src = klUrl(k,'r'); } else i.src = BV[k] || BV.base; });
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) new IntersectionObserver(function(e,o){ if (e[0].isIntersecting){ if (!bvTouched) bvStart(); o.disconnect(); } },{threshold:.6}).observe($('barview'));
+    if ($('menu-more')) $('menu-more').addEventListener('click', function(){ var m = $('menu-all'), o = m.hidden; m.hidden = !o; $('menu-more').textContent = o ? T[lang].moreClose : T[lang].moreOpen; if (o) once('menuall','Otworzył pełną kartę koktajli','cocktail'); });
+    if ($('r-guests')){ var gt; $('r-guests').addEventListener('input', function(e){ state.g = +e.target.value; render(); clearTimeout(gt); gt = setTimeout(function(){ ping('Suwak gości → '+state.g+' ('+priceTxt()+')','busts_in_silhouette'); }, 2500); }); }
+    if ($('alc-pmb')){ $('alc-pmb').addEventListener('click', function(){ state.alcPmb = true; render(); ping('Alkohol: kupuje PMB → '+priceTxt(),'gear'); }); $('alc-you').addEventListener('click', function(){ state.alcPmb = false; render(); ping('Alkohol: dostarczają sami → '+priceTxt(),'gear'); }); }
     if ($('s-cup')) $('s-cup').addEventListener('click', function(){ state.glass = false; render(); });
     if ($('s-glass')) $('s-glass').addEventListener('click', function(){ state.glass = true; render(); once('glass','Wybrał szkło → '+summary().total,'wine_glass',4); });
     if ($('waiter')) $('waiter').addEventListener('change', function(e){ state.waiter = e.target.checked; render(); if (state.waiter) once('waiter','Dodał obsługę kelnerską → '+summary().total,'heavy_plus_sign',4); });
