@@ -328,6 +328,8 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
 .toggle button small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:2px}
 .sub-lines{margin:6px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-3);display:grid;gap:3px}
 .sub-lines li{display:flex;justify-content:space-between;gap:12px}
+#menu-all:not([hidden]){display:grid}
+.grp{display:grid;gap:6px}
 </style>
 <div class="wrap">
   <header class="top">
@@ -398,13 +400,15 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Menu</h2>
-      <p>Zaznaczyliśmy nasze standardowe pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund. Możecie wymienić dowolny albo dołożyć kolejne, do ośmiu w menu. Liczba koktajli nie zmienia ceny obsługi; przy alkoholu po naszej stronie lista butelek przelicza się pod wybrane menu.</p>
+      <p>Zaznaczyliśmy nasze standardowe pięć koktajli, każdy do zrobienia w kilkadziesiąt sekund. Możecie wymienić dowolny albo dołożyć kolejne z pełnej karty Pimp My Bar (pod menu, z podziałem na alkohole), do ośmiu w menu. Każdy koktajl robimy też w wersji 0%. Liczba koktajli nie zmienia ceny obsługi; przy alkoholu po naszej stronie lista butelek przelicza się pod wybrane menu.</p>
     </div>
     <div class="split">
       <div class="col">
         <span class="label">Koktajle · od 4 do 8 w menu · razem ok. 330 szt.</span>
         <div class="menu" id="menu-pick" style="margin-top:6px"></div>
         <p class="count" id="m-count"></p>
+        <button type="button" class="btn ghost" id="menu-more" style="align-self:flex-start;margin-top:10px">Pokaż pełną kartę koktajli (wszystkie alkohole) ↓</button>
+        <div id="menu-all" hidden style="gap:14px;margin-top:10px"></div>
       </div>
       <div class="col">
         <span class="label">Poza menu, bez dopłaty</span>
@@ -490,30 +494,57 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   var fmtN = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' '); };
   var SERVICE = 4000, WASH = 600, BRAND = 200, BARS = 2, PER = 3, ASORT = 2.3, ICE_KG = 0.4, ICE = 3.5, GLASS = 0.95;
   var DRINKS = [
-    {id:'ws', n:'Whisky Sour', pl:'whiskey, cytryna, syrop cukrowy, Angostura', a:'whiskey', d:1},
-    {id:'red', n:'Red Lady', pl:'wódka, puree truskawkowe, marakuja, limonka', a:'wódka', d:1},
-    {id:'mule', n:'Moscow Mule', pl:'wódka, limonka, napój imbirowy', a:'wódka', d:1},
-    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco'},
-    {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, cytryna', a:'gin', d:1},
-    {id:'man', n:'Mangolita', pl:'wódka, puree z mango, marakuja, limonka', a:'wódka'},
-    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu', a:'prosecco', d:1},
-    {id:'gt', n:'Gin & Tonic', pl:'gin, tonik, limonka', a:'gin'},
-    {id:'dns', n:"Dark'n'Stormy", pl:'ciemny rum, limonka, napój imbirowy', a:'rum'},
-    {id:'cpr', n:'Caipiroska', pl:'wódka, limonka, cukier trzcinowy', a:'wódka'},
-    {id:'esp', n:'Espresso Martini', pl:'wódka, espresso, likier kawowy', a:'wódka'},
-    {id:'glu', n:'Grzaniec', pl:'czerwone wino, pomarańcza, przyprawy korzenne – na zimę', a:'wino'}
+    // proponowane menu (d:1) + pełna karta Pimp My Bar z podziałem na alkohole
+    {id:'ws', n:'Whisky Sour', pl:'whisky, sok z cytryny, syrop cukrowy, Angostura Bitters', a:'whiskey', d:1, g:'whisky'},
+    {id:'red', n:'Red Lady', pl:'wódka, świeża limonka, puree truskawkowe, pulpa z marakui, syrop cukrowy', a:'wódka', d:1, g:'wódka'},
+    {id:'psm', n:'Pornstar Martini', pl:'wódka, wanilia, pulpa z marakui, sok z cytryny, z winem musującym', a:'wódka', d:1, g:'wódka'},
+    {id:'bra', n:'Bramble', pl:'gin, puree z jeżyn, sok z cytryny, syrop cukrowy', a:'gin', d:1, g:'gin'},
+    {id:'hug', n:'Hugo', pl:'prosecco, mięta, limonka, syrop z kwiatu bzu, woda gazowana', a:'prosecco', d:1, g:'bab'},
+    {id:'of', n:'Old Fashioned', pl:'bourbon, Angostura Bitters, cukier, skórka pomarańczy', a:'whiskey', g:'whisky'},
+    {id:'nys', n:'New York Sour', pl:'bourbon, sok z cytryny, syrop cukrowy, Angostura, czerwone wino', a:'whiskey', g:'whisky'},
+    {id:'mj', n:'Mint Julep', pl:'bourbon, syrop cukrowy, Angostura Bitters, mięta', a:'whiskey', g:'whisky'},
+    {id:'blv', n:'Boulevardier', pl:'bourbon, Campari, Martini Rosso', a:'whiskey', g:'whisky'},
+    {id:'man', n:'Manhattan', pl:'bourbon, Martini Rosso, Angostura Bitters', a:'whiskey', g:'whisky'},
+    {id:'gt', n:'Gin & Tonic', pl:'gin, tonik, limonka', a:'gin', g:'gin'},
+    {id:'neg', n:'Negroni', pl:'gin, Martini Rosso, Campari', a:'gin', g:'gin'},
+    {id:'gbs', n:'Gin Basil Smash', pl:'gin, bazylia, sok z cytryny, syrop cukrowy', a:'gin', g:'gin'},
+    {id:'jes', n:'Juniper & Elderflower Sour', pl:'gin, sok z cytryny, syrop z kwiatu bzu', a:'gin', g:'gin'},
+    {id:'pneg', n:'Parma Negroni', pl:'gin, Campari, sok z grejpfruta, syrop cukrowy, Angostura, tonik', a:'gin', g:'gin'},
+    {id:'mule', n:'Moscow Mule', pl:'wódka, limonka, napój imbirowy', a:'wódka', g:'wódka'},
+    {id:'cpr', n:'Caipi', pl:'wódka, świeża limonka, cukier trzcinowy – do wyboru: mango, marakuja, truskawka', a:'wódka', g:'wódka'},
+    {id:'mang', n:'Mangolita', pl:'wódka, puree z mango, pulpa z marakui, świeża limonka, syrop cukrowy', a:'wódka', g:'wódka'},
+    {id:'esp', n:'Espresso Martini', pl:'wódka, espresso, likier kawowy, syrop cukrowy', a:'wódka', g:'wódka'},
+    {id:'e8', n:'East 8 Hold Up', pl:'wódka, Aperol, pulpa z marakui, sok z cytryny, sok z ananasa, syrop cukrowy', a:'wódka', g:'wódka'},
+    {id:'vs', n:'Vodka Sour', pl:'wódka, sok z cytryny, syrop cukrowy, Angostura Bitters', a:'wódka', g:'wódka'},
+    {id:'kiwi', n:'Kiwi Boy', pl:'wódka, świeże kiwi, świeża limonka, syrop cukrowy', a:'wódka', g:'wódka'},
+    {id:'chil', n:'Chily Spiny', pl:'wódka, chilli, sok z limonki, puree z mango, syrop cukrowy', a:'wódka', g:'wódka'},
+    {id:'gms', n:'Grapefruit Mint Sour', pl:'wódka, mięta, sok z cytryny, sok z grejpfruta, Angostura, syrop cukrowy', a:'wódka', g:'wódka'},
+    {id:'pg', n:'Polish Garden', pl:'wódka, bazylia, sok z cytryny, syrop z kwiatu bzu, woda gazowana', a:'wódka', g:'wódka'},
+    {id:'bm', n:'Bloody Mary', pl:'wódka, sok pomidorowy, pieprz, sól, tabasco, Worcestershire, sok z cytryny', a:'wódka', g:'wódka'},
+    {id:'moj', n:'Mojito', pl:'rum, mięta, limonka, syrop cukrowy, woda gazowana', a:'rum', g:'rum'},
+    {id:'dns', n:'Dark & Stormy', pl:'ciemny rum, sok z cytryny, syrop cukrowy, Angostura, napój imbirowy', a:'rum', g:'rum'},
+    {id:'hem', n:'Hemingway Daiquiri', pl:'rum, likier maraschino, sok z grejpfruta, sok z cytryny, syrop cukrowy', a:'rum', g:'rum'},
+    {id:'pina', n:'Pina Colada', pl:'rum, mleczko kokosowe, sok ananasowy, puree z ananasa, syrop cukrowy', a:'rum', g:'rum'},
+    {id:'mai', n:'Mai Tai', pl:'ciemny i jasny rum, likier pomarańczowy, sok z cytryny, migdał, syrop cukrowy', a:'rum', g:'rum'},
+    {id:'pal', n:'Paloma', pl:'tequila, grejpfrut, limonka, sól, woda gazowana', a:'tequila', g:'tequila'},
+    {id:'ape', n:'Aperol Spritz', pl:'Aperol, prosecco, woda gazowana, pomarańcza', a:'Aperol + prosecco', g:'bab'},
+    {id:'glu', n:'Grzaniec', pl:'czerwone wino, pomarańcza, przyprawy korzenne – na zimę', a:'wino', g:'bab'}
   ];
-  var ALC = {'whiskey':[65,40],'wódka':[48,40],'gin':[60,40],'rum':[60,40],'Aperol + prosecco':[0,0],'prosecco':[30,100],'wino':[25,150]};
+  var GROUPS = [['whisky','Whisky / bourbon'],['gin','Gin'],['wódka','Wódka'],['rum','Rum'],['tequila','Tequila'],['bab','Prosecco, Aperol, wino']];
+  var ALC = {'tequila':[78,40],'whiskey':[65,40],'wódka':[48,40],'gin':[60,40],'rum':[60,40],'Aperol + prosecco':[0,0],'prosecco':[30,100],'wino':[25,150]};
   var TICKS = ['Każdy koktajl na oczach gości','Do ośmiu koktajli w menu','Kelner zbiera szkło, barmani przy barze','Wersje 0% bez dopłaty','Finalna liczba gości do 7 dni przed'];
   var state = { g: 110, alc: true, h8: true, wash: true, brand: false, menu: DRINKS.filter(function(d){return d.d}).map(function(d){return d.id}) };
-  $('menu-pick').innerHTML = DRINKS.map(function(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+d.n+'</strong><small>'+d.pl+'</small></span></label>'; }).join('');
+  function drinkHtml(d){ return '<label class="drink" for="d-'+d.id+'"><input type="checkbox" id="d-'+d.id+'" data-drink="'+d.id+'"><span><strong>'+d.n+'</strong><small>'+d.pl+'</small></span></label>'; }
+  $('menu-pick').innerHTML = DRINKS.filter(function(d){return d.d}).map(drinkHtml).join('');
+  $('menu-all').innerHTML = GROUPS.map(function(g){ var L = DRINKS.filter(function(d){ return d.g===g[0] && !d.d; }); return L.length ? '<div class="grp"><span class="label">'+g[1]+'</span><div class="menu">'+L.map(drinkHtml).join('')+'</div></div>' : ''; }).join('');
+  $('menu-more').addEventListener('click', function(){ var o = $('menu-all').hidden; $('menu-all').hidden = !o; $('menu-more').textContent = o ? 'Zwiń pełną kartę ↑' : 'Pokaż pełną kartę koktajli (wszystkie alkohole) ↓'; });
   function alcCost(g){
     var per = Math.round(g*PER/Math.max(1,state.menu.length)), ml = {}, ord = [];
     function add(k, v){ if (!ml[k]){ ml[k]=0; ord.push(k); } ml[k] += v; }
     state.menu.forEach(function(id){ var d = DRINKS.filter(function(x){return x.id===id})[0]; if (!d) return;
       if (d.a==='Aperol + prosecco'){ add('Aperol', 40*per); add('prosecco', 60*per); return; }
       add(d.a, ALC[d.a][1]*per); });
-    var PRICE = {'whiskey':[65,700],'wódka':[48,700],'gin':[60,700],'rum':[60,700],'Aperol':[60,700],'prosecco':[30,750],'wino':[25,750]};
+    var PRICE = {'tequila':[78,700],'whiskey':[65,700],'wódka':[48,700],'gin':[60,700],'rum':[60,700],'Aperol':[60,700],'prosecco':[30,750],'wino':[25,750]};
     var sum = 0, parts = [];
     ord.forEach(function(k){ var p = PRICE[k], b = Math.ceil(ml[k]/p[1]); sum += b*p[0]; parts.push(k+' '+b); });
     return {sum:sum, parts:parts};
