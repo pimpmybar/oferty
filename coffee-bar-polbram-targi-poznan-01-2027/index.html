@@ -39,12 +39,12 @@ window.OFFER = {
 
   // Cennik (PLN netto). Stawka dzienna obsługi: [od ilu dni, zł za dzień]
   rates: [[1,1600],[3,1530],[5,1460],[7,1390]],
-  coffee: { per100: 200, options: [100, 200], def: 200 },
+  coffee: { per100: 200, options: [100, 200], def: 100 },
   hoursIncl: 8, extraHour: 200,
   deposit: 2500,
   brand: { price: 200 },
   cups: { per: 1000, price: 680, deadline: "27.11.2026", template: "../targi/kubek-250ml-wykrojnik.pdf" },
-  lids: { per: 1000, price: 200 },
+  lids: { per: 1000, price: 150 },
 
   // Formularz „Dane do umowy – Umowa Targi Kawa”: otwiera się z wpisanym wyborem ze strony
   form: {
@@ -74,8 +74,8 @@ window.OFFER = {
       { q: "Transport, montaż, demontaż", a: "<b>W cenie</b>, przy każdym z czterech terminów. Jesteśmy z Poznania, więc nie doliczamy dojazdu ani noclegów." },
       { q: "Limit kaw", a: "W wycenie przyjmujemy <b>{limit} kaw dziennie</b>, razem {limitAll} na {n} {dni}, i jesteśmy przygotowani na więcej. Espresso, cappuccino, latte czy herbata to zawsze jedna porcja." },
       { q: "Koszt przekroczenia limitu", a: "<b>{per100} netto za każdy kolejny otwarty kilogram kawy</b>, czyli ok. 100 kaw z mlekiem i kubkami. Przykład: 100 kaw to 200 zł, 130 kaw to 400 zł, bo otwieramy drugi kilogram. Działa to też w drugą stronę: nieotwartych kilogramów nie fakturujemy." },
-      { q: "Miejsce, zasilanie, woda", a: "Ok. <b>1,5 × 2 m</b> na stoisku, <b>przyłącze siłowe 400 V</b> (gniazdo <span class=\"todo\">16 A, 5 bolców</span>) dla ekspresu i gniazdo 230 V na młynek. <b>Wody nie potrzebujemy</b>, przywozimy własną. <a href=\"#wymagania\">Szczegóły ↓</a>" },
-      { q: "Kubki z logo Polbram", a: "<b>{cupsPrice} netto za {cupsPer} kubków</b> z nadrukiem w pełnym kolorze. Przy {limit} kawach dziennie potrzeba {cupsQty} sztuk, razem {cupsSel}. Projekt potrzebujemy do <span class=\"todo\">{cupsDeadline}</span>. <a href=\"#kubki\">Szczegóły ↓</a>" }
+      { q: "Miejsce, zasilanie, woda", a: "Ok. <b>1,5 × 2 m</b> na stoisku, <b>przyłącze siłowe 400 V</b> (gniazdo 32 A, 5 bolców) dla ekspresu i gniazdo 230 V na młynek. <b>Wody nie potrzebujemy</b>, przywozimy własną. <a href=\"#wymagania\">Szczegóły ↓</a>" },
+      { q: "Kubki z logo Polbram", a: "<b>{cupsPrice} netto za {cupsPer} kubków</b> z nadrukiem w pełnym kolorze. Przy {limit} kawach dziennie potrzeba {cupsQty} sztuk, razem {cupsSel}. Projekt potrzebujemy do {cupsDeadline}. <a href=\"#kubki\">Szczegóły ↓</a>" }
     ],
     bookShort: "Rezerwuję terminy",
 
@@ -83,13 +83,13 @@ window.OFFER = {
     priceP: "Cena dnia to obsługa i kawa. Obsługa obejmuje baristę do 8 godzin dziennie, moduł barowy, ekspres, młynek, transport, montaż i demontaż. Im więcej dni, tym niższa stawka dzienna. Dni można odznaczać, cena przelicza się od razu.",
     tiersP: "Stawka dzienna obsługi zależy od liczby wybranych dni. Aktualna jest podświetlona.",
     limitL: "Ile kaw dziennie przyjmujemy w wycenie",
-    limitP: "Na tę liczbę się przygotowujemy, a zapas mamy zawsze ze sobą. Po ostatnim terminie rozliczamy tylko otwarte kilogramy kawy: 1 kg to ok. 100 porcji, {per100} netto z mlekiem, herbatą i kubkami. Przykład: 100 kaw to 200 zł, 130 kaw to 400 zł, bo otwieramy drugi kilogram. Jeśli zejdzie mniej, faktura będzie niższa.",
+    limitP: "Bazą jest 100 kaw dziennie, a zapas mamy zawsze ze sobą. Każde kolejne 100 kaw, czyli otwarty kilogram kawy, to {per100} netto z mlekiem, herbatą i kubkami. Przykład: 100 kaw to 200 zł, 130 kaw to 400 zł, bo otwieramy drugi kilogram. Rozliczamy po ostatnim terminie, tylko za otwarte kilogramy.",
     brandH: "Front baru z logo Polbram",
-    brandP: "Na froncie baru drukujemy kliszę z Państwa grafiką (1225 × 1076 mm), jedną na wszystkie terminy. Plik potrzebujemy do <span class=\"todo\">18.12.2026</span>. Bez tej opcji bar przyjeżdża w naszej standardowej okleinie.",
+    brandP: "Na froncie baru drukujemy kliszę z Państwa grafiką (1225 × 1076 mm), jedną na wszystkie terminy. Plik potrzebujemy do 18.12.2026. Bez tej opcji bar przyjeżdża w naszej standardowej okleinie.",
     cupsOptH: "Kubki z logo Polbram",
     cupsOptP: "Papierowe, dwuścienne, 250 ml, nadruk w pełnym kolorze. Nakład dobieramy do liczby kaw, w paczkach po {cupsPer} sztuk. Zastępują nasze standardowe kubki, które są w cenie. Projekt do {cupsDeadline}.",
     lidsH: "Pokrywki do kubków",
-    lidsP: "Kawę podajemy w kubkach bez pokrywek. Jeśli goście mają odchodzić z kawą dalej od stoiska, dokładamy pokrywki: <span class=\"todo\">{lidsPrice} netto za {lidsPer} sztuk</span>.",
+    lidsP: "Kawę podajemy w kubkach bez pokrywek. Jeśli goście mają odchodzić z kawą dalej od stoiska, dokładamy pokrywki: {lidsPrice} netto za {lidsPer} sztuk.",
     restTerm: "faktura po ostatnim terminie",
 
     inclH: "Co jest w cenie",
@@ -98,7 +98,7 @@ window.OFFER = {
       "<b>Barista</b> z naszego stałego zespołu, do 8 godzin dziennie, w godzinach z Państwa zapytania",
       "<b>Moduł barowy 125 cm</b> w naszej okleinie albo z Państwa logo (opcja)",
       "<b>Ekspres kolbowy Faema Enova</b> (dwie grupy), młynek, dzbanki, wagi i całe zaplecze baristy",
-      "<b>Kawa ziarnista 100% arabica</b> (<span class=\"todo\">Coffee Journey, Yellow Blend</span>), mleko krowie i roślinne, herbaty, cukier, mieszadełka",
+      "<b>Kawa ziarnista 100% arabica</b> (Coffee Journey, Yellow Blend), mleko krowie i roślinne, herbaty, cukier, mieszadełka",
       "<b>Kubki papierowe 250 ml</b> w cenie kawy; pokrywki i nadruk logo są opcjami w wycenie",
       "<b>Woda</b> w kanistrach, bez przyłącza i odpływu",
       "<b>Transport, montaż i demontaż</b> przy każdym z czterech terminów",
@@ -109,14 +109,14 @@ window.OFFER = {
     specP: "Miejsce, zasilanie i woda, o które Pan pytał. Tę tabelę można przekazać wykonawcy zabudowy stoiska.",
     spec: [
       ["Miejsce", "moduł barowy 125 cm; razem z przejściem dla baristy ok. 1,5 × 2 m"],
-      ["Prąd", "przyłącze siłowe 400 V: gniazdo <span class=\"todo\">16 A, 5 bolców (3P+N+PE)</span>, ekspres pobiera do 5 kW; osobne gniazdo 230 V na młynek"],
+      ["Prąd", "przyłącze siłowe 400 V: gniazdo 32 A, 5 bolców (3P+N+PE), ekspres pobiera do 5 kW; osobne gniazdo 230 V na młynek"],
       ["Ekspres", "Faema Enova, dwie grupy; 72 × 56 × 52 cm, 66 kg, stoi na naszym module"],
       ["Woda", "nie jest potrzebna, przywozimy własną w kanistrach; przyłącze i odpływ zbędne"],
       ["Zapas", "ok. 1 m² w schowku stoiska na kartony z kubkami i mleko"],
-      ["Wjazd", "identyfikator wystawcy dla baristy, wjazd na rozładunek przed każdym terminem i miejsce parkingowe na czas targów; auto: Opel Combo, nr rej. <span class=\"todo\">PO 2JP48</span> (do 3,5 t)"],
+      ["Wjazd", "identyfikator wystawcy dla baristy, wjazd na rozładunek przed każdym terminem i miejsce parkingowe na czas targów; auto: Opel Combo, nr rej. PO 2JP48 (do 3,5 t)"],
       ["Grafika", "tylko przy opcjach z logo: klisza na front 1225 × 1076 mm, kubki według naszego wykrojnika"]
     ],
-    specNote: "Jeśli na stoisku nie da się doprowadzić 400 V, proszę dać znać przy rezerwacji. <span class=\"todo\">Dobierzemy wtedy ekspres na 230 V.</span>",
+    specNote: "Jeśli na stoisku nie da się doprowadzić 400 V, proszę dać znać przy rezerwacji. Dobierzemy wtedy ekspres na 230 V.",
 
     planH: "Plan czterech terminów",
     planP: "Przy każdym terminie stawiamy bar przed otwarciem pierwszego dnia i zabieramy go po zakończeniu drugiego. Jeśli stoisko jest gotowe dzień wcześniej, możemy rozstawić się wtedy, jak Państwu wygodniej.",
@@ -128,7 +128,7 @@ window.OFFER = {
       "<b>Nakład:</b> druk w paczkach po 1 000 sztuk, jeden wzór, wspólna pula na wszystkie terminy. Przy 100 kawach dziennie wystarczy 1 000 sztuk, przy 200 kawach potrzeba 2 000; wycena dobiera nakład sama",
       "Jeśli zejdzie więcej kaw niż kubków z logo, kolejne podajemy w naszych standardowych kubkach",
       "<b>Czas druku:</b> 10–15 dni roboczych od akceptacji projektu, potem wysyłka",
-      "<b>Projekt:</b> na naszym wykrojniku, do <span class=\"todo\">{cupsDeadline}</span>, żeby kubki dotarły przed 7 stycznia",
+      "<b>Projekt:</b> na naszym wykrojniku, do {cupsDeadline}, żeby kubki dotarły przed 7 stycznia",
       "<b>Plik:</b> CMYK, fonty zamienione na krzywe, tło z min. 3 mm spadu, logo i ważne treści powyżej linii rantu",
       "Kolor na kubku może różnić się od wizualizacji o ok. 15%, to standard druku na papierze"
     ],
@@ -149,7 +149,7 @@ window.OFFER = {
             p: "Krótki film z serwisu kawy na targach Meble Polska. Od 2013 roku zrobiliśmy ponad 2 000 eventów: firmowych, targowych i prywatnych." },
 
     faq: [
-      ["Co, jeśli któryś termin wypadnie albo się przesunie?", "Proszę dać znać jak najwcześniej. Pojedynczy termin można odwołać bez kosztów do <span class=\"todo\">14 dni</span> przed nim, a cena pozostałych dni przeliczy się według stawek z wyceny. Przesunięcie potwierdzimy od ręki, jeśli tylko mamy wolny dzień."],
+      ["Co, jeśli któryś termin wypadnie albo się przesunie?", "Proszę dać znać jak najwcześniej. Przesunięcie potwierdzimy od ręki, jeśli tylko mamy wolny dzień. Przy odwołaniu terminu cena pozostałych dni przelicza się według stawek z wyceny, a zaliczka pokrywa koszty, które już ponieśliśmy (na przykład druk kubków i zakupy), i w tej części nie podlega zwrotowi."],
       ["Co, jeśli gości będzie więcej, niż zakładamy?", "Zawsze mamy ze sobą zapas kawy, mleka i kubków, a jeden barista wydaje ok. 300 kaw w ciągu 8 godzin. Każdy kolejny otwarty kilogram kawy (ok. 100 kaw) to {per100} netto, doliczane do faktury końcowej. Jeśli zejdzie mniej, płacą Państwo tylko za otwarte kilogramy."],
       ["W jakich godzinach pracuje barista?", "W godzinach z Pana zapytania: w pierwszy dzień terminu 11:00–17:00, w drugi 9:00–16:00. W cenie jest do {hoursIncl} godzin dziennie, każda dodatkowa godzina to {extraHour} netto. Rozstawienie baru i rozgrzanie ekspresu przed otwarciem są po naszej stronie."],
       ["Jak wygląda rozliczenie?", "Po akceptacji wypełnia Pan krótki formularz, a my wysyłamy umowę i fakturę proforma na zaliczkę {deposit} netto. Resztę fakturujemy po ostatnim terminie, razem z rozliczeniem otwartych kilogramów kawy."]
