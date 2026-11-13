@@ -460,3 +460,10 @@ html.owner body .todo{background:var(--todo);color:var(--todo-ink);padding:0 .3e
   #zakres,#wycena,#wymagania,#plan,#kubki,#akceptacja{break-inside:avoid}
   #pytania .sec-head p,#kubki.np-off{display:none}
 }
+/* Menu do wyboru z karty (O.bar.pick) */
+.crew.pick{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px}
+.crew.pick legend{grid-column:1/-1}
+.crew.pick label:has(input:disabled){opacity:.45;cursor:not-allowed}
+.crew.pick small.pc{font-family:var(--body);font-size:12.5px;line-height:1.35}
+@media (max-width:520px){.crew.pick{grid-template-columns:1fr}}
+@media print{.crew.pick label:not(:has(input:checked)){display:none}.crew.pick:not(:has(input:checked)){display:none}.crew.pick{gap:3pt;margin-top:4pt}.crew.pick label{padding:3pt 6pt}}
