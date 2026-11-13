@@ -370,13 +370,14 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Wycena</h2>
-      <p>Bazą jest dotychczasowy Załącznik nr 1. Hotel nie zbiera i nie myje szkła, więc wynajmujemy szkło na każdy koktajl z menu. Do tego jedna z dwóch opcji obsługi baru w foyer.</p>
+      <p>Bazą jest dotychczasowy Załącznik nr 1. Hotel nie zbiera i nie myje szkła, więc wynajmujemy szkło na każdy koktajl z menu. Do tego jedna z dwóch opcji: barman z dodatkowym modułem albo sam kelner do szkła. Kliknijcie wybraną – całość przeliczy się poniżej.</p>
     </div>
     <div class="pricing">
       <div>
+        <p class="hours-head" style="margin:0 0 10px"><strong>Dodatkowa osoba do obsługi – wybierzcie jedną z dwóch opcji:</strong></p>
         <div class="opts" role="group" aria-label="Wybór opcji">
-          <button type="button" id="opt2" aria-pressed="true"><span class="badge">Rekomendujemy</span>Opcja 2 · 4. barman + 4. moduł w foyer<small>Bar w foyer ma 2 moduły (ok. 2,5 m), stoi przy nim 2 barmanów. Jeden z nich co 20–30 min zbiera i segreguje szkło z sali.</small></button>
-          <button type="button" id="opt1" aria-pressed="false"><span class="badge">&nbsp;</span>Opcja 1 · kelner do zbierania szkła<small>3 barmanów, 3 moduły (2 na sali, 1 w foyer) i kelner, który przez cały event zbiera nasze szkło.</small></button>
+          <button type="button" id="opt2" aria-pressed="true"><span class="badge">Rekomendujemy</span>A · Barman + 4. moduł barowy<span class="num" style="font-family:var(--display);font-size:28px;line-height:1">+ 1 250 zł</span><small>barman 800 zł + moduł 450 zł. Bar w foyer na 2 modułach (ok. 2,5 m), 2 barmanów. Drugi barman robi koktajle i co 20–30 min zbiera i segreguje szkło.</small><small><b>Razem: 12 876 zł netto</b></small></button>
+          <button type="button" id="opt1" aria-pressed="false"><span class="badge">Taniej</span>B · Sam kelner, bez barmana i modułu<span class="num" style="font-family:var(--display);font-size:28px;line-height:1">+ 600 zł</span><small>Zostaje 3 barmanów i 3 moduły (2 na sali, 1 w foyer). Kelner przez cały event zbiera nasze szkło z sali i foyer.</small><small><b>Razem: 12 226 zł netto</b></small></button>
         </div>
         <ul class="lines" id="lines"></ul>
         <div class="glass">
@@ -406,11 +407,11 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="sec-head">
       <h2>Bar w foyer</h2>
-      <p>Rozdzielenie barów to dla nas dodatkowa logistyka. Dlatego przy dwóch lokalizacjach rekomendujemy opcję 2.</p>
+      <p>Rozdzielenie barów to dla nas dodatkowa logistyka. Dlatego przy dwóch lokalizacjach rekomendujemy opcję A, ale opcja B też jest do wyboru.</p>
     </div>
     <div class="split">
       <div class="col">
-        <span class="label">Jeden barman w foyer (opcja 1)</span>
+        <span class="label">Jeden barman w foyer (opcja B)</span>
         <ul>
           <li><span>Barman <b>nie może zejść z baru</b> – nawet na chwilę</span></li>
           <li><span>Braki w asortymencie <b>zgłasza telefonicznie</b> do drugiego baru</span></li>
@@ -418,7 +419,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
         </ul>
       </div>
       <div class="col">
-        <span class="label">Dwóch barmanów w foyer (opcja 2)</span>
+        <span class="label">Dwóch barmanów w foyer (opcja A)</span>
         <ul>
           <li><span>Bar na <b>2 modułach, ok. 2,5 m</b> – wygląda reprezentacyjnie</span></li>
           <li><span>Zawsze <b>ktoś za barem</b>, nawet gdy drugi barman zbiera szkło</span></li>
@@ -478,7 +479,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
   <div class="wrap">
     <div class="accept">
       <div style="display:flex;flex-direction:column;gap:14px">
-        <h2>Którą opcję bierzecie?</h2>
+        <h2>A czy B?</h2>
         <p>Odpiszcie na maila z wybraną opcją albo zadzwońcie. Poprawimy umowę i Załącznik nr 1, zaliczka zostaje bez zmian.</p>
         <p class="num" id="choice" style="color:var(--ink)"><strong>Wybrana wersja:</strong> <span id="choice-text"></span></p>
       </div>
@@ -515,7 +516,7 @@ footer{padding-block:36px 48px;font-size:13px;color:var(--ink-3);display:flex;ju
     var ul = $('lines'); ul.innerHTML='';
     items.forEach(function(i){ var li=document.createElement('li'); li.innerHTML='<span class="what"></span><span class="amt"></span><span class="why"></span>'; li.children[0].textContent=i.what; li.children[1].textContent=fmt(i.amt); li.children[2].textContent=i.why; ul.appendChild(li); });
     $('opt1').setAttribute('aria-pressed', String(state.opt===1)); $('opt2').setAttribute('aria-pressed', String(state.opt===2));
-    var name = (state.opt===2 ? 'Opcja 2 · 4 barmanów + 4 moduły' : 'Opcja 1 · 3 barmanów + kelner do szkła') + (state.brand?' · fronty wg projektu':'');
+    var name = (state.opt===2 ? 'Opcja A · barman + 4. moduł' : 'Opcja B · sam kelner do szkła') + (state.brand?' · fronty wg projektu':'');
     $('variant-name').textContent = name; $('sum').textContent = fmt(total); $('brutto').textContent = fmt2(total*1.23);
     $('peek').innerHTML = fmt(total) + '<small>netto</small>'; $('choice-text').textContent = name + ', ' + fmt(total) + ' netto';
   }
