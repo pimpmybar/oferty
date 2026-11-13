@@ -1,4 +1,4 @@
-# Szablon ofert targowych (kawa) – `targi/`
+# Szablon ofert targowych (kawa, opcjonalnie koktajle) – `targi/`
 
 Jedna oferta = jeden folder z `index.html`, w którym jest tylko konfiguracja `window.OFFER`.
 Wygląd (`targi.css`) i logika (`targi.js`) są wspólne. Wzór: `coffee-bar-polbram-targi-poznan-01-2027/`.
@@ -12,6 +12,8 @@ Wygląd (`targi.css`) i logika (`targi.js`) są wspólne. Wzór: `coffee-bar-pol
    - `coffee` – `per100` (cena 100 kaw), `options` (limity dzienne do wyboru), `def`
    - `deposit`, `hoursIncl`, `extraHour`
    - `brand` (front baru z logo), `cups` (kubki z nadrukiem), `lids` (pokrywki) – usuń klucz, jeśli opcji nie ma; nakład kubków i pokrywek liczy się sam: limit kaw × dni, w górę do pełnej paczki `per`
+   - `bar` (opcja) – bar koktajlowy: `menu` [{n, c, alc:[[butelka, porcji z butelki, zł netto]], zero}], `levels` (butelek mocnego alkoholu na koktajl), `def`, `per` (17), `assort` (zł/koktajl z lodem), `zero` (pula 0%), `glass`; wzór: `targi-meble-polska-restese-23-02-2027/`
+   - `extras` (opcja) – dodatki do zaznaczenia `{h, short, p, price, on}`; `brandSub`, `variant`, `t.crewLabel`, `t.crewShort`, `t.serviceWord`, `t.setupWord` – etykiety dla wersji z koktajlami
    - `form` – formularz umowy: `url`, `entries` (id pól), `prefill` (tylko dane firmy z rejestru, bez danych osobowych)
    - `t` – wszystkie teksty; tokeny `{total}`, `{totalAlt}` i `{limitAlt}` (suma przy drugim limicie kaw), `{perDay}`, `{rate}`, `{n}`, `{dni}`, `{limit}`, `{cupsQty}`, `{cupsSel}`, `{lidsQty}`, `{deposit}`… przeliczają się na żywo
 3. Liczby do potwierdzenia przez właściciela oznacz `<span class="todo">…</span>` – podświetlają się tylko w podglądzie `?ja`.

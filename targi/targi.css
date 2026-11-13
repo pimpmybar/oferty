@@ -307,6 +307,9 @@ html.owner body .todo{background:var(--todo);color:var(--todo-ink);padding:0 .3e
 .ctl > .label{display:block;margin-bottom:8px}
 .ctl .seg{margin-bottom:10px}
 .seg.s3{grid-template-columns:1fr 1fr 1fr}
+.seg.s4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:460px){.seg.s4{grid-template-columns:1fr 1fr}}
+.lines .what small{font-weight:400;color:var(--ink-3)}
 .addon{cursor:default}
 .addon .ab{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
 .addon label{display:flex;flex-direction:column;gap:2px;cursor:pointer}

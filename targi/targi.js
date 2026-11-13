@@ -5,6 +5,8 @@
 (function(){
   var O = window.OFFER; if (!O || !O.days || !O.rates) return;
   var T = O.t || {}, M = O.media || '../expo-real-lds/assets/', C = O.coffee || {per100:200, options:[100,150,200], def:100};
+  // Opcjonalnie: bar koktajlowy (O.bar) i dodatki do zaznaczenia (O.extras). Bez nich silnik działa jak sam coffee bar.
+  var B = O.bar || null, X = O.extras || [], SUB = O.brandSub || 'Coffee';
   var $ = function(id){ return document.getElementById(id); };
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function nf(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
@@ -35,7 +37,23 @@
   function tierOf(n){ var k = 0; RATES.forEach(function(x, i){ if (n >= x[0]) k = i; }); return k; }
   function tierLabel(i){ var a = RATES[i][0], z = RATES[i + 1] ? RATES[i + 1][0] - 1 : DAYS.length; return (a === z ? a + ' ' + dni(a) : a + '–' + z + ' dni') + ' · ' + zl(RATES[i][1]); }
 
-  var S = { on: DAYS.map(function(){ return true; }), limit: C.def, brand: false, cups: false, lids: false };
+  var S = { on: DAYS.map(function(){ return true; }), limit: C.def, brand: false, cups: false, lids: false,
+            lvl: B ? B.def : 0, zero: B && B.zero ? B.zero.def : 0, ex: X.map(function(x){ return !!x.on; }) };
+  // Koktajle: lvl = butelki mocnego alkoholu na każdy koktajl z menu; sztuk = lvl × B.per (17 z butelki 0,7 l przy 40 ml).
+  // Butelki każdej pozycji liczone z porcji na butelkę (np. Hugo 90 ml z 0,75 l), zawsze w górę do pełnej butelki.
+  function barCalc(){
+    if (!B) return { cnt:0, each:0, alc:0, assort:0, zero:0, glass:0, total:0, items:[], bottles:[] };
+    var per = B.per || 17, each = S.lvl * per, alc = 0, items = [], bt = {}, ord = [];
+    B.menu.forEach(function(m){
+      var b = (m.alc || []).map(function(a){ var n = each ? Math.ceil(each / a[1] - 1e-9) : 0; alc += n * a[2]; if (n){ if (!bt[a[0]]){ bt[a[0]] = 0; ord.push(a[0]); } bt[a[0]] += n; } return n; });
+      items.push({ n:m.n, c:m.c, zero:m.zero, cnt:each, b:b, alc:m.alc || [] });
+    });
+    var cnt = each * B.menu.length, assort = cnt * (B.assort || 3);
+    var zero = B.zero ? S.zero / 100 * B.zero.per100 : 0, glass = (cnt || S.zero) && B.glass ? B.glass.price : 0;
+    var bottles = ord.map(function(k){ return bt[k] + ' × ' + k; });
+    return { cnt:cnt, each:each, alc:alc, assort:assort, zero:zero, glass:glass, total:alc + assort + zero + glass, items:items, bottles:bottles };
+  }
+  function exTotal(){ var t = 0; X.forEach(function(x, i){ if (S.ex[i]) t += x.price; }); return t; }
   // Nakład kubków i pokrywek idzie za liczbą kaw: limit dzienny × dni, w górę do pełnej paczki (np. 1 000 szt.).
   function pack(lim, n, per){ return Math.max(per, Math.ceil(lim * n / per) * per); }
   function calc(lim){
@@ -46,9 +64,10 @@
     var cupsQty = O.cups ? pack(L, n, O.cups.per) : 0, lidsQty = O.lids ? pack(L, n, O.lids.per) : 0;
     var cups = S.cups && O.cups ? O.cups.price * cupsQty / O.cups.per : 0;
     var lids = S.lids && O.lids ? O.lids.price * lidsQty / O.lids.per : 0;
-    var total = svc + cof + brand + cups + lids;
+    var bar = barCalc(), ex = exTotal();
+    var total = svc + cof + brand + cups + lids + bar.total + ex;
     var dep = O.deposit ? Math.min(O.deposit, Math.round(total * 0.3 / 100) * 100) : 0;
-    return { sel:sel, n:n, rate:r, svc:svc, cofDay:cofDay, cof:cof, brand:brand, cups:cups, cupsQty:cupsQty, lids:lids, lidsQty:lidsQty, total:total, perDay:r + cofDay, save:n * (top - r), dep:dep, daysTotal:svc + cof };
+    return { bar:bar, ex:ex, sel:sel, n:n, rate:r, svc:svc, cofDay:cofDay, cof:cof, brand:brand, cups:cups, cupsQty:cupsQty, lids:lids, lidsQty:lidsQty, total:total, perDay:r + cofDay, save:n * (top - r), dep:dep, daysTotal:svc + cof };
   }
   function datesShort(sel){
     var by = {}, ord = [];
@@ -62,12 +81,12 @@
     var h = '';
     h += '<div class="ownerbar">Podgląd właściciela: żółte pola są do potwierdzenia. Klient ich nie widzi, a z tej przeglądarki nie idą powiadomienia.</div>';
     h += '<div class="wrap">';
-    h += '<div class="printhead"><b>Pimp My Bar / Coffee</b><span>' + esc(T.offerFor) + ' · nr ' + esc(O.nr) + ' · przygotowana ' + esc(O.prepared) + ' · ważna do ' + esc(O.validUntil) + '</span></div>';
-    h += '<header class="top"><a class="brand" href="https://www.pimpmybar.pl" target="_blank" rel="noopener">Pimp My Bar <span>/ Coffee</span></a><div class="label">' + esc(T.offerFor) + '<br>nr ' + esc(O.nr) + '</div></header>';
+    h += '<div class="printhead"><b>Pimp My Bar / ' + esc(SUB) + '</b><span>' + esc(T.offerFor) + ' · nr ' + esc(O.nr) + ' · przygotowana ' + esc(O.prepared) + ' · ważna do ' + esc(O.validUntil) + '</span></div>';
+    h += '<header class="top"><a class="brand" href="https://www.pimpmybar.pl" target="_blank" rel="noopener">Pimp My Bar <span>/ ' + esc(SUB) + '</span></a><div class="label">' + esc(T.offerFor) + '<br>nr ' + esc(O.nr) + '</div></header>';
     h += '<div class="hero"><div class="hero-copy"><div class="label">' + esc(T.kicker) + '</div><h1>' + T.h1 + '</h1><p class="lead">' + T.lead + '</p>';
     h += '<dl class="facts">' + (T.facts || []).map(function(f){ return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>';
     h += '<div class="price-peek"><div class="big num" id="peek"></div><a class="btn" href="#wycena">Zobacz wycenę ↓</a></div></div>';
-    h += '<div class="reel" aria-label="Film z naszych realizacji: targi, kawa i koktajle"><video id="reel-v" src="' + (O.heroVideo || M + 'hero.mp4') + '" poster="' + (O.heroPoster || M + 'poster.jpg') + '" autoplay muted loop playsinline preload="auto"></video><div class="ticker" aria-live="off"><span class="label">Pimp My Bar · Coffee</span><span class="line" id="tick"></span></div></div></div></div>';
+    h += '<div class="reel" aria-label="Film z naszych realizacji: targi, kawa i koktajle"><video id="reel-v" src="' + (O.heroVideo || M + 'hero.mp4') + '" poster="' + (O.heroPoster || M + 'poster.jpg') + '" autoplay muted loop playsinline preload="auto"></video><div class="ticker" aria-live="off"><span class="label">Pimp My Bar · ' + esc(SUB) + '</span><span class="line" id="tick"></span></div></div></div></div>';
 
     // 1. Odpowiedź na zapytanie – każdy punkt z maila i liczba obok
     h += '<section id="odpowiedz"><div class="wrap"><div class="ans"><div class="ans-head"><h2>' + esc(T.ansH) + '</h2>' + (T.ansOk ? '<span class="okchip">✓ ' + esc(T.ansOk) + '</span>' : '') + '</div><dl>';
@@ -87,11 +106,18 @@
     h += '<div class="tiers" id="tiers">' + RATES.map(function(r, i){ return '<span class="tier" data-tier="' + i + '">' + tierLabel(i) + '</span>'; }).join('') + '</div>';
     h += '<p class="hint np">' + fill(T.tiersP) + '</p>';
     h += '<div class="ctl"><span class="label">' + esc(T.limitL) + '</span><div class="seg' + (C.options.length === 3 ? ' s3' : '') + '" role="group" aria-label="' + esc(T.limitL) + '">' + C.options.map(function(v){ return '<button type="button" data-limit="' + v + '">do ' + v + ' kaw</button>'; }).join('') + '</div><p class="note" style="margin-top:0">' + fill(T.limitP) + '</p></div>';
+    if (B){
+      h += '<div class="ctl" id="bar-ctl"><span class="label">' + esc(T.barL || 'Ile koktajli przygotowujemy') + '</span><div class="seg s' + B.levels.length + '" role="group" aria-label="' + esc(T.barL || 'Ile koktajli') + '">' + B.levels.map(function(v){ return '<button type="button" data-lvl="' + v + '">' + (v ? 'po ' + v * (B.per || 17) : 'bez koktajli') + '</button>'; }).join('') + '</div>';
+      h += '<p class="note" style="margin-top:0">' + fill(T.barP || '') + '</p><ul class="lines" id="bar-menu"></ul><p class="note" id="bar-note"></p>';
+      if (B.zero) h += '<span class="label" style="display:block;margin-top:18px">' + esc(T.zeroL || 'Koktajle bezalkoholowe') + '</span><div class="seg s' + B.zero.options.length + '" role="group" aria-label="' + esc(T.zeroL || 'Koktajle bezalkoholowe') + '">' + B.zero.options.map(function(v){ return '<button type="button" data-zero="' + v + '">' + (v ? v + ' porcji' : 'bez') + '</button>'; }).join('') + '</div><p class="note" style="margin-top:0">' + fill(T.zeroP || '') + '</p>';
+      h += '</div>';
+    }
+    X.forEach(function(x, i){ h += '<div class="addon" id="ex-box-' + i + '"><input type="checkbox" id="ex-' + i + '" data-ex="' + i + '"><div class="ab"><label for="ex-' + i + '"><strong>' + esc(x.h) + ', +\u00a0' + zl(x.price) + '</strong><small>' + (x.p || '') + '</small></label></div></div>'; });
     if (O.brand) h += '<div class="addon" id="brand-box"><input type="checkbox" id="brand"><div class="ab"><label for="brand"><strong>' + esc(T.brandH) + ', +\u00a0' + zl(O.brand.price) + '</strong><small>' + T.brandP + '</small></label></div></div>';
     if (O.cups) h += '<div class="addon" id="cups-box"><input type="checkbox" id="cups"><div class="ab"><label for="cups"><strong>' + esc(T.cupsOptH) + ', <span data-v="cupsQty"></span> szt., +\u00a0<span data-v="cupsSel"></span></strong><small>' + fill(T.cupsOptP) + '</small></label></div></div>';
     if (O.lids) h += '<div class="addon" id="lids-box"><input type="checkbox" id="lids"><div class="ab"><label for="lids"><strong>' + esc(T.lidsH || 'Pokrywki do kubków') + ', <span data-v="lidsQty"></span> szt., +\u00a0<span data-v="lidsSel"></span></strong><small>' + fill(T.lidsP || '') + '</small></label></div></div>';
     h += '</div><aside class="total" aria-live="polite"><span class="label" id="variant-name"></span><div class="sum" id="sum"></div><span class="sub" id="sum-sub"></span><hr><ul class="brk" id="brk"></ul><hr><ul class="terms">';
-    h += (O.deposit ? '<li>Zaliczka <b id="dep"></b></li>' : '') + '<li>Reszta <b>' + esc(T.restTerm || 'faktura po ostatnim terminie') + '</b></li><li>Kawa <b>rozliczana za otwarte kg</b></li><li>Oferta ważna do <b>' + esc(O.validUntil) + '</b></li></ul>';
+    h += (O.deposit ? '<li>Zaliczka <b id="dep"></b></li>' : '') + '<li>Reszta <b>' + esc(T.restTerm || 'faktura po ostatnim terminie') + '</b></li><li>Kawa <b>rozliczana za otwarte kg</b></li>' + (B ? '<li>Alkohol <b>nieotwarte butelki odliczamy</b></li>' : '') + '<li>Oferta ważna do <b>' + esc(O.validUntil) + '</b></li></ul>';
     h += '<a class="btn" href="#akceptacja">' + esc(T.bookShort || 'Rezerwuję terminy') + '</a><button class="btn ghost" type="button" data-print>Wersja do druku (PDF)</button></aside></div></div></section>';
 
     // 3. Co jest w cenie
@@ -105,8 +131,8 @@
     // 5. Plan terminów
     h += '<section id="plan"><div class="wrap"><div class="sec-head"><h2>' + esc(T.planH || 'Plan terminów') + '</h2><p>' + (T.planP || '') + '</p></div><div class="days">';
     BLOCKS.forEach(function(b){
-      var a = b.days[0], z = b.days[b.days.length - 1], rows = [[hhmm(mins(a.from) - 60), 'przyjazd, montaż baru, rozgrzanie ekspresu']];
-      b.days.forEach(function(d, k){ rows.push([d.from.replace(':00', '') + '–' + d.to.replace(':00', ''), d.dm + ': serwis kawy' + (k < b.days.length - 1 ? ', bar zostaje na noc' : '')]); });
+      var a = b.days[0], z = b.days[b.days.length - 1], rows = [[hhmm(mins(a.from) - 60), (T.setupWord || 'przyjazd, montaż baru, rozgrzanie ekspresu')]];
+      b.days.forEach(function(d, k){ rows.push([d.from.replace(':00', '') + '–' + d.to.replace(':00', ''), d.dm + ': ' + (T.serviceWord || 'serwis kawy') + (k < b.days.length - 1 ? ', bar zostaje na noc' : '')]); });
       rows.push([z.to, 'demontaż, ok. pół godziny']);
       h += '<div class="day fair"><div class="d">' + b.range + '<small>' + b.wd + '</small></div><ul>' + rows.map(function(r){ return '<li><time>' + r[0] + '</time>' + r[1] + '</li>'; }).join('') + '</ul></div>';
     });
@@ -148,17 +174,20 @@
   }
 
   // ── Podsumowania: tekst wyboru, Załącznik nr 1 do formularza, mail ──
-  function addons(c){ var a = []; if (c.brand) a.push('front baru z logo (' + zl(c.brand) + ')'); if (c.cups) a.push('kubki z logo ' + nf(c.cupsQty) + ' szt. (' + zl(c.cups) + ')'); if (c.lids) a.push('pokrywki ' + nf(c.lidsQty) + ' szt. (' + zl(c.lids) + ')'); return a; }
+  function addons(c){ var a = []; X.forEach(function(x, i){ if (S.ex[i]) a.push((x.short || x.h).toLowerCase() + ' (' + zl(x.price) + ')'); }); if (c.brand) a.push('front baru z logo (' + zl(c.brand) + ')'); if (c.cups) a.push('kubki z logo ' + nf(c.cupsQty) + ' szt. (' + zl(c.cups) + ')'); if (c.lids) a.push('pokrywki ' + nf(c.lidsQty) + ' szt. (' + zl(c.lids) + ')'); return a; }
   function choice(c){
-    return c.n + ' ' + dni(c.n) + ' (' + datesShort(c.sel) + ') · 1 barista + bar + ekspres · w wycenie ' + S.limit + ' kaw dziennie · ' + (addons(c).join(', ') || 'bez dodatków') + ' · ' + zl(c.total) + ' netto';
+    return c.n + ' ' + dni(c.n) + ' (' + datesShort(c.sel) + ') · ' + (T.crewShort || '1 barista + bar + ekspres') + ' · w wycenie ' + S.limit + ' kaw dziennie' + (B ? ' + ' + (c.bar.cnt ? nf(c.bar.cnt) + ' koktajli (po ' + c.bar.each + ' każdego)' : 'bez koktajli') + (S.zero ? ' + ' + S.zero + ' porcji 0%' : '') : '') + ' · ' + (addons(c).join(', ') || 'bez dodatków') + ' · ' + zl(c.total) + ' netto';
   }
   function annex(c){
     var L = ['ZAŁĄCZNIK NR 1 – wybór z oferty online (' + O.nr + ')', T.annexTitle || 'Coffee bar na stoisku targowym', 'Terminy (' + c.n + ' ' + dni(c.n) + '):'];
     c.sel.forEach(function(d){ L.push('- ' + d.full + ' (' + d.wd + ') ' + d.from + '–' + d.to); });
     L.push('Zakres: ' + (T.annexScope || '1 barista do 8 h dziennie, moduł barowy 125 cm, ekspres kolbowy, młynek, kawa, mleko, herbata, kubki; transport, montaż i demontaż w cenie.'));
     L.push('Kawa: w wycenie ' + S.limit + ' kaw dziennie (razem ' + nf(S.limit * c.n) + '); rozliczenie po ostatnim terminie za faktycznie otwarte kilogramy, 1 kg = ok. 100 kaw = ' + zl(C.per100) + ' netto.');
+    if (B){
+      L.push('Koktajle: ' + (c.bar.cnt ? nf(c.bar.cnt) + ' szt. – ' + c.bar.items.map(function(m){ return m.n + ' ' + m.cnt; }).join(', ') + '; alkohol: ' + c.bar.bottles.join(', ') + ' (' + zl(c.bar.alc) + '), asortyment i lód ' + zl(c.bar.assort) : 'bez koktajli') + (S.zero ? '; koktajle 0%: ' + S.zero + ' porcji (' + zl(c.bar.zero) + ')' : '') + (c.bar.glass ? '; szkło ' + B.glass.qty + ' szt. (' + zl(c.bar.glass) + ')' : '') + '. Nieotwarte butelki odliczamy od faktury końcowej i wracają na nasz magazyn.');
+    }
     L.push('Dodatki: ' + (addons(c).join(', ') || 'brak'));
-    L.push('Cena: ' + zl(c.total) + ' netto + 23% VAT (obsługa ' + c.n + ' × ' + zl(c.rate) + ', kawa ' + zl(c.cof) + (c.brand + c.cups + c.lids ? ', dodatki ' + zl(c.brand + c.cups + c.lids) : '') + ')');
+    L.push('Cena: ' + zl(c.total) + ' netto + 23% VAT (obsługa ' + c.n + ' × ' + zl(c.rate) + ', kawa ' + zl(c.cof) + (B ? ', koktajle ' + zl(c.bar.total) : '') + (c.brand + c.cups + c.lids + c.ex ? ', dodatki ' + zl(c.brand + c.cups + c.lids + c.ex) : '') + ')');
     if (c.dep) L.push('Zaliczka: ' + zl(c.dep) + ' netto, faktura proforma');
     L.push('Oferta: ' + location.origin + location.pathname);
     L.push('', 'Uwagi / zmiany: ');
@@ -199,8 +228,22 @@
     [].forEach.call(document.querySelectorAll('[data-limit]'), function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-limit') === S.limit)); });
     if ($('brand')){ $('brand').checked = S.brand; $('brand-box').className = 'addon' + (S.brand ? ' picked' : ''); }
     if ($('cups')){ $('cups').checked = S.cups; $('cups-box').className = 'addon' + (S.cups ? ' picked' : ''); if ($('kubki')) $('kubki').className = S.cups ? '' : 'np-off'; } // w druku szczegóły kubków tylko, gdy opcja wybrana
+    X.forEach(function(x, i){ $('ex-' + i).checked = S.ex[i]; $('ex-box-' + i).className = 'addon' + (S.ex[i] ? ' picked' : ''); });
+    if (B){
+      [].forEach.call(document.querySelectorAll('[data-lvl]'), function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-lvl') === S.lvl)); });
+      [].forEach.call(document.querySelectorAll('[data-zero]'), function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-zero') === S.zero)); });
+      $('bar-menu').innerHTML = c.bar.items.map(function(m){
+        var bt = m.alc.map(function(a, k){ return m.b[k] ? m.b[k] + ' × ' + a[0] : ''; }).filter(Boolean).join(', ');
+        return '<li><span class="what">' + esc(m.n) + (m.zero ? ' <small>(też 0%)</small>' : '') + '</span><span class="amt">' + (m.cnt ? m.cnt + ' szt.' : '–') + '</span><span class="why">' + esc(m.c) + (bt ? ' · ' + esc(bt) : '') + '</span></li>';
+      }).join('');
+      $('bar-note').textContent = c.bar.cnt ? 'Razem ' + nf(c.bar.cnt) + ' koktajli, ok. ' + Math.round(c.bar.cnt / Math.max(1, c.n)) + ' dziennie. Przywozimy: ' + c.bar.bottles.join(', ') + '. Nieotwarte butelki odliczamy od faktury końcowej.' : 'Bez koktajli – sama kawa.';
+    }
     if ($('lids')){ $('lids').checked = S.lids; $('lids-box').className = 'addon' + (S.lids ? ' picked' : ''); }
     var brk = [['Obsługa, ' + c.n + ' × ' + zl(c.rate), zl(c.svc)], ['Kawa, ' + S.limit + ' dziennie', zl(c.cof)]];
+    if (B && c.bar.cnt){ brk.push(['Alkohol do ' + nf(c.bar.cnt) + ' koktajli', zl(c.bar.alc)]); brk.push(['Asortyment i lód', zl(c.bar.assort)]); }
+    if (B && c.bar.zero) brk.push(['Koktajle 0%, ' + S.zero + ' porcji', zl(c.bar.zero)]);
+    if (B && c.bar.glass) brk.push(['Szkło, ' + B.glass.qty + ' szt.', zl(c.bar.glass)]);
+    X.forEach(function(x, i){ if (S.ex[i]) brk.push([x.short || x.h, zl(x.price)]); });
     if (c.brand) brk.push(['Front baru z logo', zl(c.brand)]);
     if (c.cups) brk.push(['Kubki z logo, ' + nf(c.cupsQty) + ' szt.', zl(c.cups)]);
     if (c.lids) brk.push(['Pokrywki, ' + nf(c.lidsQty) + ' szt.', zl(c.lids)]);
@@ -210,7 +253,7 @@
     $('sum').textContent = zl(c.total);
     $('sum-sub').innerHTML = 'netto, doliczamy 23% VAT · <b>' + zl(c.perDay) + '</b> za dzień';
     $('peek').innerHTML = zl(c.total) + '<small>netto za ' + c.n + ' ' + dni(c.n) + ' · <b>' + zl(c.perDay) + '</b> za dzień</small>';
-    $('variant-name').textContent = 'Coffee bar · ' + c.n + ' ' + dni(c.n) + ' · 1 barista';
+    $('variant-name').textContent = (O.variant || 'Coffee bar') + ' · ' + c.n + ' ' + dni(c.n) + ' · ' + (T.crewLabel || '1 barista');
     if ($('dep')) $('dep').textContent = zl(c.dep) + ' netto, proforma';
     $('choice-text').textContent = choice(c);
     if ($('form-btn')) $('form-btn').href = formUrl(c);
@@ -251,6 +294,9 @@
       });
     });
     [].forEach.call(document.querySelectorAll('[data-limit]'), function(b){ b.addEventListener('click', function(){ S.limit = +b.getAttribute('data-limit'); var c = paint(); once('lim' + S.limit, 'Sprawdził wariant: do ' + S.limit + ' kaw dziennie → ' + zl(c.total), 'coffee'); }); });
+    [].forEach.call(document.querySelectorAll('[data-lvl]'), function(b){ b.addEventListener('click', function(){ S.lvl = +b.getAttribute('data-lvl'); var c = paint(); once('lvl' + S.lvl, 'Sprawdził koktajle: ' + (S.lvl ? 'po ' + c.bar.each + ' każdego, razem ' + c.bar.cnt : 'bez koktajli') + ' → ' + zl(c.total), 'tropical_drink', 4); }); });
+    [].forEach.call(document.querySelectorAll('[data-zero]'), function(b){ b.addEventListener('click', function(){ S.zero = +b.getAttribute('data-zero'); var c = paint(); once('zero' + S.zero, 'Koktajle 0%: ' + S.zero + ' porcji → ' + zl(c.total), 'tropical_drink'); }); });
+    [].forEach.call(document.querySelectorAll('[data-ex]'), function(cb){ cb.addEventListener('change', function(){ var i = +cb.getAttribute('data-ex'); S.ex[i] = cb.checked; var c = paint(); once('ex' + i + cb.checked, (cb.checked ? 'Zaznaczył: ' : 'Odznaczył: ') + X[i].h + ' → ' + zl(c.total), 'heavy_plus_sign'); }); });
     if ($('brand')) $('brand').addEventListener('change', function(e){ S.brand = e.target.checked; paint(); if (S.brand) once('brand', 'Zaznaczył: front baru z logo', 'art', 4); });
     if ($('cups')) $('cups').addEventListener('change', function(e){ S.cups = e.target.checked; paint(); if (S.cups) once('cups', 'Zaznaczył: kubki z logo', 'art', 4); });
     if ($('lids')) $('lids').addEventListener('change', function(e){ S.lids = e.target.checked; paint(); if (S.lids) once('lids', 'Zaznaczył: pokrywki do kubków', 'art', 4); });

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kawa i koktajle na stoisku RESTESE – Meble Polska 2027 – oferta Pimp My Bar</title>
+<meta property="og:title" content="Kawa i koktajle na stoisku RESTESE – Meble Polska 2027">
+<meta property="og:description" content="Barman-barista na 3 dni targów Meble Polska, 23–25.02.2027. Cena każdego dnia i łączna, menu koktajli, kawa i wymagania na stoisku.">
+<meta property="og:image" content="https://pimpmybar.github.io/oferty/expo-real-lds/assets/poster.jpg">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../targi/targi.css?v=5">
+</head>
+<body>
+<div id="app"></div>
+<script>
+// Dane tej oferty. Silnik, style i teksty wspólne: ../targi/targi.js, ../targi/targi.css
+window.OFFER = {
+  id: "restese-meble-polska-230227",
+  title: "RESTESE – Meble Polska 2027, kawa + koktajle, 3 dni 23–25.02.2027 (Anna Cencora)",
+  nr: "PMB-2027-RESTESE",
+  prepared: "13.11.2026",
+  validUntil: "4.12.2026",
+  brandSub: "Coffee & Cocktails",
+  variant: "Kawa i koktajle",
+  kitImg: "../expo-real-lds/assets/espresso-martini.jpg",
+
+  days: [
+    { d: "2027-02-23", from: "9:00", to: "18:00", b: 1 },
+    { d: "2027-02-24", from: "9:00", to: "18:00", b: 1 },
+    { d: "2027-02-25", from: "9:00", to: "18:00", b: 1 }
+  ],
+
+  // Cennik (PLN netto). Stawka dzienna obsługi: [od ilu dni, zł za dzień]
+  rates: [[1,1800],[3,1600]],
+  coffee: { per100: 200, options: [100, 150], def: 100 },
+  hoursIncl: 9, extraHour: 200,
+  deposit: 3000,
+  brand: { price: 200 },
+
+  // Bar koktajlowy: per = koktajli z butelki 0,7 l (40 ml); alc = [butelka, porcji z butelki, zł netto za butelkę]
+  bar: {
+    per: 17, levels: [0, 2, 3, 4], def: 3, assort: 3,
+    menu: [
+      { n: "Porn Star Martini", c: "wódka 40 ml, marakuja, wanilia, sok z limonki; on the rocks", alc: [["wódka 0,7 l", 17, 52.5]] },
+      { n: "Bramble", zero: true, c: "gin 40 ml, sok z cytryny, puree z jeżyn, lód kruszony", alc: [["gin 0,7 l", 17, 60]] },
+      { n: "Whisky Sour", c: "whisky 40 ml, sok z cytryny, syrop cukrowy, aquafaba", alc: [["whisky Grant's 0,7 l", 17, 60]] },
+      { n: "Caipiroska (truskawka lub mango)", zero: true, c: "wódka 40 ml, limonka, owoce, cukier trzcinowy, lód kruszony", alc: [["wódka 0,7 l", 17, 52.5]] },
+      { n: "Hugo", c: "prosecco 90 ml, syrop z kwiatu czarnego bzu, mięta, limonka, woda gazowana", alc: [["prosecco 0,75 l", 750 / 90, 30]] }
+    ],
+    zero: { options: [0, 50, 100], def: 100, per100: 250 },
+    glass: { qty: 150, price: 143 }
+  },
+
+  extras: [
+    { h: "Porcelana do kawy, 70 kompletów", short: "Porcelana, 70 kompletów", price: 100, on: true,
+      p: "Kawa w filiżankach zamiast kubków papierowych, tak jak w 2026 roku. Myjemy na bieżąco za barem." },
+    { h: "Woda i soki dla gości stoiska", short: "Woda i soki", price: 175, on: true,
+      p: "13 butelek wody niegazowanej i 13 gazowanej (1,5 l), po 8 kartonów soku pomarańczowego i jabłkowego (1 l). Nieotwarte odliczamy od faktury, jak w 2026 roku." }
+  ],
+
+  form: {
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSeQD1jnE1M6Q8gehniyVRNMc4fITNranDM5v02n5fmP8-hZQg/viewform",
+    entries: { service: "1649506470", company: "732734084", zip: "817691760", street: "418824607", town: "1298031597", nip: "1989414285", regon: "946499291",
+               dateFrom: "1904277049", dateTo: "1821170169", days: "578949915", city: "677305500", crew: "682544170", modules: "143571991",
+               timeFrom: "1656993427", timeTo: "124569630", notes: "1777569244" },
+    prefill: { service: "TARGI COFFEE and COCKTAILS", company: "RESTESE SP. Z O.O.", zip: "37-600", street: "ul. Jana III Sobieskiego 6", town: "Lubaczów", nip: "7931639512", regon: "528845533",
+               city: "Poznań", crew: "1", modules: "Jeden moduł barowy" }
+  },
+
+  t: {
+    offerFor: "Oferta dla RESTESE",
+    kicker: "Meble Polska 2027 · MTP Poznań · 23–25.02.2027",
+    h1: "Bar RESTESE na <em>Meble Polska 2027</em>",
+    lead: "Dzień dobry, Pani Anno! Dziękujemy za zaproszenie do współpracy także w 2027 roku. Termin 23–25 lutego mamy wolny. Zakres jest jak w tym roku: barman-barista za barem na Państwa stoisku, rano kawa, w ciągu dnia koktajle. Przywozimy ekspres, alkohole, szkło, porcelanę i wszystko do koktajli. Poniżej jest cena każdego dnia i suma. Liczbę kaw i koktajli może Pani zmieniać, cena przelicza się od razu.",
+    facts: [["Termin", "23–25.02.2027, wt–czw"], ["Godziny", "9:00–18:00"], ["Obsada", "1 barman-barista"], ["Miejsce", "MTP Poznań, Państwa stoisko"]],
+    ticks: ["Cappuccino z latte art", "Porn Star Martini", "Bramble", "Whisky Sour", "Hugo", "Koktajle 0%"],
+
+    ansH: "Odpowiedź na Pani zapytanie",
+    ansOk: "Termin wolny",
+    answers: [
+      { q: "Dostępność", a: "<b>Potwierdzamy 23, 24 i 25 lutego 2027</b>, w godzinach 9:00–18:00. Bar rozstawiamy dzień wcześniej, 22 lutego, tak jak w tym roku." },
+      { q: "Zakres usługi", a: "<b>Jak w 2026 roku:</b> barman-barista, moduł barowy, ekspres, kawa i herbata, menu pięciu koktajli plus dwa bezalkoholowe, szkło, porcelana, woda i soki. Nowość: zamiast wynajmowanego ekspresu automatycznego przywozimy nasz ekspres kolbowy, już w cenie obsługi." },
+      { q: "Cena", a: "<span class=\"n\">{total}</span> netto za {n} {dni} przy {limit} kawach dziennie i menu koktajli z wyceny. Obsługa to {rate} za dzień, z ekspresem, transportem, montażem i demontażem. Do cen doliczamy 23% VAT." },
+      { q: "Rozliczenie", a: "Płacą Państwo za to, co faktycznie zejdzie: <b>nieotwarte butelki, nieotwarte kilogramy kawy i nieotwarte soki odliczamy od faktury końcowej</b>, tak jak w tym roku." }
+    ],
+    bookShort: "Rezerwuję termin",
+
+    priceH: "Wycena",
+    priceP: "Cena dnia to obsługa i kawa. Obsługa obejmuje barmana-baristę do 9 godzin dziennie, moduł barowy, ekspres kolbowy, młynek, transport, montaż i demontaż. Koktajle, szkło i dodatki liczymy osobno, niżej.",
+    tiersP: "Przy trzech dniach liczymy niższą stawkę dzienną obsługi. Jest już w tej wycenie.",
+    limitL: "Ile kaw dziennie przyjmujemy w wycenie",
+    limitP: "Każde 100 kaw, czyli otwarty kilogram kawy, to {per100} netto z mlekiem, herbatą i dodatkami. Zapas mamy zawsze ze sobą, rozliczamy po targach tylko za otwarte kilogramy.",
+    barL: "Ile koktajli każdego rodzaju przygotowujemy",
+    barP: "Liczymy z pełnych butelek: 40 ml mocnego alkoholu na koktajl, czyli 17 koktajli z butelki 0,7 l; Hugo na 90 ml prosecco. W tym roku było po 51 każdego. Bramble i Caipiroskę robimy też w wersji 0%.",
+    zeroL: "Koktajle bezalkoholowe: Poznań Mule (imbir) i Mangolita",
+    zeroP: "Pula na trzy dni, po połowie każdego. 100 porcji to 250 zł netto.",
+    brandH: "Front baru z logo RESTESE",
+    brandP: "Kliszę z Państwa grafiką drukujemy na front baru (1225 × 1076 mm). Plik potrzebujemy do 12.02.2027. Bez tej opcji przyjeżdża bar w złotym lustrze, jak w tym roku.",
+    restTerm: "faktura po targach, minus zwroty",
+
+    inclH: "Co jest w cenie",
+    inclP: "Rano kawa z ekspresu kolbowego: espresso, americano, cappuccino, flat white, latte, także na mleku roślinnym, i herbaty. W ciągu dnia koktajle robione na żywo, każdy od zera.",
+    incl: [
+      "<b>Barman-barista</b> z naszego stałego zespołu, 23–25.02 w godzinach 9:00–18:00",
+      "<b>Moduł barowy 125 cm</b> w złotym lustrze albo z Państwa logo (opcja)",
+      "<b>Ekspres kolbowy</b>, młynek i całe zaplecze baristy; w tym roku ekspres automatyczny był osobną pozycją za 600 zł",
+      "<b>Kawa ziarnista 100% arabica</b> (Coffee Journey, Yellow Blend), mleko krowie i roślinne, herbaty, cukier",
+      "<b>Alkohole, owoce, puree, syropy, soki i lód</b> do koktajli z menu",
+      "<b>Szkło do koktajli</b>, myte na bieżąco za barem",
+      "<b>Woda do ekspresu</b> w kanistrach, bez przyłącza i odpływu",
+      "<b>Transport, montaż 22.02 i demontaż</b> po zamknięciu hali 25.02"
+    ],
+
+    reel: { h: "Targi, kawa i koktajle w 76 sekund", p: "Tak pracujemy na stoiskach: rano kawa, w ciągu dnia koktajle, wszystko robione na żywo przy gościach." },
+
+    specH: "Czego potrzebujemy na stoisku",
+    specP: "Tak jak w tym roku. Tabelę można przekazać wykonawcy zabudowy.",
+    spec: [
+      ["Miejsce", "moduł barowy 125 cm; z przejściem dla barmana ok. 1,5 × 2 m"],
+      ["Prąd", "przyłącze siłowe 400 V: gniazdo 32 A, 5 bolców (3P+N+PE), ekspres pobiera do 5 kW; osobne gniazdo 230 V na młynek i blender"],
+      ["Woda", "nie jest potrzebna, przywozimy własną; przyłącze i odpływ zbędne"],
+      ["Zapas", "ok. 1 m² w schowku stoiska na skrzynki ze szkłem, termoboks z lodem i napoje"],
+      ["Wjazd", "identyfikator wystawcy dla barmana, wjazd na rozładunek 22.02 i miejsce parkingowe; auto: VW Caddy, nr rej. PO2E547 (do 3,5 t)"],
+      ["Montaż", "22.02 w godzinach 12:00–16:00, jak w tym roku; demontaż od razu po zamknięciu hali 25.02"]
+    ],
+    specNote: "Jeśli na stoisku nie będzie 400 V, wystarczy dać znać przy rezerwacji. Przywieziemy wtedy ekspres na 230 V.",
+
+    planH: "Plan targów",
+    planP: "Bar stawiamy 22 lutego, a 23 lutego od rana ekspres jest rozgrzany przed otwarciem hali.",
+    serviceWord: "kawa i koktajle",
+    setupWord: "kalibracja ekspresu, przygotowanie baru (montaż 22.02)",
+
+    teamH: "Kto przyjedzie",
+    teamP: "Za barem stanie barman-barista z naszego stałego zespołu. <span class=\"todo\">Postaramy się, żeby był to Kuba, który obsługiwał Państwa w tym roku</span>; potwierdzimy przed targami.",
+    team: [
+      { img: "../wesele/assets/tomek.jpg", role: "Właściciel · opiekun realizacji", name: "Tomasz Malinowski", chips: ["od 2013", "kawa i koktajle"],
+        bio: "Prowadzi Pimp My Bar od 2013 roku. Przygotowuje ofertę, umowę i logistykę targów i jest pod telefonem przez całe targi." },
+      { role: "Zespół barowy", name: "Barmani-bariści Pimp My Bar", chips: ["MTP od lat", "kawa i koktajle"],
+        bio: "Pracują zarówno na ekspresie kolbowym, jak i za barem koktajlowym. Na Meble Polska 2026 obsługiwaliśmy kilka stoisk, w tym Państwa." }
+    ],
+
+    refsH: "Z naszych realizacji targowych",
+    refsP: "Na targach Meble Polska pracujemy co roku, w 2026 m.in. na stoisku RESTESE. Wszystkie zdjęcia pochodzą z naszych realizacji.",
+    film: { url: "https://www.youtube.com/shorts/9Hri5ngNDA4", label: "MTP Poznań · Meble Polska 2026", h: "Nasz bar na Meble Polska",
+            p: "Krótki film z targów Meble Polska 2026. Od 2013 roku zrobiliśmy ponad 2 000 eventów: firmowych, targowych i prywatnych." },
+
+    faq: [
+      ["Co, jeśli koktajli zabraknie albo zostanie?", "Zawsze mamy zapas w aucie. Jeśli zabraknie, dowozimy i rozliczamy według tych samych stawek, po wcześniejszej informacji. Nieotwarte butelki odliczamy od faktury końcowej i zabieramy z powrotem."],
+      ["W jakich godzinach pracuje barman?", "9:00–18:00 każdego dnia, czyli {hoursIncl} godzin w cenie. Każda dodatkowa godzina to {extraHour} netto. Przygotowanie baru przed otwarciem hali jest po naszej stronie."],
+      ["Czy można zmienić menu?", "Tak. Menu jest takie jak w tym roku, ale każdy koktajl można wymienić na inny z naszej karty, bez zmiany ceny przy tym samym alkoholu bazowym."],
+      ["Jak wygląda rozliczenie?", "Po akceptacji wypełnia Pani krótki formularz, a my wysyłamy umowę i fakturę proforma na zaliczkę {deposit} netto. Resztę fakturujemy po targach, po odliczeniu nieotwartych butelek, kawy i soków."]
+    ],
+
+    accH: "Rezerwujemy termin",
+    accP: "Termin 23–25 lutego trzymamy dla Państwa do {validUntil}. Rezerwacja to trzy kroki:",
+    steps: [
+      "Klika Pani „Rezerwuję termin”. Otwiera się formularz do umowy z danymi RESTESE i wyborem z tej strony.",
+      "Uzupełnia Pani osobę reprezentującą firmę, numer hali i stoiska oraz telefon, i wysyła formularz.",
+      "Wysyłamy umowę i fakturę proforma na zaliczkę {deposit} netto. Po wpłacie termin jest Państwa."
+    ],
+    formBtn: "Rezerwuję termin – formularz umowy",
+    sendAlt: "Wyślij wybór mailem",
+    formNote: "W formularzu można jeszcze wszystko poprawić. Jeśli wygodniej mailem albo telefonicznie, wystarczy odpisać lub zadzwonić.",
+    mailSubj: "Rezerwacja – RESTESE, Meble Polska 23–25.02.2027",
+    crewShort: "1 barman-barista + bar + ekspres",
+    crewLabel: "1 barman-barista",
+    annexTitle: "Kawa i koktajle na stoisku RESTESE – Meble Polska, MTP Poznań, 23–25.02.2027",
+    annexScope: "1 barman-barista 9:00–18:00, moduł barowy 125 cm, ekspres kolbowy (przyłącze 400 V po stronie Zamawiającego), młynek, kawa, mleko, herbata; koktajle z menu z alkoholem, asortymentem i lodem; szkło; montaż 22.02 w godz. 12–16, demontaż po targach; transport w cenie."
+  }
+};
+</script>
+<script src="../targi/targi.js?v=7"></script>
+</body>
+</html>
